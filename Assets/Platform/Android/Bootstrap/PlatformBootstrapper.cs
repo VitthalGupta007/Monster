@@ -54,7 +54,7 @@ namespace VXMonster.Platform.Bootstrap
                 adMobConfig = ScriptableObject.CreateInstance<AdMobConfig>();
             }
 
-#if UNITY_ANDROID && !UNITY_EDITOR && GOOGLE_MOBILE_ADS_AVAILABLE
+#if (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR && GOOGLE_MOBILE_ADS_AVAILABLE
             adService = new AdMobService(adMobConfig);
 #else
             adService = new MockAdService();
@@ -74,6 +74,7 @@ namespace VXMonster.Platform.Bootstrap
         private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             TryAttachLobbyModePanel();
+            PlatformServices.RefreshBannerForActiveScene();
         }
 
         private static void TryAttachLobbyModePanel()

@@ -2,23 +2,30 @@ using VXMonster.Core.Audio;
 using VXMonster.Core.Easing;
 using VXMonster.Core.Input;
 using VXMonster.Core.Upgrades;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using VXMonster.Gameplay;
 using VXMonster.Platform;
+using System.Collections;
 
 namespace VXMonster.Core.UI
 {
     public class StageFailedScreen : MonoBehaviour
     {
+        private const string AdReviveReadyLabel = "Watch Ad   Revive";
+        private const string AdReviveLoadingLabel = "Loading Ad...";
+
         [SerializeField] CanvasGroup canvasGroup;
         [SerializeField] Button reviveButton;
         [SerializeField] Button adReviveButton;
         [SerializeField] Button exitButton;
 
         private Canvas canvas;
+        private TextMeshProUGUI adReviveLabel;
+        private Coroutine refreshRoutine;
 
         private bool upgradeReviveUsed;
 
@@ -30,6 +37,7 @@ namespace VXMonster.Core.UI
             if (adReviveButton != null)
             {
                 adReviveButton.onClick.AddListener(AdReviveButtonClick);
+                adReviveLabel = adReviveButton.GetComponentInChildren<TextMeshProUGUI>();
             }
 
             exitButton.onClick.AddListener(ExitButtonClick);
@@ -45,8 +53,33 @@ namespace VXMonster.Core.UI
             canvasGroup.DoAlpha(1, 0.3f).SetUnscaledTime(true);
 
             RefreshReviveButtons();
+            refreshRoutine = StartCoroutine(RefreshReviveButtonsUntilReady());
 
             GameController.InputManager.onInputChanged += OnInputChanged;
+        }
+
+        private IEnumerator RefreshReviveButtonsUntilReady()
+        {
+            while (gameObject.activeInHierarchy)
+            {
+                var session = GameSessionManager.Instance?.RunSession;
+                var canAdRevive = session == null || !session.AdReviveUsed;
+                var adReady = PlatformServices.AdService != null && PlatformServices.AdService.IsRewardedReady;
+
+                if (canAdRevive && !adReady && PlatformServices.AdService != null)
+                {
+                    PlatformServices.AdService.LoadRewarded();
+                }
+
+                RefreshReviveButtons();
+
+                if (!canAdRevive || adReady)
+                {
+                    yield break;
+                }
+
+                yield return new WaitForSecondsRealtime(0.5f);
+            }
         }
 
         private void RefreshReviveButtons()
@@ -62,7 +95,13 @@ namespace VXMonster.Core.UI
             reviveButton.gameObject.SetActive(canUpgradeRevive);
             if (adReviveButton != null)
             {
-                adReviveButton.gameObject.SetActive(canAdRevive && adReady);
+                adReviveButton.gameObject.SetActive(canAdRevive);
+                adReviveButton.interactable = adReady;
+
+                if (adReviveLabel != null)
+                {
+                    adReviveLabel.text = adReady ? AdReviveReadyLabel : AdReviveLoadingLabel;
+                }
             }
 
             if (canUpgradeRevive)
@@ -81,6 +120,12 @@ namespace VXMonster.Core.UI
 
         public void Hide(UnityAction onFinish)
         {
+            if (refreshRoutine != null)
+            {
+                StopCoroutine(refreshRoutine);
+                refreshRoutine = null;
+            }
+
             canvasGroup.DoAlpha(0, 0.3f).SetUnscaledTime(true).SetOnFinish(() => {
                 gameObject.SetActive(false);
                 onFinish?.Invoke();
@@ -107,6 +152,11 @@ namespace VXMonster.Core.UI
 
             GameController.AudioManager.PlaySound(AudioManager.BUTTON_CLICK_HASH);
 
+            if (adReviveButton != null)
+            {
+                adReviveButton.interactable = false;
+            }
+
             PlatformServices.AdService.ShowRewarded(
                 onRewardGranted: () =>
                 {
@@ -119,6 +169,11 @@ namespace VXMonster.Core.UI
                 },
                 onClosed: () =>
                 {
+                    if (adReviveButton != null && gameObject.activeInHierarchy)
+                    {
+                        adReviveButton.interactable = PlatformServices.AdService.IsRewardedReady;
+                    }
+
                     PlatformServices.AdService.LoadRewarded();
                 });
         }
@@ -126,14 +181,28 @@ namespace VXMonster.Core.UI
         private void ExitButtonClick()
         {
             GameController.AudioManager.PlaySound(AudioManager.BUTTON_CLICK_HASH);
-            Time.timeScale = 1;
 
-            if (!PlatformServices.TryShowInterstitial(() => StageController.ReturnToMainMenu()))
+            if (refreshRoutine != null)
             {
-                StageController.ReturnToMainMenu();
+                StopCoroutine(refreshRoutine);
+                refreshRoutine = null;
             }
 
             GameController.InputManager.onInputChanged -= OnInputChanged;
+
+            void ReturnToMenu()
+            {
+                Time.timeScale = 1;
+                gameObject.SetActive(false);
+                StageController.ReturnToMainMenu();
+            }
+
+            Time.timeScale = 1;
+
+            if (!PlatformServices.TryShowInterstitial(ReturnToMenu))
+            {
+                ReturnToMenu();
+            }
         }
 
         private void OnInputChanged(InputType prevInput, InputType inputType)

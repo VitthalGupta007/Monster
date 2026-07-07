@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using VXMonster.Platform.Ads;
 using VXMonster.Platform.PlayGames;
 
@@ -14,6 +15,7 @@ namespace VXMonster.Platform
         private static float lastInterstitialTime = -999f;
         private static float lastAppOpenTime = -999f;
         private static AdMobConfig config;
+        private static bool wantsMenuBanner;
 
         public static void Initialize(AdMobConfig adConfig, IAdService adService, IPlayGamesService playGamesService = null)
         {
@@ -30,6 +32,7 @@ namespace VXMonster.Platform
                     {
                         AdService.LoadRewarded();
                         AdService.LoadInterstitial();
+                        RefreshBannerForActiveScene();
                     }
                 });
             });
@@ -62,12 +65,33 @@ namespace VXMonster.Platform
 
         public static void ShowMainMenuBanner()
         {
-            AdService?.ShowBanner();
+            wantsMenuBanner = true;
+            RefreshBannerForActiveScene();
         }
 
         public static void HideBanner()
         {
+            wantsMenuBanner = false;
             AdService?.HideBanner();
+        }
+
+        public static void RefreshBannerForActiveScene()
+        {
+            if (!IsReady || AdService == null) return;
+
+            if (wantsMenuBanner && IsMainMenuScene(SceneManager.GetActiveScene().name))
+            {
+                AdService.ShowBanner();
+            }
+            else if (!IsMainMenuScene(SceneManager.GetActiveScene().name))
+            {
+                AdService.HideBanner();
+            }
+        }
+
+        private static bool IsMainMenuScene(string sceneName)
+        {
+            return sceneName == "Main Menu";
         }
 
         public static void SubmitDailyScore(int score)

@@ -35,23 +35,33 @@ namespace VXMonster.Platform.Ads
         public void ShowInterstitial(Action onClosed)
         {
             Debug.Log("[VX Ads] Mock interstitial shown.");
-            onClosed?.Invoke();
+            MainThreadDispatcher.Run(() => onClosed?.Invoke());
         }
 
         public void ShowRewarded(Action onRewardGranted, Action onClosed)
         {
             Debug.Log("[VX Ads] Mock rewarded completed — granting revive.");
-            onRewardGranted?.Invoke();
-            onClosed?.Invoke();
+            MainThreadDispatcher.Run(() =>
+            {
+                onRewardGranted?.Invoke();
+                onClosed?.Invoke();
+            });
         }
 
         public void ShowAppOpen(Action onClosed)
         {
             Debug.Log("[VX Ads] Mock app open shown.");
-            onClosed?.Invoke();
+            MainThreadDispatcher.Run(() => onClosed?.Invoke());
         }
 
-        public void LoadRewarded() { }
-        public void LoadInterstitial() { }
+        public void LoadRewarded()
+        {
+            Debug.Log("[VX Ads] Mock rewarded load requested.");
+        }
+
+        public void LoadInterstitial()
+        {
+            Debug.Log("[VX Ads] Mock interstitial load requested.");
+        }
     }
 }
