@@ -43,7 +43,7 @@ namespace OctoberStudio.Currency
 
         protected virtual void OnDestroy()
         {
-            Currency.onAmountChanged -= OnAmountChanged;
+            if (Currency != null) Currency.onAmountChanged -= OnAmountChanged;
         }
     }
 }

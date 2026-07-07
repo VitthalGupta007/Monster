@@ -425,8 +425,8 @@ namespace OctoberStudio.UI
 
         protected virtual void OnDestroy()
         {
-            save.onSelectedStageChanged -= InitStage;
-            GameController.InputManager.onInputChanged -= OnInputChanged;
+            if (save != null) save.onSelectedStageChanged -= InitStage;
+            if (GameController.InputManager != null) GameController.InputManager.onInputChanged -= OnInputChanged;
             if(PurchaseCurrency != null) PurchaseCurrency.onAmountChanged -= OnCurrencyAmountChanged;
         }
 

@@ -10,24 +10,49 @@ namespace VXMonster.UI
 {
     /// <summary>
     /// Adds Daily Challenge and Endless mode buttons to the lobby at runtime.
+    /// Layout is derived from Lobby Window.prefab rects (Attempts, Play, bottom icons).
     /// </summary>
     [DefaultExecutionOrder(100)]
     public class VXLobbyModePanel : MonoBehaviour
     {
+        private const float ButtonWidth = 210f;
+        private const float ButtonHeight = 56f;
+        private const float ButtonGap = 14f;
+        private const float LabelFontSize = 34f;
+
         [SerializeField] LobbyWindowBehavior lobbyWindow;
         [SerializeField] Sprite buttonSprite;
         [SerializeField] Sprite greenButtonSprite;
+        [SerializeField] TMP_FontAsset labelFont;
 
         private DailyChallengeSave dailySave;
+        private TextMeshProUGUI labelStyleReference;
+        private bool uiBuilt;
 
         private void Start()
         {
+            BuildModeButtons();
+        }
+
+        private void BuildModeButtons()
+        {
+            if (uiBuilt) return;
+
             if (lobbyWindow == null)
             {
                 lobbyWindow = FindAnyObjectByType<LobbyWindowBehavior>();
             }
 
             if (lobbyWindow == null) return;
+
+            var lobbyRect = lobbyWindow.GetComponent<RectTransform>();
+            if (lobbyRect == null) return;
+
+            if (lobbyRect.Find("VX Mode Buttons") != null)
+            {
+                uiBuilt = true;
+                return;
+            }
 
             if (GameController.SaveManager != null)
             {
@@ -38,26 +63,82 @@ namespace VXMonster.UI
             if (playTransform == null) return;
 
             var playButton = playTransform.GetComponent<Button>();
-            var playRect = playTransform.GetComponent<RectTransform>();
-            if (playButton == null || playRect == null) return;
+            if (playButton == null) return;
 
+            ResolveVisualReferences(playTransform, playButton);
+
+            var playBackground = FindDeepChild(lobbyWindow.transform, "Play Button Background") as RectTransform;
+            if (playBackground == null) return;
+
+            var rowCenterY = CalculateRowCenterY(lobbyWindow.transform, playBackground);
+            var totalWidth = ButtonWidth * 3f + ButtonGap * 2f;
+            var halfStep = ButtonWidth + ButtonGap;
+
+            var root = new GameObject("VX Mode Buttons", typeof(RectTransform));
+            var rootRect = root.GetComponent<RectTransform>();
+            rootRect.SetParent(lobbyRect, false);
+            rootRect.SetAsLastSibling();
+            rootRect.anchorMin = new Vector2(0.5f, 0.5f);
+            rootRect.anchorMax = new Vector2(0.5f, 0.5f);
+            rootRect.pivot = new Vector2(0.5f, 0.5f);
+            rootRect.anchoredPosition = new Vector2(0f, rowCenterY + 10f);
+            rootRect.sizeDelta = new Vector2(totalWidth, ButtonHeight);
+
+            CreateModeButton(rootRect, "Daily Rank", new Vector2(-halfStep, 0f), OnDailyScoredClicked, greenButtonSprite ?? buttonSprite);
+            CreateModeButton(rootRect, "Practice", new Vector2(0f, 0f), OnDailyPracticeClicked, buttonSprite);
+            CreateModeButton(rootRect, "Endless", new Vector2(halfStep, 0f), OnEndlessClicked, buttonSprite);
+
+            uiBuilt = true;
+        }
+
+        private static float CalculateRowCenterY(Transform lobbyRoot, RectTransform playBackground)
+        {
+            const float padding = 12f;
+
+            var playTop = playBackground.anchoredPosition.y + playBackground.rect.height * 0.5f;
+            var gapBottom = playTop + padding;
+
+            var attempts = FindDeepChild(lobbyRoot, "Attempts Text (TMP)") as RectTransform;
+            if (attempts != null && attempts.gameObject.activeInHierarchy)
+            {
+                var attemptsBottom = attempts.anchoredPosition.y - attempts.rect.height * 0.5f;
+                var gapTop = attemptsBottom - padding;
+                var gapSize = gapTop - gapBottom;
+
+                if (gapSize >= ButtonHeight)
+                {
+                    return gapBottom + gapSize * 0.5f;
+                }
+            }
+
+            return gapBottom + ButtonHeight * 0.5f;
+        }
+
+        private void ResolveVisualReferences(Transform playTransform, Button playButton)
+        {
             if (buttonSprite == null)
             {
                 buttonSprite = playButton.image.sprite;
             }
 
-            var root = new GameObject("VX Mode Buttons", typeof(RectTransform));
-            var rootRect = root.GetComponent<RectTransform>();
-            rootRect.SetParent(playRect.parent, false);
-            rootRect.anchorMin = new Vector2(0.5f, 0f);
-            rootRect.anchorMax = new Vector2(0.5f, 0f);
-            rootRect.pivot = new Vector2(0.5f, 0f);
-            rootRect.anchoredPosition = new Vector2(0f, playRect.anchoredPosition.y + 170f);
-            rootRect.sizeDelta = new Vector2(420f, 150f);
+            if (greenButtonSprite == null)
+            {
+                var upgradeButton = FindDeepChild(lobbyWindow.transform, "Upgrade Button");
+                if (upgradeButton != null && upgradeButton.TryGetComponent<Image>(out var upgradeImage))
+                {
+                    greenButtonSprite = upgradeImage.sprite;
+                }
+            }
 
-            CreateModeButton(rootRect, "Daily (Scored)", new Vector2(-140f, 75f), OnDailyScoredClicked, greenButtonSprite ?? buttonSprite);
-            CreateModeButton(rootRect, "Daily Practice", new Vector2(140f, 75f), OnDailyPracticeClicked, buttonSprite);
-            CreateModeButton(rootRect, "Endless", new Vector2(0f, 0f), OnEndlessClicked, buttonSprite);
+            var playLabelTransform = playTransform.Find("Text (TMP)");
+            if (playLabelTransform != null)
+            {
+                labelStyleReference = playLabelTransform.GetComponent<TextMeshProUGUI>();
+                if (labelFont == null && labelStyleReference != null)
+                {
+                    labelFont = labelStyleReference.font;
+                }
+            }
         }
 
         private void OnDailyScoredClicked()
@@ -87,11 +168,11 @@ namespace VXMonster.UI
             var go = new GameObject(label, typeof(RectTransform), typeof(CanvasRenderer), typeof(Image), typeof(Button));
             var rect = go.GetComponent<RectTransform>();
             rect.SetParent(parent, false);
-            rect.anchorMin = new Vector2(0.5f, 0f);
-            rect.anchorMax = new Vector2(0.5f, 0f);
+            rect.anchorMin = new Vector2(0.5f, 0.5f);
+            rect.anchorMax = new Vector2(0.5f, 0.5f);
             rect.pivot = new Vector2(0.5f, 0.5f);
             rect.anchoredPosition = anchoredPosition;
-            rect.sizeDelta = new Vector2(260f, 70f);
+            rect.sizeDelta = new Vector2(ButtonWidth, ButtonHeight);
 
             var image = go.GetComponent<Image>();
             image.sprite = sprite;
@@ -107,14 +188,41 @@ namespace VXMonster.UI
             textRect.SetParent(rect, false);
             textRect.anchorMin = Vector2.zero;
             textRect.anchorMax = Vector2.one;
-            textRect.offsetMin = Vector2.zero;
-            textRect.offsetMax = Vector2.zero;
+            textRect.offsetMin = new Vector2(8f, 4f);
+            textRect.offsetMax = new Vector2(-8f, -4f);
 
-            var tmp = textGo.GetComponent<TextMeshProUGUI>();
-            tmp.text = label;
+            ApplyLabelStyle(textGo.GetComponent<TextMeshProUGUI>(), label);
+        }
+
+        private void ApplyLabelStyle(TextMeshProUGUI tmp, string text)
+        {
+            tmp.text = text;
             tmp.alignment = TextAlignmentOptions.Center;
-            tmp.fontSize = 26f;
-            tmp.color = Color.white;
+            tmp.verticalAlignment = VerticalAlignmentOptions.Middle;
+            tmp.textWrappingMode = TextWrappingModes.NoWrap;
+            tmp.overflowMode = TextOverflowModes.Overflow;
+            tmp.enableAutoSizing = false;
+            tmp.fontSize = LabelFontSize;
+            tmp.raycastTarget = false;
+
+            if (labelStyleReference != null)
+            {
+                tmp.font = labelStyleReference.font;
+                tmp.fontSharedMaterial = labelStyleReference.fontSharedMaterial;
+                tmp.fontStyle = labelStyleReference.fontStyle;
+                tmp.color = labelStyleReference.color;
+                tmp.characterSpacing = labelStyleReference.characterSpacing;
+                tmp.wordSpacing = labelStyleReference.wordSpacing;
+                return;
+            }
+
+            if (labelFont != null)
+            {
+                tmp.font = labelFont;
+                tmp.fontSharedMaterial = labelFont.material;
+                tmp.fontStyle = FontStyles.Bold;
+                tmp.color = Color.white;
+            }
         }
 
         private static Transform FindDeepChild(Transform parent, string childName)

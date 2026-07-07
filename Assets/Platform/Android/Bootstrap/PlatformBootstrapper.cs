@@ -1,6 +1,7 @@
 using OctoberStudio;
 using OctoberStudio.Save;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using VXMonster.Gameplay;
 using VXMonster.Platform;
 using VXMonster.Platform.Ads;
@@ -24,17 +25,6 @@ namespace VXMonster.Platform.Bootstrap
         }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
-        private static void EnsureLobbyModePanel()
-        {
-            if (FindAnyObjectByType<VXMonster.UI.VXLobbyModePanel>() != null) return;
-
-            var lobby = FindAnyObjectByType<OctoberStudio.UI.LobbyWindowBehavior>();
-            if (lobby == null) return;
-
-            lobby.gameObject.AddComponent<VXMonster.UI.VXLobbyModePanel>();
-        }
-
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         private static void EnsureExists()
         {
             if (FindAnyObjectByType<PlatformBootstrapper>() != null) return;
@@ -53,6 +43,9 @@ namespace VXMonster.Platform.Bootstrap
             instance = this;
             DontDestroyOnLoad(gameObject);
 
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+            SceneManager.sceneLoaded += OnSceneLoaded;
+
             EnsureGameSessionManager();
             EnsureRelicsManager();
 
@@ -68,6 +61,29 @@ namespace VXMonster.Platform.Bootstrap
 #endif
 
             PlatformServices.Initialize(adMobConfig, adService, new MockPlayGamesService());
+
+            // AfterSceneLoad may run before this object exists; attach panel for the current scene too.
+            TryAttachLobbyModePanel();
+        }
+
+        private void OnDestroy()
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
+
+        private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            TryAttachLobbyModePanel();
+        }
+
+        private static void TryAttachLobbyModePanel()
+        {
+            if (FindAnyObjectByType<VXMonster.UI.VXLobbyModePanel>() != null) return;
+
+            var lobby = FindAnyObjectByType<OctoberStudio.UI.LobbyWindowBehavior>();
+            if (lobby == null) return;
+
+            lobby.gameObject.AddComponent<VXMonster.UI.VXLobbyModePanel>();
         }
 
         private void Start()

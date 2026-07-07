@@ -53,7 +53,7 @@ namespace OctoberStudio.Input
 
         private void OnEnable()
         {
-            inputAsset.Enable();
+            if (inputAsset != null) inputAsset.Enable();
         }
 
         private void OnDisable()
@@ -78,6 +78,8 @@ namespace OctoberStudio.Input
 
         private void Update()
         {
+            if (inputAsset == null || save == null) return;
+
             if (ActiveInput != InputType.Keyboard && Keyboard.current != null && Keyboard.current.wasUpdatedThisFrame && !Keyboard.current.CheckStateIsAtDefaultIgnoringNoise())
             {
                 Debug.Log("Switching To Keyboard");
@@ -87,7 +89,7 @@ namespace OctoberStudio.Input
 
                 if (Joystick != null) Joystick.Disable();
 
-                highlightsParent.EnableArrows();
+                highlightsParent?.EnableArrows();
 
                 onInputChanged?.Invoke(prevInput, InputType.Keyboard);
             }
@@ -104,7 +106,7 @@ namespace OctoberStudio.Input
 
                 if (Joystick != null) Joystick.Enable();
 
-                highlightsParent.DisableArrows();
+                highlightsParent?.DisableArrows();
 
                 onInputChanged?.Invoke(prevInput, InputType.UIJoystick);
             }
@@ -129,7 +131,7 @@ namespace OctoberStudio.Input
 
                 if (Joystick != null) Joystick.Disable();
 
-                highlightsParent.EnableArrows();
+                highlightsParent?.EnableArrows();
 
                 onInputChanged?.Invoke(prevInput, InputType.Gamepad);
             }

@@ -27,24 +27,35 @@ namespace OctoberStudio.Easing
 
         public virtual void Awake()
         {
-            instance = this;
+            if (instance != null && instance != this)
+            {
+                Destroy(this);
+                return;
+            }
 
+            instance = this;
             positionJobRunner = new EasingPositionJobRunner();
         }
 
         protected virtual void OnDestroy()
         {
-            positionJobRunner.Clear();
+            if (instance == this)
+            {
+                instance = null;
+            }
+
+            positionJobRunner?.Clear();
+            positionJobRunner = null;
         }
 
         protected virtual void Update()
         {
-            positionJobRunner.Update();
+            positionJobRunner?.Update();
         }
 
         protected virtual void LateUpdate()
         {
-            positionJobRunner.LateUpdate();
+            positionJobRunner?.LateUpdate();
         }
 
         public static IEasingCoroutine DoFloat(float from, float to, float duration, UnityAction<float> action, float delay = 0)
