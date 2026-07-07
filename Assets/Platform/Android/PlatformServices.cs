@@ -72,6 +72,7 @@ namespace VXMonster.Platform
             if (Time.unscaledTime - lastInterstitialTime < cooldown) return false;
 
             lastInterstitialTime = Time.unscaledTime;
+            Analytics.AnalyticsEvents.LogAdImpression("interstitial");
             AdService.ShowInterstitial(onClosed);
             return true;
         }

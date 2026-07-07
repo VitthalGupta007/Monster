@@ -19,55 +19,59 @@ Wire these in Unity after pulling latest scripts. Optional fields can stay empty
 | `termsButton` | Opens legal modal |
 | `legalTextWindow` | Panel with `LegalTextWindowBehavior` |
 
-## Legal modal (`LegalTextWindowBehavior`)
+## Difficulty modal (`DifficultyModalWindowBehavior`)
 
-| Field | Object |
-|-------|--------|
-| `bodyText` | Scroll content TMP |
-| `scrollRect` | Scroll view |
-| `backButton` | Close |
+1. Create modal panel on lobby canvas (inactive by default).
+2. Add 4 tier buttons + `previewLabel` + close.
+3. `VXLobbyModePanel` opens this when present; otherwise cycles difficulty.
 
-## Talent Tree (new modal)
+## Talent Tree / Codex / Shop
 
-1. Duplicate an existing modal (e.g. Settings).
-2. Add `TalentTreeWindowBehavior`.
-3. Assign `pointsLabel`, `nodesContainer` (Vertical Layout), `nodeButtonPrefab` (Button + TMP child).
-
-Open from lobby with a button calling `TalentTreeWindowBehavior.Open()`.
-
-## Codex (new modal)
-
-1. Add `CodexWindowBehavior` on a panel with a TMP body field.
-2. Assign `bodyText`, `backButton`.
-
-## Shop (new modal)
-
-1. Add `ShopWindowBehavior`.
-2. For each IAP row, fill `ShopProductRow`:
-   - `productId` — use constants from `IAPProductIds`
-   - `buyButton`, `priceLabel`, `titleLabel`
-3. Assign `restoreButton`, `backButton`, `statusLabel`.
-
-**Dev testing:** Mock IAP grants immediately in Editor. For Remove Ads without purchase, set `EntitlementsSave.RemoveAdsPurchased = true` in save JSON.
-
-**Live testing:** Create matching products in Play Console after $25 registration. Product IDs must match `IAPProductIds.cs`.
+See [ScreenInventory.md](ScreenInventory.md) for full list.
 
 ## Run results
 
-| Screen | Field | Notes |
-|--------|-------|-------|
-| Stage Complete | `statsText` | Optional TMP; shows mode, kills, time, combos |
-| Stage Failed | `statsText` | Same formatter, includes endless loop on death |
+| Screen | Field |
+|--------|-------|
+| Stage Complete | `statsText` |
+| Stage Failed | `statsText`, `retryButton` |
 
-## Combo HUD (in-game)
+## In-run HUD (`Game Screen.prefab`)
 
-1. On Game Screen canvas top bar, add TMP label.
-2. Add `ComboHudBehavior`, assign `comboLabel`.
+| Script | Field |
+|--------|-------|
+| `ComboHudBehavior` | `comboLabel` |
+| `RelicHudBehavior` | 3× `slotIcons`, optional `slotLabels` |
+| `DifficultyBadgeHudBehavior` | `badgeLabel` |
 
-## Stages 3–6 (content)
+## Loading screen (`Loading Screen.unity`)
 
-Assets exist with recolored spotlight tints and Stage 2 timeline/field as placeholder. **Your task:** duplicate timelines per biome and assign unique field art when ready.
+Add `LoadingScreenBehavior` with `progressBar`, `statusLabel`, `percentLabel`.
+
+## Tutorial (`TutorialOverlayBehavior`)
+
+Full-screen overlay on Main Menu or Lobby; assign `bodyText`, `nextButton`, `skipButton`.
+
+## Local personal bests
+
+`LocalPersonalBestBehavior` auto-attaches to lobby at runtime. For custom layout, add manually with `dailyBestLabel` and `endlessBestLabel`.
+
+## Daily modifiers
+
+Add `DailyModifierPreviewBehavior` with `modifiersLabel` near Daily Challenge button.
+
+## Stages 3–6
+
+See [BiomeBrief.md](BiomeBrief.md). Duplicate timelines and preview sprites in Unity.
 
 ## Package install
 
-Open Unity once so it resolves `com.unity.purchasing` from `manifest.json`. Editor script `PurchasingDefineSync` adds `UNITY_PURCHASING` when the package is present.
+Open Unity once for `com.unity.purchasing`. `PurchasingDefineSync` adds `UNITY_PURCHASING` when resolved.
+
+## Firebase (Phase 6)
+
+See [FirebaseSetup.md](FirebaseSetup.md).
+
+## Production QA
+
+See [ProductionGates.md](ProductionGates.md).

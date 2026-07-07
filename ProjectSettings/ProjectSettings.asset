@@ -859,9 +859,9 @@ PlayerSettings:
   webWasm2023: 0
   webEnableSubmoduleStrippingCompatibility: 0
   scriptingDefineSymbols:
-    Android: GOOGLE_MOBILE_ADS_AVAILABLE;APP_UI_EDITOR_ONLY
-    Standalone: GOOGLE_MOBILE_ADS_AVAILABLE;APP_UI_EDITOR_ONLY
-    iPhone: GOOGLE_MOBILE_ADS_AVAILABLE
+    Android: GOOGLE_MOBILE_ADS_AVAILABLE;APP_UI_EDITOR_ONLY;UNITY_PURCHASING
+    Standalone: GOOGLE_MOBILE_ADS_AVAILABLE;APP_UI_EDITOR_ONLY;UNITY_PURCHASING
+    iPhone: GOOGLE_MOBILE_ADS_AVAILABLE;UNITY_PURCHASING
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
@@ -979,7 +979,7 @@ PlayerSettings:
   cloudProjectId: 0eaf23ae-d10a-460f-ba7b-db2cb69d8822
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: VX Monster
+  projectName: Monster
   organizationId: vitthalgupta007
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0

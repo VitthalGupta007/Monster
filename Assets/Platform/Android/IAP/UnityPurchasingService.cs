@@ -115,6 +115,8 @@ namespace VXMonster.Platform.IAP
             var productId = purchaseEvent.purchasedProduct.definition.id;
             var success = PurchaseFulfillment.TryFulfill(productId);
             pendingPurchaseCallback?.Invoke(success, success ? string.Empty : "Fulfillment failed.");
+            if (success) VXMonster.Platform.Analytics.AnalyticsEvents.LogIapPurchase(productId, true);
+            else VXMonster.Platform.Analytics.AnalyticsEvents.LogIapPurchase(productId, false);
             pendingPurchaseCallback = null;
             return PurchaseProcessingResult.Complete;
         }

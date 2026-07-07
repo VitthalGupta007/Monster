@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using VXMonster.Gameplay;
 using VXMonster.Platform;
+using VXMonster.Platform.Analytics;
 using VXMonster.Platform.Ads;
 using VXMonster.Platform.IAP;
 using VXMonster.Platform.PlayGames;
@@ -61,6 +62,13 @@ namespace VXMonster.Platform.Bootstrap
             adService = new MockAdService();
 #endif
 
+#if UNITY_FIREBASE
+            AnalyticsEvents.Bind(new FirebaseAnalyticsService());
+#else
+            AnalyticsEvents.Bind(new MockAnalyticsService());
+#endif
+            AnalyticsEvents.Initialize();
+
             GoogleMobileAdsConsentController.GatherConsent(_ =>
             {
                 if (GameController.SaveManager != null)
@@ -79,6 +87,22 @@ namespace VXMonster.Platform.Bootstrap
 
             // AfterSceneLoad may run before this object exists; attach panel for the current scene too.
             TryAttachLobbyModePanel();
+            TryAttachLobbyPersonalBest();
+            TryShowLobbyTutorial();
+        }
+
+        private static void TryAttachLobbyPersonalBest()
+        {
+            var lobby = FindAnyObjectByType<VXMonster.Core.UI.LobbyWindowBehavior>();
+            if (lobby == null) return;
+            if (lobby.GetComponent<VXMonster.UI.LocalPersonalBestBehavior>() != null) return;
+            lobby.gameObject.AddComponent<VXMonster.UI.LocalPersonalBestBehavior>();
+        }
+
+        private static void TryShowLobbyTutorial()
+        {
+            var tutorial = FindAnyObjectByType<VXMonster.UI.TutorialOverlayBehavior>();
+            tutorial?.TryShowFirstRun();
         }
 
         private void OnDestroy()
@@ -89,6 +113,8 @@ namespace VXMonster.Platform.Bootstrap
         private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             TryAttachLobbyModePanel();
+            TryAttachLobbyPersonalBest();
+            TryShowLobbyTutorial();
             PlatformServices.RefreshBannerForActiveScene();
         }
 

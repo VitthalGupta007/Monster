@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using VXMonster.Platform.Analytics;
 
 namespace VXMonster.Platform.IAP
 {
@@ -38,9 +39,11 @@ namespace VXMonster.Platform.IAP
             if (!PurchaseFulfillment.TryFulfill(productId))
             {
                 onComplete?.Invoke(false, "Unknown product.");
+                AnalyticsEvents.LogIapPurchase(productId, false);
                 return;
             }
 
+            AnalyticsEvents.LogIapPurchase(productId, true);
             onComplete?.Invoke(true, string.Empty);
         }
 

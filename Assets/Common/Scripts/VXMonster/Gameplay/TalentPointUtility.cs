@@ -1,3 +1,5 @@
+using VXMonster.Platform.Analytics;
+
 namespace VXMonster.Gameplay
 {
     public static class TalentPointUtility
@@ -9,6 +11,7 @@ namespace VXMonster.Gameplay
 
             var points = session.Difficulty.TalentPointsPerBossKill();
             session.TalentTree.AddPoints(points);
+            AnalyticsEvents.LogBossKilled(points);
         }
     }
 }

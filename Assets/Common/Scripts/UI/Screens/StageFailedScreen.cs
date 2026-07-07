@@ -25,6 +25,7 @@ namespace VXMonster.Core.UI
         [SerializeField] Button reviveButton;
         [SerializeField] Button adReviveButton;
         [SerializeField] Button exitButton;
+        [SerializeField] Button retryButton;
         [SerializeField] TMP_Text statsText;
 
         private TextMeshProUGUI adReviveLabel;
@@ -42,6 +43,7 @@ namespace VXMonster.Core.UI
             }
 
             exitButton.onClick.AddListener(ExitButtonClick);
+            if (retryButton != null) retryButton.onClick.AddListener(RetryButtonClick);
 
             upgradeReviveUsed = false;
         }
@@ -201,6 +203,21 @@ namespace VXMonster.Core.UI
                         adReviveButton.interactable = PlatformServices.AdService.IsRewardedReady;
                     }
                 });
+        }
+
+        private void RetryButtonClick()
+        {
+            GameController.AudioManager.PlaySound(AudioManager.BUTTON_CLICK_HASH);
+
+            if (refreshRoutine != null)
+            {
+                StopCoroutine(refreshRoutine);
+                refreshRoutine = null;
+            }
+
+            GameController.InputManager.onInputChanged -= OnInputChanged;
+            Hide(null);
+            RunRetryUtility.RetryCurrentRun();
         }
 
         private void ExitButtonClick()

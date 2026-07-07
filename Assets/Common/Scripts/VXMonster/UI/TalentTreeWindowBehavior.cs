@@ -82,6 +82,7 @@ namespace VXMonster.UI
             if (talentSave == null) return;
             if (!talentSave.TryUnlock(node.Id, node.Cost)) return;
             GameController.SaveManager?.Save(false);
+            VXMonster.Platform.Analytics.AnalyticsEvents.LogTalentUnlock(node.Id);
             Refresh();
         }
 

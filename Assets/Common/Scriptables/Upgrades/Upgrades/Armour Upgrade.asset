@@ -38,3 +38,23 @@ MonoBehaviour:
     price:
       currencyId: gold
       amount: 2000
+  - cost: 3200
+    value: 0.55
+    price:
+      currencyId: gold
+      amount: 3200
+  - cost: 5000
+    value: 0.5
+    price:
+      currencyId: gold
+      amount: 5000
+  - cost: 8000
+    value: 0.45
+    price:
+      currencyId: gold
+      amount: 8000
+  - cost: 12000
+    value: 0.4
+    price:
+      currencyId: gold
+      amount: 12000

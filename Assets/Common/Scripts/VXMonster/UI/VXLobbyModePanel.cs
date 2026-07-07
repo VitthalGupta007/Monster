@@ -146,6 +146,13 @@ namespace VXMonster.UI
 
         private void OnDifficultyClicked()
         {
+            var modal = FindAnyObjectByType<DifficultyModalWindowBehavior>();
+            if (modal != null)
+            {
+                modal.Open(RefreshDifficultyLabel);
+                return;
+            }
+
             VXDifficultySelection.CycleNext();
             RefreshDifficultyLabel();
         }

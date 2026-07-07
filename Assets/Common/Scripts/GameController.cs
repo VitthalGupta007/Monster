@@ -16,6 +16,8 @@ namespace VXMonster.Core
     using Save;
     using Upgrades;
     using Vibration;
+    using VXMonster.Platform.Analytics;
+    using VXMonster.UI;
 
     public class GameController : MonoBehaviour
     {
@@ -231,32 +233,41 @@ namespace VXMonster.Core
 
         protected static IEnumerator StageLoadingCoroutine()
         {
+            LoadingProgressReporter.Reset();
             var loadingSceneName = GetLoadingScreenSceneName();
             var mainMenuSceneName = GetMainMenuSceneName();
             var gameSceneName = GetGameSceneName();
 
             if (loadingSceneName != null)
             {
-                yield return LoadAsyncScene(loadingSceneName, LoadSceneMode.Additive);
+                yield return LoadAsyncScene(loadingSceneName, LoadSceneMode.Additive, "Loading...");
             }
 
+            LoadingProgressReporter.Report(0.35f, "Preparing stage...");
             yield return UnloadAsyncScene(mainMenuSceneName);
-            yield return LoadAsyncScene(gameSceneName, LoadSceneMode.Single);
+            LoadingProgressReporter.Report(0.55f, "Loading game...");
+            yield return LoadAsyncScene(gameSceneName, LoadSceneMode.Single, "Starting run...");
+            LoadingProgressReporter.Report(1f, "Ready");
+            AnalyticsEvents.LogRunStart();
         }
 
         protected static IEnumerator MainMenuLoadingCoroutine()
         {
+            LoadingProgressReporter.Reset();
             var loadingSceneName = GetLoadingScreenSceneName();
             var mainMenuSceneName = GetMainMenuSceneName();
             var gameSceneName = GetGameSceneName();
 
             if (loadingSceneName != null)
             {
-                yield return LoadAsyncScene(loadingSceneName, LoadSceneMode.Additive);
+                yield return LoadAsyncScene(loadingSceneName, LoadSceneMode.Additive, "Loading...");
             }
 
+            LoadingProgressReporter.Report(0.4f, "Leaving stage...");
             yield return UnloadAsyncScene(gameSceneName);
-            yield return LoadAsyncScene(mainMenuSceneName, LoadSceneMode.Single);
+            LoadingProgressReporter.Report(0.7f, "Main menu...");
+            yield return LoadAsyncScene(mainMenuSceneName, LoadSceneMode.Single, "Welcome back");
+            LoadingProgressReporter.Report(1f, "Ready");
 
             if (StageController.Stage.UseCustomMusic)
             {
@@ -313,15 +324,16 @@ namespace VXMonster.Core
             }
         }
 
-        protected static IEnumerator LoadAsyncScene(string sceneName, LoadSceneMode loadSceneMode)
+        protected static IEnumerator LoadAsyncScene(string sceneName, LoadSceneMode loadSceneMode, string status = null)
         {
+            if (!string.IsNullOrEmpty(status)) LoadingProgressReporter.Report(LoadingProgressReporter.Progress, status);
+
             var asyncLoad = SceneManager.LoadSceneAsync(sceneName, loadSceneMode);
             asyncLoad.allowSceneActivation = false;
-            //wait until the asynchronous scene fully loads
             while (!asyncLoad.isDone)
             {
-                //scene has loaded as much as possible,
-                // the last 10% can't be multi-threaded
+                var mapped = Mathf.Lerp(LoadingProgressReporter.Progress, 0.95f, asyncLoad.progress / 0.9f);
+                LoadingProgressReporter.Report(mapped, status);
                 if (asyncLoad.progress >= 0.9f)
                 {
                     asyncLoad.allowSceneActivation = true;

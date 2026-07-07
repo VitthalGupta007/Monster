@@ -160,6 +160,11 @@ namespace VXMonster.Gameplay
             return false;
         }
 
+        public RelicData GetRelicById(string relicId)
+        {
+            return database?.GetById(relicId);
+        }
+
         public int GetPassiveSlotBonus()
         {
             return CountEffect(RelicEffectType.ExtraPassiveSlot);

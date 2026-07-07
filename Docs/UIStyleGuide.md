@@ -35,15 +35,23 @@ Font: reuse **NeverMindRounded-Bold** / lobby labels from existing prefabs.
 
 ## Screens to build (prefab hookup)
 
+Full inventory: [ScreenInventory.md](ScreenInventory.md)
+
 | Screen | Script | Key `[SerializeField]` refs |
 |--------|--------|------------------------------|
-| Difficulty | (lobby runtime button done) | — |
+| Difficulty modal | `DifficultyModalWindowBehavior` | 4 tier buttons, preview, close |
 | Talent Tree | `TalentTreeWindowBehavior` | `pointsLabel`, `nodesContainer`, `nodeButtonPrefab` |
 | Codex | `CodexWindowBehavior` | `bodyText`, `backButton` |
 | Shop | `ShopWindowBehavior` | product rows, `restoreButton`, `statusLabel` |
 | Legal | `LegalTextWindowBehavior` | `bodyText`, `scrollRect`, `backButton` |
-| Results | `StageCompleteScreen` / `StageFailedScreen` | optional `statsText` |
-| Combo HUD | `ComboHudBehavior` | `comboLabel` on game screen |
+| Results | `StageCompleteScreen` / `StageFailedScreen` | `statsText`, `retryButton` (fail) |
+| Combo HUD | `ComboHudBehavior` | `comboLabel` |
+| Relic HUD | `RelicHudBehavior` | slot icons/labels |
+| Difficulty badge | `DifficultyBadgeHudBehavior` | `badgeLabel` |
+| Tutorial | `TutorialOverlayBehavior` | body, next, skip |
+| Loading | `LoadingScreenBehavior` | progress bar, labels |
+| Local PB | `LocalPersonalBestBehavior` | daily/endless labels |
+| Daily modifiers | `DailyModifierPreviewBehavior` | `modifiersLabel` |
 
 ## Abilities popup — new optional fields
 

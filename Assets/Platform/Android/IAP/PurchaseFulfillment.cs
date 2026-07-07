@@ -2,6 +2,7 @@ using VXMonster.Core;
 using VXMonster.Save;
 using UnityEngine;
 using VXMonster.Platform;
+using VXMonster.Platform.Analytics;
 
 namespace VXMonster.Platform.IAP
 {

@@ -63,8 +63,14 @@ Ad unit IDs live in `AdMobConfig` (ScriptableObject). Do not commit production k
 
 | Doc | Purpose |
 |-----|---------|
-| [Docs/PrefabHookup.md](Docs/PrefabHookup.md) | Wire UI prefabs to new scripts (shop, talent tree, codex, legal, results, combo HUD) |
-| [Docs/UIStyleGuide.md](Docs/UIStyleGuide.md) | Colors, typography, and screen conventions |
+| [Docs/ScreenInventory.md](Docs/ScreenInventory.md) | Full UI screen audit (23 prefabs + new screens) |
+| [Docs/PrefabHookup.md](Docs/PrefabHookup.md) | Wire UI prefabs to scripts |
+| [Docs/UIStyleGuide.md](Docs/UIStyleGuide.md) | Colors, typography, conventions |
+| [Docs/ProductionGates.md](Docs/ProductionGates.md) | Pre-submit QA checklist |
+| [Docs/BiomeBrief.md](Docs/BiomeBrief.md) | Stages 3–6 content pipeline |
+| [Docs/FirebaseSetup.md](Docs/FirebaseSetup.md) | Analytics + Crashlytics install |
+| [Docs/iOS_Parity.md](Docs/iOS_Parity.md) | Phase 8 iOS stubs |
+| [Docs/GPGS_v1.1.md](Docs/GPGS_v1.1.md) | Play Games leaderboards (post-launch) |
 
 ## Development notes
 

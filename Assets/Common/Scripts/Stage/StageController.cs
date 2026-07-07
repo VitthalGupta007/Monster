@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.Playables;
 using VXMonster.Gameplay;
 using VXMonster.Platform;
+using VXMonster.Platform.Analytics;
 using VXMonster.Save;
 
 namespace VXMonster.Core
@@ -89,6 +90,11 @@ namespace VXMonster.Core
 
             PlayerBehavior.Player.onPlayerDied += OnGameFailed;
 
+            if (GetComponent<MidRunSaveController>() == null)
+            {
+                gameObject.AddComponent<MidRunSaveController>();
+            }
+
             director.stopped += TimelineStopped;
             if (testingPreset != null) {
                 director.time = testingPreset.StartTime; 
@@ -154,6 +160,7 @@ namespace VXMonster.Core
             }
 
             gameScreen.Hide();
+            AnalyticsEvents.LogRunEnd(true);
             stageCompletedScreen.Show();
             Time.timeScale = 0;
         }
@@ -182,6 +189,7 @@ namespace VXMonster.Core
             }
 
             gameScreen.Hide();
+            AnalyticsEvents.LogRunEnd(false);
             stageFailedScreen.Show();
         }
 
