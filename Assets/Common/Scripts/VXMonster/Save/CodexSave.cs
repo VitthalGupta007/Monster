@@ -31,6 +31,10 @@ namespace VXMonster.Save
             return true;
         }
 
+        public IReadOnlyList<string> DiscoveredRelicIds => discoveredRelics;
+        public IReadOnlyList<string> DiscoveredEvolutionIds => discoveredEvolutions;
+        public bool HasDiscoveredFirstCombo => discoveredFirstCombo;
+
         public void Flush() { }
     }
 }

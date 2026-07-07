@@ -9,16 +9,24 @@ using VXMonster.Save;
 namespace VXMonster.UI
 {
     /// <summary>
-    /// Adds Daily Challenge and Endless mode buttons to the lobby at runtime.
-    /// Layout is derived from Lobby Window.prefab rects (Attempts, Play, bottom icons).
+    /// Adds Daily Challenge, Endless, and Difficulty controls to the lobby at runtime.
+    /// Layout coordinates match Lobby Window.prefab (Attempts y=-289, Play y=-550).
     /// </summary>
     [DefaultExecutionOrder(100)]
     public class VXLobbyModePanel : MonoBehaviour
     {
-        private const float ButtonWidth = 210f;
-        private const float ButtonHeight = 56f;
-        private const float ButtonGap = 14f;
-        private const float LabelFontSize = 34f;
+        private const string RootName = "VX Mode Buttons";
+
+        private const float RowHeight = 42f;
+        private const float RowGap = 8f;
+        private const float HorizontalPadding = 40f;
+        private const float ButtonGap = 10f;
+        private const float DifficultyButtonWidth = 220f;
+        private const float LabelFontSize = 26f;
+        private const float LabelFontSizeMin = 18f;
+
+        // Midpoint between Attempts Text bottom (~-359) and Play button top (~-457).
+        private const float PanelCenterY = -408f;
 
         [SerializeField] LobbyWindowBehavior lobbyWindow;
         [SerializeField] Sprite buttonSprite;
@@ -27,6 +35,7 @@ namespace VXMonster.UI
 
         private DailyChallengeSave dailySave;
         private TextMeshProUGUI labelStyleReference;
+        private TextMeshProUGUI difficultyLabel;
         private bool uiBuilt;
 
         private void Start()
@@ -48,10 +57,10 @@ namespace VXMonster.UI
             var lobbyRect = lobbyWindow.GetComponent<RectTransform>();
             if (lobbyRect == null) return;
 
-            if (lobbyRect.Find("VX Mode Buttons") != null)
+            var existing = lobbyRect.Find(RootName);
+            if (existing != null)
             {
-                uiBuilt = true;
-                return;
+                Destroy(existing.gameObject);
             }
 
             if (GameController.SaveManager != null)
@@ -67,51 +76,78 @@ namespace VXMonster.UI
 
             ResolveVisualReferences(playTransform, playButton);
 
-            var playBackground = FindDeepChild(lobbyWindow.transform, "Play Button Background") as RectTransform;
-            if (playBackground == null) return;
+            var panelHeight = RowHeight * 2f + RowGap;
+            var modeRowY = PanelCenterY - (panelHeight * 0.5f) + RowHeight * 0.5f;
+            var difficultyRowY = modeRowY + RowHeight + RowGap;
 
-            var rowCenterY = CalculateRowCenterY(lobbyWindow.transform, playBackground);
-            var totalWidth = ButtonWidth * 3f + ButtonGap * 2f;
-            var halfStep = ButtonWidth + ButtonGap;
+            var lobbyWidth = lobbyRect.rect.width > 0f ? lobbyRect.rect.width : 720f;
+            var maxRowWidth = Mathf.Min(lobbyWidth - HorizontalPadding, 620f);
+            var modeButtonWidth = Mathf.Floor((maxRowWidth - ButtonGap * 2f) / 3f);
+            modeButtonWidth = Mathf.Clamp(modeButtonWidth, 120f, 190f);
+            var halfStep = modeButtonWidth + ButtonGap;
 
-            var root = new GameObject("VX Mode Buttons", typeof(RectTransform));
+            var root = new GameObject(RootName, typeof(RectTransform));
             var rootRect = root.GetComponent<RectTransform>();
             rootRect.SetParent(lobbyRect, false);
             rootRect.SetAsLastSibling();
             rootRect.anchorMin = new Vector2(0.5f, 0.5f);
             rootRect.anchorMax = new Vector2(0.5f, 0.5f);
             rootRect.pivot = new Vector2(0.5f, 0.5f);
-            rootRect.anchoredPosition = new Vector2(0f, rowCenterY + 10f);
-            rootRect.sizeDelta = new Vector2(totalWidth, ButtonHeight);
+            rootRect.anchoredPosition = Vector2.zero;
+            rootRect.sizeDelta = Vector2.zero;
 
-            CreateModeButton(rootRect, "Daily Rank", new Vector2(-halfStep, 0f), OnDailyScoredClicked, greenButtonSprite ?? buttonSprite);
-            CreateModeButton(rootRect, "Practice", new Vector2(0f, 0f), OnDailyPracticeClicked, buttonSprite);
-            CreateModeButton(rootRect, "Endless", new Vector2(halfStep, 0f), OnEndlessClicked, buttonSprite);
+            var diffGo = CreateModeButton(
+                rootRect,
+                "Difficulty Button",
+                new Vector2(0f, difficultyRowY),
+                new Vector2(DifficultyButtonWidth, RowHeight),
+                OnDifficultyClicked,
+                buttonSprite,
+                VXDifficultySelection.Selected.DisplayLabel());
+            difficultyLabel = diffGo.GetComponentInChildren<TextMeshProUGUI>();
+
+            CreateModeButton(
+                rootRect,
+                "Daily Challenge",
+                new Vector2(-halfStep, modeRowY),
+                new Vector2(modeButtonWidth, RowHeight),
+                OnDailyScoredClicked,
+                greenButtonSprite ?? buttonSprite,
+                "Daily");
+
+            CreateModeButton(
+                rootRect,
+                "Practice",
+                new Vector2(0f, modeRowY),
+                new Vector2(modeButtonWidth, RowHeight),
+                OnDailyPracticeClicked,
+                buttonSprite,
+                "Practice");
+
+            CreateModeButton(
+                rootRect,
+                "Endless",
+                new Vector2(halfStep, modeRowY),
+                new Vector2(modeButtonWidth, RowHeight),
+                OnEndlessClicked,
+                buttonSprite,
+                "Endless");
 
             uiBuilt = true;
         }
 
-        private static float CalculateRowCenterY(Transform lobbyRoot, RectTransform playBackground)
+        private void RefreshDifficultyLabel()
         {
-            const float padding = 12f;
-
-            var playTop = playBackground.anchoredPosition.y + playBackground.rect.height * 0.5f;
-            var gapBottom = playTop + padding;
-
-            var attempts = FindDeepChild(lobbyRoot, "Attempts Text (TMP)") as RectTransform;
-            if (attempts != null && attempts.gameObject.activeInHierarchy)
+            if (difficultyLabel != null)
             {
-                var attemptsBottom = attempts.anchoredPosition.y - attempts.rect.height * 0.5f;
-                var gapTop = attemptsBottom - padding;
-                var gapSize = gapTop - gapBottom;
-
-                if (gapSize >= ButtonHeight)
-                {
-                    return gapBottom + gapSize * 0.5f;
-                }
+                difficultyLabel.text = VXDifficultySelection.Selected.DisplayLabel();
             }
+        }
 
-            return gapBottom + ButtonHeight * 0.5f;
+        private void OnDifficultyClicked()
+        {
+            VXDifficultySelection.CycleNext();
+            RefreshDifficultyLabel();
         }
 
         private void ResolveVisualReferences(Transform playTransform, Button playButton)
@@ -159,19 +195,26 @@ namespace VXMonster.UI
 
         private void OnEndlessClicked()
         {
-            lobbyWindow.StartEndlessRun(DifficultyTier.Normal);
+            lobbyWindow.StartEndlessRun(VXDifficultySelection.Selected);
         }
 
-        private void CreateModeButton(RectTransform parent, string label, Vector2 anchoredPosition, UnityEngine.Events.UnityAction onClick, Sprite sprite)
+        private GameObject CreateModeButton(
+            RectTransform parent,
+            string objectName,
+            Vector2 anchoredPosition,
+            Vector2 size,
+            UnityEngine.Events.UnityAction onClick,
+            Sprite sprite,
+            string label)
         {
-            var go = new GameObject(label, typeof(RectTransform), typeof(CanvasRenderer), typeof(Image), typeof(Button));
+            var go = new GameObject(objectName, typeof(RectTransform), typeof(CanvasRenderer), typeof(Image), typeof(Button));
             var rect = go.GetComponent<RectTransform>();
             rect.SetParent(parent, false);
             rect.anchorMin = new Vector2(0.5f, 0.5f);
             rect.anchorMax = new Vector2(0.5f, 0.5f);
             rect.pivot = new Vector2(0.5f, 0.5f);
             rect.anchoredPosition = anchoredPosition;
-            rect.sizeDelta = new Vector2(ButtonWidth, ButtonHeight);
+            rect.sizeDelta = size;
 
             var image = go.GetComponent<Image>();
             image.sprite = sprite;
@@ -187,10 +230,11 @@ namespace VXMonster.UI
             textRect.SetParent(rect, false);
             textRect.anchorMin = Vector2.zero;
             textRect.anchorMax = Vector2.one;
-            textRect.offsetMin = new Vector2(8f, 4f);
-            textRect.offsetMax = new Vector2(-8f, -4f);
+            textRect.offsetMin = new Vector2(6f, 2f);
+            textRect.offsetMax = new Vector2(-6f, -2f);
 
             ApplyLabelStyle(textGo.GetComponent<TextMeshProUGUI>(), label);
+            return go;
         }
 
         private void ApplyLabelStyle(TextMeshProUGUI tmp, string text)
@@ -200,7 +244,9 @@ namespace VXMonster.UI
             tmp.verticalAlignment = VerticalAlignmentOptions.Middle;
             tmp.textWrappingMode = TextWrappingModes.NoWrap;
             tmp.overflowMode = TextOverflowModes.Overflow;
-            tmp.enableAutoSizing = false;
+            tmp.enableAutoSizing = true;
+            tmp.fontSizeMin = LabelFontSizeMin;
+            tmp.fontSizeMax = LabelFontSize;
             tmp.fontSize = LabelFontSize;
             tmp.raycastTarget = false;
 

@@ -1,11 +1,13 @@
 using VXMonster.Core.Audio;
 using VXMonster.Core.Easing;
 using VXMonster.Core.Input;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using VXMonster.Platform;
+using VXMonster.UI;
 
 namespace VXMonster.Core.UI
 {
@@ -17,6 +19,7 @@ namespace VXMonster.Core.UI
 
         [SerializeField] CanvasGroup canvasGroup;
         [SerializeField] Button button;
+        [SerializeField] TMP_Text statsText;
 
         private void Awake()
         {
@@ -31,6 +34,11 @@ namespace VXMonster.Core.UI
             canvasGroup.DoAlpha(1f, 0.3f).SetUnscaledTime(true).SetOnFinish(onFinish);
 
             gameObject.SetActive(true);
+
+            if (statsText != null)
+            {
+                statsText.text = RunResultsFormatter.BuildSummary(true);
+            }
 
             GameController.AudioManager.PlaySound(STAGE_COMPLETE_HASH);
 

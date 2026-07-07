@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using VXMonster.Core;
 
 namespace VXMonster.Gameplay
 {
@@ -141,7 +142,22 @@ namespace VXMonster.Gameplay
             if (!session.TryAddRelic(relic.Id, MaxRelicSlots)) return false;
 
             GameSessionManager.Instance?.Codex?.DiscoverRelic(relic.Id);
+            PlayerBehavior.Player?.RefreshRelicModifiers();
             return true;
+        }
+
+        private bool HasRelic(string relicId)
+        {
+            var session = GameSessionManager.Instance?.RunSession;
+            if (session == null) return false;
+
+            var relicIds = session.ActiveRelicIds;
+            for (var i = 0; i < relicIds.Count; i++)
+            {
+                if (relicIds[i] == relicId) return true;
+            }
+
+            return false;
         }
 
         public int GetPassiveSlotBonus()
@@ -158,7 +174,6 @@ namespace VXMonster.Gameplay
         {
             var mult = 1f;
             mult += SumMagnitude(RelicEffectType.DamageBoost, 0.4f);
-            mult += SumMagnitude(RelicEffectType.BossDamage, 0f); // applied contextually
             return mult;
         }
 
@@ -180,6 +195,26 @@ namespace VXMonster.Gameplay
         public float GetGoldMultiplier()
         {
             return 1f + SumMagnitude(RelicEffectType.GoldBoost, 0.25f);
+        }
+
+        public float GetMaxHpMultiplier()
+        {
+            var mult = 1f;
+            mult -= SumMagnitude(RelicEffectType.MaxHpPenalty, 0.3f);
+
+            if (HasRelic("glass_soul"))
+            {
+                var relic = database.GetById("glass_soul");
+                var penalty = relic != null && relic.Magnitude > 0f ? relic.Magnitude : 0.4f;
+                mult *= 1f - penalty;
+            }
+
+            return Mathf.Clamp(mult, 0.25f, 1f);
+        }
+
+        public float GetComboAmplifierBonus()
+        {
+            return SumMagnitude(RelicEffectType.ComboAmplifier, 0.25f);
         }
 
         public bool HasPhoenixRevive()

@@ -8,6 +8,7 @@ using Unity.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Playables;
+using VXMonster.Gameplay;
 
 namespace VXMonster.Core
 {
@@ -24,7 +25,7 @@ namespace VXMonster.Core
 
         [Space]
         [Tooltip("Maximum amount of alive enemies at a time. No more enemies will be spawned until some of existing aren't defeated")]
-        [SerializeField] protected int enemiesCap = 2000;
+        [SerializeField] protected int enemiesCap = 3000;
 
         [Header("Offscreen Teleport")]
         [Tooltip("When enabled, enemies that are behaind of the player will teleport to the front")]
@@ -34,7 +35,7 @@ namespace VXMonster.Core
         [SerializeField, Range(0, 1f)] protected float teleportConeSize = 0.8f;
 
         [Tooltip("Enemy will stop teleporting if there are more than this amount of enemies")]
-        [SerializeField] protected int enemiesTeleportCap = 100;
+        [SerializeField] protected int enemiesTeleportCap = 200;
 
         protected int enemiesDiedCounter;
 
@@ -477,6 +478,8 @@ namespace VXMonster.Core
             enemies.RemoveSwapBack(boss);
             boss.onEnemyDied -= OnBossDied;
 
+            TalentPointUtility.AwardBossKillPoints();
+
             if (boss.ShouldSpawnChestOnDeath && StageController.AbilityManager.HasAvailableAbilities()) StageController.DropManager.Drop(DropType.Chest, boss.transform.position.XY() + Random.insideUnitCircle);
             StageController.DropManager.Drop(DropType.Magnet, boss.transform.position.XY() + Random.insideUnitCircle);
             StageController.DropManager.Drop(DropType.Food, boss.transform.position.XY() + Random.insideUnitCircle);
@@ -493,6 +496,7 @@ namespace VXMonster.Core
             var boss = Instantiate(bossData.BossPrefab).GetComponent<EnemyBehavior>();
             boss.transform.position = spawnPosition;
 
+            boss.IsBoss = true;
             boss.Play();
 
             boss.onEnemyDied += OnBossDied;

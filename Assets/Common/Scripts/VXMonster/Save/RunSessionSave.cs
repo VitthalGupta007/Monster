@@ -12,6 +12,7 @@ namespace VXMonster.Save
         [SerializeField] protected int rerollsRemaining = 1;
         [SerializeField] protected bool adReviveUsed;
         [SerializeField] protected bool upgradeReviveUsed;
+        [SerializeField] protected bool phoenixReviveUsed;
 
         public IReadOnlyList<string> ActiveRelicIds => activeRelicIds;
 
@@ -45,6 +46,12 @@ namespace VXMonster.Save
             set => upgradeReviveUsed = value;
         }
 
+        public bool PhoenixReviveUsed
+        {
+            get => phoenixReviveUsed;
+            set => phoenixReviveUsed = value;
+        }
+
         public void ResetForNewRun(int startingRerolls = 1)
         {
             activeRelicIds.Clear();
@@ -53,6 +60,7 @@ namespace VXMonster.Save
             rerollsRemaining = startingRerolls;
             adReviveUsed = false;
             upgradeReviveUsed = false;
+            phoenixReviveUsed = false;
         }
 
         public bool TryAddRelic(string relicId, int maxSlots)

@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Events;
+using VXMonster.Gameplay;
+using VXMonster.Save;
 
 namespace VXMonster.Core
 {
@@ -86,6 +88,11 @@ namespace VXMonster.Core
         public float SizeMultiplier { get; protected set; }
         public float DurationMultiplier { get; protected set; }
         public float GoldMultiplier { get; protected set; }
+
+        private float lastMagnetAbilityMultiplier = 1f;
+        private float lastMaxHpAbilityMultiplier = 1f;
+        private float lastGoldAbilityMultiplier = 1f;
+        private float lastCooldownAbilityMultiplier = 1f;
 
         public Vector2 LookDirection { get; protected set; }
         public bool IsMovingAlowed { get; set; }
@@ -179,7 +186,14 @@ namespace VXMonster.Core
 
         public virtual void RecalculateMagnetRadius(float magnetRadiusMultiplier)
         {
-            MagnetRadiusSqr = Mathf.Pow(defaultMagnetRadius * magnetRadiusMultiplier, 2);
+            lastMagnetAbilityMultiplier = magnetRadiusMultiplier;
+            var mult = magnetRadiusMultiplier;
+            if (RelicsManager.Instance != null)
+            {
+                mult *= RelicsManager.Instance.GetPickupRadiusMultiplier();
+            }
+
+            MagnetRadiusSqr = Mathf.Pow(defaultMagnetRadius * mult, 2);
         }
 
         public virtual void RecalculateMoveSpeed(float moveSpeedMultiplier)
@@ -198,8 +212,15 @@ namespace VXMonster.Core
 
         public virtual void RecalculateMaxHP(float maxHPMultiplier)
         {
+            lastMaxHpAbilityMultiplier = maxHPMultiplier;
             var upgradeValue = GameController.UpgradesManager.GetUpgadeValue(UpgradeType.Health);
-            healthbar.ChangeMaxHP((Data.BaseHP + upgradeValue) * maxHPMultiplier);
+            var mult = maxHPMultiplier;
+            if (RelicsManager.Instance != null)
+            {
+                mult *= RelicsManager.Instance.GetMaxHpMultiplier();
+            }
+
+            healthbar.ChangeMaxHP((Data.BaseHP + upgradeValue) * mult);
         }
 
         public virtual void RecalculateXPMuliplier(float xpMultiplier)
@@ -209,7 +230,14 @@ namespace VXMonster.Core
 
         public virtual void RecalculateCooldownMuliplier(float cooldownMultiplier)
         {
-            CooldownMultiplier = this.cooldownMultiplier * cooldownMultiplier;
+            lastCooldownAbilityMultiplier = cooldownMultiplier;
+            var mult = this.cooldownMultiplier * cooldownMultiplier;
+            if (RelicsManager.Instance != null)
+            {
+                mult *= RelicsManager.Instance.GetCooldownMultiplier();
+            }
+
+            CooldownMultiplier = mult;
         }
 
         public virtual void RecalculateDamageReduction(float damageReductionPercent)
@@ -219,7 +247,9 @@ namespace VXMonster.Core
             if (GameController.UpgradesManager.IsUpgradeAquired(UpgradeType.Armor))
             {
                 DamageReductionMultiplier *= GameController.UpgradesManager.GetUpgadeValue(UpgradeType.Armor);
-            } 
+            }
+
+            DamageReductionMultiplier = Mathf.Clamp(DamageReductionMultiplier, 0.1f, 1f);
         }
 
         public virtual void RecalculateProjectileSpeedMultiplier(float projectileSpeedMultiplier)
@@ -239,7 +269,23 @@ namespace VXMonster.Core
 
         public virtual void RecalculateGoldMultiplier(float goldMultiplier)
         {
-            GoldMultiplier = initialGoldMultiplier * goldMultiplier;
+            lastGoldAbilityMultiplier = goldMultiplier;
+            var mult = initialGoldMultiplier * goldMultiplier;
+            if (RelicsManager.Instance != null)
+            {
+                mult *= RelicsManager.Instance.GetGoldMultiplier();
+            }
+
+            mult *= GameSessionManager.Instance?.GetTalentGoldMultiplier() ?? 1f;
+            GoldMultiplier = mult;
+        }
+
+        public virtual void RefreshRelicModifiers()
+        {
+            RecalculateMagnetRadius(lastMagnetAbilityMultiplier);
+            RecalculateMaxHP(lastMaxHpAbilityMultiplier);
+            RecalculateGoldMultiplier(lastGoldAbilityMultiplier);
+            RecalculateCooldownMuliplier(lastCooldownAbilityMultiplier);
         }
 
         public virtual void RestoreHP(float hpPercent)
@@ -339,6 +385,11 @@ namespace VXMonster.Core
 
             if (healthbar.IsZero)
             {
+                if (TryPhoenixRevive())
+                {
+                    return;
+                }
+
                 Character.PlayDefeatAnimation();
                 Character.SetSortingOrder(102);
 
@@ -367,6 +418,21 @@ namespace VXMonster.Core
                 
                 GameController.AudioManager.PlaySound(RECEIVING_DAMAGE_HASH);
             }
+        }
+
+        protected virtual bool TryPhoenixRevive()
+        {
+            var session = GameSessionManager.Instance?.RunSession;
+            if (session == null || session.PhoenixReviveUsed) return false;
+            if (RelicsManager.Instance == null || !RelicsManager.Instance.HasPhoenixRevive()) return false;
+
+            session.PhoenixReviveUsed = true;
+            healthbar.ResetHP(0.35f);
+            Character.SetSortingOrder(0);
+            invincible = true;
+            EasingManager.DoAfter(2f, () => invincible = false).SetUnscaledTime(true);
+            GameController.AudioManager.PlaySound(REVIVE_HASH);
+            return true;
         }
     }
 }

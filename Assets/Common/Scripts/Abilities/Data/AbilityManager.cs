@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
+using VXMonster.Gameplay;
+using VXMonster.Save;
 
 namespace VXMonster.Core.Abilities
 {
@@ -18,9 +20,12 @@ namespace VXMonster.Core.Abilities
         protected List<AbilityType> removedAbilities = new List<AbilityType>();
         protected AbilitiesSave save;
         protected StageSave stageSave;
+        protected int lastAbilityPickLevel;
+        protected bool lastPickWasLevelUp;
 
         public int ActiveAbilitiesCapacity => abilitiesDatabase.ActiveAbilitiesCapacity;
-        public int PassiveAbilitiesCapacity => abilitiesDatabase.PassiveAbilitiesCapacity;
+
+        public int PassiveAbilitiesCapacity => abilitiesDatabase.PassiveAbilitiesCapacity + (GameSessionManager.Instance?.GetPassiveSlotBonus() ?? 0);
 
         protected virtual void Awake()
         {
@@ -185,22 +190,55 @@ namespace VXMonster.Core.Abilities
 
         protected virtual void OnXpLevelChanged(int level)
         {
+            var selectedAbilities = SelectWeightedAbilities(level, 3);
+            if (selectedAbilities.Count > 0)
+            {
+                lastAbilityPickLevel = level;
+                lastPickWasLevelUp = true;
+                StageController.GameScreen.ShowAbilitiesPanel(selectedAbilities, true);
+            }
+        }
+
+        public List<AbilityData> RefreshAbilityChoicesAfterBanish()
+        {
+            return SelectWeightedAbilities(lastAbilityPickLevel, 3);
+        }
+
+        public bool TryRerollAbilityChoices(out List<AbilityData> newChoices)
+        {
+            newChoices = null;
+            var session = GameSessionManager.Instance?.RunSession;
+            if (session == null || session.RerollsRemaining <= 0) return false;
+
+            newChoices = SelectWeightedAbilities(lastAbilityPickLevel, 3);
+            if (newChoices == null || newChoices.Count == 0) return false;
+
+            session.RerollsRemaining--;
+            return true;
+        }
+
+        public bool TryBanishAbility(AbilityType abilityType)
+        {
+            var session = GameSessionManager.Instance?.RunSession;
+            if (session == null || session.BanishUsed) return false;
+            if (removedAbilities.Contains(abilityType)) return false;
+
+            removedAbilities.Add(abilityType);
+            session.BanishUsed = true;
+            return true;
+        }
+
+        public List<AbilityData> SelectWeightedAbilities(int level, int maxCount)
+        {
             var abilities = GetAvailableAbilities();
             var selectedAbilities = new List<AbilityData>();
-
             var weightedAbilities = new List<WeightedAbility>();
 
             bool firstLevels = level < 10;
-
             var activeCount = GetActiveAbilitiesCount();
             var passiveCount = GetPassiveAbilitiesCount();
-
             bool moreActive = activeCount > passiveCount;
             bool morePassive = passiveCount > activeCount;
-
-            // Here we are populating list of abilities with weights.
-            // Depending on the multipliers in the abilities database, some abilities will have higher chance to be selected
-            // For example, usualy evolution abilities should be selected every time they are available
 
             foreach (var ability in abilities)
             {
@@ -213,7 +251,8 @@ namespace VXMonster.Core.Abilities
                     if (firstLevels) weight *= abilitiesDatabase.FirstLevelsActiveAbilityWeightMultiplier;
                     if (morePassive) weight *= abilitiesDatabase.LessAbilitiesOfTypeWeightMultiplier;
                     if (ability.IsEvolution) weight *= abilitiesDatabase.EvolutionAbilityWeightMultiplier;
-                } else
+                }
+                else
                 {
                     if (IsRequiredForAquiredEvolution(ability.AbilityType)) weight *= abilitiesDatabase.RequiredForEvolutionWeightMultiplier;
                     if (moreActive) weight *= abilitiesDatabase.LessAbilitiesOfTypeWeightMultiplier;
@@ -222,51 +261,40 @@ namespace VXMonster.Core.Abilities
                 weightedAbilities.Add(new WeightedAbility() { abilityData = ability, weight = weight });
             }
 
-            while (abilities.Count > 0 && selectedAbilities.Count < 3)
+            while (abilities.Count > 0 && selectedAbilities.Count < maxCount)
             {
-                // Here we're evening out weights so that their sum was exactly 1
-
                 float weightSum = 0f;
-                foreach(var container in weightedAbilities) weightSum += container.weight;
+                foreach (var container in weightedAbilities) weightSum += container.weight;
+                if (weightSum <= 0f) break;
 
                 foreach (var container in weightedAbilities) container.weight /= weightSum;
 
-                // Getting random value between 0 and 1,
-                // Iteraing abilities until the sum of ther weight is more than the random value
-                // if the random value is 0, we'll select the first ability
-                // if it is 1, we'll select the last one
-
                 float random = Random.value;
                 float progress = 0;
-
                 AbilityData selectedAbility = null;
 
                 foreach (var container in weightedAbilities)
                 {
                     progress += container.weight;
-
-                    if(random <= progress)
+                    if (random <= progress)
                     {
                         selectedAbility = container.abilityData;
                         break;
                     }
                 }
 
-                // If we've successfully selected an ability (as we should have been), were removing it from the pool of available abilities
-                // If something gone wrong, we have a failsafe - just completely randomly selecting one of the available abilities
-                if(selectedAbility != null)
+                if (selectedAbility != null)
                 {
                     abilities.Remove(selectedAbility);
-                } else
+                }
+                else
                 {
                     selectedAbility = abilities.PopRandom();
                 }
 
-                // Removing selected ability from the weighted abilities list
-
                 foreach (var container in weightedAbilities)
                 {
-                    if(container.abilityData == selectedAbility)
+                    if (container.abilityData == selectedAbility)
                     {
                         weightedAbilities.Remove(container);
                         break;
@@ -276,10 +304,7 @@ namespace VXMonster.Core.Abilities
                 selectedAbilities.Add(selectedAbility);
             }
 
-            if(selectedAbilities.Count > 0)
-            {
-                StageController.GameScreen.ShowAbilitiesPanel(selectedAbilities, true);
-            }
+            return selectedAbilities;
         }
 
         protected virtual List<AbilityData> GetAvailableAbilities()
@@ -355,11 +380,11 @@ namespace VXMonster.Core.Abilities
 
                     // There are no available active abilities slots left
 
-                    if (abilityData.IsActiveAbility && activeAbilitiesCount >= abilitiesDatabase.ActiveAbilitiesCapacity && !isAbilityAquired) continue;
+                    if (abilityData.IsActiveAbility && activeAbilitiesCount >= ActiveAbilitiesCapacity && !isAbilityAquired) continue;
 
                     // There are no available passive abilities slots left
 
-                    if (!abilityData.IsActiveAbility && passiveAbilitiesCount >= abilitiesDatabase.PassiveAbilitiesCapacity && !isAbilityAquired) continue;
+                    if (!abilityData.IsActiveAbility && passiveAbilitiesCount >= PassiveAbilitiesCapacity && !isAbilityAquired) continue;
                 }
 
                 result.Add(abilityData);

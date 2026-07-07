@@ -45,5 +45,29 @@ namespace VXMonster.Gameplay
                 _ => 1f
             };
         }
+
+        public static int TalentPointsPerBossKill(this DifficultyTier tier)
+        {
+            return tier switch
+            {
+                DifficultyTier.Easy => 1,
+                DifficultyTier.Normal => 2,
+                DifficultyTier.Hard => 4,
+                DifficultyTier.Nightmare => 7,
+                _ => 2
+            };
+        }
+
+        public static string DisplayLabel(this DifficultyTier tier)
+        {
+            return tier switch
+            {
+                DifficultyTier.Easy => "Easy",
+                DifficultyTier.Normal => "Normal",
+                DifficultyTier.Hard => "Hard",
+                DifficultyTier.Nightmare => "Nightmare",
+                _ => tier.ToString()
+            };
+        }
     }
 }

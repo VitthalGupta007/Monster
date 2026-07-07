@@ -269,7 +269,7 @@ namespace VXMonster.Core.UI
 
         protected virtual void StartStage()
         {
-            GameSessionManager.Instance?.ConfigureCampaign(DifficultyTier.Normal);
+            GameSessionManager.Instance?.ConfigureCampaign(VXDifficultySelection.Selected);
 
             save.IsPlaying = true;
             save.ResetStageData = true;

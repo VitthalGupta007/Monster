@@ -2,26 +2,53 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using VXMonster.Platform.Ads;
+using VXMonster.Platform.IAP;
 using VXMonster.Platform.PlayGames;
+using VXMonster.Save;
 
 namespace VXMonster.Platform
 {
     public static class PlatformServices
     {
         public static IAdService AdService { get; private set; }
+        public static IIapService IapService { get; private set; }
         public static IPlayGamesService PlayGames { get; private set; }
         public static bool IsReady { get; private set; }
+        public static bool IsIapReady => IapService != null && IapService.IsReady;
 
         private static float lastInterstitialTime = -999f;
         private static float lastAppOpenTime = -999f;
         private static AdMobConfig config;
         private static bool wantsMenuBanner;
+        private static EntitlementsSave entitlements;
 
-        public static void Initialize(AdMobConfig adConfig, IAdService adService, IPlayGamesService playGamesService = null)
+        public static bool AdsEnabled => entitlements == null || !entitlements.RemoveAdsPurchased;
+
+        public static void BindEntitlements(EntitlementsSave save)
+        {
+            entitlements = save;
+        }
+
+        public static void Initialize(AdMobConfig adConfig, IAdService adService, IPlayGamesService playGamesService = null, IIapService iapService = null)
         {
             config = adConfig;
             AdService = adService ?? new MockAdService();
             PlayGames = playGamesService ?? new MockPlayGamesService();
+            IapService = iapService ?? new MockIapService();
+
+            IapService.Initialize(_ => { });
+
+            if (!GoogleMobileAdsConsentController.CanRequestAds)
+            {
+                IsReady = true;
+                return;
+            }
+
+            if (!AdsEnabled)
+            {
+                IsReady = true;
+                return;
+            }
 
             PlayGames.Initialize(_ =>
             {
@@ -38,6 +65,7 @@ namespace VXMonster.Platform
 
         public static bool TryShowInterstitial(Action onClosed)
         {
+            if (!AdsEnabled) return false;
             if (AdService == null || !AdService.IsInterstitialReady) return false;
 
             var cooldown = config != null ? config.interstitialCooldownSeconds : 90f;
@@ -50,6 +78,7 @@ namespace VXMonster.Platform
 
         public static bool TryShowAppOpen(Action onClosed)
         {
+            if (!AdsEnabled) return false;
             if (AdService == null) return false;
 
             var cooldown = config != null ? config.appOpenCooldownSeconds : 30f;
@@ -74,6 +103,12 @@ namespace VXMonster.Platform
 
         public static void RefreshBannerForActiveScene()
         {
+            if (!AdsEnabled)
+            {
+                AdService?.HideBanner();
+                return;
+            }
+
             if (!IsReady || AdService == null) return;
 
             if (wantsMenuBanner && IsMainMenuScene(SceneManager.GetActiveScene().name))

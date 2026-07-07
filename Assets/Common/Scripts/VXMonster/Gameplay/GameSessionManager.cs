@@ -19,6 +19,7 @@ namespace VXMonster.Gameplay
         public LifetimeStatsSave LifetimeStats { get; private set; }
         public DailyChallengeSave DailyChallenge { get; private set; }
         public CodexSave Codex { get; private set; }
+        public TalentTreeSave TalentTree { get; private set; }
 
         private readonly List<RunModifierDefinition> activeModifiers = new List<RunModifierDefinition>();
 
@@ -42,12 +43,13 @@ namespace VXMonster.Gameplay
             DontDestroyOnLoad(gameObject);
         }
 
-        public void BindSaves(RunSessionSave runSession, LifetimeStatsSave lifetimeStats, DailyChallengeSave dailyChallenge, CodexSave codex)
+        public void BindSaves(RunSessionSave runSession, LifetimeStatsSave lifetimeStats, DailyChallengeSave dailyChallenge, CodexSave codex, TalentTreeSave talentTree)
         {
             RunSession = runSession;
             LifetimeStats = lifetimeStats;
             DailyChallenge = dailyChallenge;
             Codex = codex;
+            TalentTree = talentTree;
         }
 
         public void ConfigureCampaign(DifficultyTier difficulty)
@@ -70,7 +72,7 @@ namespace VXMonster.Gameplay
             DailySeed = RunModifierUtility.GetUtcDailySeed();
             activeModifiers.Clear();
             activeModifiers.AddRange(RunModifierUtility.GetDailyModifiers(DailySeed));
-            RunSession?.ResetForNewRun(1);
+            RunSession?.ResetForNewRun(GetBonusRerolls());
         }
 
         public void ConfigureEndless(DifficultyTier difficulty)
@@ -95,7 +97,10 @@ namespace VXMonster.Gameplay
             var mult = Difficulty.EnemyHpMultiplier();
             if (RunMode == RunMode.Endless)
             {
-                mult *= 1f + EndlessLoopCount * 0.15f;
+                var loops = EndlessLoopCount;
+                var linear = loops * 0.15f;
+                var softCap = 3f;
+                mult *= 1f + Mathf.Min(linear, softCap) + Mathf.Max(0f, linear - softCap) * 0.05f;
             }
 
             foreach (var modifier in activeModifiers)
@@ -111,7 +116,10 @@ namespace VXMonster.Gameplay
             var mult = Difficulty.EnemyDamageMultiplier();
             if (RunMode == RunMode.Endless)
             {
-                mult *= 1f + EndlessLoopCount * 0.15f;
+                var loops = EndlessLoopCount;
+                var linear = loops * 0.15f;
+                var softCap = 3f;
+                mult *= 1f + Mathf.Min(linear, softCap) + Mathf.Max(0f, linear - softCap) * 0.05f;
             }
 
             foreach (var modifier in activeModifiers)
@@ -124,7 +132,7 @@ namespace VXMonster.Gameplay
 
         public float GetRewardMultiplier()
         {
-            var mult = Difficulty.RewardMultiplier();
+            var mult = Difficulty.RewardMultiplier() * GetTalentGoldMultiplier();
             foreach (var modifier in activeModifiers)
             {
                 mult *= modifier.RewardMultiplier;
@@ -136,6 +144,11 @@ namespace VXMonster.Gameplay
         public int GetPassiveSlotBonus()
         {
             var bonus = 0;
+            if (TalentTree != null && TalentTree.IsUnlocked(TalentTreeIds.ExpandedMind))
+            {
+                bonus++;
+            }
+
             foreach (var modifier in activeModifiers)
             {
                 bonus += modifier.PassiveSlotBonus;
@@ -152,12 +165,27 @@ namespace VXMonster.Gameplay
         public int GetBonusRerolls()
         {
             var rerolls = 1;
+            if (TalentTree != null && TalentTree.IsUnlocked(TalentTreeIds.ExtraReroll))
+            {
+                rerolls++;
+            }
+
             if (RelicsManager.Instance != null)
             {
                 rerolls += RelicsManager.Instance.GetBonusRerolls();
             }
 
             return rerolls;
+        }
+
+        public float GetTalentGoldMultiplier()
+        {
+            if (TalentTree != null && TalentTree.IsUnlocked(TalentTreeIds.GoldenInstinct))
+            {
+                return 1.1f;
+            }
+
+            return 1f;
         }
 
         public int CalculateDailyScore(int kills, float survivalTime, int comboBursts)

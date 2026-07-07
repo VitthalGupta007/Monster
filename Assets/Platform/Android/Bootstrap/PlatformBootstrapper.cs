@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using VXMonster.Gameplay;
 using VXMonster.Platform;
 using VXMonster.Platform.Ads;
+using VXMonster.Platform.IAP;
 using VXMonster.Platform.PlayGames;
 using VXMonster.Save;
 
@@ -60,7 +61,21 @@ namespace VXMonster.Platform.Bootstrap
             adService = new MockAdService();
 #endif
 
-            PlatformServices.Initialize(adMobConfig, adService, new MockPlayGamesService());
+            GoogleMobileAdsConsentController.GatherConsent(_ =>
+            {
+                if (GameController.SaveManager != null)
+                {
+                    PlatformServices.BindEntitlements(
+                        GameController.SaveManager.GetSave<EntitlementsSave>("VX Entitlements"));
+                }
+
+#if UNITY_PURCHASING
+                var iapService = new UnityPurchasingService();
+#else
+                var iapService = new MockIapService();
+#endif
+                PlatformServices.Initialize(adMobConfig, adService, new MockPlayGamesService(), iapService);
+            });
 
             // AfterSceneLoad may run before this object exists; attach panel for the current scene too.
             TryAttachLobbyModePanel();
@@ -90,6 +105,12 @@ namespace VXMonster.Platform.Bootstrap
         private void Start()
         {
             BindPersistentSaves();
+
+            if (GameController.SaveManager != null)
+            {
+                PlatformServices.BindEntitlements(GameController.SaveManager.GetSave<EntitlementsSave>("VX Entitlements"));
+            }
+
             PlatformServices.ShowMainMenuBanner();
         }
 
@@ -123,7 +144,7 @@ namespace VXMonster.Platform.Bootstrap
 
             if (GameSessionManager.Instance != null)
             {
-                GameSessionManager.Instance.BindSaves(runSession, lifetime, daily, codex);
+                GameSessionManager.Instance.BindSaves(runSession, lifetime, daily, codex, talent);
             }
         }
 

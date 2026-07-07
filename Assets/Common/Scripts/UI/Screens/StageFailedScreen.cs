@@ -9,6 +9,8 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using VXMonster.Gameplay;
 using VXMonster.Platform;
+using VXMonster.Save;
+using VXMonster.UI;
 using System.Collections;
 
 namespace VXMonster.Core.UI
@@ -17,11 +19,13 @@ namespace VXMonster.Core.UI
     {
         private const string AdReviveReadyLabel = "Watch Ad   Revive";
         private const string AdReviveLoadingLabel = "Loading Ad...";
+        private const string FreeReviveLabel = "Free Revive";
 
         [SerializeField] CanvasGroup canvasGroup;
         [SerializeField] Button reviveButton;
         [SerializeField] Button adReviveButton;
         [SerializeField] Button exitButton;
+        [SerializeField] TMP_Text statsText;
 
         private TextMeshProUGUI adReviveLabel;
         private Coroutine refreshRoutine;
@@ -42,12 +46,23 @@ namespace VXMonster.Core.UI
             upgradeReviveUsed = false;
         }
 
+        private static bool HasRemoveAds()
+        {
+            if (GameController.SaveManager == null) return false;
+            return GameController.SaveManager.GetSave<EntitlementsSave>("VX Entitlements").RemoveAdsPurchased;
+        }
+
         public void Show()
         {
             gameObject.SetActive(true);
 
             canvasGroup.alpha = 0;
             canvasGroup.DoAlpha(1, 0.3f).SetUnscaledTime(true);
+
+            if (statsText != null)
+            {
+                statsText.text = RunResultsFormatter.BuildSummary(false);
+            }
 
             RefreshReviveButtons();
             refreshRoutine = StartCoroutine(RefreshReviveButtonsUntilReady());
@@ -60,17 +75,13 @@ namespace VXMonster.Core.UI
             while (gameObject.activeInHierarchy)
             {
                 var session = GameSessionManager.Instance?.RunSession;
-                var canAdRevive = session == null || !session.AdReviveUsed;
-                var adReady = PlatformServices.AdService != null && PlatformServices.AdService.IsRewardedReady;
-
-                if (canAdRevive && !adReady && PlatformServices.AdService != null)
-                {
-                    PlatformServices.AdService.LoadRewarded();
-                }
+                var canBonusRevive = session == null || !session.AdReviveUsed;
+                var removeAds = HasRemoveAds();
+                var adReady = removeAds || (PlatformServices.AdService != null && PlatformServices.AdService.IsRewardedReady);
 
                 RefreshReviveButtons();
 
-                if (!canAdRevive || adReady)
+                if (!canBonusRevive || adReady)
                 {
                     yield break;
                 }
@@ -86,18 +97,26 @@ namespace VXMonster.Core.UI
                                    && !upgradeReviveUsed
                                    && (session == null || !session.UpgradeReviveUsed);
 
-            var canAdRevive = session == null || !session.AdReviveUsed;
-            var adReady = PlatformServices.AdService != null && PlatformServices.AdService.IsRewardedReady;
+            var canBonusRevive = session == null || !session.AdReviveUsed;
+            var removeAds = HasRemoveAds();
+            var adReady = removeAds || (PlatformServices.AdService != null && PlatformServices.AdService.IsRewardedReady);
 
             reviveButton.gameObject.SetActive(canUpgradeRevive);
             if (adReviveButton != null)
             {
-                adReviveButton.gameObject.SetActive(canAdRevive);
+                adReviveButton.gameObject.SetActive(canBonusRevive);
                 adReviveButton.interactable = adReady;
 
                 if (adReviveLabel != null)
                 {
-                    adReviveLabel.text = adReady ? AdReviveReadyLabel : AdReviveLoadingLabel;
+                    if (removeAds)
+                    {
+                        adReviveLabel.text = FreeReviveLabel;
+                    }
+                    else
+                    {
+                        adReviveLabel.text = adReady ? AdReviveReadyLabel : AdReviveLoadingLabel;
+                    }
                 }
             }
 
@@ -105,7 +124,7 @@ namespace VXMonster.Core.UI
             {
                 EventSystem.current.SetSelectedGameObject(reviveButton.gameObject);
             }
-            else if (adReviveButton != null && canAdRevive && adReady)
+            else if (adReviveButton != null && canBonusRevive && adReady)
             {
                 EventSystem.current.SetSelectedGameObject(adReviveButton.gameObject);
             }
@@ -123,7 +142,8 @@ namespace VXMonster.Core.UI
                 refreshRoutine = null;
             }
 
-            canvasGroup.DoAlpha(0, 0.3f).SetUnscaledTime(true).SetOnFinish(() => {
+            canvasGroup.DoAlpha(0, 0.3f).SetUnscaledTime(true).SetOnFinish(() =>
+            {
                 gameObject.SetActive(false);
                 onFinish?.Invoke();
             });
@@ -145,9 +165,19 @@ namespace VXMonster.Core.UI
 
         private void AdReviveButtonClick()
         {
-            if (PlatformServices.AdService == null || !PlatformServices.AdService.IsRewardedReady) return;
+            var session = GameSessionManager.Instance?.RunSession;
+            if (session != null && session.AdReviveUsed) return;
 
             GameController.AudioManager.PlaySound(AudioManager.BUTTON_CLICK_HASH);
+
+            if (HasRemoveAds())
+            {
+                session.AdReviveUsed = true;
+                Hide(StageController.ResurrectPlayer);
+                return;
+            }
+
+            if (PlatformServices.AdService == null || !PlatformServices.AdService.IsRewardedReady) return;
 
             if (adReviveButton != null)
             {

@@ -59,6 +59,8 @@ namespace VXMonster.Core
 
         public bool ShouldSpawnChestOnDeath { get; set; }
 
+        public bool IsBoss { get; set; }
+
         IEasingCoroutine fallBackCoroutine;
 
         private Dictionary<EffectType, List<Effect>> appliedEffects = new Dictionary<EffectType, List<Effect>>();
@@ -283,6 +285,10 @@ namespace VXMonster.Core
             if (RelicsManager.Instance != null)
             {
                 damage *= RelicsManager.Instance.GetDamageMultiplier();
+                if (IsBoss)
+                {
+                    damage *= RelicsManager.Instance.GetBossDamageMultiplier();
+                }
             }
 
             HP -= damage;

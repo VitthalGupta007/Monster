@@ -9,12 +9,13 @@ namespace VXMonster.Gameplay
         {
             if (status == null || sourceEnemy == null) return false;
 
+            var comboDamage = playerDamage * GetComboDamageMultiplier();
             var elements = status.ActiveElements;
             var triggered = false;
 
             if (Has(elements, ElementType.Burn) && Has(elements, ElementType.Chill))
             {
-                TriggerSteamBurst(sourceEnemy, playerDamage);
+                TriggerSteamBurst(sourceEnemy, comboDamage);
                 triggered = true;
             }
 
@@ -26,7 +27,7 @@ namespace VXMonster.Gameplay
 
             if (Has(elements, ElementType.Shock) && Has(elements, ElementType.Burn))
             {
-                status.TickBurnDamage(sourceEnemy, playerDamage * 2f);
+                status.TickBurnDamage(sourceEnemy, comboDamage * 2f);
                 triggered = true;
             }
 
@@ -37,6 +38,11 @@ namespace VXMonster.Gameplay
             }
 
             return triggered;
+        }
+
+        private static float GetComboDamageMultiplier()
+        {
+            return 1f + (RelicsManager.Instance?.GetComboAmplifierBonus() ?? 0f);
         }
 
         private static bool Has(ElementType mask, ElementType flag)

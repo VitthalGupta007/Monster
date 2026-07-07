@@ -19,6 +19,9 @@ namespace VXMonster.Core.UI
         [Space]
         [SerializeField] Button backButton;
         [SerializeField] Button exitButton;
+        [SerializeField] Button privacyButton;
+        [SerializeField] Button termsButton;
+        [SerializeField] LegalTextWindowBehavior legalTextWindow;
 
         private void Start()
         {
@@ -39,6 +42,27 @@ namespace VXMonster.Core.UI
         public void Init(UnityAction onBackButtonClicked)
         {
             backButton.onClick.AddListener(onBackButtonClicked);
+
+            if (privacyButton != null && legalTextWindow != null)
+            {
+                privacyButton.onClick.AddListener(() =>
+                {
+                    legalTextWindow.Open(LegalTexts.PrivacyPolicyTitle, LegalTexts.PrivacyPolicyBody);
+                });
+            }
+
+            if (termsButton != null && legalTextWindow != null)
+            {
+                termsButton.onClick.AddListener(() =>
+                {
+                    legalTextWindow.Open(LegalTexts.TermsTitle, LegalTexts.TermsBody);
+                });
+            }
+
+            if (legalTextWindow != null)
+            {
+                legalTextWindow.Init(CloseLegalWindow);
+            }
 
 #if (UNITY_IOS || UNITY_ANDROID || UNITY_WEBGL) && !UNITY_EDITOR
             exitButton.gameObject.SetActive(false);
@@ -86,6 +110,11 @@ namespace VXMonster.Core.UI
 #else
             Application.Quit();
 #endif
+        }
+
+        private void CloseLegalWindow()
+        {
+            legalTextWindow?.Close();
         }
     }
 }

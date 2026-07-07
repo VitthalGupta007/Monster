@@ -133,11 +133,6 @@ namespace VXMonster.Core
                 return;
             }
 
-            if (session != null && session.RunMode == RunMode.Campaign && session.EndlessLoopCount == 0)
-            {
-                // Offer-style endless continuation could be added here later.
-            }
-
             stageSave.CompleteStage(Stage);
 
             stageSave.IsPlaying = false;
@@ -151,11 +146,6 @@ namespace VXMonster.Core
                 var score = session.CalculateDailyScore(stageSave.EnemiesKilled, stageSave.Time, session.RunSession?.ComboBurstCount ?? 0);
                 session.DailyChallenge?.RecordScore(GameSessionManager.GetUtcDateKey(), score);
                 PlatformServices.SubmitDailyScore(score);
-            }
-
-            if (session != null && session.RunMode == RunMode.Endless)
-            {
-                PlatformServices.SubmitEndlessScore(session.EndlessLoopCount);
             }
 
             if (session?.LifetimeStats != null)
@@ -178,6 +168,18 @@ namespace VXMonster.Core
             var session = GameSessionManager.Instance;
             session?.LifetimeStats?.AddKills(stageSave.EnemiesKilled);
             session?.LifetimeStats?.IncrementRunsFailed();
+
+            if (session != null && session.RunMode == RunMode.Endless)
+            {
+                session.LifetimeStats?.UpdateEndlessLoopsBest(session.EndlessLoopCount);
+                PlatformServices.SubmitEndlessScore(session.EndlessLoopCount);
+            }
+
+            if (session != null && session.RunMode == RunMode.DailyChallenge && session.IsDailyScoredRun)
+            {
+                var score = session.CalculateDailyScore(stageSave.EnemiesKilled, stageSave.Time, session.RunSession?.ComboBurstCount ?? 0);
+                session.DailyChallenge?.RecordScore(GameSessionManager.GetUtcDateKey(), score);
+            }
 
             gameScreen.Hide();
             stageFailedScreen.Show();
