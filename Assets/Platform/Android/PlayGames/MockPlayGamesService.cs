@@ -2,9 +2,6 @@ using System;
 
 namespace VXMonster.Platform.PlayGames
 {
-    /// <summary>
-    /// Offline stub until Play Console payment and live GPGS resource IDs are configured.
-    /// </summary>
     public class MockPlayGamesService : IPlayGamesService
     {
         public bool IsAuthenticated { get; private set; }

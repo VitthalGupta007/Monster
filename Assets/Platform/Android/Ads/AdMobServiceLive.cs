@@ -49,11 +49,6 @@ namespace VXMonster.Platform.Ads
             if (bannerView == null)
             {
                 bannerView = new BannerView(GetBannerUnitId(), AdSize.Banner, AdPosition.Bottom);
-                bannerView.OnBannerAdLoadFailed += error =>
-                {
-                    MainThreadDispatcher.Run(() =>
-                        Debug.LogWarning($"[VX Ads] Banner load failed: {error.GetMessage()}"));
-                };
             }
 
             bannerView.LoadAd(new AdRequest());
@@ -116,15 +111,7 @@ namespace VXMonster.Platform.Ads
             }
 
             rewardedAd.OnAdFullScreenContentClosed += HandleClosed;
-            rewardedAd.OnAdFullScreenContentFailed += _ =>
-            {
-                MainThreadDispatcher.Run(() =>
-                {
-                    onClosed?.Invoke();
-                    DestroyRewarded();
-                    LoadRewarded();
-                });
-            };
+            rewardedAd.OnAdFullScreenContentFailed += _ => HandleClosed();
 
             rewardedAd.Show(_ => { rewardGranted = true; });
         }
@@ -165,7 +152,6 @@ namespace VXMonster.Platform.Ads
                     if (error != null)
                     {
                         rewardedLoaded = false;
-                        Debug.LogWarning($"[VX Ads] Rewarded load failed: {error.GetMessage()}");
                         return;
                     }
 
@@ -187,7 +173,6 @@ namespace VXMonster.Platform.Ads
                     if (error != null)
                     {
                         interstitialLoaded = false;
-                        Debug.LogWarning($"[VX Ads] Interstitial load failed: {error.GetMessage()}");
                         return;
                     }
 
@@ -209,7 +194,6 @@ namespace VXMonster.Platform.Ads
                     if (error != null)
                     {
                         appOpenLoaded = false;
-                        Debug.LogWarning($"[VX Ads] App open load failed: {error.GetMessage()}");
                         return;
                     }
 

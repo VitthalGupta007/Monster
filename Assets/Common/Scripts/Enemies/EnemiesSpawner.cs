@@ -274,9 +274,7 @@ namespace VXMonster.Core
 
                 if (!foundPosition)
                 {
-                    
                     position = StageController.FieldManager.GetRandomPositionOnBorder();
-                    Debug.Log(position);
                 }
 
                 enemy.transform.position = position;

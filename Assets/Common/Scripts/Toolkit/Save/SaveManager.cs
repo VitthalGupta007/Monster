@@ -107,8 +107,6 @@ namespace VXMonster.Core.Save
             SaveDatabase = new SaveDatabase();
             SaveDatabase.Init();
 
-            Debug.Log("New save is created");
-
             IsSaveLoaded = true;
         }
 
@@ -123,8 +121,6 @@ namespace VXMonster.Core.Save
                 SaveDatabase = LoadSave();
 
                 SaveDatabase.Init();
-
-                Debug.Log("Save file is loaded");
             } else
             {
                 var json = PlayerPrefs.GetString("save");
@@ -132,8 +128,6 @@ namespace VXMonster.Core.Save
                 if (SaveDatabase == null) SaveDatabase = new SaveDatabase();
 
                 SaveDatabase.Init();
-
-                Debug.Log("Loaded SaveDatabase from PlayerPrefs");
             }
 
             IsSaveLoaded = true;
@@ -216,8 +210,6 @@ namespace VXMonster.Core.Save
                 }
             }
 
-            Debug.Log("Save file is updated");
-
             isSaving = false;
             saveCoroutine = null;
         }
@@ -231,19 +223,14 @@ namespace VXMonster.Core.Save
             {
                 PlayerPrefs.SetString("save", JsonUtility.ToJson(SaveDatabase));
                 PlayerPrefs.Save();
-
-                Debug.Log("Save Database is sent to PlayerPrefs");
             } else
             {
 #if UNITY_WEBGL && !UNITY_EDITOR
                 WebGLSave(SaveDatabase, SAVE_FILE_NAME);
-                Debug.Log("Save file is updated");
 #else
                 if (!SerializationHelper.IsFileLocked(SAVE_FILE_NAME))
                 {
                     SerializationHelper.SerializePersistent(SaveDatabase, SAVE_FILE_NAME);
-
-                    Debug.Log("Save file is updated");
                 }
 #endif
             }
@@ -262,13 +249,10 @@ namespace VXMonster.Core.Save
             {
                 PlayerPrefs.SetString("save", JsonUtility.ToJson(SaveDatabase));
                 PlayerPrefs.Save();
-
-                Debug.Log("Save Database is sent to PlayerPrefs");
             } else
             {
 #if UNITY_WEBGL && !UNITY_EDITOR
                 WebGLSave(SaveDatabase, SAVE_FILE_NAME);
-                Debug.Log("Save file is updated");
 #else
                 if (saveCoroutine == null) saveCoroutine = StartCoroutine(SaveCoroutine(multithreading));
 #endif
@@ -305,8 +289,6 @@ namespace VXMonster.Core.Save
 #endif
 
             PlayerPrefs.DeleteAll();
-
-            Debug.Log("Save file is deleted!");
         }
 
         private void OnDestroy()

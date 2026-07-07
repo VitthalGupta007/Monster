@@ -1,6 +1,5 @@
 using VXMonster.Core;
 using UnityEngine;
-using VXMonster.Gameplay;
 
 namespace VXMonster.Gameplay
 {
