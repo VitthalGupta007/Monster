@@ -6,6 +6,7 @@ using OctoberStudio.UI;
 using UnityEngine;
 using UnityEngine.Playables;
 using VXMonster.Gameplay;
+using VXMonster.Platform;
 using VXMonster.Save;
 
 namespace OctoberStudio
@@ -149,6 +150,17 @@ namespace OctoberStudio
             {
                 var score = session.CalculateDailyScore(stageSave.EnemiesKilled, stageSave.Time, session.RunSession?.ComboBurstCount ?? 0);
                 session.DailyChallenge?.RecordScore(GameSessionManager.GetUtcDateKey(), score);
+                PlatformServices.SubmitDailyScore(score);
+            }
+
+            if (session != null && session.RunMode == RunMode.Endless)
+            {
+                PlatformServices.SubmitEndlessScore(session.EndlessLoopCount);
+            }
+
+            if (session?.LifetimeStats != null)
+            {
+                PlatformServices.SubmitLifetimeKills(session.LifetimeStats.TotalEnemiesKilled);
             }
 
             gameScreen.Hide();

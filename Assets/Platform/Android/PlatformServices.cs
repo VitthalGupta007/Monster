@@ -1,31 +1,37 @@
 using System;
 using UnityEngine;
 using VXMonster.Platform.Ads;
+using VXMonster.Platform.PlayGames;
 
 namespace VXMonster.Platform
 {
     public static class PlatformServices
     {
         public static IAdService AdService { get; private set; }
+        public static IPlayGamesService PlayGames { get; private set; }
         public static bool IsReady { get; private set; }
 
         private static float lastInterstitialTime = -999f;
         private static float lastAppOpenTime = -999f;
         private static AdMobConfig config;
 
-        public static void Initialize(AdMobConfig adConfig, IAdService adService)
+        public static void Initialize(AdMobConfig adConfig, IAdService adService, IPlayGamesService playGamesService = null)
         {
             config = adConfig;
             AdService = adService ?? new MockAdService();
+            PlayGames = playGamesService ?? new MockPlayGamesService();
 
-            AdService.Initialize(success =>
+            PlayGames.Initialize(_ =>
             {
-                IsReady = success;
-                if (success)
+                AdService.Initialize(success =>
                 {
-                    AdService.LoadRewarded();
-                    AdService.LoadInterstitial();
-                }
+                    IsReady = success;
+                    if (success)
+                    {
+                        AdService.LoadRewarded();
+                        AdService.LoadInterstitial();
+                    }
+                });
             });
         }
 
@@ -62,6 +68,21 @@ namespace VXMonster.Platform
         public static void HideBanner()
         {
             AdService?.HideBanner();
+        }
+
+        public static void SubmitDailyScore(int score)
+        {
+            PlayGames?.SubmitScore(GPGSIds.LeaderboardDailyChallenge, score);
+        }
+
+        public static void SubmitEndlessScore(int loops)
+        {
+            PlayGames?.SubmitScore(GPGSIds.LeaderboardEndlessWaves, loops);
+        }
+
+        public static void SubmitLifetimeKills(int totalKills)
+        {
+            PlayGames?.SubmitScore(GPGSIds.LeaderboardLifetimeKills, totalKills);
         }
     }
 }

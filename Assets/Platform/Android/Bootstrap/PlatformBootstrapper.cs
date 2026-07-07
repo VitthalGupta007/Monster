@@ -4,6 +4,7 @@ using UnityEngine;
 using VXMonster.Gameplay;
 using VXMonster.Platform;
 using VXMonster.Platform.Ads;
+using VXMonster.Platform.PlayGames;
 using VXMonster.Save;
 
 namespace VXMonster.Platform.Bootstrap
@@ -20,6 +21,17 @@ namespace VXMonster.Platform.Bootstrap
         private static void ResetStatic()
         {
             instance = null;
+        }
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+        private static void EnsureLobbyModePanel()
+        {
+            if (FindAnyObjectByType<VXMonster.UI.VXLobbyModePanel>() != null) return;
+
+            var lobby = FindAnyObjectByType<OctoberStudio.UI.LobbyWindowBehavior>();
+            if (lobby == null) return;
+
+            lobby.gameObject.AddComponent<VXMonster.UI.VXLobbyModePanel>();
         }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
@@ -44,14 +56,18 @@ namespace VXMonster.Platform.Bootstrap
             EnsureGameSessionManager();
             EnsureRelicsManager();
 
-            adService = new MockAdService();
-
             if (adMobConfig == null)
             {
                 adMobConfig = ScriptableObject.CreateInstance<AdMobConfig>();
             }
 
-            PlatformServices.Initialize(adMobConfig, adService);
+#if UNITY_ANDROID && !UNITY_EDITOR && GOOGLE_MOBILE_ADS_AVAILABLE
+            adService = new AdMobService(adMobConfig);
+#else
+            adService = new MockAdService();
+#endif
+
+            PlatformServices.Initialize(adMobConfig, adService, new MockPlayGamesService());
         }
 
         private void Start()
@@ -86,6 +102,7 @@ namespace VXMonster.Platform.Bootstrap
             var lifetime = GameController.SaveManager.GetSave<LifetimeStatsSave>("VX Lifetime Stats");
             var daily = GameController.SaveManager.GetSave<DailyChallengeSave>("VX Daily Challenge");
             var codex = GameController.SaveManager.GetSave<CodexSave>("VX Codex");
+            var talent = GameController.SaveManager.GetSave<TalentTreeSave>("VX Talent Tree");
 
             if (GameSessionManager.Instance != null)
             {
