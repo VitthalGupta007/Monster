@@ -1,8 +1,6 @@
 {
   "dependencies": {
     "com.unity.2d.pixel-perfect": "6.0.0",
-    "com.unity.ai.assistant": "2.13.0-pre.2",
-    "com.unity.ai.inference": "2.6.1",
     "com.unity.ai.navigation": "2.0.13",
     "com.unity.burst": "1.8.29",
     "com.unity.collab-proxy": "2.12.4",
