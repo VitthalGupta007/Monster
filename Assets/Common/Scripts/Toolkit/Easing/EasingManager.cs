@@ -1,4 +1,4 @@
-using OctoberStudio.Extensions;
+using VXMonster.Core.Extensions;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace OctoberStudio.Easing
+namespace VXMonster.Core.Easing
 {
     public class EasingManager : MonoBehaviour
     {

@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
-    [CreateAssetMenu(fileName = "Damage Ability Data", menuName = "October/Abilities/Passive/Damage")]
+    [CreateAssetMenu(fileName = "Damage Ability Data", menuName = "VX Monster/Abilities/Passive/Damage")]
     public class DamageAbilityData : GenericAbilityData<DamageAbilityLevel>
     {
         private void Awake()

@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace OctoberStudio.Timeline.Editor 
+namespace VXMonster.Core.Timeline.Editor 
 {
     [CustomPropertyDrawer(typeof(RushSpawn))]
     public class RushSpawnPropertyDrawer : PropertyDrawer

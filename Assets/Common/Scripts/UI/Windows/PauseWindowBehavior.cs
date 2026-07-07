@@ -1,7 +1,7 @@
-using OctoberStudio.Abilities.UI;
-using OctoberStudio.Audio;
-using OctoberStudio.Easing;
-using OctoberStudio.Input;
+using VXMonster.Core.Abilities.UI;
+using VXMonster.Core.Audio;
+using VXMonster.Core.Easing;
+using VXMonster.Core.Input;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -9,7 +9,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-namespace OctoberStudio.UI
+namespace VXMonster.Core.UI
 {
     public class PauseWindowBehavior : MonoBehaviour
     {

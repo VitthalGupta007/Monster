@@ -1,10 +1,10 @@
-using OctoberStudio.Input;
+using VXMonster.Core.Input;
 using UnityEngine;
 #if UNITY_WEBGL
 using UnityEngine.InputSystem.WebGL;
 #endif
 
-namespace OctoberStudio.Vibration
+namespace VXMonster.Core.Vibration
 {
     public class VibrationManager : MonoBehaviour, IVibrationManager
     {

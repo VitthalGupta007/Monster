@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using VXMonster.Gameplay;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
     public class GuardianEyeAbilityBehavior : AbilityBehavior<GuardianEyeAbilityData, GuardianEyeAbilityLevel>
     {

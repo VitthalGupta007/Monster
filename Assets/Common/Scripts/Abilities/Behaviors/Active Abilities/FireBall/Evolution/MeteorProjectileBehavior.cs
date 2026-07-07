@@ -1,9 +1,9 @@
-using OctoberStudio.Easing;
-using OctoberStudio.Extensions;
+using VXMonster.Core.Easing;
+using VXMonster.Core.Extensions;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
     public class MeteorProjectileBehavior : MonoBehaviour
     {

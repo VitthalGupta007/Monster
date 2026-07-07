@@ -1,7 +1,7 @@
-using OctoberStudio.Audio;
-using OctoberStudio.Currency;
-using OctoberStudio.Easing;
-using OctoberStudio.Input;
+using VXMonster.Core.Audio;
+using VXMonster.Core.Currency;
+using VXMonster.Core.Easing;
+using VXMonster.Core.Input;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,7 +10,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using VXMonster.Gameplay;
 
-namespace OctoberStudio.UI
+namespace VXMonster.Core.UI
 {
     public class LobbyWindowBehavior : MonoBehaviour
     {

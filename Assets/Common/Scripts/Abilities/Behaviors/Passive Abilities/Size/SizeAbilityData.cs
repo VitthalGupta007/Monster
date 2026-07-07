@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
-    [CreateAssetMenu(fileName = "Size Ability Data", menuName = "October/Abilities/Passive/Size")]
+    [CreateAssetMenu(fileName = "Size Ability Data", menuName = "VX Monster/Abilities/Passive/Size")]
     public class SizeAbilityData : GenericAbilityData<SizeAbilityLevel>
     {
         private void Awake()

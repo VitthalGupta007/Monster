@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
-    using OctoberStudio.Easing;
-    using OctoberStudio.Extensions;
+    using VXMonster.Core.Easing;
+    using VXMonster.Core.Extensions;
 
     public class AbilityManager : MonoBehaviour
     {

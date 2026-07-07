@@ -1,14 +1,14 @@
-using OctoberStudio.Easing;
-using OctoberStudio.Extensions;
-using OctoberStudio.Input;
-using OctoberStudio.Pool;
+using VXMonster.Core.Easing;
+using VXMonster.Core.Extensions;
+using VXMonster.Core.Input;
+using VXMonster.Core.Pool;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace OctoberStudio.Abilities.UI
+namespace VXMonster.Core.Abilities.UI
 {
     public class AbilitiesWindowBehavior : MonoBehaviour
     {

@@ -1,15 +1,15 @@
-using OctoberStudio.Bossfight;
-using OctoberStudio.Extensions;
-using OctoberStudio.Pool;
-using OctoberStudio.Timeline;
-using OctoberStudio.UI;
+using VXMonster.Core.Bossfight;
+using VXMonster.Core.Extensions;
+using VXMonster.Core.Pool;
+using VXMonster.Core.Timeline;
+using VXMonster.Core.UI;
 using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Playables;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
     [DefaultExecutionOrder(-10)]
     public class EnemiesSpawner : MonoBehaviour

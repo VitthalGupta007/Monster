@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: WISARD
+  m_text: WIZARD
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4dfcf958076d4184a84bc0cb519c5914, type: 2}
   m_sharedMaterial: {fileID: 3011222351521239885, guid: 4dfcf958076d4184a84bc0cb519c5914,

@@ -1,11 +1,11 @@
-using OctoberStudio.Currency;
+using VXMonster.Core.Currency;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.Upgrades
+namespace VXMonster.Core.Upgrades
 {
-    [CreateAssetMenu(fileName = "Upgrades", menuName = "October/Upgrades/Upgrade")]
+    [CreateAssetMenu(fileName = "Upgrades", menuName = "VX Monster/Upgrades/Upgrade")]
     public class UpgradeData : ScriptableObject
     {
         [SerializeField, HideInInspector] protected int dataVersion;

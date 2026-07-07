@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.Save
+namespace VXMonster.Core.Save
 {
     public interface ISaveManager
     {

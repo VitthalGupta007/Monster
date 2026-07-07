@@ -1,7 +1,7 @@
-using OctoberStudio.Easing;
+using VXMonster.Core.Easing;
 using UnityEngine;
 
-namespace OctoberStudio.Enemy
+namespace VXMonster.Core.Enemy
 {
     public class EnemyMaskHandBehavior : SimpleEnemyProjectileBehavior
     {

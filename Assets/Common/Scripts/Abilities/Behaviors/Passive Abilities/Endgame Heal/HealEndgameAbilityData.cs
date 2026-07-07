@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
-    [CreateAssetMenu(fileName = "Heal Endgame Ability Data", menuName = "October/Abilities/Passive/Heal Endgame")]
+    [CreateAssetMenu(fileName = "Heal Endgame Ability Data", menuName = "VX Monster/Abilities/Passive/Heal Endgame")]
     public class HealEndgameAbilityData : GenericAbilityData<HealEndgameAbilityLevel>
     {
         private void Awake()

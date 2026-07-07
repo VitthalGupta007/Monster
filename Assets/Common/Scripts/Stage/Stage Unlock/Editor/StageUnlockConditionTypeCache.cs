@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
     public static class StageUnlockConditionTypeCache
     {

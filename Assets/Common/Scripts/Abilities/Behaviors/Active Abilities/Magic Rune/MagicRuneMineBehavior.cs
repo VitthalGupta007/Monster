@@ -1,7 +1,7 @@
-using OctoberStudio.Easing;
+using VXMonster.Core.Easing;
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
     public class MagicRuneMineBehavior : MonoBehaviour
     {

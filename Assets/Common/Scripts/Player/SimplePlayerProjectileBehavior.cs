@@ -1,9 +1,9 @@
-using OctoberStudio.Easing;
+using VXMonster.Core.Easing;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
     public class SimplePlayerProjectileBehavior : ProjectileBehavior
     {

@@ -1,8 +1,8 @@
-using OctoberStudio.Easing;
+using VXMonster.Core.Easing;
 using UnityEngine;
 using UnityEngine.Playables;
 
-namespace OctoberStudio.Timeline
+namespace VXMonster.Core.Timeline
 {
     public class CameraControl : PlayableAsset
     {

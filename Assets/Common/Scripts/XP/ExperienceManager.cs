@@ -1,9 +1,9 @@
-using OctoberStudio.Easing;
+using VXMonster.Core.Easing;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
     public class ExperienceManager : MonoBehaviour
     {

@@ -1,9 +1,9 @@
-using OctoberStudio.Extensions;
+using VXMonster.Core.Extensions;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
     public class RecoilerProjectileBehavior : ProjectileBehavior
     {

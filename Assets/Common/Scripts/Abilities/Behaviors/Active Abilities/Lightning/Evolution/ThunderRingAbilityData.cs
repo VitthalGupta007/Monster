@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
-    [CreateAssetMenu(fileName = "Thunder Ring Ability Data", menuName = "October/Abilities/Evolution/Thunder Ring")]
+    [CreateAssetMenu(fileName = "Thunder Ring Ability Data", menuName = "VX Monster/Abilities/Evolution/Thunder Ring")]
     public class ThunderRingAbilityData : GenericAbilityData<ThunderRingAbilityLevel>
     {
         private void Awake()

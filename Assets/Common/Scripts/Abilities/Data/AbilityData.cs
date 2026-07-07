@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
     public abstract class AbilityData : ScriptableObject 
     {

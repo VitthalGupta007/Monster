@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
-    [CreateAssetMenu(fileName = "Scepter Data", menuName = "October/Abilities/Evolution/Scepter")]
+    [CreateAssetMenu(fileName = "Scepter Data", menuName = "VX Monster/Abilities/Evolution/Scepter")]
     public class ScepterWeaponAbilityData : GenericAbilityData<ScepterWeaponAbilityLevel>
     {
         private void Awake()

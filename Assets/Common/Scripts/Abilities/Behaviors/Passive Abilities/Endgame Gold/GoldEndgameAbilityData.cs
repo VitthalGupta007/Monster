@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
-    [CreateAssetMenu(fileName = "Gold Endgame Ability Data", menuName = "October/Abilities/Passive/Gold Endgame")]
+    [CreateAssetMenu(fileName = "Gold Endgame Ability Data", menuName = "VX Monster/Abilities/Passive/Gold Endgame")]
     public class GoldEndgameAbilityData : GenericAbilityData<GoldEndgameAbilityLevel>
     {
         private void Awake()

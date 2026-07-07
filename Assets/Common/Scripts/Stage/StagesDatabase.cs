@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
-    [CreateAssetMenu(fileName = "Stage Database", menuName = "October/Stages Database")]
+    [CreateAssetMenu(fileName = "Stage Database", menuName = "VX Monster/Stages Database")]
     public class StagesDatabase : ScriptableObject
     {
         [SerializeField] protected List<StageData> stages;

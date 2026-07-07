@@ -1,5 +1,5 @@
-using OctoberStudio;
-using OctoberStudio.Save;
+using VXMonster.Core;
+using VXMonster.Core.Save;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using VXMonster.Gameplay;
@@ -28,7 +28,7 @@ namespace VXMonster.Platform.Bootstrap
         private static void EnsureExists()
         {
             if (FindAnyObjectByType<PlatformBootstrapper>() != null) return;
-            var go = new GameObject("VX Platform Bootstrapper");
+            var go = new GameObject("VX Monster Bootstrapper");
             go.AddComponent<PlatformBootstrapper>();
         }
 
@@ -80,7 +80,7 @@ namespace VXMonster.Platform.Bootstrap
         {
             if (FindAnyObjectByType<VXMonster.UI.VXLobbyModePanel>() != null) return;
 
-            var lobby = FindAnyObjectByType<OctoberStudio.UI.LobbyWindowBehavior>();
+            var lobby = FindAnyObjectByType<VXMonster.Core.UI.LobbyWindowBehavior>();
             if (lobby == null) return;
 
             lobby.gameObject.AddComponent<VXMonster.UI.VXLobbyModePanel>();

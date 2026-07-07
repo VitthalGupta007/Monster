@@ -1,4 +1,4 @@
-namespace OctoberStudio.Bossfight
+namespace VXMonster.Core.Bossfight
 {
     public enum BossType
     {

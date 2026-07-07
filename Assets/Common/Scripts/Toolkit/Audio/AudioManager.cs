@@ -1,8 +1,8 @@
-using OctoberStudio.Pool;
+using VXMonster.Core.Pool;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.Audio
+namespace VXMonster.Core.Audio
 {
     public class AudioManager : MonoBehaviour, IAudioManager
     {

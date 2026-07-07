@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
-    [CreateAssetMenu(fileName = "Restore HP Ability Data", menuName = "October/Abilities/Passive/Restore HP")]
+    [CreateAssetMenu(fileName = "Restore HP Ability Data", menuName = "VX Monster/Abilities/Passive/Restore HP")]
     public class RestoreHPAbilityData : GenericAbilityData<RestoreHPAbilityLevel>
     {
         private void Awake()

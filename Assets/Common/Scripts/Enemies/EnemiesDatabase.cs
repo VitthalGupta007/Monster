@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
-    [CreateAssetMenu(menuName = "October/Enemies Database", fileName = "Enemies Database")]
+    [CreateAssetMenu(menuName = "VX Monster/Enemies Database", fileName = "Enemies Database")]
     public class EnemiesDatabase : ScriptableObject
     {
         [SerializeField] List<EnemyData> enemies;

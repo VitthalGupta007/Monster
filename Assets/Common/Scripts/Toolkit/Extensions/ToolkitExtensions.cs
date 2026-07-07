@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
 
-namespace OctoberStudio.Extensions
+namespace VXMonster.Core.Extensions
 {
     public static class ToolkitExtensions
     {

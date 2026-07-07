@@ -8,10 +8,3 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 625f186215c104763be7675aa2d941aa, type: 3}
-AssetOrigin:
-  serializedVersion: 1
-  productId: 304936
-  packageName: Monster Survivors - Full Game
-  packageVersion: 1.5.0
-  assetPath: Assets/TextMesh Pro/Shaders/TMP_SDF-URP Lit.shadergraph
-  uploadId: 936972

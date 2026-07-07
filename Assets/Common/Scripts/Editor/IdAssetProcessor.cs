@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEditor;
 using System.Diagnostics.CodeAnalysis;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
 
     public class IdAssetProcessor : AssetModificationProcessor

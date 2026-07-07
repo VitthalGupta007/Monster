@@ -1,7 +1,7 @@
-using OctoberStudio.Currency;
+using VXMonster.Core.Currency;
 using UnityEngine;
 
-namespace OctoberStudio.Drop
+namespace VXMonster.Core.Drop
 {
     public class CoinDropBehavior : DropBehavior
     {

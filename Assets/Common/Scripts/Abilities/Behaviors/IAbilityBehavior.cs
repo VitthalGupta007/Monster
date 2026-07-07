@@ -1,6 +1,6 @@
-using OctoberStudio.Abilities;
+using VXMonster.Core.Abilities;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
     public interface IAbilityBehavior
     {

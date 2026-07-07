@@ -21,10 +21,3 @@ AudioImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 304936
-  packageName: Monster Survivors - Full Game
-  packageVersion: 1.5.0
-  assetPath: Assets/Common/Audio/Sounds/revive.wav
-  uploadId: 936972

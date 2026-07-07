@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
 using System.Text;
 using UnityEngine;
 
-namespace OctoberStudio.Save
+namespace VXMonster.Core.Save
 {
     public static class SerializationHelper
     {

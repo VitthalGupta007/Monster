@@ -1,4 +1,4 @@
-namespace OctoberStudio.Pool
+namespace VXMonster.Core.Pool
 {
     public abstract class AbstractPool
     {

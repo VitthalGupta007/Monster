@@ -1,11 +1,11 @@
-using OctoberStudio.Extensions;
+using VXMonster.Core.Extensions;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace OctoberStudio.Audio
+namespace VXMonster.Core.Audio
 {
-    [CreateAssetMenu(fileName = "Audio Database", menuName = "October/Audio Database")]
+    [CreateAssetMenu(fileName = "Audio Database", menuName = "VX Monster/Audio Database")]
     public class AudioDatabase : ScriptableObject
     {
         [SerializeField] List<SoundContainer> sounds;

@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
-    [CreateAssetMenu(fileName = "Fireball Ability Data", menuName = "October/Abilities/Active/Fireball")]
+    [CreateAssetMenu(fileName = "Fireball Ability Data", menuName = "VX Monster/Abilities/Active/Fireball")]
     public class FireballAbilityData : GenericAbilityData<FireballAbilityLevel>
     {
         private void Awake()

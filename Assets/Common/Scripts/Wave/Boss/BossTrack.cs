@@ -1,6 +1,6 @@
 using UnityEngine.Timeline;
 
-namespace OctoberStudio.Timeline.Bossfight
+namespace VXMonster.Core.Timeline.Bossfight
 {
     [TrackClipType(typeof(Boss))]
     public class BossTrack : TrackAsset

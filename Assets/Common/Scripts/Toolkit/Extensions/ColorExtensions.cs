@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
-namespace OctoberStudio.Extensions
+namespace VXMonster.Core.Extensions
 {
     public static class ColorExtensions
     {

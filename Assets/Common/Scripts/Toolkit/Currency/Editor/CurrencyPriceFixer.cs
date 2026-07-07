@@ -1,8 +1,8 @@
-using OctoberStudio.Upgrades;
+using VXMonster.Core.Upgrades;
 using UnityEditor;
 using UnityEngine;
 
-namespace OctoberStudio.Currency
+namespace VXMonster.Core.Currency
 {
     [InitializeOnLoad]
     public static class CurrencyPriceFixer 
@@ -14,13 +14,13 @@ namespace OctoberStudio.Currency
             EditorApplication.delayCall += () => RunCheck(true);
         }
 
-        [MenuItem("Tools/October/Migration/Migrate from Cost to Price", true)]
+        [MenuItem("Tools/VX Monster/Migration/Migrate from Cost to Price", true)]
         private static bool RunCheckMenuValidation()
         {
             return !Application.isPlaying;
         }
 
-        [MenuItem("Tools/October/Migration/Migrate from Cost to Price")]
+        [MenuItem("Tools/VX Monster/Migration/Migrate from Cost to Price")]
         private static void RunCheckMenu()
         {
             RunCheck(false);

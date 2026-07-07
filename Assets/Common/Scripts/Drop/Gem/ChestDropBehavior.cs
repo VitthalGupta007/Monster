@@ -1,4 +1,4 @@
-namespace OctoberStudio.Drop
+namespace VXMonster.Core.Drop
 {
     public class ChestDropBehavior : DropBehavior
     {

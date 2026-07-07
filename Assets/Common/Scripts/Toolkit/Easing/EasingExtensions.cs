@@ -1,10 +1,10 @@
-using OctoberStudio.Extensions;
+using VXMonster.Core.Extensions;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace OctoberStudio.Easing
+namespace VXMonster.Core.Easing
 {
     public static class EasingExtensions
     {

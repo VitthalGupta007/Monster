@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
-    [CreateAssetMenu(fileName = "Steel Sword Data", menuName = "October/Abilities/Active/Steel Sword")]
+    [CreateAssetMenu(fileName = "Steel Sword Data", menuName = "VX Monster/Abilities/Active/Steel Sword")]
     public class SteelSwordWeaponAbilityData : GenericAbilityData<SteelSwordWeaponAbilityLevel>
     {
         private void Awake()

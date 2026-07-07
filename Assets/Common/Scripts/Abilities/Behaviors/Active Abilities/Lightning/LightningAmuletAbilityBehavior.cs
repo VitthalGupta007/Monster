@@ -1,11 +1,11 @@
-using OctoberStudio.Easing;
-using OctoberStudio.Pool;
+using VXMonster.Core.Easing;
+using VXMonster.Core.Pool;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using VXMonster.Gameplay;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
     public class LightningAmuletAbilityBehavior : AbilityBehavior<LightningAmuletAbilityData, LightningAmuletAbilityLevel>
     {

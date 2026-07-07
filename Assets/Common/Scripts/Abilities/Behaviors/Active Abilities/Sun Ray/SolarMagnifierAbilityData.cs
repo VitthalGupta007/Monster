@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
-    [CreateAssetMenu(fileName = "Solar Magnifier Ability Data", menuName = "October/Abilities/Active/Solar Magnifier")]
+    [CreateAssetMenu(fileName = "Solar Magnifier Ability Data", menuName = "VX Monster/Abilities/Active/Solar Magnifier")]
     public class SolarMagnifierAbilityData : GenericAbilityData<SolarMagnifierAbilityLevel>
     {
         private void Awake()

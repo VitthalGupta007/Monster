@@ -1,5 +1,5 @@
-using OctoberStudio.Easing;
-using OctoberStudio.Input;
+using VXMonster.Core.Easing;
+using VXMonster.Core.Input;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -8,7 +8,7 @@ using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-namespace OctoberStudio.UI
+namespace VXMonster.Core.UI
 {
     public class SettingsWindowBehavior : MonoBehaviour
     {

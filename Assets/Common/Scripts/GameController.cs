@@ -1,4 +1,4 @@
-using OctoberStudio.Currency;
+using VXMonster.Core.Currency;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,11 +8,11 @@ using VXMonster.Platform;
 using UnityEditor;
 #endif
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
-    using OctoberStudio.Audio;
-    using OctoberStudio.Easing;
-    using OctoberStudio.Input;
+    using VXMonster.Core.Audio;
+    using VXMonster.Core.Easing;
+    using VXMonster.Core.Input;
     using Save;
     using Upgrades;
     using Vibration;

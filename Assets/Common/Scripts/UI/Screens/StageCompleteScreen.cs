@@ -1,13 +1,13 @@
-using OctoberStudio.Audio;
-using OctoberStudio.Easing;
-using OctoberStudio.Input;
+using VXMonster.Core.Audio;
+using VXMonster.Core.Easing;
+using VXMonster.Core.Input;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using VXMonster.Platform;
 
-namespace OctoberStudio.UI
+namespace VXMonster.Core.UI
 {
     public class StageCompleteScreen : MonoBehaviour
     {

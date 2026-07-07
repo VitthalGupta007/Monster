@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-namespace OctoberStudio.UI
+namespace VXMonster.Core.UI
 {
     public class CustomScrollView : ScrollRect, IPointerEnterHandler, IPointerExitHandler
     {

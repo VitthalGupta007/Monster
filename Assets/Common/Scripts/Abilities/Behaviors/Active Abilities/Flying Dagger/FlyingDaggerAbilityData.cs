@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
-    [CreateAssetMenu(fileName = "Flying Dagger Ability Data", menuName = "October/Abilities/Active/Flying Dagger")]
+    [CreateAssetMenu(fileName = "Flying Dagger Ability Data", menuName = "VX Monster/Abilities/Active/Flying Dagger")]
     public class FlyingDaggerAbilityData : GenericAbilityData<FlyingDaggerAbilityLevel>
     {
         private void Awake()

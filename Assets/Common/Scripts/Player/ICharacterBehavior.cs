@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
     public interface ICharacterBehavior
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace OctoberStudio.Timeline
+namespace VXMonster.Core.Timeline
 {
     public abstract class RushWave : WaveAsset
     {

@@ -1,11 +1,11 @@
-using OctoberStudio.Timeline;
+using VXMonster.Core.Timeline;
 using System;
 using UnityEditor;
 using UnityEditor.Timeline;
 using UnityEngine;
 using UnityEngine.Timeline;
 
-namespace OctoberStudio.Timeline.Editor
+namespace VXMonster.Core.Timeline.Editor
 {
     [CustomTimelineEditor(typeof(WaveAsset))]
     public class WaveEditor : ClipEditor

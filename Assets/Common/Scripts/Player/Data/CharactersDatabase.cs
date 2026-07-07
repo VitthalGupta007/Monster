@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
-    [CreateAssetMenu(fileName = "Characters Database", menuName = "October/Character/Characters Database")]
+    [CreateAssetMenu(fileName = "Characters Database", menuName = "VX Monster/Character/Characters Database")]
     public class CharactersDatabase : ScriptableObject
     {
         [Obsolete("Use characterDatas")]

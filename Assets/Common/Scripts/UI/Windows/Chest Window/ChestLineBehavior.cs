@@ -1,13 +1,13 @@
-using OctoberStudio.Abilities;
-using OctoberStudio.Easing;
-using OctoberStudio.Extensions;
-using OctoberStudio.Pool;
+using VXMonster.Core.Abilities;
+using VXMonster.Core.Easing;
+using VXMonster.Core.Extensions;
+using VXMonster.Core.Pool;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace OctoberStudio.UI.Chest
+namespace VXMonster.Core.UI.Chest
 {
     public class ChestLineBehavior : MonoBehaviour
     {

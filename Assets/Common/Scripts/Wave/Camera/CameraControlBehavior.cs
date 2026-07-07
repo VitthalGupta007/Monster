@@ -1,9 +1,9 @@
-using OctoberStudio.Easing;
+using VXMonster.Core.Easing;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.U2D;
 
-namespace OctoberStudio.Timeline
+namespace VXMonster.Core.Timeline
 {
     public class CameraControlBehavior : PlayableBehaviour
     {

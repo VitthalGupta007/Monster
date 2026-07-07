@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
-    [CreateAssetMenu(fileName = "Recoiler Ability Data", menuName = "October/Abilities/Evolution/Recoiler")]
+    [CreateAssetMenu(fileName = "Recoiler Ability Data", menuName = "VX Monster/Abilities/Evolution/Recoiler")]
     public class RecoilerAbilityData : GenericAbilityData<RecoilerAbilityLevel>
     {
         private void Awake()

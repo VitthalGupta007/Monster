@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace OctoberStudio.Timeline.Editor
+namespace VXMonster.Core.Timeline.Editor
 {
     [CustomPropertyDrawer(typeof(RushSpawn.SpawnData))]
     public class RushSpawnDataPropertyDrawer : PropertyDrawer
@@ -309,7 +309,7 @@ namespace OctoberStudio.Timeline.Editor
                 angleStyle.alignment = GetAlignment(direction);
 
                 Handles.color = (angle % 90 == 0) ? Color.white : new Color(1f, 1f, 1f, 0.5f);
-                Handles.Label(position, angle + "°", angleStyle);
+                Handles.Label(position, angle + "ï¿½", angleStyle);
             }
         }
 

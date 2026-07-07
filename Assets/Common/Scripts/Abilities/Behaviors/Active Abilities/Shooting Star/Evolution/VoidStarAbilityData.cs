@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
-    [CreateAssetMenu(fileName = "Void Star Ability Data", menuName = "October/Abilities/Evolution/Void Star")]
+    [CreateAssetMenu(fileName = "Void Star Ability Data", menuName = "VX Monster/Abilities/Evolution/Void Star")]
     public class VoidStarAbilityData : GenericAbilityData<VoidStartAbilityLevel>
     {
         private void Awake()

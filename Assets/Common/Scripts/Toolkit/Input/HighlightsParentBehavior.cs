@@ -1,9 +1,9 @@
-using OctoberStudio.Extensions;
-using OctoberStudio.Pool;
-using OctoberStudio.UI;
+using VXMonster.Core.Extensions;
+using VXMonster.Core.Pool;
+using VXMonster.Core.UI;
 using UnityEngine;
 
-namespace OctoberStudio.Input
+namespace VXMonster.Core.Input
 {
     public class HighlightsParentBehavior : MonoBehaviour
     {

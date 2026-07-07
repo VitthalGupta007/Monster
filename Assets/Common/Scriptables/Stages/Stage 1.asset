@@ -36,5 +36,5 @@ MonoBehaviour:
     version: 2
     RefIds:
     - rid: 7181948531491733506
-      type: {class: AlwaysUnlockedCondition, ns: OctoberStudio, asm: Assembly-CSharp}
+      type: {class: AlwaysUnlockedCondition, ns: VXMonster.Core, asm: Assembly-CSharp}
       data: 

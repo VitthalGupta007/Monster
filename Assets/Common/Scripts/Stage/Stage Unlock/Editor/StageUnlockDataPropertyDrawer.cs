@@ -2,7 +2,7 @@ using System;
 using UnityEditor;
 using UnityEngine;
 
-namespace OctoberStudio.StageCreator
+namespace VXMonster.Core.StageCreator
 {
     [CustomPropertyDrawer(typeof(StageUnlockData))]
     public class StageUnlockDataPropertyDrawer : PropertyDrawer

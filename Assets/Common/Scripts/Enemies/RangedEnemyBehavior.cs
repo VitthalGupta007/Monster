@@ -1,10 +1,10 @@
-using OctoberStudio.Extensions;
-using OctoberStudio.Pool;
+using VXMonster.Core.Extensions;
+using VXMonster.Core.Pool;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.Enemy
+namespace VXMonster.Core.Enemy
 {
     public class RangedEnemyBehavior : EnemyBehavior
     {

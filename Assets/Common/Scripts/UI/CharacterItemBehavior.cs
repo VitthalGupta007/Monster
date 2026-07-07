@@ -1,12 +1,12 @@
-using OctoberStudio.Abilities;
-using OctoberStudio.Audio;
+using VXMonster.Core.Abilities;
+using VXMonster.Core.Audio;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace OctoberStudio.UI
+namespace VXMonster.Core.UI
 {
     public class CharacterItemBehavior : MonoBehaviour
     {

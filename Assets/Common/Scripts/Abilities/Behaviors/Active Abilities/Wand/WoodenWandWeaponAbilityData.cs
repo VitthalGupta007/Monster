@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
-    [CreateAssetMenu(fileName = "Wooden Wand Data", menuName = "October/Abilities/Active/Wooden Wand")]
+    [CreateAssetMenu(fileName = "Wooden Wand Data", menuName = "VX Monster/Abilities/Active/Wooden Wand")]
     public class WoodenWandWeaponAbilityData : GenericAbilityData<WoodenWandWeaponAbilityLevel>
     {
         private void Awake()

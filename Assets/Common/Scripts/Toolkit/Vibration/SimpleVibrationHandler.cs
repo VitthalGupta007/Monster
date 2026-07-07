@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-namespace OctoberStudio.Vibration
+namespace VXMonster.Core.Vibration
 {
     public class SimpleVibrationHandler
     {

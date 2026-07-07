@@ -1,10 +1,10 @@
-using OctoberStudio.Bossfight;
-using OctoberStudio.Easing;
-using OctoberStudio.Extensions;
+using VXMonster.Core.Bossfight;
+using VXMonster.Core.Easing;
+using VXMonster.Core.Extensions;
 using UnityEngine;
 using UnityEngine.Playables;
 
-namespace OctoberStudio.Timeline.Bossfight
+namespace VXMonster.Core.Timeline.Bossfight
 {
     public class BossBehavior : PlayableBehaviour
     {

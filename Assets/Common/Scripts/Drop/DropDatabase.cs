@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
-    [CreateAssetMenu(fileName = "Drop Database", menuName = "October/Drop Database")]
+    [CreateAssetMenu(fileName = "Drop Database", menuName = "VX Monster/Drop Database")]
     public class DropDatabase : ScriptableObject
     {
         [SerializeField] List<DropData> gems;

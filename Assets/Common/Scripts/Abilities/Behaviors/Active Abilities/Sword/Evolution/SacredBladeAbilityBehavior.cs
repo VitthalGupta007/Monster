@@ -1,10 +1,10 @@
-using OctoberStudio.Pool;
-using OctoberStudio.Easing;
+using VXMonster.Core.Pool;
+using VXMonster.Core.Easing;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
     public class SacredBladeAbilityBehavior : AbilityBehavior<SacredBladeAbilityData, SacredBladeAbilityLevel>
     {

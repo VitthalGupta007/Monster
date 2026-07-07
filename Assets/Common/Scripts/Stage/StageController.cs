@@ -1,15 +1,15 @@
-using OctoberStudio.Abilities;
-using OctoberStudio.Extensions;
-using OctoberStudio.Pool;
-using OctoberStudio.Timeline.Bossfight;
-using OctoberStudio.UI;
+using VXMonster.Core.Abilities;
+using VXMonster.Core.Extensions;
+using VXMonster.Core.Pool;
+using VXMonster.Core.Timeline.Bossfight;
+using VXMonster.Core.UI;
 using UnityEngine;
 using UnityEngine.Playables;
 using VXMonster.Gameplay;
 using VXMonster.Platform;
 using VXMonster.Save;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
     public class StageController : MonoBehaviour
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
     public abstract class AbilityBehavior<T, K> : MonoBehaviour, IAbilityBehavior where T: GenericAbilityData<K> where K : AbilityLevel
     {

@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
-    [CreateAssetMenu(fileName = "Shooting Star Ability Data", menuName = "October/Abilities/Active/Shooting Star")]
+    [CreateAssetMenu(fileName = "Shooting Star Ability Data", menuName = "VX Monster/Abilities/Active/Shooting Star")]
     public class ShootingStarAbilityData : GenericAbilityData<ShootingStartAbilityLevel>
     {
         private void Awake()

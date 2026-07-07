@@ -1,12 +1,12 @@
-using OctoberStudio.Currency;
+using VXMonster.Core.Currency;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 using UnityEngine;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
-    [CreateAssetMenu(menuName = "October/Character/Data", fileName = "Character Data")]
+    [CreateAssetMenu(menuName = "VX Monster/Character/Data", fileName = "Character Data")]
     public class CharacterDataSO : ScriptableObject
     {
         [SerializeField] protected Id id;

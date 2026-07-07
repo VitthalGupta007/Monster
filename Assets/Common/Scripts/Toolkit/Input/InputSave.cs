@@ -1,8 +1,8 @@
-using OctoberStudio.Input;
-using OctoberStudio.Save;
+using VXMonster.Core.Input;
+using VXMonster.Core.Save;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
     public class InputSave : ISave
     {

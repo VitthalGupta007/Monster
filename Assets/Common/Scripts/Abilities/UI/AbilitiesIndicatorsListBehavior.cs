@@ -1,9 +1,9 @@
-using OctoberStudio.Easing;
-using OctoberStudio.Extensions;
+using VXMonster.Core.Easing;
+using VXMonster.Core.Extensions;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.Abilities.UI
+namespace VXMonster.Core.Abilities.UI
 {
     public class AbilitiesIndicatorsListBehavior : MonoBehaviour
     {

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
     public class TimeZoneAbilityBehavior : AbilityBehavior<TimeGazerAbilityData, TimeGazerAbilityLevel>
     {

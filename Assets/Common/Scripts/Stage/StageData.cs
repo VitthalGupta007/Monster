@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.Timeline;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
-    [CreateAssetMenu(fileName = "Stage Data", menuName = "October/Stage Data")]
+    [CreateAssetMenu(fileName = "Stage Data", menuName = "VX Monster/Stage Data")]
     public class StageData : ScriptableObject
     {
         [SerializeField] protected Id id;

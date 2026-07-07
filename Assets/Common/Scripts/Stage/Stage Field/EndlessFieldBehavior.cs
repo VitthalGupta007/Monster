@@ -1,10 +1,10 @@
-using OctoberStudio.Easing;
-using OctoberStudio.Extensions;
-using OctoberStudio.Pool;
+using VXMonster.Core.Easing;
+using VXMonster.Core.Extensions;
+using VXMonster.Core.Pool;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
     public class EndlessFieldBehavior : AbstractFieldBehavior
     {

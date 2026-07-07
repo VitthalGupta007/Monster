@@ -1,4 +1,4 @@
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
     public class MaxHPAbilityBehavior : AbilityBehavior<MaxHPAbilityData, MaxHPAbilityLevel>
     {

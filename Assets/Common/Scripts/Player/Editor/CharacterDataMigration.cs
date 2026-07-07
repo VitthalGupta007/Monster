@@ -1,9 +1,9 @@
-using OctoberStudio.Currency;
-using OctoberStudio.StageCreator;
+using VXMonster.Core.Currency;
+using VXMonster.Core.StageCreator;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
-namespace OctoberStudio
+namespace VXMonster.Core
 {
     [InitializeOnLoad]
     public static class CharacterDataMigration
@@ -15,13 +15,13 @@ namespace OctoberStudio
            EditorApplication.delayCall += () => Migrate(true);
         }
 
-        [MenuItem("Tools/October/Migration/Convert Character Data to Scriptable Objects", true)]
+        [MenuItem("Tools/VX Monster/Migration/Convert Character Data to Scriptable Objects", true)]
         private static bool RunCheckMenuValidation()
         {
             return !Application.isPlaying;
         }
 
-        [MenuItem("Tools/October/Migration/Convert Character Data to Scriptable Objects")]
+        [MenuItem("Tools/VX Monster/Migration/Convert Character Data to Scriptable Objects")]
         private static void RunCheckMenu()
         {
             Migrate(false);

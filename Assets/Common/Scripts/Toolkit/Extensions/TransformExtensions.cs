@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace OctoberStudio.Extensions
+namespace VXMonster.Core.Extensions
 {
     public static class TransformExtensions
     {

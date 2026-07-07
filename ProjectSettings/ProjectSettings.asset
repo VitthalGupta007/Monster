@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: VitthalX Studios
+  companyName: VitthalX Studio
   productName: VX Monster
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -263,7 +263,7 @@ PlayerSettings:
   shaderPrecisionModel: 0
   clonedFromGUID: ec8a769f4b6dd8a43b0c7cb565b49240
   templatePackageId: 
-  templateDefaultScene: Assets/Scenes/SampleScene.unity
+  templateDefaultScene: Assets/Common/Scenes/Main Menu.unity
   useCustomMainManifest: 1
   useCustomLauncherManifest: 0
   useCustomMainGradleTemplate: 0
@@ -861,6 +861,7 @@ PlayerSettings:
   scriptingDefineSymbols:
     Android: GOOGLE_MOBILE_ADS_AVAILABLE;APP_UI_EDITOR_ONLY
     Standalone: GOOGLE_MOBILE_ADS_AVAILABLE;APP_UI_EDITOR_ONLY
+    iPhone: GOOGLE_MOBILE_ADS_AVAILABLE
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
@@ -896,14 +897,14 @@ PlayerSettings:
   editorAssembliesCompatibilityLevel: 1
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: Monster
+  metroPackageName: VX Monster
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: Monster
+  metroApplicationDescription: VX Monster
   wsaImages: {}
   metroTileShortName: 
   metroTileShowName: 0
@@ -978,7 +979,7 @@ PlayerSettings:
   cloudProjectId: 0eaf23ae-d10a-460f-ba7b-db2cb69d8822
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: Monster
+  projectName: VX Monster
   organizationId: vitthalgupta007
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0

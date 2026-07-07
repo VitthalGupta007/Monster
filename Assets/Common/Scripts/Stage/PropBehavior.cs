@@ -1,8 +1,8 @@
-using OctoberStudio.Easing;
-using OctoberStudio.Enemy;
+using VXMonster.Core.Easing;
+using VXMonster.Core.Enemy;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
     public class PropBehavior : MonoBehaviour
     {

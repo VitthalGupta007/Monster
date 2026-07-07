@@ -3,7 +3,7 @@ using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 
-namespace OctoberStudio.UI
+namespace VXMonster.Core.UI
 {
     public class TextIndicatorBehavior : MonoBehaviour
     {

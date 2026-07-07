@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
-    [CreateAssetMenu(fileName = "Spiky Trap Ability Data", menuName = "October/Abilities/Evolution/Spiky Trap")]
+    [CreateAssetMenu(fileName = "Spiky Trap Ability Data", menuName = "VX Monster/Abilities/Evolution/Spiky Trap")]
     public class SpikyTrapAbilityData : GenericAbilityData<SpikyTrapAbilityLevel>
     {
         private void Awake()

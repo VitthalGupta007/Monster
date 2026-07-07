@@ -1,8 +1,8 @@
-using OctoberStudio.UI;
+using VXMonster.Core.UI;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace OctoberStudio.Input
+namespace VXMonster.Core.Input
 {
     public interface IInputManager
     {

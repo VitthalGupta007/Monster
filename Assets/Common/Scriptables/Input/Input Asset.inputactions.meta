@@ -11,11 +11,4 @@ ScriptedImporter:
   generateWrapperCode: 1
   wrapperCodePath: Assets/Common/Scripts/Toolkit/Input/Input Asset.cs
   wrapperClassName: 
-  wrapperCodeNamespace: OctoberStudio.Input
-AssetOrigin:
-  serializedVersion: 1
-  productId: 304936
-  packageName: Monster Survivors - Full Game
-  packageVersion: 1.5.0
-  assetPath: Assets/Common/Scriptables/Input/Input Asset.inputactions
-  uploadId: 936972
+  wrapperCodeNamespace: VXMonster.Core.Input

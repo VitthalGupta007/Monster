@@ -1,7 +1,7 @@
-using OctoberStudio.Easing;
-using OctoberStudio.Extensions;
-using OctoberStudio.Input;
-using OctoberStudio.UI;
+using VXMonster.Core.Easing;
+using VXMonster.Core.Extensions;
+using VXMonster.Core.Input;
+using VXMonster.Core.UI;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -9,7 +9,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-namespace OctoberStudio.Upgrades.UI
+namespace VXMonster.Core.Upgrades.UI
 {
     public class UpgradesWindowBehavior : MonoBehaviour
     {

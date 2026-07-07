@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace OctoberStudio.Currency
+namespace VXMonster.Core.Currency
 {
     [DefaultExecutionOrder(-5)]
     public class CurrenciesManager : MonoBehaviour

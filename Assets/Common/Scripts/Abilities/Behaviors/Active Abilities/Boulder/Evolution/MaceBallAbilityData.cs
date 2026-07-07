@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
-    [CreateAssetMenu(fileName = "Mace Ball Ability Data", menuName = "October/Abilities/Evolution/Mace Ball")]
+    [CreateAssetMenu(fileName = "Mace Ball Ability Data", menuName = "VX Monster/Abilities/Evolution/Mace Ball")]
     public class MaceBallAbilityData : GenericAbilityData<MaceBallAbilityLevel>
     {
         private void Awake()

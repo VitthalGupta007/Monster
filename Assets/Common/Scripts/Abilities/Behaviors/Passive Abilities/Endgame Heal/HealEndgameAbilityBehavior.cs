@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
     public class HealEndgameAbilityBehavior : AbilityBehavior<HealEndgameAbilityData, HealEndgameAbilityLevel>
     {

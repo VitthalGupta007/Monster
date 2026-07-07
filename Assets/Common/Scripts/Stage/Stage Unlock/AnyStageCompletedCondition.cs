@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
     [System.Serializable]
     [UnlockCondition("One Of Stages Completed")]

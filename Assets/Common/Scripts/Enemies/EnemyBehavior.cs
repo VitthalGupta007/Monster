@@ -1,14 +1,14 @@
-using OctoberStudio.Easing;
-using OctoberStudio.Enemy;
-using OctoberStudio.Extensions;
-using OctoberStudio.Timeline;
+using VXMonster.Core.Easing;
+using VXMonster.Core.Enemy;
+using VXMonster.Core.Extensions;
+using VXMonster.Core.Timeline;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
 using VXMonster.Gameplay;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
     public class EnemyBehavior : MonoBehaviour
     {

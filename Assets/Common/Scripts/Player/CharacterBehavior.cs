@@ -1,8 +1,8 @@
-using OctoberStudio.Easing;
+using VXMonster.Core.Easing;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
     public class CharacterBehavior : MonoBehaviour, ICharacterBehavior
     {

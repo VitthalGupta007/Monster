@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
     [System.Serializable]
     [UnlockCondition("Previous Stage Completed")]

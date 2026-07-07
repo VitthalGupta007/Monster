@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace OctoberStudio.Pool
+namespace VXMonster.Core.Pool
 {
     public abstract class Pool<T>: AbstractPool
     {

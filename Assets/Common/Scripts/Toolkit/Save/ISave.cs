@@ -1,4 +1,4 @@
-﻿namespace OctoberStudio.Save
+namespace VXMonster.Core.Save
 {
     public interface ISave
     {

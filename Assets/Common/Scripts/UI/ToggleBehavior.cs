@@ -1,10 +1,10 @@
-using OctoberStudio.Audio;
+using VXMonster.Core.Audio;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace OctoberStudio.UI
+namespace VXMonster.Core.UI
 {
     public class ToggleBehavior : MonoBehaviour
     {

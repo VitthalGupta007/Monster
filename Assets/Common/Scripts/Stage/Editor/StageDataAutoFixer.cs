@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
     [InitializeOnLoad]
     public static class StageDataAutoFixer

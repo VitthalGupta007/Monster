@@ -1,4 +1,4 @@
-namespace OctoberStudio.Easing
+namespace VXMonster.Core.Easing
 {
     public enum EasingType
     {

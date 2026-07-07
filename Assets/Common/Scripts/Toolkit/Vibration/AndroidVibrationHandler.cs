@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace OctoberStudio.Vibration
+namespace VXMonster.Core.Vibration
 {
     public class AndroidVibrationHandler : SimpleVibrationHandler
     {

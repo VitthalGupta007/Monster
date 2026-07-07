@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace OctoberStudio.Enemy
+namespace VXMonster.Core.Enemy
 {
     public class HandEventsHandler : MonoBehaviour
     {

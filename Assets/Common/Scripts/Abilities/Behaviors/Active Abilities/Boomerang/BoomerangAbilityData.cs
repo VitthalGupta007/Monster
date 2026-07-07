@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
-    [CreateAssetMenu(fileName = "Boomerang Ability Data", menuName = "October/Abilities/Active/Boomerang")]
+    [CreateAssetMenu(fileName = "Boomerang Ability Data", menuName = "VX Monster/Abilities/Active/Boomerang")]
     public class BoomerangAbilityData : GenericAbilityData<BoomerangAbilityLevel>
     {
         private void Awake()

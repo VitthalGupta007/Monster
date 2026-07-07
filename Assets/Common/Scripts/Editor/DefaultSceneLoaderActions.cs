@@ -1,10 +1,10 @@
 using UnityEditor;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
     public static class DefaultSceneLoaderActions
     {
-        private const string MenuPath = "Tools/October/Default Scene Loader Enabled";
+        private const string MenuPath = "Tools/VX Monster/Default Scene Loader Enabled";
         private const string PrefKeyEnabled = "DefaultSceneLoader.Enabled";
         private const string PrefKeySkipWarning = "DefaultSceneLoader.Skip Warning";
 
@@ -27,10 +27,10 @@ namespace OctoberStudio
             {
                 var result = EditorUtility.DisplayDialogComplex(
                     "Warning",
-                    "Disabling this option may break the asset if used incorrectly.\n\n" +
-                    "When you press Play without this option turned on, the Unity will play the currently open scene, not the Main Menu scene.\n" +
+                    "Disabling this option may break the game if used incorrectly.\n\n" +
+                    "When you press Play without this option turned on, Unity will play the currently open scene, not the Main Menu scene.\n" +
                     "The Main Menu scene contains most of the systems necessary for the game to function.\n" +
-                    "Use it only to test things that do not relly on the 'The Archer - Roguelike' asset to work",
+                    "Use it only to test isolated features that do not depend on the full game bootstrap",
                     "Disable",
                     "Cancel",
                     "Disable & Don't Show Again"

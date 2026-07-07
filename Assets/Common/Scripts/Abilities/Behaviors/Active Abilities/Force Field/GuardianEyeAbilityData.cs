@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
-    [CreateAssetMenu(fileName = "Guardian Eye Ability Data", menuName = "October/Abilities/Active/Guardian Eye")]
+    [CreateAssetMenu(fileName = "Guardian Eye Ability Data", menuName = "VX Monster/Abilities/Active/Guardian Eye")]
     public class GuardianEyeAbilityData : GenericAbilityData<GuardianEyeAbilityLevel>
     {
         private void Awake()

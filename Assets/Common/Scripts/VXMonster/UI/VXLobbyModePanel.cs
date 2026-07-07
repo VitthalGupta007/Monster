@@ -1,5 +1,5 @@
-using OctoberStudio;
-using OctoberStudio.UI;
+using VXMonster.Core;
+using VXMonster.Core.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

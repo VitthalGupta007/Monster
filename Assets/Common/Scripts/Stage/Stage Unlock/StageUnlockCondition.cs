@@ -1,4 +1,4 @@
-namespace OctoberStudio
+namespace VXMonster.Core
 {
     [System.Serializable]
     public abstract class StageUnlockCondition

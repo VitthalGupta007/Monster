@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
-    [CreateAssetMenu(fileName = "Stage Field Data", menuName = "October/Stage Field Data")]
+    [CreateAssetMenu(fileName = "Stage Field Data", menuName = "VX Monster/Stage Field Data")]
     public class StageFieldData : ScriptableObject
     {
         [Obsolete("Use backgroundPrefabs field instead")]

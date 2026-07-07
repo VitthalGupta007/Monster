@@ -1,10 +1,10 @@
-using OctoberStudio.Easing;
-using OctoberStudio.Extensions;
+using VXMonster.Core.Easing;
+using VXMonster.Core.Extensions;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace OctoberStudio.Enemy
+namespace VXMonster.Core.Enemy
 {
     public class EnemyMegaSlimeProjectileBehavior : SimpleEnemyProjectileBehavior
     {

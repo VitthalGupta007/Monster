@@ -3,7 +3,7 @@ using UnityEditor.Overlays;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace OctoberStudio.Abilities.Editor
+namespace VXMonster.Core.Abilities.Editor
 {
     [Overlay(typeof(SceneView), "Abilities Overlay", true, defaultDockPosition = DockPosition.Top, defaultDockZone = DockZone.BottomToolbar)]
     [Icon("Assets/Common/Sprites/Editor/editor_ab_icon.png")]

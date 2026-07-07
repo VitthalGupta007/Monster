@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
-    [CreateAssetMenu(fileName = "Ice Shard Data", menuName = "October/Abilities/Active/Ice Shard")]
+    [CreateAssetMenu(fileName = "Ice Shard Data", menuName = "VX Monster/Abilities/Active/Ice Shard")]
     public class IceShardAbilityData : GenericAbilityData<IceShardAbilityLevel>
     {
         private void Awake()

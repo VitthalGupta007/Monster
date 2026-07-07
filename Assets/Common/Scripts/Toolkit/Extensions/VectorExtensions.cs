@@ -1,7 +1,7 @@
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace OctoberStudio.Extensions
+namespace VXMonster.Core.Extensions
 {
     public static class VectorExtensions
     {

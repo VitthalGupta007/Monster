@@ -1,4 +1,4 @@
-using OctoberStudio.Pool;
+using VXMonster.Core.Pool;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.Burst;
@@ -7,7 +7,7 @@ using Unity.Jobs;
 using Unity.Mathematics;
 using UnityEngine;
 
-namespace OctoberStudio.UI
+namespace VXMonster.Core.UI
 {
     public class WorldSpaceTextManager : MonoBehaviour
     {

@@ -1,10 +1,10 @@
-using OctoberStudio.Save;
+using VXMonster.Core.Save;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
     public class StageSave : ISave
     {

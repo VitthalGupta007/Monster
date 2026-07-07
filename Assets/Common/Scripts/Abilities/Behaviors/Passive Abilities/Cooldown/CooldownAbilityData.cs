@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
-    [CreateAssetMenu(fileName = "Cooldown Ability Data", menuName = "October/Abilities/Passive/Cooldown")]
+    [CreateAssetMenu(fileName = "Cooldown Ability Data", menuName = "VX Monster/Abilities/Passive/Cooldown")]
     public class CooldownAbilityData : GenericAbilityData<CooldownAbilityLevel>
     {
         private void Awake()

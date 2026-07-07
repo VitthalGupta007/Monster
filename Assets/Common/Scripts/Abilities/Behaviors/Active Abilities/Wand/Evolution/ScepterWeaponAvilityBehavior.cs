@@ -1,11 +1,11 @@
-using OctoberStudio.Easing;
-using OctoberStudio.Extensions;
-using OctoberStudio.Pool;
+using VXMonster.Core.Easing;
+using VXMonster.Core.Extensions;
+using VXMonster.Core.Pool;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
     public class ScepterWeaponAvilityBehavior : AbilityBehavior<ScepterWeaponAbilityData, ScepterWeaponAbilityLevel>
     {

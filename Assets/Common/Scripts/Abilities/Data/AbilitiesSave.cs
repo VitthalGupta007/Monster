@@ -1,9 +1,9 @@
-using OctoberStudio.Save;
+using VXMonster.Core.Save;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
     [System.Serializable]
     public class AbilitiesSave : ISave

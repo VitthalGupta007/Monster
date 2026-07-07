@@ -1,9 +1,9 @@
-using OctoberStudio.Extensions;
-using OctoberStudio.Pool;
+using VXMonster.Core.Extensions;
+using VXMonster.Core.Pool;
 using System.Collections;
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
     public class MagicRuneAbilityBehavior : AbilityBehavior<MagicRuneAbilityData, MagicRuneAbilityLevel>
     {

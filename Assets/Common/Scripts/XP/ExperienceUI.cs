@@ -1,9 +1,9 @@
-using OctoberStudio.Extensions;
+using VXMonster.Core.Extensions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
     public class ExperienceUI : MonoBehaviour
     {

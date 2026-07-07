@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-namespace OctoberStudio.Save
+namespace VXMonster.Core.Save
 {
     [System.Serializable]
     public class SaveCell

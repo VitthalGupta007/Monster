@@ -1,4 +1,4 @@
-using OctoberStudio.Easing;
+using VXMonster.Core.Easing;
 using System;
 using System.Collections;
 using System.IO;
@@ -10,7 +10,7 @@ using UnityEngine.Events;
 using System.Runtime.InteropServices;
 #endif
 
-namespace OctoberStudio.Save
+namespace VXMonster.Core.Save
 {
     [DefaultExecutionOrder(-100)]
     public class SaveManager : MonoBehaviour, ISaveManager

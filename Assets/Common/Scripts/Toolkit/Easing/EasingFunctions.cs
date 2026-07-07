@@ -2,7 +2,7 @@ using System.Runtime.CompilerServices;
 using Unity.Burst;
 using Unity.Mathematics;
 
-namespace OctoberStudio.Easing
+namespace VXMonster.Core.Easing
 {
     [BurstCompile]
     public static class EasingFunctions

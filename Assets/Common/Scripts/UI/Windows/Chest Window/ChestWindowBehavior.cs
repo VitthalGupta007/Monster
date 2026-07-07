@@ -1,9 +1,9 @@
-using OctoberStudio.Abilities;
-using OctoberStudio.Audio;
-using OctoberStudio.Currency;
-using OctoberStudio.Easing;
-using OctoberStudio.Input;
-using OctoberStudio.UI.Chest;
+using VXMonster.Core.Abilities;
+using VXMonster.Core.Audio;
+using VXMonster.Core.Currency;
+using VXMonster.Core.Easing;
+using VXMonster.Core.Input;
+using VXMonster.Core.UI.Chest;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +12,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using VXMonster.Gameplay;
 
-namespace OctoberStudio.UI
+namespace VXMonster.Core.UI
 {
     public class ChestWindowBehavior : MonoBehaviour
     {

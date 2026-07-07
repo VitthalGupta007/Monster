@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
-    [CreateAssetMenu(fileName = "Max HP Ability Data", menuName = "October/Abilities/Passive/Max HP")]
+    [CreateAssetMenu(fileName = "Max HP Ability Data", menuName = "VX Monster/Abilities/Passive/Max HP")]
     public class MaxHPAbilityData : GenericAbilityData<MaxHPAbilityLevel>
     {
         private void Awake()

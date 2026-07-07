@@ -1,8 +1,8 @@
-using OctoberStudio.Extensions;
+using VXMonster.Core.Extensions;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
     public class RectFieldBehavior : AbstractFieldBehavior
     {

@@ -1,7 +1,7 @@
-using OctoberStudio.UI;
+using VXMonster.Core.UI;
 using UnityEngine;
 
-namespace OctoberStudio.Currency
+namespace VXMonster.Core.Currency
 {
     public class CurrencyScreenIncicatorBehavior : ScalingLabelBehavior
     {

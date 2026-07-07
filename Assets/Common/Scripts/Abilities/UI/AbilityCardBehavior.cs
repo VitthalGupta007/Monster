@@ -1,11 +1,11 @@
-using OctoberStudio.Audio;
-using OctoberStudio.Easing;
+using VXMonster.Core.Audio;
+using VXMonster.Core.Easing;
 using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace OctoberStudio.Abilities.UI
+namespace VXMonster.Core.Abilities.UI
 {
     public class AbilityCardBehavior : MonoBehaviour
     {

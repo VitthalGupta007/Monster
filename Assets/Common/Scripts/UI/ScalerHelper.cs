@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace OctoberStudio.UI
+namespace VXMonster.Core.UI
 {
     [RequireComponent(typeof(CanvasScaler))]
     public class ScalerHelper : MonoBehaviour

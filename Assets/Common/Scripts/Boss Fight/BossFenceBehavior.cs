@@ -1,8 +1,8 @@
-using OctoberStudio.Pool;
+using VXMonster.Core.Pool;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
     public abstract class BossFenceBehavior : MonoBehaviour
     {

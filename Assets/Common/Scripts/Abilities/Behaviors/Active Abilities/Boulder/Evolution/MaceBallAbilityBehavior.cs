@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
     public class MaceBallAbilityBehavior : AbilityBehavior<MaceBallAbilityData, MaceBallAbilityLevel>
     {

@@ -1,9 +1,9 @@
-using OctoberStudio.Save;
+using VXMonster.Core.Save;
 using UnityEngine.Events;
 using UnityEngine;
-using OctoberStudio.Currency;
+using VXMonster.Core.Currency;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
     public class CurrencySave: ISave
     {

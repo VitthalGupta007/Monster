@@ -1,4 +1,4 @@
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
     public class CooldownAbilityBehavior : AbilityBehavior<CooldownAbilityData, CooldownAbilityLevel>
     {

@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEditor;
 
-namespace OctoberStudio.Currency
+namespace VXMonster.Core.Currency
 {
     [InitializeOnLoad]
     public static class CurrencyCache

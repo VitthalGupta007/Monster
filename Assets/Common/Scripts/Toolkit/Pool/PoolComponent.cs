@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace OctoberStudio.Pool
+namespace VXMonster.Core.Pool
 {
     public class PoolComponent<T> : Pool<T> where T : Component
     {

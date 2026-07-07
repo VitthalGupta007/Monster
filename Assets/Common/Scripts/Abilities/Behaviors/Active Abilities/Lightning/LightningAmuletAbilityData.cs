@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
-    [CreateAssetMenu(fileName = "Lightning Amulet Ability Data", menuName = "October/Abilities/Active/Lightning Amulet")]
+    [CreateAssetMenu(fileName = "Lightning Amulet Ability Data", menuName = "VX Monster/Abilities/Active/Lightning Amulet")]
     public class LightningAmuletAbilityData : GenericAbilityData<LightningAmuletAbilityLevel>
     {
         private void Awake()

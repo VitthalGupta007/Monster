@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.Bossfight
+namespace VXMonster.Core.Bossfight
 {
-    [CreateAssetMenu(fileName = "Bossfight Database", menuName = "October/Bossfight Database")]
+    [CreateAssetMenu(fileName = "Bossfight Database", menuName = "VX Monster/Bossfight Database")]
     public class BossfightDatabase : ScriptableObject
     {
         [SerializeField] List<BossfightData> bossfights;

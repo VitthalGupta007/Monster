@@ -1,7 +1,7 @@
-using OctoberStudio.Easing;
+using VXMonster.Core.Easing;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
     public class ShootingStarProjectile : ProjectileBehavior
     {

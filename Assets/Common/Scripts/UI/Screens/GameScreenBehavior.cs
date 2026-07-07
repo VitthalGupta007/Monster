@@ -1,9 +1,9 @@
-using OctoberStudio.Abilities;
-using OctoberStudio.Abilities.UI;
-using OctoberStudio.Audio;
-using OctoberStudio.Bossfight;
-using OctoberStudio.Easing;
-using OctoberStudio.UI;
+using VXMonster.Core.Abilities;
+using VXMonster.Core.Abilities.UI;
+using VXMonster.Core.Audio;
+using VXMonster.Core.Bossfight;
+using VXMonster.Core.Easing;
+using VXMonster.Core.UI;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +11,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
     public class GameScreenBehavior : MonoBehaviour
     {

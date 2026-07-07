@@ -1,7 +1,7 @@
-using OctoberStudio.Audio;
-using OctoberStudio.Easing;
-using OctoberStudio.Input;
-using OctoberStudio.Upgrades;
+using VXMonster.Core.Audio;
+using VXMonster.Core.Easing;
+using VXMonster.Core.Input;
+using VXMonster.Core.Upgrades;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -9,7 +9,7 @@ using UnityEngine.UI;
 using VXMonster.Gameplay;
 using VXMonster.Platform;
 
-namespace OctoberStudio.UI
+namespace VXMonster.Core.UI
 {
     public class StageFailedScreen : MonoBehaviour
     {

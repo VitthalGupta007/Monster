@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-using OctoberStudio;
+using VXMonster.Core;
 
 namespace VXMonster.Gameplay
 {

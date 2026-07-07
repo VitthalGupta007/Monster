@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine.Playables;
 
-namespace OctoberStudio.Timeline
+namespace VXMonster.Core.Timeline
 {
     public class BurstRushWaveBehavior : RushWaveBehavior
     {

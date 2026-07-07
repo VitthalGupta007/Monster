@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
-    [CreateAssetMenu(fileName = "Move Speed Ability Data", menuName = "October/Abilities/Passive/Move Speed")]
+    [CreateAssetMenu(fileName = "Move Speed Ability Data", menuName = "VX Monster/Abilities/Passive/Move Speed")]
     public class MoveSpeedAbilityData: GenericAbilityData<MoveSpeedAbilityLevel>
     {
         private void Awake()

@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
-    [CreateAssetMenu(fileName = "Sacred Blade Data", menuName = "October/Abilities/Evolution/Sacred Blade")]
+    [CreateAssetMenu(fileName = "Sacred Blade Data", menuName = "VX Monster/Abilities/Evolution/Sacred Blade")]
     public class SacredBladeAbilityData : GenericAbilityData<SacredBladeAbilityLevel>
     {
         private void Awake()

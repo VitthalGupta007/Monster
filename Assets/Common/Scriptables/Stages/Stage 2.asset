@@ -38,11 +38,11 @@ MonoBehaviour:
     version: 2
     RefIds:
     - rid: 7181948531491733507
-      type: {class: PreviousStageCompletedCondition, ns: OctoberStudio, asm: Assembly-CSharp}
+      type: {class: PreviousStageCompletedCondition, ns: VXMonster.Core, asm: Assembly-CSharp}
       data:
         name: Previous Stage Completed
     - rid: 7181948531491733508
-      type: {class: PurchasedCondition, ns: OctoberStudio, asm: Assembly-CSharp}
+      type: {class: PurchasedCondition, ns: VXMonster.Core, asm: Assembly-CSharp}
       data:
         price:
           currencyId: gold

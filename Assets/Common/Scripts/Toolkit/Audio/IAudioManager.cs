@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace OctoberStudio.Audio
+namespace VXMonster.Core.Audio
 {
     public interface IAudioManager
     {

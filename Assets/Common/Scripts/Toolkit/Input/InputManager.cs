@@ -1,10 +1,10 @@
-using OctoberStudio.UI;
+using VXMonster.Core.UI;
 using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-namespace OctoberStudio.Input
+namespace VXMonster.Core.Input
 {
     public class InputManager : MonoBehaviour, IInputManager
     {

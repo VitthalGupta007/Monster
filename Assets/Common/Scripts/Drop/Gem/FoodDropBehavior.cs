@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace OctoberStudio.Drop
+namespace VXMonster.Core.Drop
 {
     public class FoodDropBehavior : DropBehavior
     {

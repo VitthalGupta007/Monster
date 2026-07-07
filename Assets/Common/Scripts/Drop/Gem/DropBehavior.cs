@@ -1,9 +1,9 @@
-using OctoberStudio.Easing;
-using OctoberStudio.Pool;
+using VXMonster.Core.Easing;
+using VXMonster.Core.Pool;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.Drop
+namespace VXMonster.Core.Drop
 {
     public abstract class DropBehavior : MonoBehaviour
     {

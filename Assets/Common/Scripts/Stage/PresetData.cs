@@ -1,10 +1,10 @@
-using OctoberStudio.Abilities;
+using VXMonster.Core.Abilities;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
-    [CreateAssetMenu(menuName = "October/Testing/Preset", fileName = "Testing Preset")]
+    [CreateAssetMenu(menuName = "VX Monster/Testing/Preset", fileName = "Testing Preset")]
     public class PresetData : ScriptableObject
     {
         [SerializeField] float startTime;

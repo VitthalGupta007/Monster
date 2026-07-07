@@ -1,5 +1,5 @@
 #import <Foundation/Foundation.h>
 
-@interface OctoberVibration : NSObject
+@interface VXVibration : NSObject
 
 @end

@@ -1,9 +1,9 @@
-using OctoberStudio.Pool;
+using VXMonster.Core.Pool;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.Enemy
+namespace VXMonster.Core.Enemy
 {
     public class VoidBehavior : EnemyBehavior
     {

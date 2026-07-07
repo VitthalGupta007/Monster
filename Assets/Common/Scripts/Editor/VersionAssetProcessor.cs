@@ -1,9 +1,9 @@
-using OctoberStudio.Upgrades;
+using VXMonster.Core.Upgrades;
 using System.Diagnostics.CodeAnalysis;
 using UnityEditor;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
     public class VersionAssetProcessor : AssetModificationProcessor
     {

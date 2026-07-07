@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
     public class GoldEndgameAbilityBehavior : AbilityBehavior<GoldEndgameAbilityData, GoldEndgameAbilityLevel>
     {

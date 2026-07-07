@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
     public class CircleFenceBehavior : BossFenceBehavior
     {

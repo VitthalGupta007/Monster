@@ -1,6 +1,6 @@
 using System;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     public class UnlockConditionAttribute : Attribute

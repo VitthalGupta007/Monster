@@ -1,7 +1,7 @@
-using OctoberStudio.Abilities;
-using OctoberStudio.Easing;
-using OctoberStudio.Extensions;
-using OctoberStudio.Input;
+using VXMonster.Core.Abilities;
+using VXMonster.Core.Easing;
+using VXMonster.Core.Extensions;
+using VXMonster.Core.Input;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -9,7 +9,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-namespace OctoberStudio.UI
+namespace VXMonster.Core.UI
 {
     public class CharactersWindowBehavior : MonoBehaviour
     {

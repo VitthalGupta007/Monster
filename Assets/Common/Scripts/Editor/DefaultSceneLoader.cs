@@ -4,7 +4,7 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
     [InitializeOnLoad]
     public static class DefaultSceneLoader

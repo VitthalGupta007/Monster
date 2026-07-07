@@ -1,8 +1,8 @@
-using OctoberStudio.Easing;
+using VXMonster.Core.Easing;
 using System;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
     public class WarningCircleBehavior : MonoBehaviour
     {

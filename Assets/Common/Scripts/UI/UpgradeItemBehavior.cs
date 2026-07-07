@@ -1,12 +1,12 @@
-using OctoberStudio.Audio;
-using OctoberStudio.UI;
+using VXMonster.Core.Audio;
+using VXMonster.Core.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace OctoberStudio.Upgrades.UI
+namespace VXMonster.Core.Upgrades.UI
 {
     public class UpgradeItemBehavior : MonoBehaviour
     {

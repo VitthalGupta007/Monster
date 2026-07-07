@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
-    [CreateAssetMenu(fileName = "Experience Data", menuName = "October/Experience Data")]
+    [CreateAssetMenu(fileName = "Experience Data", menuName = "VX Monster/Experience Data")]
     public class ExperienceData: ScriptableObject 
     {
         public List<ExperienceDataLevel> levels;

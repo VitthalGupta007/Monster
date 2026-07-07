@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
-    [CreateAssetMenu(fileName = "Magic Rune Ability Data", menuName = "October/Abilities/Active/Magic Rune")]
+    [CreateAssetMenu(fileName = "Magic Rune Ability Data", menuName = "VX Monster/Abilities/Active/Magic Rune")]
     public class MagicRuneAbilityData : GenericAbilityData<MagicRuneAbilityLevel>
     {
         private void Awake()

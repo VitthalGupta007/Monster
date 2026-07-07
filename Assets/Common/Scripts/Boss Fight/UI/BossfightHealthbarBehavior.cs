@@ -1,9 +1,9 @@
-using OctoberStudio.Easing;
+using VXMonster.Core.Easing;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace OctoberStudio.Bossfight
+namespace VXMonster.Core.Bossfight
 {
     public class BossfightHealthbarBehavior : MonoBehaviour
     {

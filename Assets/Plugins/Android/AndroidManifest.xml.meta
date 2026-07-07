@@ -5,10 +5,3 @@ TextScriptImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 304936
-  packageName: Monster Survivors - Full Game
-  packageVersion: 1.5.0
-  assetPath: Assets/Plugins/Android/AndroidManifest.xml
-  uploadId: 936972

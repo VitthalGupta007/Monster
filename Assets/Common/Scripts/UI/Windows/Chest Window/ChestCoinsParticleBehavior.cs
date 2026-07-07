@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace OctoberStudio.UI.Chest
+namespace VXMonster.Core.UI.Chest
 {
     public class ChestCoinsParticleBehavior : MonoBehaviour
     {

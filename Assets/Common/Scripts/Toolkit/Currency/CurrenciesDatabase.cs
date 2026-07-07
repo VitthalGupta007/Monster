@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.Currency
+namespace VXMonster.Core.Currency
 {
-    [CreateAssetMenu(fileName = "Currencies Database", menuName = "October/Currencies Database")]
+    [CreateAssetMenu(fileName = "Currencies Database", menuName = "VX Monster/Currencies Database")]
     public class CurrenciesDatabase : ScriptableObject
     {
         [SerializeField] List<CurrencyData> currencies;

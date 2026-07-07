@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace OctoberStudio.Enemy
+namespace VXMonster.Core.Enemy
 {
-    [CreateAssetMenu(fileName = "Enemy Dissolve Settings", menuName = "October/Enemy/Dissolve Settings")]
+    [CreateAssetMenu(fileName = "Enemy Dissolve Settings", menuName = "VX Monster/Enemy/Dissolve Settings")]
     public class DissolveSettings : ScriptableObject
     {
         [SerializeField] float duration = 0.5f;

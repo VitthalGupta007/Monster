@@ -1,9 +1,9 @@
-using OctoberStudio.Easing;
+using VXMonster.Core.Easing;
 using UnityEngine;
 using UnityEngine.Events;
 using VXMonster.Gameplay;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
     public class FireballProjectileBehavior : MonoBehaviour
     {

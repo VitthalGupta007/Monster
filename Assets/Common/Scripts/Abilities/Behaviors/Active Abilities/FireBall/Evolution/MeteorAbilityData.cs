@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
-    [CreateAssetMenu(fileName = "Meteor Ability Data", menuName = "October/Abilities/Evolution/Meteor")]
+    [CreateAssetMenu(fileName = "Meteor Ability Data", menuName = "VX Monster/Abilities/Evolution/Meteor")]
     public class MeteorAbilityData : GenericAbilityData<MeteorAbilityLevel>
     {
         private void Awake()

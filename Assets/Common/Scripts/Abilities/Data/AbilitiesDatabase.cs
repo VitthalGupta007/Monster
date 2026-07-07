@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
-    [CreateAssetMenu(fileName = "Abilities Database", menuName = "October/Abilities/Database")]
+    [CreateAssetMenu(fileName = "Abilities Database", menuName = "VX Monster/Abilities/Database")]
     public class AbilitiesDatabase : ScriptableObject
     {
         [SerializeField] int activeAbilitiesCapacity = 5;

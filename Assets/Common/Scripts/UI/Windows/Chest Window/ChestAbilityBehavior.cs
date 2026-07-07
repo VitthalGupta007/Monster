@@ -1,9 +1,9 @@
-using OctoberStudio.Abilities;
+using VXMonster.Core.Abilities;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace OctoberStudio.UI.Chest
+namespace VXMonster.Core.UI.Chest
 {
     public class ChestAbilityBehavior : MonoBehaviour
     {

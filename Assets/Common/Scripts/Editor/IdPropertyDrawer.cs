@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
     [CustomPropertyDrawer(typeof(Id))]
     public class IdPropertyDrawer : PropertyDrawer

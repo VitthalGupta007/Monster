@@ -1,4 +1,4 @@
-namespace OctoberStudio.Vibration
+namespace VXMonster.Core.Vibration
 {
     public interface IVibrationManager
     {

@@ -1,8 +1,8 @@
-using OctoberStudio.Easing;
+using VXMonster.Core.Easing;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace OctoberStudio.Enemy
+namespace VXMonster.Core.Enemy
 {
     public class HoneyMineBehavior : MonoBehaviour
     {

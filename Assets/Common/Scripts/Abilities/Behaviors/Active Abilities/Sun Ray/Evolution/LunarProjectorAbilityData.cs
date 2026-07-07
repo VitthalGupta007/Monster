@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
-    [CreateAssetMenu(fileName = "Lunar Projector Ability Data", menuName = "October/Abilities/Evolution/Lunar Projector")]
+    [CreateAssetMenu(fileName = "Lunar Projector Ability Data", menuName = "VX Monster/Abilities/Evolution/Lunar Projector")]
     public class LunarProjectorAbilityData : GenericAbilityData<LunarProjectorAbilityLevel>
     {
         private void Awake()

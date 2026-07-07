@@ -1,8 +1,8 @@
-using OctoberStudio.Abilities;
+using VXMonster.Core.Abilities;
 using System.Collections;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
     public class RestoreHPAbilityBehavior : AbilityBehavior<RestoreHPAbilityData, RestoreHPAbilityLevel>
     {

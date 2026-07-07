@@ -1,8 +1,8 @@
-using OctoberStudio.Currency;
+using VXMonster.Core.Currency;
 using System;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
     [System.Serializable]
     public class CharacterData

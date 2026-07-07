@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.UI
+namespace VXMonster.Core.UI
 {
     public class SafeAreaManager : MonoBehaviour
     {

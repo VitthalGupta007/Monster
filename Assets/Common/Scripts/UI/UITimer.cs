@@ -1,9 +1,9 @@
-using OctoberStudio.Easing;
+using VXMonster.Core.Easing;
 using System;
 using TMPro;
 using UnityEngine;
 
-namespace OctoberStudio.UI
+namespace VXMonster.Core.UI
 {
     public class UITimer : MonoBehaviour
     {

@@ -1,10 +1,10 @@
-using OctoberStudio.Easing;
-using OctoberStudio.Extensions;
+using VXMonster.Core.Easing;
+using VXMonster.Core.Extensions;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
     public class SunRayProjectileBehavior : MonoBehaviour
     {

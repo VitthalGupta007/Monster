@@ -1,8 +1,8 @@
-using OctoberStudio.Save;
+using VXMonster.Core.Save;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OctoberStudio.Upgrades
+namespace VXMonster.Core.Upgrades
 {
     [System.Serializable]
     public class UpgradesSave : ISave

@@ -1,7 +1,7 @@
-using OctoberStudio.Currency;
+using VXMonster.Core.Currency;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
     [System.Serializable]
     [UnlockCondition("Purchased")]

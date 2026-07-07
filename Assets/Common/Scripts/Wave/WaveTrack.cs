@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
 
-namespace OctoberStudio.Timeline
+namespace VXMonster.Core.Timeline
 {
     [TrackClipType(typeof(WaveAsset))]
     public class WaveTrack : TrackAsset

@@ -2,7 +2,7 @@ using System;
 using UnityEditor;
 using UnityEngine;
 
-namespace OctoberStudio.Currency
+namespace VXMonster.Core.Currency
 {
     [CustomPropertyDrawer(typeof(CurrencyId))]
     public class CurrencyIdPropertyDrawer : PropertyDrawer

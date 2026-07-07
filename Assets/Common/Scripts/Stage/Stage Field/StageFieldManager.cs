@@ -1,13 +1,13 @@
-using OctoberStudio.Bossfight;
-using OctoberStudio.Extensions;
-using OctoberStudio.Pool;
-using OctoberStudio.Timeline.Bossfight;
+using VXMonster.Core.Bossfight;
+using VXMonster.Core.Extensions;
+using VXMonster.Core.Pool;
+using VXMonster.Core.Timeline.Bossfight;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
     public class StageFieldManager : MonoBehaviour
     {

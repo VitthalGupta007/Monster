@@ -1,7 +1,7 @@
-using OctoberStudio.Drop;
+using VXMonster.Core.Drop;
 using UnityEngine;
 
-namespace OctoberStudio
+namespace VXMonster.Core
 {
     public class GemBehavior : DropBehavior
     {

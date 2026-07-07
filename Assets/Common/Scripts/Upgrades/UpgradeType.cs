@@ -1,4 +1,4 @@
-namespace OctoberStudio.Upgrades
+namespace VXMonster.Core.Upgrades
 {
     public enum UpgradeType
     {

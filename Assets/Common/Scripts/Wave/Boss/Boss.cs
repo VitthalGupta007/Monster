@@ -1,8 +1,8 @@
-using OctoberStudio.Bossfight;
+using VXMonster.Core.Bossfight;
 using UnityEngine;
 using UnityEngine.Playables;
 
-namespace OctoberStudio.Timeline.Bossfight
+namespace VXMonster.Core.Timeline.Bossfight
 {
     public class Boss : PlayableAsset
     {

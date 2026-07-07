@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace OctoberStudio.Bossfight
+namespace VXMonster.Core.Bossfight
 {
     [System.Serializable]
     public class BossfightData

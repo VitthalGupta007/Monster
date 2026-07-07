@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
-    [CreateAssetMenu(fileName = "Rolling Stone Ability Data", menuName = "October/Abilities/Active/Rolling Stone")]
+    [CreateAssetMenu(fileName = "Rolling Stone Ability Data", menuName = "VX Monster/Abilities/Active/Rolling Stone")]
     public class RollingStoneAbilityData : GenericAbilityData<RollingStoneAbilityLevel>
     {
         private void Awake()

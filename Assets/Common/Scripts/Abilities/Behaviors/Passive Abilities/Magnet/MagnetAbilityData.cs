@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
-    [CreateAssetMenu(fileName = "Magnet Ability Data", menuName = "October/Abilities/Passive/Magnet")]
+    [CreateAssetMenu(fileName = "Magnet Ability Data", menuName = "VX Monster/Abilities/Passive/Magnet")]
     public class MagnetAbilityData : GenericAbilityData<MagnetAbilityLevel>
     {
         private void Awake()

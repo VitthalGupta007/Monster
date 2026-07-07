@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace OctoberStudio.Save
+namespace VXMonster.Core.Save
 {
     [Serializable]
     public class SaveDatabase

@@ -1,8 +1,8 @@
-using OctoberStudio.Easing;
-using OctoberStudio.Pool;
+using VXMonster.Core.Easing;
+using VXMonster.Core.Pool;
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
     public class SpikyTrapBehavior : MonoBehaviour
     {

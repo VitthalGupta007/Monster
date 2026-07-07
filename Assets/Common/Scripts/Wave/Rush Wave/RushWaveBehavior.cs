@@ -1,4 +1,4 @@
-namespace OctoberStudio.Timeline 
+namespace VXMonster.Core.Timeline 
 {
     public class RushWaveBehavior : WaveBehavior
     {

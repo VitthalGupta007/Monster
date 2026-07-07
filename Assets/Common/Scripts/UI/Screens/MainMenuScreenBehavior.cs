@@ -1,10 +1,10 @@
-using OctoberStudio.Audio;
-using OctoberStudio.Easing;
-using OctoberStudio.Upgrades.UI;
+using VXMonster.Core.Audio;
+using VXMonster.Core.Easing;
+using VXMonster.Core.Upgrades.UI;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace OctoberStudio.UI
+namespace VXMonster.Core.UI
 {
     public class MainMenuScreenBehavior : MonoBehaviour
     {

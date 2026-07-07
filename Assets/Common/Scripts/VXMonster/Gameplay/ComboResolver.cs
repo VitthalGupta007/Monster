@@ -1,4 +1,4 @@
-using OctoberStudio;
+using VXMonster.Core;
 using UnityEngine;
 
 namespace VXMonster.Gameplay

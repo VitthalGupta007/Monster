@@ -1,9 +1,9 @@
-using OctoberStudio.Easing;
-using OctoberStudio.Extensions;
+using VXMonster.Core.Easing;
+using VXMonster.Core.Extensions;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace OctoberStudio.UI
+namespace VXMonster.Core.UI
 {
     public class BackgroundTintUI : MonoBehaviour
     {

@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace OctoberStudio.Abilities
+namespace VXMonster.Core.Abilities
 {
-    [CreateAssetMenu(fileName = "Time Gazer Ability Data", menuName = "October/Abilities/Evolution/Time Gazer")]
+    [CreateAssetMenu(fileName = "Time Gazer Ability Data", menuName = "VX Monster/Abilities/Evolution/Time Gazer")]
     public class TimeGazerAbilityData : GenericAbilityData<TimeGazerAbilityLevel>
     {
         private void Awake()

@@ -1,7 +1,7 @@
-using OctoberStudio.Save;
+using VXMonster.Core.Save;
 using UnityEngine;
 
-namespace OctoberStudio.Audio
+namespace VXMonster.Core.Audio
 {
     public class AudioSave : ISave
     {
