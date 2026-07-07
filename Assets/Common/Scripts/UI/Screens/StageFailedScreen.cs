@@ -23,7 +23,6 @@ namespace VXMonster.Core.UI
         [SerializeField] Button adReviveButton;
         [SerializeField] Button exitButton;
 
-        private Canvas canvas;
         private TextMeshProUGUI adReviveLabel;
         private Coroutine refreshRoutine;
 
@@ -31,8 +30,6 @@ namespace VXMonster.Core.UI
 
         private void Awake()
         {
-            canvas = GetComponent<Canvas>();
-
             reviveButton.onClick.AddListener(ReviveButtonClick);
             if (adReviveButton != null)
             {
@@ -173,8 +170,6 @@ namespace VXMonster.Core.UI
                     {
                         adReviveButton.interactable = PlatformServices.AdService.IsRewardedReady;
                     }
-
-                    PlatformServices.AdService.LoadRewarded();
                 });
         }
 

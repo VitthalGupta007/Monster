@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.Build;
-using UnityEngine;
 
 namespace VXMonster.Platform.Ads.Editor
 {
@@ -45,13 +44,11 @@ namespace VXMonster.Platform.Ads.Editor
                 {
                     defines.Add(Define);
                     PlayerSettings.SetScriptingDefineSymbols(group, string.Join(";", defines));
-                    Debug.Log($"[VX Ads] Added scripting define {Define} for {group.TargetName}.");
                 }
                 else if (!packageResolved && hasDefine)
                 {
                     defines.Remove(Define);
                     PlayerSettings.SetScriptingDefineSymbols(group, string.Join(";", defines));
-                    Debug.Log($"[VX Ads] Removed scripting define {Define} for {group.TargetName}.");
                 }
             }
         }

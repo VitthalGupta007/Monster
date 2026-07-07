@@ -30,8 +30,6 @@ namespace VXMonster.Platform
                     IsReady = success;
                     if (success)
                     {
-                        AdService.LoadRewarded();
-                        AdService.LoadInterstitial();
                         RefreshBannerForActiveScene();
                     }
                 });
@@ -47,7 +45,6 @@ namespace VXMonster.Platform
 
             lastInterstitialTime = Time.unscaledTime;
             AdService.ShowInterstitial(onClosed);
-            AdService.LoadInterstitial();
             return true;
         }
 

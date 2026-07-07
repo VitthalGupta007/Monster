@@ -5,10 +5,6 @@ using UnityEngine;
 
 namespace VXMonster.Platform.Ads
 {
-    /// <summary>
-    /// Live AdMob integration for Android/iOS device builds.
-    /// Uses Google test ad units in Development builds.
-    /// </summary>
     public class AdMobService : IAdService
     {
         private readonly AdMobConfig config;
@@ -38,7 +34,6 @@ namespace VXMonster.Platform.Ads
                 MainThreadDispatcher.Run(() =>
                 {
                     IsInitialized = true;
-                    Debug.Log("[VX Ads] AdMob SDK initialized.");
                     LoadRewarded();
                     LoadInterstitial();
                     LoadAppOpen();
@@ -49,19 +44,11 @@ namespace VXMonster.Platform.Ads
 
         public void ShowBanner()
         {
-            if (!IsInitialized)
-            {
-                Debug.Log("[VX Ads] Banner skipped — SDK not initialized yet.");
-                return;
-            }
+            if (!IsInitialized) return;
 
             if (bannerView == null)
             {
                 bannerView = new BannerView(GetBannerUnitId(), AdSize.Banner, AdPosition.Bottom);
-                bannerView.OnBannerAdLoaded += () =>
-                {
-                    MainThreadDispatcher.Run(() => Debug.Log("[VX Ads] Banner ad loaded."));
-                };
                 bannerView.OnBannerAdLoadFailed += error =>
                 {
                     MainThreadDispatcher.Run(() =>
@@ -69,36 +56,29 @@ namespace VXMonster.Platform.Ads
                 };
             }
 
-            Debug.Log("[VX Ads] Banner requested.");
             bannerView.LoadAd(new AdRequest());
             bannerView.Show();
             IsBannerVisible = true;
-            Debug.Log("[VX Ads] Banner shown.");
         }
 
         public void HideBanner()
         {
             bannerView?.Hide();
             IsBannerVisible = false;
-            Debug.Log("[VX Ads] Banner hidden.");
         }
 
         public void ShowInterstitial(Action onClosed)
         {
             if (!IsInterstitialReady)
             {
-                Debug.Log("[VX Ads] Interstitial not ready — skipping.");
                 MainThreadDispatcher.Run(() => onClosed?.Invoke());
                 return;
             }
-
-            Debug.Log("[VX Ads] Interstitial showing.");
 
             void HandleClosed()
             {
                 MainThreadDispatcher.Run(() =>
                 {
-                    Debug.Log("[VX Ads] Interstitial closed.");
                     onClosed?.Invoke();
                     DestroyInterstitial();
                     LoadInterstitial();
@@ -114,7 +94,6 @@ namespace VXMonster.Platform.Ads
         {
             if (!IsRewardedReady)
             {
-                Debug.Log("[VX Ads] Rewarded not ready — skipping.");
                 MainThreadDispatcher.Run(() => onClosed?.Invoke());
                 return;
             }
@@ -127,12 +106,7 @@ namespace VXMonster.Platform.Ads
                 {
                     if (rewardGranted)
                     {
-                        Debug.Log("[VX Ads] Rewarded completed — granting revive.");
                         onRewardGranted?.Invoke();
-                    }
-                    else
-                    {
-                        Debug.Log("[VX Ads] Rewarded closed without reward.");
                     }
 
                     onClosed?.Invoke();
@@ -146,14 +120,12 @@ namespace VXMonster.Platform.Ads
             {
                 MainThreadDispatcher.Run(() =>
                 {
-                    Debug.LogWarning("[VX Ads] Rewarded display failed.");
                     onClosed?.Invoke();
                     DestroyRewarded();
                     LoadRewarded();
                 });
             };
 
-            Debug.Log("[VX Ads] Rewarded showing.");
             rewardedAd.Show(_ => { rewardGranted = true; });
         }
 
@@ -161,19 +133,15 @@ namespace VXMonster.Platform.Ads
         {
             if (!appOpenLoaded || appOpenAd == null || !appOpenAd.CanShowAd())
             {
-                Debug.Log("[VX Ads] App open not ready — skipping.");
                 MainThreadDispatcher.Run(() => onClosed?.Invoke());
                 LoadAppOpen();
                 return;
             }
 
-            Debug.Log("[VX Ads] App open showing.");
-
             void HandleClosed()
             {
                 MainThreadDispatcher.Run(() =>
                 {
-                    Debug.Log("[VX Ads] App open closed.");
                     onClosed?.Invoke();
                     DestroyAppOpen();
                     LoadAppOpen();
@@ -203,7 +171,6 @@ namespace VXMonster.Platform.Ads
 
                     rewardedAd = ad;
                     rewardedLoaded = true;
-                    Debug.Log("[VX Ads] Rewarded ad loaded.");
                 });
             });
         }
@@ -226,7 +193,6 @@ namespace VXMonster.Platform.Ads
 
                     interstitialAd = ad;
                     interstitialLoaded = true;
-                    Debug.Log("[VX Ads] Interstitial ad loaded.");
                 });
             });
         }
@@ -249,7 +215,6 @@ namespace VXMonster.Platform.Ads
 
                     appOpenAd = ad;
                     appOpenLoaded = true;
-                    Debug.Log("[VX Ads] App open ad loaded.");
                 });
             });
         }

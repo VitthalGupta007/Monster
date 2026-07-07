@@ -1,11 +1,7 @@
 using System;
-using UnityEngine;
 
 namespace VXMonster.Platform.Ads
 {
-    /// <summary>
-    /// Safe fallback for Editor and dev builds until Google Mobile Ads SDK resolves in Unity.
-    /// </summary>
     public class MockAdService : IAdService
     {
         public bool IsInitialized { get; private set; }
@@ -16,31 +12,26 @@ namespace VXMonster.Platform.Ads
         public void Initialize(Action<bool> onComplete)
         {
             IsInitialized = true;
-            Debug.Log("[VX Ads] MockAdService initialized.");
             onComplete?.Invoke(true);
         }
 
         public void ShowBanner()
         {
             IsBannerVisible = true;
-            Debug.Log("[VX Ads] Mock banner shown.");
         }
 
         public void HideBanner()
         {
             IsBannerVisible = false;
-            Debug.Log("[VX Ads] Mock banner hidden.");
         }
 
         public void ShowInterstitial(Action onClosed)
         {
-            Debug.Log("[VX Ads] Mock interstitial shown.");
             MainThreadDispatcher.Run(() => onClosed?.Invoke());
         }
 
         public void ShowRewarded(Action onRewardGranted, Action onClosed)
         {
-            Debug.Log("[VX Ads] Mock rewarded completed — granting revive.");
             MainThreadDispatcher.Run(() =>
             {
                 onRewardGranted?.Invoke();
@@ -50,18 +41,11 @@ namespace VXMonster.Platform.Ads
 
         public void ShowAppOpen(Action onClosed)
         {
-            Debug.Log("[VX Ads] Mock app open shown.");
             MainThreadDispatcher.Run(() => onClosed?.Invoke());
         }
 
-        public void LoadRewarded()
-        {
-            Debug.Log("[VX Ads] Mock rewarded load requested.");
-        }
+        public void LoadRewarded() { }
 
-        public void LoadInterstitial()
-        {
-            Debug.Log("[VX Ads] Mock interstitial load requested.");
-        }
+        public void LoadInterstitial() { }
     }
 }

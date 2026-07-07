@@ -145,7 +145,6 @@ namespace VXMonster.UI
         {
             if (dailySave != null && dailySave.HasScoredToday(GameSessionManager.GetUtcDateKey()))
             {
-                Debug.Log("[VX] Daily scored attempt already used today — starting practice instead.");
                 lobbyWindow.StartDailyChallenge(false);
                 return;
             }
