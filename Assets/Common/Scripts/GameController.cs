@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using VXMonster.Platform;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -329,7 +330,7 @@ namespace OctoberStudio
             }
         }
 
-        protected virtual void OnApplicationFocus(bool focus)
+        private void OnApplicationFocus(bool focus)
         {
 #if UNITY_WEBGL && !UNITY_EDITOR
             if (focus) { 
@@ -341,6 +342,10 @@ namespace OctoberStudio
                 });
             } 
 #endif
+            if (focus && !StageController.IsLoaded)
+            {
+                PlatformServices.TryShowAppOpen(null);
+            }
         }
     }
 }

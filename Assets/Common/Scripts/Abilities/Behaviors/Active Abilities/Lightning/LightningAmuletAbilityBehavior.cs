@@ -3,6 +3,7 @@ using OctoberStudio.Pool;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VXMonster.Gameplay;
 
 namespace OctoberStudio.Abilities
 {
@@ -48,13 +49,16 @@ namespace OctoberStudio.Abilities
                     {
                         particle.transform.position = enemy.transform.position;
 
-                        enemy.TakeDamage(PlayerBehavior.Player.Damage * AbilityLevel.Damage);
+                        ElementDamageUtility.DealDamage(enemy, PlayerBehavior.Player.Damage * AbilityLevel.Damage, ElementType.Shock, 2.5f);
 
                         var enemiesInRadius = StageController.EnemiesSpawner.GetEnemiesInRadius(enemy.transform.position, AbilityLevel.AdditionalDamageRadius);
 
                         foreach(var closeEnemy in enemiesInRadius)
                         {
-                            if (closeEnemy != enemy) closeEnemy.TakeDamage(PlayerBehavior.Player.Damage * AbilityLevel.AdditionalDamage);
+                            if (closeEnemy != enemy)
+                            {
+                                ElementDamageUtility.DealDamage(closeEnemy, PlayerBehavior.Player.Damage * AbilityLevel.AdditionalDamage, ElementType.Shock, 2f);
+                            }
                         }
                     } else
                     {

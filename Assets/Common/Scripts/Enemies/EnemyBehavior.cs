@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
+using VXMonster.Gameplay;
 
 namespace OctoberStudio
 {
@@ -126,7 +127,7 @@ namespace OctoberStudio
 
         public virtual void Play()
         {
-            MaxHP = StageController.Stage.EnemyHP * hp;
+            MaxHP = StageController.ScaledEnemyHp * hp;
             Speed = speed;
             if (WaveOverride != null)
             {
@@ -162,6 +163,12 @@ namespace OctoberStudio
             Vector3 direction;
 
             float speed = Speed;
+
+            var elementStatus = GetComponent<EnemyElementStatus>();
+            if (elementStatus != null)
+            {
+                speed *= elementStatus.SpeedMultiplier;
+            }
 
             if (appliedEffects.TryGetValue(EffectType.Speed, out var speedEffects))
             {
@@ -231,7 +238,7 @@ namespace OctoberStudio
             var damage = this.damage;
             if(WaveOverride != null) damage = WaveOverride.ApplyDamageOverride(damage);
 
-            var baseDamage = StageController.Stage.EnemyDamage * damage;
+            var baseDamage = StageController.ScaledEnemyDamage * damage;
             
             if (appliedEffects.ContainsKey(EffectType.Damage))
             {
@@ -256,8 +263,27 @@ namespace OctoberStudio
 
         public void TakeDamage(float damage)
         {
+            TakeDamage(damage, ElementType.None, 0f);
+        }
+
+        public void TakeDamage(float damage, ElementType appliedElement, float elementDuration)
+        {
             if (!IsAlive) return;
             if (IsInvulnerable) return;
+
+            var elementStatus = EnsureElementStatus();
+            if (appliedElement != ElementType.None && elementDuration > 0f)
+            {
+                elementStatus.ApplyElement(appliedElement, elementDuration);
+                ComboResolver.TryTriggerCombo(elementStatus, this, damage);
+            }
+
+            damage *= elementStatus.DamageTakenMultiplier;
+
+            if (RelicsManager.Instance != null)
+            {
+                damage *= RelicsManager.Instance.GetDamageMultiplier();
+            }
 
             HP -= damage;
 
@@ -451,6 +477,17 @@ namespace OctoberStudio
             {
                 effects.Remove(effect);
             }
+        }
+
+        protected EnemyElementStatus EnsureElementStatus()
+        {
+            var status = GetComponent<EnemyElementStatus>();
+            if (status == null)
+            {
+                status = gameObject.AddComponent<EnemyElementStatus>();
+            }
+
+            return status;
         }
 
         protected virtual void OnDisable()

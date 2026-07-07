@@ -1,6 +1,7 @@
 using OctoberStudio.Easing;
 using UnityEngine;
 using UnityEngine.Events;
+using VXMonster.Gameplay;
 
 namespace OctoberStudio.Abilities
 {
@@ -63,7 +64,7 @@ namespace OctoberStudio.Abilities
             {
                 var enemy = enemies[i];
 
-                enemy.TakeDamage(PlayerBehavior.Player.Damage * DamageMultiplier);
+                ElementDamageUtility.DealDamage(enemy, PlayerBehavior.Player.Damage * DamageMultiplier, ElementType.Burn, 3f);
             }
 
             explosionParticle.Play();

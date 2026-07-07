@@ -5,6 +5,8 @@ using OctoberStudio.Timeline.Bossfight;
 using OctoberStudio.UI;
 using UnityEngine;
 using UnityEngine.Playables;
+using VXMonster.Gameplay;
+using VXMonster.Save;
 
 namespace OctoberStudio
 {
@@ -44,6 +46,14 @@ namespace OctoberStudio
         public static GameScreenBehavior GameScreen => instance.gameScreen;
 
         public static StageData Stage { get; private set; }
+
+        public static float ScaledEnemyHp =>
+            Stage != null ? Stage.EnemyHP * GetSessionMultiplier(GameSessionManager.Instance?.GetEnemyHpMultiplier() ?? 1f) : 1f;
+
+        public static float ScaledEnemyDamage =>
+            Stage != null ? Stage.EnemyDamage * GetSessionMultiplier(GameSessionManager.Instance?.GetEnemyDamageMultiplier() ?? 1f) : 1f;
+
+        private static float GetSessionMultiplier(float multiplier) => Mathf.Max(0.1f, multiplier);
 
         public static bool IsLoaded => instance != null;
 
@@ -111,17 +121,39 @@ namespace OctoberStudio
 
         private void TimelineStopped(PlayableDirector director)
         {
-            if (gameObject.activeSelf)
+            if (!gameObject.activeSelf) return;
+
+            var session = GameSessionManager.Instance;
+            if (session != null && session.RunMode == RunMode.Endless)
             {
-                stageSave.CompleteStage(Stage);
-
-                stageSave.IsPlaying = false;
-                GameController.SaveManager.Save(true);
-
-                gameScreen.Hide();
-                stageCompletedScreen.Show();
-                Time.timeScale = 0;
+                session.IncrementEndlessLoop();
+                director.time = 0;
+                director.Play();
+                return;
             }
+
+            if (session != null && session.RunMode == RunMode.Campaign && session.EndlessLoopCount == 0)
+            {
+                // Offer-style endless continuation could be added here later.
+            }
+
+            stageSave.CompleteStage(Stage);
+
+            stageSave.IsPlaying = false;
+            GameController.SaveManager.Save(true);
+
+            session?.LifetimeStats?.AddKills(stageSave.EnemiesKilled);
+            session?.LifetimeStats?.IncrementRunsCompleted();
+
+            if (session != null && session.RunMode == RunMode.DailyChallenge && session.IsDailyScoredRun)
+            {
+                var score = session.CalculateDailyScore(stageSave.EnemiesKilled, stageSave.Time, session.RunSession?.ComboBurstCount ?? 0);
+                session.DailyChallenge?.RecordScore(GameSessionManager.GetUtcDateKey(), score);
+            }
+
+            gameScreen.Hide();
+            stageCompletedScreen.Show();
+            Time.timeScale = 0;
         }
 
         private void OnGameFailed()
@@ -131,17 +163,29 @@ namespace OctoberStudio
             stageSave.IsPlaying = false;
             GameController.SaveManager.Save(true);
 
+            var session = GameSessionManager.Instance;
+            session?.LifetimeStats?.AddKills(stageSave.EnemiesKilled);
+            session?.LifetimeStats?.IncrementRunsFailed();
+
             gameScreen.Hide();
             stageFailedScreen.Show();
         }
 
         public static void ResurrectPlayer()
         {
+            var stageSave = instance.stageSave;
+            if (stageSave != null)
+            {
+                stageSave.IsPlaying = true;
+            }
+
             EnemiesSpawner.DealDamageToAllEnemies(PlayerBehavior.Player.Damage * 1000);
 
             GameScreen.Show();
             PlayerBehavior.Player.Revive();
             Time.timeScale = 1;
+
+            GameController.SaveManager?.Save(true);
         }
 
         public static void ReturnToMainMenu()

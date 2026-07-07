@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using VXMonster.Platform;
 
 namespace OctoberStudio.UI
 {
@@ -52,7 +53,13 @@ namespace OctoberStudio.UI
         {
             GameController.AudioManager.PlaySound(AudioManager.BUTTON_CLICK_HASH);
             Time.timeScale = 1;
-            GameController.LoadMainMenu();
+
+            PlatformServices.HideBanner();
+
+            if (!PlatformServices.TryShowInterstitial(() => GameController.LoadMainMenu()))
+            {
+                GameController.LoadMainMenu();
+            }
 
             GameController.InputManager.onInputChanged -= OnInputChanged;
         }

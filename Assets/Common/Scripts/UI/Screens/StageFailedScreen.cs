@@ -6,6 +6,8 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using VXMonster.Gameplay;
+using VXMonster.Platform;
 
 namespace OctoberStudio.UI
 {
@@ -13,20 +15,26 @@ namespace OctoberStudio.UI
     {
         [SerializeField] CanvasGroup canvasGroup;
         [SerializeField] Button reviveButton;
+        [SerializeField] Button adReviveButton;
         [SerializeField] Button exitButton;
 
         private Canvas canvas;
 
-        private bool revivedAlready = false;
+        private bool upgradeReviveUsed;
 
         private void Awake()
         {
             canvas = GetComponent<Canvas>();
 
             reviveButton.onClick.AddListener(ReviveButtonClick);
+            if (adReviveButton != null)
+            {
+                adReviveButton.onClick.AddListener(AdReviveButtonClick);
+            }
+
             exitButton.onClick.AddListener(ExitButtonClick);
 
-            revivedAlready = false;
+            upgradeReviveUsed = false;
         }
 
         public void Show()
@@ -36,18 +44,39 @@ namespace OctoberStudio.UI
             canvasGroup.alpha = 0;
             canvasGroup.DoAlpha(1, 0.3f).SetUnscaledTime(true);
 
-            if (GameController.UpgradesManager.IsUpgradeAquired(UpgradeType.Revive) && !revivedAlready)
-            {
-                reviveButton.gameObject.SetActive(true);
-
-                EventSystem.current.SetSelectedGameObject(reviveButton.gameObject);
-            } else
-            {
-                reviveButton.gameObject.SetActive(false);
-                EventSystem.current.SetSelectedGameObject(exitButton.gameObject);
-            }
+            RefreshReviveButtons();
 
             GameController.InputManager.onInputChanged += OnInputChanged;
+        }
+
+        private void RefreshReviveButtons()
+        {
+            var session = GameSessionManager.Instance?.RunSession;
+            var canUpgradeRevive = GameController.UpgradesManager.IsUpgradeAquired(UpgradeType.Revive)
+                                   && !upgradeReviveUsed
+                                   && (session == null || !session.UpgradeReviveUsed);
+
+            var canAdRevive = session == null || !session.AdReviveUsed;
+            var adReady = PlatformServices.AdService != null && PlatformServices.AdService.IsRewardedReady;
+
+            reviveButton.gameObject.SetActive(canUpgradeRevive);
+            if (adReviveButton != null)
+            {
+                adReviveButton.gameObject.SetActive(canAdRevive && adReady);
+            }
+
+            if (canUpgradeRevive)
+            {
+                EventSystem.current.SetSelectedGameObject(reviveButton.gameObject);
+            }
+            else if (adReviveButton != null && canAdRevive && adReady)
+            {
+                EventSystem.current.SetSelectedGameObject(adReviveButton.gameObject);
+            }
+            else
+            {
+                EventSystem.current.SetSelectedGameObject(exitButton.gameObject);
+            }
         }
 
         public void Hide(UnityAction onFinish)
@@ -63,15 +92,46 @@ namespace OctoberStudio.UI
         private void ReviveButtonClick()
         {
             GameController.AudioManager.PlaySound(AudioManager.BUTTON_CLICK_HASH);
+            upgradeReviveUsed = true;
+            if (GameSessionManager.Instance?.RunSession != null)
+            {
+                GameSessionManager.Instance.RunSession.UpgradeReviveUsed = true;
+            }
+
             Hide(StageController.ResurrectPlayer);
-            revivedAlready = true;
+        }
+
+        private void AdReviveButtonClick()
+        {
+            if (PlatformServices.AdService == null || !PlatformServices.AdService.IsRewardedReady) return;
+
+            GameController.AudioManager.PlaySound(AudioManager.BUTTON_CLICK_HASH);
+
+            PlatformServices.AdService.ShowRewarded(
+                onRewardGranted: () =>
+                {
+                    if (GameSessionManager.Instance?.RunSession != null)
+                    {
+                        GameSessionManager.Instance.RunSession.AdReviveUsed = true;
+                    }
+
+                    Hide(StageController.ResurrectPlayer);
+                },
+                onClosed: () =>
+                {
+                    PlatformServices.AdService.LoadRewarded();
+                });
         }
 
         private void ExitButtonClick()
         {
             GameController.AudioManager.PlaySound(AudioManager.BUTTON_CLICK_HASH);
             Time.timeScale = 1;
-            StageController.ReturnToMainMenu();
+
+            if (!PlatformServices.TryShowInterstitial(() => StageController.ReturnToMainMenu()))
+            {
+                StageController.ReturnToMainMenu();
+            }
 
             GameController.InputManager.onInputChanged -= OnInputChanged;
         }
@@ -80,14 +140,7 @@ namespace OctoberStudio.UI
         {
             if (prevInput == InputType.UIJoystick)
             {
-                if (GameController.UpgradesManager.IsUpgradeAquired(UpgradeType.Revive) && !revivedAlready)
-                {
-                    EventSystem.current.SetSelectedGameObject(reviveButton.gameObject);
-                }
-                else
-                {
-                    EventSystem.current.SetSelectedGameObject(exitButton.gameObject);
-                }
+                RefreshReviveButtons();
             }
         }
     }

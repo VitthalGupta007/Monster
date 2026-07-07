@@ -103,5 +103,14 @@ InitTestScene*.unity*
 /[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Core/Property Providers
 /[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Core/Property Providers.meta
 
+# Production secrets
+Assets/Platform/Android/Config/ProductionAdConfig.asset
+Assets/Platform/Android/Config/ProductionAdConfig.asset.meta
+Assets/Platform/Android/Config/GPGSConfig.asset
+Assets/Platform/Android/Config/GPGSConfig.asset.meta
+*.keystore
+*.jks
+google-services.json
+
 # Auto-generated scenes by play mode tests
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*

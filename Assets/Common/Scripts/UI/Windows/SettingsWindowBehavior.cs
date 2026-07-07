@@ -1,6 +1,8 @@
 using OctoberStudio.Easing;
 using OctoberStudio.Input;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;

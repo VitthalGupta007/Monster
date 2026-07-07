@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using VXMonster.Gameplay;
 
 namespace OctoberStudio.Abilities
 {
@@ -36,7 +37,7 @@ namespace OctoberStudio.Abilities
             {
                 enemies.Add(enemy, Time.time);
 
-                enemy.TakeDamage(AbilityLevel.Damage * PlayerBehavior.Player.Damage);
+                ElementDamageUtility.DealDamage(enemy, AbilityLevel.Damage * PlayerBehavior.Player.Damage, ElementType.Chill, 2f);
             }
         }
 
@@ -50,7 +51,7 @@ namespace OctoberStudio.Abilities
                 {
                     enemies[enemy] = Time.time;
 
-                    enemy.TakeDamage(AbilityLevel.Damage * PlayerBehavior.Player.Damage);
+                    ElementDamageUtility.DealDamage(enemy, AbilityLevel.Damage * PlayerBehavior.Player.Damage, ElementType.Chill, 2f);
                 }
             }
 

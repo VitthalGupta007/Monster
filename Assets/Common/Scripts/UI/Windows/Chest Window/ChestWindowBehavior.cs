@@ -10,6 +10,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using VXMonster.Gameplay;
 
 namespace OctoberStudio.UI
 {
@@ -216,6 +217,8 @@ namespace OctoberStudio.UI
                 currency = GameController.CurrenciesManager.GetDefaultCurrency(true);
             }
             currency.Deposit(coinsReward);
+
+            RelicsManager.Instance?.TryGrantRandomRelic();
 
             CloseWindow();
         }

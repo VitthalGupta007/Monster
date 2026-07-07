@@ -8,6 +8,7 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using VXMonster.Gameplay;
 
 namespace OctoberStudio.UI
 {
@@ -268,11 +269,50 @@ namespace OctoberStudio.UI
 
         protected virtual void StartStage()
         {
+            GameSessionManager.Instance?.ConfigureCampaign(DifficultyTier.Normal);
+
             save.IsPlaying = true;
             save.ResetStageData = true;
             save.Time = 0f;
             save.XP = 0f;
             save.XPLEVEL = 0;
+            save.EnemiesKilled = 0;
+
+            var stage = stagesDatabase.GetStage(save.SelectedStageId);
+            save.IncrementStageAttempts(stage);
+
+            GameController.AudioManager.PlaySound(AudioManager.BUTTON_CLICK_HASH);
+            GameController.LoadStage();
+        }
+
+        public void StartDailyChallenge(bool scoredAttempt)
+        {
+            GameSessionManager.Instance?.ConfigureDailyChallenge(scoredAttempt);
+
+            save.IsPlaying = true;
+            save.ResetStageData = true;
+            save.Time = 0f;
+            save.XP = 0f;
+            save.XPLEVEL = 0;
+            save.EnemiesKilled = 0;
+
+            var stage = stagesDatabase.GetStage(save.SelectedStageId);
+            save.IncrementStageAttempts(stage);
+
+            GameController.AudioManager.PlaySound(AudioManager.BUTTON_CLICK_HASH);
+            GameController.LoadStage();
+        }
+
+        public void StartEndlessRun(DifficultyTier difficulty)
+        {
+            GameSessionManager.Instance?.ConfigureEndless(difficulty);
+
+            save.IsPlaying = true;
+            save.ResetStageData = true;
+            save.Time = 0f;
+            save.XP = 0f;
+            save.XPLEVEL = 0;
+            save.EnemiesKilled = 0;
 
             var stage = stagesDatabase.GetStage(save.SelectedStageId);
             save.IncrementStageAttempts(stage);
