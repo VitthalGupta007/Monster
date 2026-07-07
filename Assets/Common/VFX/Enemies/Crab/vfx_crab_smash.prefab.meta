@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 0c7bef2f152da2f459c8c8ef05d1002c
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/VFX/Enemies/Crab/vfx_crab_smash.prefab
+  uploadId: 936972

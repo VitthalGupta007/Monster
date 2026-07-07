@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: bbc60b2c878c32e46b61be252f2262ae
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Animations/Enemies/Enemy Void.anim
+  uploadId: 936972

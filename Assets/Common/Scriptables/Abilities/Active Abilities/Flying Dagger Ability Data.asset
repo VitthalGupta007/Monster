@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca844530d09d39247b276cdc829f2c85, type: 3}
+  m_Name: Flying Dagger Ability Data
+  m_EditorClassIdentifier: 
+  type: 8
+  title: Flying Daggers
+  description: Launches a spinning spectral dagger
+  icon: {fileID: 21300000, guid: b24b88b28c170c541bd1ba7328631066, type: 3}
+  prefab: {fileID: 2508247732540034436, guid: 96b489f6283cc1f4a8f703293f1c971b, type: 3}
+  isActiveAbility: 1
+  isWeaponAbility: 0
+  isEvolution: 0
+  evolutionRequirements: []
+  levels:
+  - projectileCount: 1
+    projectileLifetime: 4
+    timeBetweenProjectiles: 0.2
+    abilityCooldown: 5
+    throwingForce: 8
+    spread: 20
+    damage: 15
+    projectileSize: 1
+  - projectileCount: 2
+    projectileLifetime: 4
+    timeBetweenProjectiles: 0.2
+    abilityCooldown: 5
+    throwingForce: 8
+    spread: 20
+    damage: 15
+    projectileSize: 1
+  - projectileCount: 2
+    projectileLifetime: 4
+    timeBetweenProjectiles: 0.2
+    abilityCooldown: 5
+    throwingForce: 8
+    spread: 20
+    damage: 20
+    projectileSize: 1.2
+  - projectileCount: 3
+    projectileLifetime: 4
+    timeBetweenProjectiles: 0.2
+    abilityCooldown: 5
+    throwingForce: 8
+    spread: 20
+    damage: 20
+    projectileSize: 1.2
+  - projectileCount: 3
+    projectileLifetime: 4
+    timeBetweenProjectiles: 0.2
+    abilityCooldown: 5
+    throwingForce: 8
+    spread: 20
+    damage: 25
+    projectileSize: 1.4

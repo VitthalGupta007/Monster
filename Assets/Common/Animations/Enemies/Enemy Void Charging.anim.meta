@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 9bf8ef25d99ec684fb99fe86c160e3a3
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Animations/Enemies/Enemy Void Charging.anim
+  uploadId: 936972

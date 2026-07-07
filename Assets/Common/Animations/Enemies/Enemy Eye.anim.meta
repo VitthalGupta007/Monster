@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: df29a350160326f4ea96e734cdc1695d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Animations/Enemies/Enemy Eye.anim
+  uploadId: 936972

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d4f41d5221707f0468954ef32f4f85d6
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Animations/Enemies/enemy_bat_0.controller
+  uploadId: 936972

@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9243079d1d16af49907120c059b995c, type: 3}
+  m_Name: Drop Database
+  m_EditorClassIdentifier: 
+  gems:
+  - dropType: 0
+    prefab: {fileID: 9143106580007897129, guid: e2434e12c48aad342a597ad9d08a9fe0,
+      type: 3}
+    affectedByMagnet: 1
+    dropCooldown: 0
+  - dropType: 1
+    prefab: {fileID: 3767841545309144952, guid: c13a6d6a7784ecd4f90a22c3ce2e5903,
+      type: 3}
+    affectedByMagnet: 1
+    dropCooldown: 0
+  - dropType: 2
+    prefab: {fileID: 1494583194590317331, guid: ef3b7cf0f6a3ec04bb4e88a673250008,
+      type: 3}
+    affectedByMagnet: 1
+    dropCooldown: 0
+  - dropType: 3
+    prefab: {fileID: 1537621102715106445, guid: f4d4d0d16e89884448fd6e144d12d08c,
+      type: 3}
+    affectedByMagnet: 1
+    dropCooldown: 0
+  - dropType: 10
+    prefab: {fileID: 38311367728016649, guid: de47d81e6dffeec47828e2867df98072, type: 3}
+    affectedByMagnet: 0
+    dropCooldown: 5
+  - dropType: 20
+    prefab: {fileID: 3492111080169054687, guid: 0fe00d4c6ad341648bd885d10959eb00,
+      type: 3}
+    affectedByMagnet: 0
+    dropCooldown: 20
+  - dropType: 30
+    prefab: {fileID: 5357998141908448301, guid: 77f2b74f802e4a048b4767a694018f7a,
+      type: 3}
+    affectedByMagnet: 0
+    dropCooldown: 5
+  - dropType: 40
+    prefab: {fileID: 7999236800876406289, guid: bf4bdd82d81c78940af86324ea6bc89b,
+      type: 3}
+    affectedByMagnet: 0
+    dropCooldown: 0
+  - dropType: 100
+    prefab: {fileID: 5701827647628563461, guid: 4a35a7cb0cae03f48a99efa54d058854,
+      type: 3}
+    affectedByMagnet: 0
+    dropCooldown: 0

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: abffc138aa8512841895264fae8f6e5e
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Stage Elements/Boss Walls/Wall Shade Link.prefab
+  uploadId: 936972

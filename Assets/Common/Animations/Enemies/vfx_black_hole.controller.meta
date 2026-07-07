@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 9794cdad3c3a1304ba3e0dbbe3115604
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Animations/Enemies/vfx_black_hole.controller
+  uploadId: 936972

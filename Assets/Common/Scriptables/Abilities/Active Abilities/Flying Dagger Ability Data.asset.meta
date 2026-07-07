@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 7012f7a45b17ee44ca872ea3f1d6f16f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scriptables/Abilities/Active Abilities/Flying Dagger Ability
+    Data.asset
+  uploadId: 936972

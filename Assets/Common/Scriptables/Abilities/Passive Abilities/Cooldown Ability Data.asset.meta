@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 68bf2ddb340e23e42ba85d719a8d00cc
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scriptables/Abilities/Passive Abilities/Cooldown Ability
+    Data.asset
+  uploadId: 936972

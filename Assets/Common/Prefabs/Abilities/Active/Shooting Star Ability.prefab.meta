@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 84c63e5479c7eae46bf3db3b9662f6ca
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Abilities/Active/Shooting Star Ability.prefab
+  uploadId: 936972

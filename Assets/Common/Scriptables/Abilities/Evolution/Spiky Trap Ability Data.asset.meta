@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8f88486c784281d4c928ddb0096ec25c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scriptables/Abilities/Evolution/Spiky Trap Ability Data.asset
+  uploadId: 936972

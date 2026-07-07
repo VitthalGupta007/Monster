@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4c93596d116b8cd46ae7e5c15767f969
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Animations/Enemies/Enemy Vampire.anim
+  uploadId: 936972

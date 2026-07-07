@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 8a5541af052d6e843ab111525a9705fe
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scripts/Enemies/Boss Mega Slime/MegaSlimeEventsHandler.cs
+  uploadId: 936972

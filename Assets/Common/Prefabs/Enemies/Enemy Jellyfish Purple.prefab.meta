@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d61327b5b6eb9684c83daba2169b97cb
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Enemies/Enemy Jellyfish Purple.prefab
+  uploadId: 936972

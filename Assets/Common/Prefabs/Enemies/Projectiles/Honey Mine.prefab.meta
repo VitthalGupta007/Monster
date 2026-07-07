@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: e052eaa1e16b3a049abf6e6e3ab712c6
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Enemies/Projectiles/Honey Mine.prefab
+  uploadId: 936972

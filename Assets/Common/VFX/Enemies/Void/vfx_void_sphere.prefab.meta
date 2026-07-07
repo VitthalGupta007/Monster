@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b98f14830729e0440a4b96afa0ee5e41
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/VFX/Enemies/Void/vfx_void_sphere.prefab
+  uploadId: 936972

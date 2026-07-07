@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: abd2e9570ea2d174f93e5661f48cb923
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Enemies/Projectiles/Mask Projectile.prefab
+  uploadId: 936972

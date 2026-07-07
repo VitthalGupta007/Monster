@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1ae2243badb7cc7458d721ea578a4105
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Materials/VFX Materials/Recoiler.mat
+  uploadId: 936972

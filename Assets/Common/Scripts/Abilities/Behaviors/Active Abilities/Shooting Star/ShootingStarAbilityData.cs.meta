@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: b5c5b94e0f62c8c4aa563be6b3ce9c7b
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scripts/Abilities/Behaviors/Active Abilities/Shooting
+    Star/ShootingStarAbilityData.cs
+  uploadId: 936972

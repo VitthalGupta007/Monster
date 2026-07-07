@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 11f7a3d6739d4c041a49b1cfb4f44189
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scripts/Wave/Boss/Boss.cs
+  uploadId: 936972

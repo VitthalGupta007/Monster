@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 9e1458d4422ac5447a63c7dd328b5a69
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Animations/Chest/ui_coin_spin_0.controller
+  uploadId: 936972

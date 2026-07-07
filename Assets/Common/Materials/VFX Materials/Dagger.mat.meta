@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0337f705ea6f9494cad0f0c4e1f24fd5
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Materials/VFX Materials/Dagger.mat
+  uploadId: 936972

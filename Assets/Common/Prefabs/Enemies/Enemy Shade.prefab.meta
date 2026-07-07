@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 527cb116fb01ba34994bd85d880719fe
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Enemies/Enemy Shade.prefab
+  uploadId: 936972

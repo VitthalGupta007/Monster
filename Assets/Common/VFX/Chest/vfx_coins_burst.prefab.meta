@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 332aaac13a25d4e46a0b04d516a6a859
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/VFX/Chest/vfx_coins_burst.prefab
+  uploadId: 936972

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 82f325a2b53b2c84cb2a7e48f4f05f59
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scripts/Stage/Stage Field/HorizontalFieldBehavior.cs
+  uploadId: 936972

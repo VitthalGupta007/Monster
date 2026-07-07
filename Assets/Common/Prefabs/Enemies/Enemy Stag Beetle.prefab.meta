@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 3b85b112e1154b4469a44f0040a84e7e
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Enemies/Enemy Stag Beetle.prefab
+  uploadId: 936972

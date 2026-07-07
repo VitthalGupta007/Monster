@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69a603a3e05b0a14e81aad0ae1e51e6a, type: 3}
+  m_Name: Magnet Ability Data
+  m_EditorClassIdentifier: 
+  type: 100
+  title: Magnet
+  description: Draws gems from further away
+  icon: {fileID: 21300000, guid: 10a34bcdcaa3ea04991549779670e23e, type: 3}
+  prefab: {fileID: 7251880435604865545, guid: f009c8b4f624b304abe17863117b97de, type: 3}
+  isActiveAbility: 0
+  isWeaponAbility: 0
+  isEvolution: 0
+  evolutionRequirements: []
+  levels:
+  - radiusMultiplier: 2
+  - radiusMultiplier: 3
+  - radiusMultiplier: 4
+  - radiusMultiplier: 5
+  - radiusMultiplier: 6

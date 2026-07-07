@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 3be93d48e617ca642bd199d1638ec045
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Abilities/Projectiles/Flying Dagger Projectile.prefab
+  uploadId: 936972

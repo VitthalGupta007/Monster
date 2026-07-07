@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 384a1ef21e786284c80ea6a70ffe2910
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/VFX/Abilities/vfx_scepter_projectile.prefab
+  uploadId: 936972

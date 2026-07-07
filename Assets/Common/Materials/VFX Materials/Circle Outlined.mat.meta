@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 422bce24cdc1c8648bca992d4373b8d7
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Materials/VFX Materials/Circle Outlined.mat
+  uploadId: 936972

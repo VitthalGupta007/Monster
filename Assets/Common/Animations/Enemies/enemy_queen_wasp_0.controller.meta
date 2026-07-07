@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 32ee3f24a71108f489668a3859a8cd7f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Animations/Enemies/enemy_queen_wasp_0.controller
+  uploadId: 936972

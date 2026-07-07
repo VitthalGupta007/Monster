@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ac6b9a237c571be4586582738b1b60b0
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/VFX/Enemies/Mega Slime/vfx_rusty_sword_impact.prefab
+  uploadId: 936972

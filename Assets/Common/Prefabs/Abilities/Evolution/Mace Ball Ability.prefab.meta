@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: e9c46b08cd0ab8d42822b40310707f9b
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Abilities/Evolution/Mace Ball Ability.prefab
+  uploadId: 936972

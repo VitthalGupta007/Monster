@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: bf17907b51035774b8fa80f179dafffc
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Materials/VFX Materials/Spiky Trail.mat
+  uploadId: 936972

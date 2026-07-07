@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd2ff9c5e3dc05c43a421319f81de6d2, type: 3}
+  m_Name: Spiky Trap Ability Data
+  m_EditorClassIdentifier: 
+  type: 205
+  title: Spiky Trap
+  description: Draws an explosive rune with spikes
+  icon: {fileID: 21300000, guid: 8cc8ee46f71f2854b998534652d2b27b, type: 3}
+  prefab: {fileID: 6787047396129160972, guid: 07a978f1fd9649748bee8c864bf04d4d, type: 3}
+  isActiveAbility: 1
+  isWeaponAbility: 0
+  isEvolution: 1
+  evolutionRequirements:
+  - abilityType: 5
+    requiredAbilityLevel: 4
+    shouldRemoveAfterEvolution: 1
+  - abilityType: 108
+    requiredAbilityLevel: 0
+    shouldRemoveAfterEvolution: 0
+  levels:
+  - minesCount: 4
+    spikesCount: 10
+    abilityCooldown: 6
+    mineSpawnRadius: 3
+    mineLifetime: 10
+    damage: 50
+    spikeDamage: 10
+    mineSize: 2
+    mineTriggerRadius: 0.6
+    mineDamageRadius: 2

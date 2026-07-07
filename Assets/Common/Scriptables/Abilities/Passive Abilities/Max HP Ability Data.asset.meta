@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 4e3ec23ddf3546540a91ee20406d5e23
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scriptables/Abilities/Passive Abilities/Max HP Ability
+    Data.asset
+  uploadId: 936972

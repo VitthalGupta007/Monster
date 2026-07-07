@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d0cfda7e17fece9459de80f149995db8
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Animations/Chest/Chest Opening.anim
+  uploadId: 936972

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c486e059035b84e4ab38d6895e962c39
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Animations/Enemies/enemy_stag_beetle_0.controller
+  uploadId: 936972

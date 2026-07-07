@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c1fb294911b88884d920f289ad79a4bb
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/VFX/Player/vfx_heal_pickup.prefab
+  uploadId: 936972

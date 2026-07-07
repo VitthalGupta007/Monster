@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b78ac4f102c39054ca6d376c82b818c0
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scriptables/Abilities/Passive Abilities/Move Speed Ability
+    Data.asset
+  uploadId: 936972

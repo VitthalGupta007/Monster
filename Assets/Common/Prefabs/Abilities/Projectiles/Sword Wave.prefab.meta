@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 9e850ae63ca93d54fbee3ec9d2246636
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Abilities/Projectiles/Sword Wave.prefab
+  uploadId: 936972

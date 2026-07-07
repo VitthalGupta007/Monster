@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: bf36e4f471cf1534bb28fd99f64afa76
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/VFX/Enemies/Mask/vfx_shade_splatter.prefab
+  uploadId: 936972

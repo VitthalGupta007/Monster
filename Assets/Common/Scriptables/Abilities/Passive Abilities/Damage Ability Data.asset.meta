@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: e2e912d0319d0294d970714e454973f4
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scriptables/Abilities/Passive Abilities/Damage Ability
+    Data.asset
+  uploadId: 936972

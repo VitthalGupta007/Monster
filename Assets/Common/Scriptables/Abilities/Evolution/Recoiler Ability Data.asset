@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b45cb7027aba0e42a578f2da7fde9b6, type: 3}
+  m_Name: Recoiler Ability Data
+  m_EditorClassIdentifier: 
+  type: 207
+  title: Recoiler
+  description: Throws an upgraded swift boomerang
+  icon: {fileID: 21300000, guid: 94d5132492f5d6a43899713c4cf1e666, type: 3}
+  prefab: {fileID: 2769290797171051951, guid: dcb08d2e8637f2b4988c1c7a8c18c9ca, type: 3}
+  isActiveAbility: 1
+  isWeaponAbility: 0
+  isEvolution: 1
+  evolutionRequirements:
+  - abilityType: 7
+    requiredAbilityLevel: 4
+    shouldRemoveAfterEvolution: 1
+  - abilityType: 100
+    requiredAbilityLevel: 0
+    shouldRemoveAfterEvolution: 0
+  levels:
+  - projectileLifetime: 4
+    abilityCooldown: 5
+    projectileTravelDistance: 4
+    angularSpeed: -300
+    damage: 30
+    projectileSize: 1.2

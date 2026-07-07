@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b69de26ed576f46418a2df9b9ed48dfd
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/VFX/Enemies/Queen Wasp/vfx_honey_splash.prefab
+  uploadId: 936972

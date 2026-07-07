@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 49f7457e4d1cde64a974a503d700003a
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scripts/Wave/Editor/TestTrackEditor.cs
+  uploadId: 936972

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c810b7ecf2d81f74ebb312aefb7b61f7
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Animations/Characters/Wizard/Wizard Revive.anim
+  uploadId: 936972

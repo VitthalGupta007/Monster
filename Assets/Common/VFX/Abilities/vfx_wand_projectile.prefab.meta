@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 5f8d509c0b321d44184dd43dd794165c
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/VFX/Abilities/vfx_wand_projectile.prefab
+  uploadId: 936972

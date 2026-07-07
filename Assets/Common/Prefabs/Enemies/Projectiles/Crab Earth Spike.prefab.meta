@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: dc7968d66f158e948bb1be2683e7818a
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Enemies/Projectiles/Crab Earth Spike.prefab
+  uploadId: 936972

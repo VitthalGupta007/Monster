@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 29fecd0e6b7486c4f8159cf20a4ce053
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scriptables/Abilities/Passive Abilities/Magnet Ability
+    Data.asset
+  uploadId: 936972

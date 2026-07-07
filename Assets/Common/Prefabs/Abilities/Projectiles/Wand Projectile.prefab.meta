@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 0c31b4594f203c5408278ee618129a83
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Abilities/Projectiles/Wand Projectile.prefab
+  uploadId: 936972

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 880d773043c3bfe488874de5e8d8cbd7
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/VFX/Enemies/Crab/vfx_crab_burrowing.prefab
+  uploadId: 936972

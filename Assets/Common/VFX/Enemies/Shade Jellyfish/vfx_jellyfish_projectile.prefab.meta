@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 17aa2f1ee4d0bee4eb3cb5a262405f96
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/VFX/Enemies/Shade Jellyfish/vfx_jellyfish_projectile.prefab
+  uploadId: 936972

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: bdce753bd24f91e4f9a35c104404ee8d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Animations/Enemies/enemy_pumpkin_0.controller
+  uploadId: 936972

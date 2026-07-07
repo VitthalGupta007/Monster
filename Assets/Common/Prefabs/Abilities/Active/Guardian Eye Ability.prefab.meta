@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 7788118687ac2254e9574b5bcaf6d2ff
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Abilities/Active/Guardian Eye Ability.prefab
+  uploadId: 936972

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 4dc913d52c8913c4eb3638801ccb292e
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scripts/Enemies/Boss Mega Slime/EnemyMegaSlimeBehavior.cs
+  uploadId: 936972

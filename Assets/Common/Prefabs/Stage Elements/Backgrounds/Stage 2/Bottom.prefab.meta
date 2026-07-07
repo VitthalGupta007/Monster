@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 309cb689d34e2bc41b1a15c157ac3678
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Stage Elements/Backgrounds/Stage 2/Bottom.prefab
+  uploadId: 936972

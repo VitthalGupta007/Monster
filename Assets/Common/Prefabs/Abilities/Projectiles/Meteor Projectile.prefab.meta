@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: aad7eb9c7fc292b47b1dad8120de53c9
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Abilities/Projectiles/Meteor Projectile.prefab
+  uploadId: 936972

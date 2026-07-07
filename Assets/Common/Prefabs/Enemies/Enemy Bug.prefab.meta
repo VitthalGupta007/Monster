@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 5dc89d49c6842b5409db52d345501d70
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Enemies/Enemy Bug.prefab
+  uploadId: 936972

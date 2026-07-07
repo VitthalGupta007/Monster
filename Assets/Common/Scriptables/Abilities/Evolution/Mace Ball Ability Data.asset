@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bbb4463f118f3d4bb9544bfbd915f0c, type: 3}
+  m_Name: Mace Ball Ability Data
+  m_EditorClassIdentifier: 
+  type: 203
+  title: Mace Ball
+  description: Cute spiky friend
+  icon: {fileID: 21300000, guid: afbccac59abb33247bb68223c8626582, type: 3}
+  prefab: {fileID: 3128169338053202466, guid: e9c46b08cd0ab8d42822b40310707f9b, type: 3}
+  isActiveAbility: 1
+  isWeaponAbility: 0
+  isEvolution: 1
+  evolutionRequirements:
+  - abilityType: 3
+    requiredAbilityLevel: 4
+    shouldRemoveAfterEvolution: 1
+  - abilityType: 102
+    requiredAbilityLevel: 0
+    shouldRemoveAfterEvolution: 0
+  levels:
+  - speed: 2
+    angularSpeed: 270
+    damage: 50
+    size: 1.25

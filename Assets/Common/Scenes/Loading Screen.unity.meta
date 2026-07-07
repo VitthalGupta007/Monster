@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 95a86f634c4229442892ca7b7c2d7635
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scenes/Loading Screen.unity
+  uploadId: 936972

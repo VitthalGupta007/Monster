@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c32baae9fbd3eeb468f2c65fa3cbc7d0
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Animations/Enemies/Enemy Crab.anim
+  uploadId: 936972

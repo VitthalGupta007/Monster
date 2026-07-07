@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: af0db12f0f2b0e34992aebce178468a7
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scriptables/Bossfight Database.asset
+  uploadId: 936972

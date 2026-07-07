@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: affb1c21d7e652040afe995b59f5b42e
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Abilities/Evolution/Twin Dagger Ability.prefab
+  uploadId: 936972

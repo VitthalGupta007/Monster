@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d943c61e1122ff64090ac7226e91d821
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/VFX/Abilities/vfx_boomerang.prefab
+  uploadId: 936972

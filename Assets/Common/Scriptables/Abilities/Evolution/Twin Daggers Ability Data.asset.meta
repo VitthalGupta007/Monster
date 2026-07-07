@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e5aef831ee372c54b8b45fc5c6c3fa3b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scriptables/Abilities/Evolution/Twin Daggers Ability Data.asset
+  uploadId: 936972

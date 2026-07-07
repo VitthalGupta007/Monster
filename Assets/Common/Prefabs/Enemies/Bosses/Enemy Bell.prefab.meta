@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b4adcec29d46a994ba0c95f194cb64e0
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Enemies/Bosses/Enemy Bell.prefab
+  uploadId: 936972

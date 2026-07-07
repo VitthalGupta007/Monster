@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 10c830b8802d8f243ae65d51072592c3
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/VFX/Enemies/Void/vfx_void_black_hole_charge.prefab
+  uploadId: 936972

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 833fcac6efa6f0240abd094388cdfa9d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Animations/Characters/Wizard Crimson/Wizard Crimson Revive.anim
+  uploadId: 936972

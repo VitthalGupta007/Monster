@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 1f8c8ae5949cde346a3e39ad1e5cc2dd
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/UI/Chest/Chest Window.prefab
+  uploadId: 936972

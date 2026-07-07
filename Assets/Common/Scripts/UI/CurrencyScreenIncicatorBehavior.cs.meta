@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: fb33d12932392ca4da748991aa3683ab
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scripts/UI/CurrencyScreenIncicatorBehavior.cs
+  uploadId: 936972

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b3b57b2d5c9bf354fa2d159bde15c25c
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Abilities/Passive/XP Ability.prefab
+  uploadId: 936972

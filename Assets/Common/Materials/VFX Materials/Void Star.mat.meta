@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8a854638cb8f83b4787892625bff40db
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Materials/VFX Materials/Void Star.mat
+  uploadId: 936972

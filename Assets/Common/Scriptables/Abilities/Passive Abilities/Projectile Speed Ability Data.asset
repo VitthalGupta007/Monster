@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7071a3204d49c545801f25ffb445d84, type: 3}
+  m_Name: Projectile Speed Ability Data
+  m_EditorClassIdentifier: 
+  type: 108
+  title: Wind Fan
+  description: Increases projectile speed
+  icon: {fileID: 21300000, guid: e26748d24d9d3704680e4675d0140c19, type: 3}
+  prefab: {fileID: 7816908637222287925, guid: c8481d262ca76214ebe5bd7a6d538b28, type: 3}
+  isActiveAbility: 0
+  isWeaponAbility: 0
+  isEvolution: 0
+  evolutionRequirements: []
+  levels:
+  - projectileSpeedMultiplier: 1.1
+  - projectileSpeedMultiplier: 1.2
+  - projectileSpeedMultiplier: 1.3
+  - projectileSpeedMultiplier: 1.4
+  - projectileSpeedMultiplier: 1.5

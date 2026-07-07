@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: aaa3cc84662ac644e996d06c1ab1bf63
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Animations/Enemies/Enemy Shade.anim
+  uploadId: 936972

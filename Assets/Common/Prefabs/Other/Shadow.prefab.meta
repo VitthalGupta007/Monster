@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: bd21be6fc4cedd44e93cefd12da1c8ed
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Other/Shadow.prefab
+  uploadId: 936972

@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 0d4428a2a0945e7429675f5c6a7cf695
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scripts/Abilities/Behaviors/Passive Abilities/Endgame
+    Heal/HealEndgameAbilityData.cs
+  uploadId: 936972

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 10f85165c00ab52478088ba91528ee1f
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scripts/Abilities/Behaviors/Active Abilities/Sun Ray/Evolution/LunarProjectorAbilityData.cs
+  uploadId: 936972

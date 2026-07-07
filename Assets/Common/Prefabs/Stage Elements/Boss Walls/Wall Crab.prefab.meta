@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: e5ba9edff5749654e9f9254d146aa062
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Stage Elements/Boss Walls/Wall Crab.prefab
+  uploadId: 936972

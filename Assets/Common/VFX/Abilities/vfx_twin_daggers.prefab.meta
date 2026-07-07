@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 73c43a9392a0da44bbc841e81dd51907
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/VFX/Abilities/vfx_twin_daggers.prefab
+  uploadId: 936972

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: bf4bdd82d81c78940af86324ea6bc89b
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Drop/Coin Drop.prefab
+  uploadId: 936972

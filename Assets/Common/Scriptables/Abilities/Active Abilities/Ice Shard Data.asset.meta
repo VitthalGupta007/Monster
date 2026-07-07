@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 81f53358e8dd08a40975bc2878b4158d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scriptables/Abilities/Active Abilities/Ice Shard Data.asset
+  uploadId: 936972

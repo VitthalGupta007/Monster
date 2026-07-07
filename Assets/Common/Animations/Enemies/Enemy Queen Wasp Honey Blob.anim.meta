@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 603b194c2353b154c80fe225c17dcbc7
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Animations/Enemies/Enemy Queen Wasp Honey Blob.anim
+  uploadId: 936972

@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bafa157c553fd74398db8cc932d5cda, type: 3}
+  m_Name: Steel Sword Data
+  m_EditorClassIdentifier: 
+  type: 1001
+  title: Steel Sword
+  description: Slashes enemies in front of you
+  icon: {fileID: 21300000, guid: f75bf02f0e4a26946a94de1178ad1352, type: 3}
+  prefab: {fileID: 5349004258488764192, guid: 1fb009b476592b649aae6523123f1897, type: 3}
+  isActiveAbility: 1
+  isWeaponAbility: 1
+  isEvolution: 0
+  evolutionRequirements: []
+  levels:
+  - abilityCooldown: 2
+    slashesCount: 1
+    damage: 10
+    slashSize: 1
+    timeBetweenSlashes: 0.2
+  - abilityCooldown: 2
+    slashesCount: 2
+    damage: 10
+    slashSize: 1
+    timeBetweenSlashes: 0.2
+  - abilityCooldown: 2
+    slashesCount: 3
+    damage: 15
+    slashSize: 1.2
+    timeBetweenSlashes: 0.2
+  - abilityCooldown: 2
+    slashesCount: 4
+    damage: 15
+    slashSize: 1.2
+    timeBetweenSlashes: 0.2
+  - abilityCooldown: 2
+    slashesCount: 5
+    damage: 15
+    slashSize: 1.4
+    timeBetweenSlashes: 0.2

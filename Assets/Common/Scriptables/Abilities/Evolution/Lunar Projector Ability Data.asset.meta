@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 23bb3bcb8f644004fa03a63f6da83f20
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scriptables/Abilities/Evolution/Lunar Projector Ability
+    Data.asset
+  uploadId: 936972

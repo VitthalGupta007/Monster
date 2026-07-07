@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ea9683083b900d745896adb2d97044fc
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/VFX/Abilities/vfx_sword_wave.prefab
+  uploadId: 936972

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 32ad250b89ed5bc43916d37d311f9169
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scriptables/Abilities/Evolution/Silver Stakes Data.asset
+  uploadId: 936972

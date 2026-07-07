@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 54121bc69e709ef4aae3deb8291032d8
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Characters/Mage.prefab
+  uploadId: 936972

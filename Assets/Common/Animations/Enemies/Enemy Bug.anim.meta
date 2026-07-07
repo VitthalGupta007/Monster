@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3f9707005ea330e49a77d966a4e4e1e7
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Animations/Enemies/Enemy Bug.anim
+  uploadId: 936972

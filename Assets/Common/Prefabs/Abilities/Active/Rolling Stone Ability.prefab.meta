@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 565cc53bad5258c4984210d9f55ab7b2
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Abilities/Active/Rolling Stone Ability.prefab
+  uploadId: 936972

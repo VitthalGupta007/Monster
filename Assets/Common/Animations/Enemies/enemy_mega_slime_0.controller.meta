@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8ecb805c88bbcbc4e95281701787fc67
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Animations/Enemies/enemy_mega_slime_0.controller
+  uploadId: 936972

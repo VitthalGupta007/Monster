@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: dc3c0ab48ebbaa04582ef079a782330e
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/VFX/Abilities/vfx_ice_shard.prefab
+  uploadId: 936972

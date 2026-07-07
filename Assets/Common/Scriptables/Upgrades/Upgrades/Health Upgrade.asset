@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36d3b836181b43648ba3d70244b2d519, type: 3}
+  m_Name: Health Upgrade
+  m_EditorClassIdentifier: 
+  dataVersion: 1
+  upgradeType: 1
+  icon: {fileID: 21300000, guid: 2deb6e762eff10748b0caa8e6f3976b5, type: 3}
+  title: HEALTH
+  devStartLevel: -1
+  levels:
+  - cost: 200
+    value: 100
+    price:
+      currencyId: gold
+      amount: 200
+  - cost: 400
+    value: 200
+    price:
+      currencyId: gold
+      amount: 400
+  - cost: 1000
+    value: 300
+    price:
+      currencyId: gold
+      amount: 1000
+  - cost: 2000
+    value: 400
+    price:
+      currencyId: gold
+      amount: 2000

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: d18a95848ddd2104ebb802aef7784e64
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scripts/Abilities/Behaviors/Active Abilities/Lightning/LightningAmuletAbilityBehavior.cs
+  uploadId: 936972

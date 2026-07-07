@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 98fb7fc0eca131b4aa0db1df92577fde
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Abilities/Projectiles/Spike Trap.prefab
+  uploadId: 936972

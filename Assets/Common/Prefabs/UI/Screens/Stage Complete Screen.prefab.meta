@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 526ee5a8b79f89e4495ff8533294c005
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/UI/Screens/Stage Complete Screen.prefab
+  uploadId: 936972

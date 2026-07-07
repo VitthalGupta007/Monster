@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1f4d88d926d3d2747b9ae4a7a20b7389
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Materials/VFX Materials/Lightning Ball 3F.mat
+  uploadId: 936972

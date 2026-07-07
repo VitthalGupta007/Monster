@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: dcb08d2e8637f2b4988c1c7a8c18c9ca
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Abilities/Evolution/Recoiler Ability.prefab
+  uploadId: 936972

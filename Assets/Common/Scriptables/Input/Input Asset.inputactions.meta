@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: e3d7cb309cd97cb4998aceb684f33068
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 8404be70184654265930450def6a9037, type: 3}
+  generateWrapperCode: 1
+  wrapperCodePath: Assets/Common/Scripts/Toolkit/Input/Input Asset.cs
+  wrapperClassName: 
+  wrapperCodeNamespace: OctoberStudio.Input
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scriptables/Input/Input Asset.inputactions
+  uploadId: 936972

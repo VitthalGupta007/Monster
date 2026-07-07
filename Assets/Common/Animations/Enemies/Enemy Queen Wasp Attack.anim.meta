@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1cd8b33f420289d4eab869f5f62fd0dc
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Animations/Enemies/Enemy Queen Wasp Attack.anim
+  uploadId: 936972

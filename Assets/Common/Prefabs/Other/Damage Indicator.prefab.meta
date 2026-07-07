@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: fc60ac8291ef14d4ca1503791b3975ce
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Other/Damage Indicator.prefab
+  uploadId: 936972

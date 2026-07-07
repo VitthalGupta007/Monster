@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 0a0cd58db56e14e46ac6cf573d0645ce
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scripts/Enemies/Boss Mask/HandEventsHandler.cs
+  uploadId: 936972

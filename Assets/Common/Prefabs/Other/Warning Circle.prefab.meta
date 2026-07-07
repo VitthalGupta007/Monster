@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b91326e8653317c4290120912f15a8b9
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Other/Warning Circle.prefab
+  uploadId: 936972

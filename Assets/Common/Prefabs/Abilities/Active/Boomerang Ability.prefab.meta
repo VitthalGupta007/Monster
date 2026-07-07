@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 348e519951a23e84c9d86c5c1f89387f
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Abilities/Active/Boomerang Ability.prefab
+  uploadId: 936972

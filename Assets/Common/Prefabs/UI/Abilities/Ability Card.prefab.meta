@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ec0b03c5483f580449001baabaa7aa7f
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/UI/Abilities/Ability Card.prefab
+  uploadId: 936972

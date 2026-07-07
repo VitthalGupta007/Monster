@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 94a86386fc0444b4da7da44db7c6db90
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Animations/Characters/Wizard Crimson/Wizard Crimson Controller.controller
+  uploadId: 936972

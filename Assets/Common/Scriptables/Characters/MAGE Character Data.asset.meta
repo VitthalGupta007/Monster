@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 7982ee81d70ccc242a705925c7773222
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scriptables/Characters/MAGE Character Data.asset
+  uploadId: 936972

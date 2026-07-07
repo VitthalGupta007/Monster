@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b7f2ee05e75feee498b1c3d503400b91
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Materials/VFX Materials/Rune Light.mat
+  uploadId: 936972

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c66b22e19152c8e4898c7b1f00e36357
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Abilities/Passive/Endgame Gold Ability.prefab
+  uploadId: 936972

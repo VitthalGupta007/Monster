@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: dba22133da73a7c4f86b734fa22d0145
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Materials/VFX Materials/Honey Drop.mat
+  uploadId: 936972

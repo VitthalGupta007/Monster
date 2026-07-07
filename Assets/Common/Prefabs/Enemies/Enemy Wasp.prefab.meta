@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 4fd0e1f4242cc534ba52cd31872d072b
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Enemies/Enemy Wasp.prefab
+  uploadId: 936972

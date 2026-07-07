@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 108aeb0c3fe1ce34588d447d300c8020, type: 3}
+  m_Name: Stage 1 Field Data
+  m_EditorClassIdentifier: 
+  obsoleteBackgroundPrefab: {fileID: 0}
+  backgroundPrefabs:
+  - {fileID: 4228152677517912084, guid: 72656fe2fa1a65647bf20dd40a6b25b8, type: 3}
+  topPrefab: {fileID: 6659819002268331200, guid: eb6aa68784579a74dbccb5b0f2bed58f,
+    type: 3}
+  bottomPrefab: {fileID: 7164971267086277502, guid: 813fcdb24b546da40bd63b835d404f58,
+    type: 3}
+  leftPrefab: {fileID: 1012426333365272321, guid: 4ba1a8dce6ec36a4fa0c56b7ae70f060,
+    type: 3}
+  rightPrefab: {fileID: 1883665581421635691, guid: 45c4ba4cb0301234da1ede1171c1480b,
+    type: 3}
+  topRightPrefab: {fileID: 8389163192620866072, guid: 3fec59a217c2f1c4d940cfa9132a6ddf,
+    type: 3}
+  topLeftPrefab: {fileID: 3653819040653122886, guid: dfe4337897bed05459df7ffd892b3bbb,
+    type: 3}
+  bottomRightPrefab: {fileID: 5336617445698214928, guid: a0f2ba96e3e752b40846f0dde6a43325,
+    type: 3}
+  bottomLeftPrefab: {fileID: 2104026248382152375, guid: 773770bad6d1c334db3377ac21750582,
+    type: 3}
+  propChances:
+  - prefab: {fileID: 1028214238412592778, guid: 2accda9df7a5e08479ce38f9b320104f,
+      type: 3}
+    maxAmount: 3
+    chance: 75

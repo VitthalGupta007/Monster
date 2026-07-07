@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80567d708e2a27c42b25f3bc909504ed, type: 3}
+  m_Name: Damage Reduction Ability Data
+  m_EditorClassIdentifier: 
+  type: 107
+  title: Titan Shield
+  description: Reduces incoming damage
+  icon: {fileID: 21300000, guid: 64917bb6cfcc63a4495308648c35a137, type: 3}
+  prefab: {fileID: 9093015508192957762, guid: 14873e52654f8d74cb06443e5f7a6a5e, type: 3}
+  isActiveAbility: 0
+  isWeaponAbility: 0
+  isEvolution: 0
+  evolutionRequirements: []
+  levels:
+  - damageReductionPercent: 10
+  - damageReductionPercent: 20
+  - damageReductionPercent: 30
+  - damageReductionPercent: 40
+  - damageReductionPercent: 50

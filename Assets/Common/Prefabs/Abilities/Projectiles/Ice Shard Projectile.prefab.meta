@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 61e7aa0a51767dc46aa6faffb53243de
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Abilities/Projectiles/Ice Shard Projectile.prefab
+  uploadId: 936972

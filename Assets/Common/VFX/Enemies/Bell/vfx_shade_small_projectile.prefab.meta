@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d56f92515e2627942ac561a4203e9a7b
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/VFX/Enemies/Bell/vfx_shade_small_projectile.prefab
+  uploadId: 936972

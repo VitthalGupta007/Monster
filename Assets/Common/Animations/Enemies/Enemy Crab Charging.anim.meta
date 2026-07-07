@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 57d8ad39fd0d5264fb62a9eed3333905
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Animations/Enemies/Enemy Crab Charging.anim
+  uploadId: 936972

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 73cc0fc0393904447b2f03c569a66560
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scriptables/Abilities/Passive Abilities/Projectile Speed
+    Ability Data.asset
+  uploadId: 936972

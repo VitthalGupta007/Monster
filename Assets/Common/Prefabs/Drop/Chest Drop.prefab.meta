@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 4a35a7cb0cae03f48a99efa54d058854
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Drop/Chest Drop.prefab
+  uploadId: 936972

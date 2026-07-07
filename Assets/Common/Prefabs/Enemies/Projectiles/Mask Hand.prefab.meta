@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: a0bcb4d3392ce384088d4ab38e87fe58
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Enemies/Projectiles/Mask Hand.prefab
+  uploadId: 936972

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 170d7a951a7fbfa43ad2017bb5acc9cf
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Animations/Enemies/enemy_fire_slime_0.controller
+  uploadId: 936972

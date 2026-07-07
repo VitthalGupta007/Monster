@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 9c70b226be1cf3a49a26b5dfd4ee5221
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/VFX/Abilities/vfx_void_star.prefab
+  uploadId: 936972

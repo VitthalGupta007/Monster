@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c56553a9f6e0f8439953e4008fa4833, type: 3}
+  m_Name: Bossfight Database
+  m_EditorClassIdentifier: 
+  bossfights:
+  - bossType: 1
+    displayName: MEGA SLIME
+    bossPrefab: {fileID: 5964416160108566549, guid: 39801caeba5fd7e4d815ca03728f482d,
+      type: 3}
+    fencePrefab: {fileID: 6967435664897069084, guid: c098a263fcd5d3a489ab7f38017bfce2,
+      type: 3}
+  - bossType: 3
+    displayName: MIGHTY CRAB
+    bossPrefab: {fileID: 2150824473416715463, guid: e061174aa69bee94b99b2e2a798e4b79,
+      type: 3}
+    fencePrefab: {fileID: 6967435664897069084, guid: e5ba9edff5749654e9f9254d146aa062,
+      type: 3}
+  - bossType: 2
+    displayName: QUEEN WASP
+    bossPrefab: {fileID: 2150824473416715463, guid: 80a8889eeffae08468fb24937274c0e8,
+      type: 3}
+    fencePrefab: {fileID: 6967435664897069084, guid: c098a263fcd5d3a489ab7f38017bfce2,
+      type: 3}
+  - bossType: 0
+    displayName: MYSTERIOUS MASK
+    bossPrefab: {fileID: 5964416160108566549, guid: e1fcb21549ee01547beadb30c24248e0,
+      type: 3}
+    fencePrefab: {fileID: 6967435664897069084, guid: 18939989e8dbf704b982bde9ea7e8873,
+      type: 3}
+  - bossType: 5
+    displayName: FOR WHOM THE BELL TOLLS
+    bossPrefab: {fileID: 4574435750923931073, guid: b4adcec29d46a994ba0c95f194cb64e0,
+      type: 3}
+    fencePrefab: {fileID: 6967435664897069084, guid: 18939989e8dbf704b982bde9ea7e8873,
+      type: 3}
+  - bossType: 4
+    displayName: THE VOID
+    bossPrefab: {fileID: 1090571174421192766, guid: 65fc20f9c4000714ab78a84619f6b8ef,
+      type: 3}
+    fencePrefab: {fileID: 6967435664897069084, guid: 5558991dbcad058409cdcf21cd73dea0,
+      type: 3}

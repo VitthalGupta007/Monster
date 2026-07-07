@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 25efd9345d9609346a934fbc5583db87
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Materials/VFX Materials/Circle Soft Reversed.mat
+  uploadId: 936972

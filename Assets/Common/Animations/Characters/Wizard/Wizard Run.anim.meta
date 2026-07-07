@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a47a92c791709a14dbfb2d578b0d0b21
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Animations/Characters/Wizard/Wizard Run.anim
+  uploadId: 936972

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a781d9de1335baf45a3564ce008cf014
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Animations/Chest/ui_spark_vfx_0.controller
+  uploadId: 936972

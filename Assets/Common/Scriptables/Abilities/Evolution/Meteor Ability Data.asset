@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ef84cc4bbaf71b47bb750531b36ab2f, type: 3}
+  m_Name: Meteor Ability Data
+  m_EditorClassIdentifier: 
+  type: 206
+  title: Meteor
+  description: Launches a meteor shower from above
+  icon: {fileID: 21300000, guid: 96133003953070b4abc7f3ae2a6e4cdb, type: 3}
+  prefab: {fileID: 8666185439850298685, guid: aeefd65d7a29fed4a96e4f711db3fc7b, type: 3}
+  isActiveAbility: 1
+  isWeaponAbility: 0
+  isEvolution: 1
+  evolutionRequirements:
+  - abilityType: 6
+    requiredAbilityLevel: 4
+    shouldRemoveAfterEvolution: 1
+  - abilityType: 109
+    requiredAbilityLevel: 0
+    shouldRemoveAfterEvolution: 0
+  levels:
+  - projectilesCount: 4
+    timeBetweenProjectiles: 0.5
+    abilityCooldown: 6
+    damage: 30
+    explosionRadius: 1.5

@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e675658e5d57a9046b3324c0c946a620, type: 3}
+  m_Name: Stage 1
+  m_EditorClassIdentifier: 
+  id:
+    value: d82872fc-97f9-4a84-941b-8db66fd70ec9
+    canEdit: 0
+  icon: {fileID: 21300000, guid: baf23008440c44a4088a3e760f4dd7a6, type: 3}
+  displayName: DREAMY WOODS
+  timeline: {fileID: 11400000, guid: fa599a9bdd46a7b4886ff5ecbdfbe895, type: 2}
+  stageType: 0
+  stageFieldData: {fileID: 11400000, guid: 52c7b0006b996a04681b47c761528a3d, type: 2}
+  spawnProp: 1
+  removePropFromBossfight: 1
+  spotlightColor: {r: 0.64705884, g: 1, b: 0.2901961, a: 0.24705882}
+  spotlightShadowColor: {r: 0.011764706, g: 0.09411765, b: 0.2901961, a: 0.95686275}
+  enemyDamage: 1
+  enemyHP: 1
+  useCustomMusic: 0
+  musicName: Stage Music
+  stageUnlockData:
+    unlockDescription: 
+    unlockConditions:
+    - rid: 7181948531491733506
+  references:
+    version: 2
+    RefIds:
+    - rid: 7181948531491733506
+      type: {class: AlwaysUnlockedCondition, ns: OctoberStudio, asm: Assembly-CSharp}
+      data: 

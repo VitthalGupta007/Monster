@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c72ab72bbc1bffe46b4652b10aa30275
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Materials/VFX Materials/Circle Dissolved.mat
+  uploadId: 936972

@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cee9e708d20778f40be895baad2b4eee, type: 3}
+  m_Name: Guardian Eye Ability Data
+  m_EditorClassIdentifier: 
+  type: 1
+  title: Guardian Eye
+  description: Deals damage in a small area around
+  icon: {fileID: 21300000, guid: 43e89f4117adb7543a2adcc4e982d470, type: 3}
+  prefab: {fileID: 6046089768498997805, guid: 7788118687ac2254e9574b5bcaf6d2ff, type: 3}
+  isActiveAbility: 1
+  isWeaponAbility: 0
+  isEvolution: 0
+  evolutionRequirements: []
+  levels:
+  - fieldRadius: 0.8
+    damage: 5
+    damageCooldown: 1
+  - fieldRadius: 1
+    damage: 10
+    damageCooldown: 1
+  - fieldRadius: 1.2
+    damage: 15
+    damageCooldown: 1
+  - fieldRadius: 1.4
+    damage: 15
+    damageCooldown: 1
+  - fieldRadius: 1.6
+    damage: 20
+    damageCooldown: 1

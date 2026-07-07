@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 05b984e6f9af3764fb9900095208677e
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scripts/Toolkit/Pool/PoolComponent.cs
+  uploadId: 936972

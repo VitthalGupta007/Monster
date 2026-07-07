@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 14873e52654f8d74cb06443e5f7a6a5e
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Abilities/Passive/Damage Reduction Ability.prefab
+  uploadId: 936972

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 98e4cfaa5c232e449b999b5641f0aadd
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scripts/Stage/Stage Field/IFieldBehavior.cs
+  uploadId: 936972

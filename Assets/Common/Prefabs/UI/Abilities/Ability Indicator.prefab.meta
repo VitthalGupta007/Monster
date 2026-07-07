@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 6121a08ee372a374ca66ddd36690b50f
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/UI/Abilities/Ability Indicator.prefab
+  uploadId: 936972

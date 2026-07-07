@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 17544eb3b9ef7b4488338169d6ba2435
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scriptables/Abilities/Evolution/Thunder Ring Ability Data.asset
+  uploadId: 936972

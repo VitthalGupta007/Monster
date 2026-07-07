@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: 0fc0b8446fe34467a55b19f4e7140560
+timeCreated: 1726267352
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scripts/Toolkit/Extensions/VectorExtensions.cs
+  uploadId: 936972

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c098a263fcd5d3a489ab7f38017bfce2
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Stage Elements/Boss Walls/Wall Spike.prefab
+  uploadId: 936972

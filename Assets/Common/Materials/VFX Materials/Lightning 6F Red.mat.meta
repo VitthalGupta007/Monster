@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: fc7dbc96772af3a4e8f83f8e87b147d3
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Materials/VFX Materials/Lightning 6F Red.mat
+  uploadId: 936972

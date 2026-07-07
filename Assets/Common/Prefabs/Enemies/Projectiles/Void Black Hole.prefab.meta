@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 35a6f5c3833a3d04fb061ee8941c2797
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Enemies/Projectiles/Void Black Hole.prefab
+  uploadId: 936972

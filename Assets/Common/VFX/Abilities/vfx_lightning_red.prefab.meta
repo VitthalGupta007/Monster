@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 1ee7bc00f5abad74fa6e20e6e9cf9bdd
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/VFX/Abilities/vfx_lightning_red.prefab
+  uploadId: 936972

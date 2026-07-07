@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 1fb009b476592b649aae6523123f1897
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Abilities/Active/Sword Weapon Ability.prefab
+  uploadId: 936972

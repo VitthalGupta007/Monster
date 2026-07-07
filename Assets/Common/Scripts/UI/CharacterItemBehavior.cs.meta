@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: b8f5a26c005303a4ab7a6895089f5c1a
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scripts/UI/CharacterItemBehavior.cs
+  uploadId: 936972

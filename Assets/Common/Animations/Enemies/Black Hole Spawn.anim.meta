@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: beaea8c037b241b488a4c79fb6e77970
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Animations/Enemies/Black Hole Spawn.anim
+  uploadId: 936972

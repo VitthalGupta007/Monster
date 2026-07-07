@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 141088cc56070244d84dccf079efb43d
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Abilities/Passive/Restore HP Ability.prefab
+  uploadId: 936972

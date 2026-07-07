@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 3da9b537208fdea4aafe4336fb9fc095
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scriptables/Abilities/Passive Abilities/Duration Ability
+    Data.asset
+  uploadId: 936972

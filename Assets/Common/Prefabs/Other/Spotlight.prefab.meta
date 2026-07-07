@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 1354e1c3feb46a346a828519f7a62fd1
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Other/Spotlight.prefab
+  uploadId: 936972

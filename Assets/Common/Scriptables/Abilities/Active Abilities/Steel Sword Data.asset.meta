@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d401b79ae48e63a42af24f9c2ba0046c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scriptables/Abilities/Active Abilities/Steel Sword Data.asset
+  uploadId: 936972

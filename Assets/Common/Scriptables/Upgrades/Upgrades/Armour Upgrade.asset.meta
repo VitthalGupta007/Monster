@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 72b30c93416c42e4e9bffbacd232a6dd
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scriptables/Upgrades/Upgrades/Armour Upgrade.asset
+  uploadId: 936972

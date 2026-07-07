@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 80a8889eeffae08468fb24937274c0e8
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Enemies/Bosses/Boss Queen Wasp.prefab
+  uploadId: 936972

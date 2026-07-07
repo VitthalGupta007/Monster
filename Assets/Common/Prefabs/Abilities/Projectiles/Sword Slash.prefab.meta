@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 9622bd132014406458723d0ecb2322e1
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Abilities/Projectiles/Sword Slash.prefab
+  uploadId: 936972

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d4b0558cc7eff0345b9b094cd9fc308f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Animations/Enemies/Enemy Jellyfish.anim
+  uploadId: 936972

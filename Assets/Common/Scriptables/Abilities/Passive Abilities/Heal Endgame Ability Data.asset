@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d4428a2a0945e7429675f5c6a7cf695, type: 3}
+  m_Name: Heal Endgame Ability Data
+  m_EditorClassIdentifier: 
+  type: 2001
+  title: Heal
+  description: Restore some of your health
+  icon: {fileID: 21300000, guid: 28c3cbc02ecf99d45b8092c5628bf0bf, type: 3}
+  prefab: {fileID: 7203766295210942642, guid: b9a895d952c9ba442a54bbfbb727a482, type: 3}
+  isActiveAbility: 0
+  isWeaponAbility: 0
+  isEndgameAbility: 1
+  isEvolution: 0
+  evolutionRequirements: []
+  levels:
+  - healPersentage: 40

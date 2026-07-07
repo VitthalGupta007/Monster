@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: fe698d442f9b87d48aae16b4bb2d3e52
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Enemies/Projectiles/Bell Spike Projectile.prefab
+  uploadId: 936972

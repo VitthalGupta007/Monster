@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: a2c2f34b8da2d0f4cbe6dc8f523fe4d7
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/VFX/Enemies/Queen Wasp/vfx_honey_explosion.prefab
+  uploadId: 936972

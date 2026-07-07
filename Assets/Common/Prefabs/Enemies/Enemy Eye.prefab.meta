@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 28a727afd8706d44684b3377fb914bf0
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Enemies/Enemy Eye.prefab
+  uploadId: 936972

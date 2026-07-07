@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0bb15ba41088fb64c9d43c87cdbba59a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Animations/Enemies/enemy_plant_0.controller
+  uploadId: 936972

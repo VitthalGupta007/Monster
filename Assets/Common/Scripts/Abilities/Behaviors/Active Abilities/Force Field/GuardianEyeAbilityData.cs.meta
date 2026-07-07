@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: cee9e708d20778f40be895baad2b4eee
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scripts/Abilities/Behaviors/Active Abilities/Force Field/GuardianEyeAbilityData.cs
+  uploadId: 936972

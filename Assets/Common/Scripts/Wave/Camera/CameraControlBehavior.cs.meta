@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 478093a7ab8561741a6e36d1dd2531f1
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scripts/Wave/Camera/CameraControlBehavior.cs
+  uploadId: 936972

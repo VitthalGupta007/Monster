@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ba47f16dffcd99f4d8b58ae03a1a773b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Materials/VFX Materials/Trap Spike.mat
+  uploadId: 936972

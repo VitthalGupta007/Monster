@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b69ce2f4f3d92e94598ef96251bd3c24
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Enemies/Projectiles/Bell Small Projectile.prefab
+  uploadId: 936972

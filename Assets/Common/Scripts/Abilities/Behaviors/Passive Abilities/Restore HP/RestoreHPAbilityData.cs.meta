@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: d9fe18c54c4716e48be4d22e29ffe7a0
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scripts/Abilities/Behaviors/Passive Abilities/Restore
+    HP/RestoreHPAbilityData.cs
+  uploadId: 936972

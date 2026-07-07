@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3f0c3b47c29b524683086d39bed3a7d, type: 3}
+  m_Name: Silver Stakes Data
+  m_EditorClassIdentifier: 
+  type: 204
+  title: Silver Stakes
+  description: Throws several sharp piercing stakes
+  icon: {fileID: 21300000, guid: 2185583ed30e543468b82c69c813548f, type: 3}
+  prefab: {fileID: 5201831521697468584, guid: 1068f86203714a44b8b4576239130948, type: 3}
+  isActiveAbility: 1
+  isWeaponAbility: 0
+  isEvolution: 1
+  evolutionRequirements:
+  - abilityType: 4
+    requiredAbilityLevel: 4
+    shouldRemoveAfterEvolution: 1
+  - abilityType: 107
+    requiredAbilityLevel: 0
+    shouldRemoveAfterEvolution: 0
+  levels:
+  - projectileSpeed: 12
+    damage: 30
+    projectileSize: 0.75
+    projectilesCount: 5

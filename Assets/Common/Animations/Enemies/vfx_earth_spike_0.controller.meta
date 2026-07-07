@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a1f70d0d08cfa2b40bf1a6a2259113c8
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Animations/Enemies/vfx_earth_spike_0.controller
+  uploadId: 936972

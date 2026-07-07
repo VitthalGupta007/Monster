@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: dda15d7e41b15c94e9bff3cf62765105
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Abilities/Passive/Duration Ability.prefab
+  uploadId: 936972

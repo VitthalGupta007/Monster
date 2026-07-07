@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 90e23cc696c2b93439f7821c9a20c4b1
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scriptables/Abilities/Active Abilities/Boomerang Ability
+    Data.asset
+  uploadId: 936972

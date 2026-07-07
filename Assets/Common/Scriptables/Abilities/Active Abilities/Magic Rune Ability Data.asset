@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89c22678ba1bc0d46aea067da436741b, type: 3}
+  m_Name: Magic Rune Ability Data
+  m_EditorClassIdentifier: 
+  type: 5
+  title: Magic Rune
+  description: Leaves an explosive symbol on the floor
+  icon: {fileID: 21300000, guid: 41b11da08bfbd71468e55b3dc58c105d, type: 3}
+  prefab: {fileID: 6119386174245202466, guid: 460c16e3997ff1d43b013c9b00f6ec69, type: 3}
+  isActiveAbility: 1
+  isWeaponAbility: 0
+  isEvolution: 0
+  evolutionRequirements: []
+  levels:
+  - minesCount: 2
+    abilityCooldown: 5
+    mineSpawnRadius: 2
+    mineLifetime: 5
+    damage: 20
+    mineSize: 1
+    mineTriggerRadius: 0.3
+    mineDamageRadius: 1
+  - minesCount: 2
+    abilityCooldown: 5
+    mineSpawnRadius: 2
+    mineLifetime: 6
+    damage: 20
+    mineSize: 1.2
+    mineTriggerRadius: 0.35
+    mineDamageRadius: 1.2
+  - minesCount: 3
+    abilityCooldown: 5
+    mineSpawnRadius: 2.5
+    mineLifetime: 7
+    damage: 25
+    mineSize: 1.4
+    mineTriggerRadius: 0.4
+    mineDamageRadius: 1.4
+  - minesCount: 3
+    abilityCooldown: 5
+    mineSpawnRadius: 2.5
+    mineLifetime: 8
+    damage: 25
+    mineSize: 1.6
+    mineTriggerRadius: 0.45
+    mineDamageRadius: 1.6
+  - minesCount: 3
+    abilityCooldown: 5
+    mineSpawnRadius: 2.5
+    mineLifetime: 9
+    damage: 30
+    mineSize: 1.8
+    mineTriggerRadius: 0.5
+    mineDamageRadius: 1.8

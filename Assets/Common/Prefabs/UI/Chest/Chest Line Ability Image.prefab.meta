@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 69225488354d208488ad28fa9d2ca139
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/UI/Chest/Chest Line Ability Image.prefab
+  uploadId: 936972

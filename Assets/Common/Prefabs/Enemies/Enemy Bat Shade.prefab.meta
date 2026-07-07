@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 9e7966bd0b80059438f701d4a2cbdbfa
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Enemies/Enemy Bat Shade.prefab
+  uploadId: 936972

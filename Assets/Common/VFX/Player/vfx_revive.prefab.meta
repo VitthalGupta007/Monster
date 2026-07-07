@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 8fb4e1a028a18014ba3d038e0740ef5a
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/VFX/Player/vfx_revive.prefab
+  uploadId: 936972

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 87037a1917e2b7f449d41588eec2b009
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/UI/Upgrades/Lobby Window.prefab
+  uploadId: 936972

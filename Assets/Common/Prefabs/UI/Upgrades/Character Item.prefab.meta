@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 8fd805856b8d12d42b550330b9be39e5
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/UI/Upgrades/Character Item.prefab
+  uploadId: 936972

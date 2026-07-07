@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 7231197ba896d7d4aafd95f6a704126c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 8400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Textures/Chest Coins Render Texture.renderTexture
+  uploadId: 936972

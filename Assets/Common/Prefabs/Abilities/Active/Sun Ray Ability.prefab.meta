@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: dca1e126c4f292044898a3114e53ce78
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Abilities/Active/Sun Ray Ability.prefab
+  uploadId: 936972

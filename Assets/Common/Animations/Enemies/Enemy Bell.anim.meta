@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 334fae2b3316e124ba60cf77a88b75af
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Animations/Enemies/Enemy Bell.anim
+  uploadId: 936972

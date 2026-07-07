@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 28db94b1e208dfc44ae2438d62fb74d4
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Animations/Enemies/Enemy Mega Slime Sword Flying.anim
+  uploadId: 936972

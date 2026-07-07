@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d444d795f98c5d645b82592f227bf2e7
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scriptables/Abilities/Passive Abilities/Gold Ability Data.asset
+  uploadId: 936972

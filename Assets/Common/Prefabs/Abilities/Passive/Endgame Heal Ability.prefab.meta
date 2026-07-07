@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b9a895d952c9ba442a54bbfbb727a482
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Abilities/Passive/Endgame Heal Ability.prefab
+  uploadId: 936972

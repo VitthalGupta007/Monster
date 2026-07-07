@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f249c53865e711542a3df804b8db1786
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scriptables/Upgrades/Upgrades Database.asset
+  uploadId: 936972

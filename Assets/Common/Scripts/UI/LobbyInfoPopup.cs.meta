@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 2e480953ce5d39a46b5068c0817ee0c3
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scripts/UI/LobbyInfoPopup.cs
+  uploadId: 936972

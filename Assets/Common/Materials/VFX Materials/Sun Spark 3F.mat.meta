@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a4b32e3a34253b04c98ea379c2f2cc90
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Materials/VFX Materials/Sun Spark 3F.mat
+  uploadId: 936972

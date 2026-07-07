@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c4427e9f220649449b58c31225d6261d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Materials/VFX Materials/Silver Stake.mat
+  uploadId: 936972

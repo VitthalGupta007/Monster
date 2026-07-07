@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 48a305acd31737643a91fd2b93259bf9
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Animations/Enemies/Enemy Mega Slime Sword Launching.anim
+  uploadId: 936972

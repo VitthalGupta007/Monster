@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: a2879e92954b1e94d95e9ee969e72dc3
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Plugins/Android/AndroidManifest.xml
+  uploadId: 936972

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 67276880eecf0844f8aa8103c961994c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scriptables/Abilities/Active Abilities/Solar Magnifier
+    Ability Data.asset
+  uploadId: 936972

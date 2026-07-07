@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 0081b9aa4e7e82a408834c7e9556c50a
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scripts/Abilities/Behaviors/Active Abilities/Sword/Evolution/SacredBladeAbilityBehavior.cs
+  uploadId: 936972

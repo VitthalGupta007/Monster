@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 7f98fa6689940d54e820a5c62dc94643
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scriptables/Abilities/Evolution/Void Star Ability Data.asset
+  uploadId: 936972

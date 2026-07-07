@@ -1,0 +1,137 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d03371d130b0624faa7f0d4cb61d768, type: 3}
+  m_Name: Experience Data
+  m_EditorClassIdentifier: 
+  levels:
+  - multiplier: 1.5
+    xp: 5
+  - multiplier: 1
+    xp: 5
+  - multiplier: 1.4
+    xp: 7
+  - multiplier: 0
+    xp: 9.8
+  - multiplier: 0
+    xp: 13.72
+  - multiplier: 0
+    xp: 19.208
+  - multiplier: 0
+    xp: 26.8912
+  - multiplier: 0
+    xp: 37.64768
+  - multiplier: 0
+    xp: 52.70675
+  - multiplier: 0
+    xp: 73.789444
+  - multiplier: 0
+    xp: 103.30522
+  - multiplier: 0
+    xp: 144.6273
+  - multiplier: 0
+    xp: 202.47823
+  - multiplier: 0
+    xp: 283.4695
+  - multiplier: 0
+    xp: 396.8573
+  - multiplier: 0
+    xp: 555.6002
+  - multiplier: 0
+    xp: 777.8403
+  - multiplier: 0
+    xp: 1088.9763
+  - multiplier: 0
+    xp: 1524.5668
+  - multiplier: 0
+    xp: 2134.3936
+  - multiplier: 0
+    xp: 2988.151
+  - multiplier: 0
+    xp: 4183.411
+  - multiplier: 0
+    xp: 5856.7754
+  - multiplier: 0
+    xp: 8199.485
+  - multiplier: 0
+    xp: 11479.279
+  - multiplier: 0
+    xp: 16070.991
+  - multiplier: 0
+    xp: 22499.387
+  - multiplier: 0
+    xp: 31499.14
+  - multiplier: 0
+    xp: 44098.797
+  - multiplier: 0
+    xp: 61738.316
+  - multiplier: 0
+    xp: 86433.64
+  - multiplier: 0
+    xp: 121007.09
+  - multiplier: 0
+    xp: 169409.92
+  - multiplier: 0
+    xp: 237173.89
+  - multiplier: 0
+    xp: 332043.44
+  - multiplier: 0
+    xp: 464860.8
+  - multiplier: 0
+    xp: 650805.1
+  - multiplier: 0
+    xp: 911127.2
+  - multiplier: 0
+    xp: 1275578
+  - multiplier: 0
+    xp: 1785809.1
+  - multiplier: 0
+    xp: 2500132.8
+  - multiplier: 0
+    xp: 3500185.8
+  - multiplier: 0
+    xp: 4900260
+  - multiplier: 0
+    xp: 6860364
+  - multiplier: 0
+    xp: 9604509
+  - multiplier: 0
+    xp: 13446312
+  - multiplier: 0
+    xp: 18824836
+  - multiplier: 0
+    xp: 26354770
+  - multiplier: 0
+    xp: 36896676
+  - multiplier: 0
+    xp: 51655344
+  - multiplier: 0
+    xp: 72317480
+  - multiplier: 2
+    xp: 144634960
+  - multiplier: 2
+    xp: 289269920
+  - multiplier: 2
+    xp: 578539840
+  - multiplier: 2
+    xp: 1.1570797e+9
+  - multiplier: 2
+    xp: 2.3141594e+9
+  - multiplier: 2
+    xp: 4.6283187e+9
+  - multiplier: 2
+    xp: 9.256637e+9
+  - multiplier: 2
+    xp: 1.8513275e+10
+  - multiplier: 2
+    xp: 3.702655e+10
+  - multiplier: 2
+    xp: 7.40531e+10

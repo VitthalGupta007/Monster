@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: e1fcb21549ee01547beadb30c24248e0
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Enemies/Bosses/Boss Mask.prefab
+  uploadId: 936972

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: f505193c24f2e8f4fa100fd937d5c839
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Shaders/Sprite With Overlay.shader
+  uploadId: 936972

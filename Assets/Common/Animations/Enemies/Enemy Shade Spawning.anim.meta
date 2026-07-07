@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: aaf49d86f1cadf7418e105f7946ba42f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Animations/Enemies/Enemy Shade Spawning.anim
+  uploadId: 936972

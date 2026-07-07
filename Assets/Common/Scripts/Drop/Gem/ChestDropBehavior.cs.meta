@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: abf4d45a6798f9441bbca44ec20e2258
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Scripts/Drop/Gem/ChestDropBehavior.cs
+  uploadId: 936972

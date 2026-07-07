@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 6f8a7ce465f48224a94851d235dd9ede
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/UI/Abilities/Abilities Popup.prefab
+  uploadId: 936972

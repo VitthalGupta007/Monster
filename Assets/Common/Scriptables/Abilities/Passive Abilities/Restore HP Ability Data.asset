@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9fe18c54c4716e48be4d22e29ffe7a0, type: 3}
+  m_Name: Restore HP Ability Data
+  m_EditorClassIdentifier: 
+  type: 106
+  title: Vitality Potion
+  description: Restores HP over time
+  icon: {fileID: 21300000, guid: 74bd4eda37a1586489c2e5ffb2986fa6, type: 3}
+  prefab: {fileID: 1574058401009310863, guid: 141088cc56070244d84dccf079efb43d, type: 3}
+  isActiveAbility: 0
+  isWeaponAbility: 0
+  isEvolution: 0
+  evolutionRequirements: []
+  levels:
+  - restoredHPPercent: 1
+    cooldown: 5
+  - restoredHPPercent: 2
+    cooldown: 5
+  - restoredHPPercent: 3
+    cooldown: 5
+  - restoredHPPercent: 4
+    cooldown: 5
+  - restoredHPPercent: 5
+    cooldown: 5

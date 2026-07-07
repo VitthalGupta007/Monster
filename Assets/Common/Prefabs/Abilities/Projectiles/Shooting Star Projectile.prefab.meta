@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: afee64571eab1c946b6bfa48f1f1bcc7
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Abilities/Projectiles/Shooting Star Projectile.prefab
+  uploadId: 936972

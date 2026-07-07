@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 77f2b74f802e4a048b4767a694018f7a
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 304936
+  packageName: Monster Survivors - Full Game
+  packageVersion: 1.5.0
+  assetPath: Assets/Common/Prefabs/Drop/Food Drop.prefab
+  uploadId: 936972

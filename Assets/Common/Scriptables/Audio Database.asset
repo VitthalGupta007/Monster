@@ -1,0 +1,298 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95531853c36d2984a9a689e5bba6f689, type: 3}
+  m_Name: Audio Database
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Button Click
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 8300000, guid: 409959954a076534893c9b15fbc1cf3e, type: 3}
+      volume: {x: 1, y: 1}
+      pitch: {x: 1, y: 1}
+  - name: Chest Ability Popup
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 8300000, guid: 8cf2e4429702f7b47b92994cacc7ad94, type: 3}
+      volume: {x: 0.3, y: 0.3}
+      pitch: {x: 1, y: 1}
+  - name: Chest Window Popup
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 8300000, guid: 3ecc253b71770624397271cbb644656e, type: 3}
+      volume: {x: 0.4, y: 0.4}
+      pitch: {x: 1, y: 1}
+  - name: Chest In Progress
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 8300000, guid: d9e87b657521ce543b43a6a478573d05, type: 3}
+      volume: {x: 0.4, y: 0.4}
+      pitch: {x: 1, y: 1}
+  - name: Stage Complete
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 8300000, guid: 07413473d6486354eb213f8acef381f6, type: 3}
+      volume: {x: 0.5, y: 0.5}
+      pitch: {x: 1, y: 1}
+  - name: Coin Pick Up
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 8300000, guid: 113f8d23b2ade2944a050d7321b6da13, type: 3}
+      volume: {x: 0.15, y: 0.15}
+      pitch: {x: 1, y: 1}
+  - name: Chest Pick Up
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 8300000, guid: 113f8d23b2ade2944a050d7321b6da13, type: 3}
+      volume: {x: 1, y: 1}
+      pitch: {x: 1, y: 1}
+  - name: Gem Pick Up
+    cooldown: 0.08
+    audioClip:
+      audioClip: {fileID: 8300000, guid: e54f26a9a7a846a4aa9dea88e2a7311d, type: 3}
+      volume: {x: 0.05, y: 0.1}
+      pitch: {x: 1.6, y: 1.6}
+  - name: Heal Pick Up
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 8300000, guid: 8d2cf402deb4bfd4a9ea3335b860b9c5, type: 3}
+      volume: {x: 0.25, y: 0.25}
+      pitch: {x: 1, y: 1}
+  - name: Bomb Pick Up
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 8300000, guid: 13501cab7503f004b8dbb78f5cd24e43, type: 3}
+      volume: {x: 0.2, y: 0.3}
+      pitch: {x: 1, y: 1}
+  - name: Magnet Pick Up
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 8300000, guid: a2ab213b5a95bb944a8db94bab5b927d, type: 3}
+      volume: {x: 0.05, y: 0.15}
+      pitch: {x: 1, y: 1}
+  - name: Level Up
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 8300000, guid: 6b10aaf61edcb7242a370eff1b7c32a8, type: 3}
+      volume: {x: 0.25, y: 0.25}
+      pitch: {x: 1, y: 1}
+  - name: Hit
+    cooldown: 0.05
+    audioClip:
+      audioClip: {fileID: 8300000, guid: d6b6886efec7c5443ae9451a515fb34b, type: 3}
+      volume: {x: 0.06, y: 0.085}
+      pitch: {x: 1.3, y: 1.6}
+  - name: Death
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 8300000, guid: 4dbd0ef392363ae438e2ed005fa048c0, type: 3}
+      volume: {x: 1, y: 1}
+      pitch: {x: 1, y: 1}
+  - name: Revive
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 8300000, guid: d569f57fc99c2bb48b2e52d84466d24d, type: 3}
+      volume: {x: 0.5, y: 0.5}
+      pitch: {x: 1, y: 1}
+  - name: Receiving Damage
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 8300000, guid: 57c2650ccfbbcc547b99c9315654ed44, type: 3}
+      volume: {x: 1, y: 1}
+      pitch: {x: 0.9, y: 1.1}
+  - name: Boomerang Throw
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 0}
+      volume: {x: 1, y: 1}
+      pitch: {x: 1, y: 1}
+  - name: Fireball Launch
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 0}
+      volume: {x: 1, y: 1}
+      pitch: {x: 1, y: 1}
+  - name: Fireball Explosion
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 0}
+      volume: {x: 1, y: 1}
+      pitch: {x: 1, y: 1}
+  - name: Flying Dagger Launch
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 0}
+      volume: {x: 1, y: 1}
+      pitch: {x: 1, y: 1}
+  - name: Guardian Eye
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 0}
+      volume: {x: 1, y: 1}
+      pitch: {x: 1, y: 1}
+  - name: Ice Shard Launch
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 0}
+      volume: {x: 1, y: 1}
+      pitch: {x: 1, y: 1}
+  - name: Lightning Amulet
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 0}
+      volume: {x: 1, y: 1}
+      pitch: {x: 1, y: 1}
+  - name: Magic Rune Setup
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 0}
+      volume: {x: 1, y: 1}
+      pitch: {x: 1, y: 1}
+  - name: Magic Rune Explosion
+    cooldown: 0.1
+    audioClip:
+      audioClip: {fileID: 0}
+      volume: {x: 1, y: 1}
+      pitch: {x: 1, y: 1}
+  - name: Rolling Stone Launch
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 0}
+      volume: {x: 1, y: 1}
+      pitch: {x: 1, y: 1}
+  - name: Shooting Stars Launch
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 0}
+      volume: {x: 1, y: 1}
+      pitch: {x: 1, y: 1}
+  - name: Solar Magnifier Launch
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 0}
+      volume: {x: 1, y: 1}
+      pitch: {x: 1, y: 1}
+  - name: Steel Sword Attack
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 0}
+      volume: {x: 1, y: 1}
+      pitch: {x: 1, y: 1}
+  - name: Wand Projectile Launch
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 0}
+      volume: {x: 1, y: 1}
+      pitch: {x: 1, y: 1}
+  - name: Eclipse Ray Launch
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 0}
+      volume: {x: 1, y: 1}
+      pitch: {x: 1, y: 1}
+  - name: Mace Ball Launch
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 0}
+      volume: {x: 1, y: 1}
+      pitch: {x: 1, y: 1}
+  - name: Meteor Launch
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 0}
+      volume: {x: 1, y: 1}
+      pitch: {x: 1, y: 1}
+  - name: Meteor Impact
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 0}
+      volume: {x: 1, y: 1}
+      pitch: {x: 1, y: 1}
+  - name: Recoiler Launch
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 0}
+      volume: {x: 1, y: 1}
+      pitch: {x: 1, y: 1}
+  - name: Sacred Blade Attack
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 0}
+      volume: {x: 1, y: 1}
+      pitch: {x: 1, y: 1}
+  - name: Septer Projectile Launch
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 0}
+      volume: {x: 1, y: 1}
+      pitch: {x: 1, y: 1}
+  - name: Silver Stakes Launch
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 0}
+      volume: {x: 1, y: 1}
+      pitch: {x: 1, y: 1}
+  - name: Spiky Trap Set Up
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 0}
+      volume: {x: 1, y: 1}
+      pitch: {x: 1, y: 1}
+  - name: Spiky Trap Explosion
+    cooldown: 0.1
+    audioClip:
+      audioClip: {fileID: 0}
+      volume: {x: 1, y: 1}
+      pitch: {x: 1, y: 1}
+  - name: Thunder Ring Strike
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 0}
+      volume: {x: 1, y: 1}
+      pitch: {x: 1, y: 1}
+  - name: Time Gazer
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 0}
+      volume: {x: 1, y: 1}
+      pitch: {x: 1, y: 1}
+  - name: Twin Daggers Launch
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 0}
+      volume: {x: 1, y: 1}
+      pitch: {x: 1, y: 1}
+  - name: Void Stars Launch
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 0}
+      volume: {x: 1, y: 1}
+      pitch: {x: 1, y: 1}
+  - name: Main Menu Music
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 8300000, guid: 629b67973afe85640b8c153ae1502f6c, type: 3}
+      volume: {x: 0.07, y: 0.07}
+      pitch: {x: 0.9, y: 0.9}
+  - name: Stage Music
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 8300000, guid: 629b67973afe85640b8c153ae1502f6c, type: 3}
+      volume: {x: 0.07, y: 0.07}
+      pitch: {x: 1, y: 1}
+  music:
+    name: Music
+    cooldown: 0
+    audioClip:
+      audioClip: {fileID: 8300000, guid: 629b67973afe85640b8c153ae1502f6c, type: 3}
+      volume: {x: 0.07, y: 0.07}
+      pitch: {x: 0.9, y: 0.9}
