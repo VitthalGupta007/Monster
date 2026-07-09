@@ -1,0 +1,41 @@
+{
+    "asset": "1114ae4693563a142a34fab5bdfbf79f",
+    "fileName": "019f47ea-ff18-7bac-950f-0dccde8d770d.png",
+    "prompt": "Recolor this seamless tileable top-down game ground texture into EMBER DEPTHS: dark volcanic stone tiles with orange-red lava glowing in cracks, same tile pattern and resolution, seamless tiling, flat 2D game texture, no characters, no props, no text.",
+    "negativePrompt": "",
+    "model": "gpt-image-1-5",
+    "modelName": "GPT Image 1.5",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": [
+            {
+                "doodleReferenceType": 7,
+                "doodle": [],
+                "label": "Image",
+                "strength": 0.25,
+                "invertStrength": false,
+                "assetReferenceGuid": "1114ae4693563a142a34fab5bdfbf79f",
+                "unlabeledIndex": -1
+            }
+        ]
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 1024,
+        "height": 1024
+    },
+    "spriteSheet": false,
+    "duration": 0.0,
+    "dynamicParams": {
+        "serializedData": []
+    }
+}

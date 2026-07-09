@@ -1,0 +1,41 @@
+{
+    "asset": "143bf3fbb3f03d643a181577b593b392",
+    "fileName": "019f47eb-14fa-7641-938c-aa1522609670.png",
+    "prompt": "Recolor this seamless tileable top-down game ground texture into TOXIC SWAMP: murky green bog mud tiles with toxic slime in cracks, mossy green patches, same tile pattern and resolution, seamless tiling, flat 2D game texture, no characters, no props, no text.",
+    "negativePrompt": "",
+    "model": "gpt-image-1-5",
+    "modelName": "GPT Image 1.5",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": [
+            {
+                "doodleReferenceType": 7,
+                "doodle": [],
+                "label": "Image",
+                "strength": 0.25,
+                "invertStrength": false,
+                "assetReferenceGuid": "143bf3fbb3f03d643a181577b593b392",
+                "unlabeledIndex": -1
+            }
+        ]
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 1024,
+        "height": 1024
+    },
+    "spriteSheet": false,
+    "duration": 0.0,
+    "dynamicParams": {
+        "serializedData": []
+    }
+}

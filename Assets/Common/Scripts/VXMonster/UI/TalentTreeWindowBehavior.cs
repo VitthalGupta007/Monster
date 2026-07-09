@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using VXMonster.Core;
 using VXMonster.Gameplay;
@@ -13,6 +14,7 @@ namespace VXMonster.UI
         [SerializeField] TMP_Text pointsLabel;
         [SerializeField] Transform nodesContainer;
         [SerializeField] GameObject nodeButtonPrefab;
+        [SerializeField] Button backButton;
 
         private TalentTreeSave talentSave;
         private readonly List<TalentNodeDefinition> nodes = new List<TalentNodeDefinition>
@@ -20,6 +22,9 @@ namespace VXMonster.UI
             new TalentNodeDefinition(TalentTreeIds.ExtraReroll, "Extra Reroll", "Start runs with +1 reroll.", 3),
             new TalentNodeDefinition(TalentTreeIds.ExpandedMind, "Expanded Mind", "+1 passive ability slot.", 5),
             new TalentNodeDefinition(TalentTreeIds.GoldenInstinct, "Golden Instinct", "+10% gold from runs.", 8),
+            new TalentNodeDefinition(TalentTreeIds.IronWill, "Iron Will", "+20 max HP.", 4),
+            new TalentNodeDefinition(TalentTreeIds.QuickFeet, "Quick Feet", "+8% move speed.", 6),
+            new TalentNodeDefinition(TalentTreeIds.ScholarsEye, "Scholar's Eye", "Bonus gold on codex discoveries.", 7),
         };
 
         private void Awake()
@@ -28,6 +33,11 @@ namespace VXMonster.UI
             {
                 talentSave = GameController.SaveManager.GetSave<TalentTreeSave>("VX Talent Tree");
             }
+        }
+
+        public void Init(UnityAction onBackClicked)
+        {
+            if (backButton != null) backButton.onClick.AddListener(onBackClicked);
         }
 
         public void Open()

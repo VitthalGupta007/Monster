@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f4afc9a0c673684a8dc8dc89ea1d93e, type: 3}
+  m_Name: Relics Database
+  m_EditorClassIdentifier: Assembly-CSharp::VXMonster.Gameplay.RelicsDatabase
+  relics:
+  - {fileID: 11400000, guid: cb8ce4f2db264bd47a1f0cd6045bdb85, type: 2}
+  - {fileID: 11400000, guid: 200b18dd5187b0d4ba204b2e78f7e20d, type: 2}
+  - {fileID: 11400000, guid: 669629193ebf7834793acff9a9b48d37, type: 2}
+  - {fileID: 11400000, guid: 52802f7301530c84a91236a29277d768, type: 2}
+  - {fileID: 11400000, guid: e01607d59d1a9184bbbbf0d3280b8d28, type: 2}
+  - {fileID: 11400000, guid: 1afb10b26ea165148af8381ab447e8e1, type: 2}
+  - {fileID: 11400000, guid: 65b0cb9bcd4953a439197770a06051c4, type: 2}
+  - {fileID: 11400000, guid: 10e8c48a69b1d9d4892b4d30d335f2f2, type: 2}
+  - {fileID: 11400000, guid: dc8816a9d2fb7ad478eb684424c707ae, type: 2}

@@ -1,0 +1,31 @@
+{
+    "asset": "187a27af54da6e14dbbd919eaa70713c",
+    "fileName": "019f47cc-fbba-78c6-a08b-631c57572257.png",
+    "prompt": "Top-down survivor arena stage preview diamond framing, toxic swamp poison bog biome, murky green water, toxic bubbles, wilted plants, purple-gold survivor game UI style matching pixel monster survivors, thick readable silhouettes, no text, no UI chrome, game art only",
+    "negativePrompt": "",
+    "model": "rpg-environment",
+    "modelName": "RPG Environment",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": []
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 512,
+        "height": 512
+    },
+    "spriteSheet": false,
+    "duration": 0.0,
+    "dynamicParams": {
+        "serializedData": []
+    }
+}

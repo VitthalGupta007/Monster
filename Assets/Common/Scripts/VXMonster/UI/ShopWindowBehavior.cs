@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using VXMonster.Core;
 using VXMonster.Platform;
@@ -32,17 +33,24 @@ namespace VXMonster.UI
                 restoreButton.onClick.AddListener(OnRestoreClicked);
             }
 
-            if (backButton != null)
-            {
-                backButton.onClick.AddListener(Close);
-            }
-
             foreach (var row in productRows)
             {
                 if (row.buyButton == null || string.IsNullOrEmpty(row.productId)) continue;
 
                 var captured = row;
                 row.buyButton.onClick.AddListener(() => OnBuyClicked(captured));
+            }
+        }
+
+        public void Init(UnityAction onBackClicked)
+        {
+            if (backButton != null)
+            {
+                backButton.onClick.AddListener(() =>
+                {
+                    Close();
+                    onBackClicked?.Invoke();
+                });
             }
         }
 

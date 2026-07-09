@@ -15,17 +15,17 @@ MonoBehaviour:
   id:
     value: 6d4f5e6f-7081-92a3-b4c5-d6e7f8091a2b
     canEdit: 0
-  icon: {fileID: 21300000, guid: 9000f7664ecafea498cba3b07fa1f838, type: 3}
+  icon: {fileID: 21300000, guid: 4c400f1249cac5b4a8678f70f28c71a5, type: 3}
   displayName: VX VOID NEXUS
-  timeline: {fileID: 11400000, guid: b0f895641243c3540b636140e9d64276, type: 2}
+  timeline: {fileID: 11400000, guid: 552fe359aa8b6ff4d853bd5a1897eb89, type: 2}
   stageType: 0
   stageFieldData: {fileID: 11400000, guid: 4784fb39006132f48ad76bf040e6db27, type: 2}
   spawnProp: 1
   removePropFromBossfight: 1
   spotlightColor: {r: 0.75, g: 0.35, b: 1, a: 0.32}
   spotlightShadowColor: {r: 0.08, g: 0.02, b: 0.15, a: 0.95}
-  enemyDamage: 1
-  enemyHP: 1
+  enemyDamage: 1.2
+  enemyHP: 1.55
   useCustomMusic: 0
   musicName: Stage Music
   stageUnlockData:

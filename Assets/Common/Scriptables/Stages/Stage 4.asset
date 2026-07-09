@@ -15,17 +15,17 @@ MonoBehaviour:
   id:
     value: 4b2f3c4d-5e6f-7081-92a3-b4c5d6e7f809
     canEdit: 0
-  icon: {fileID: 21300000, guid: 9000f7664ecafea498cba3b07fa1f838, type: 3}
+  icon: {fileID: 21300000, guid: 57fa2eb666a53cb4895d6e0c600b8676, type: 3}
   displayName: VX EMBER DEPTHS
-  timeline: {fileID: 11400000, guid: b0f895641243c3540b636140e9d64276, type: 2}
+  timeline: {fileID: 11400000, guid: c592b7d4901900540ae9532f414b32aa, type: 2}
   stageType: 0
   stageFieldData: {fileID: 11400000, guid: 4784fb39006132f48ad76bf040e6db27, type: 2}
   spawnProp: 1
   removePropFromBossfight: 1
   spotlightColor: {r: 1, g: 0.55, b: 0.25, a: 0.28}
   spotlightShadowColor: {r: 0.15, g: 0.02, b: 0.02, a: 0.95}
-  enemyDamage: 1
-  enemyHP: 1
+  enemyDamage: 1.1
+  enemyHP: 1.25
   useCustomMusic: 0
   musicName: Stage Music
   stageUnlockData:

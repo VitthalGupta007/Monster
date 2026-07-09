@@ -10,8 +10,10 @@ namespace VXMonster.UI
     {
         [SerializeField] TMP_Text dailyBestLabel;
         [SerializeField] TMP_Text endlessBestLabel;
+        [SerializeField] TMP_Text streakLabel;
         [SerializeField] string dailyFormat = "Daily best: {0}";
         [SerializeField] string endlessFormat = "Endless best: {0} loops";
+        [SerializeField] string streakFormat = "Daily streak: {0}";
 
         private void OnEnable()
         {
@@ -33,6 +35,13 @@ namespace VXMonster.UI
             if (endlessBestLabel != null)
             {
                 endlessBestLabel.text = string.Format(endlessFormat, lifetime.EndlessLoopsBest);
+            }
+
+            if (streakLabel != null)
+            {
+                streakLabel.text = lifetime.DailyStreak > 0
+                    ? string.Format(streakFormat, lifetime.DailyStreak)
+                    : string.Empty;
             }
         }
     }

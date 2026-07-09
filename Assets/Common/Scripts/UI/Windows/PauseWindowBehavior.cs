@@ -8,6 +8,7 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using VXMonster.Gameplay;
 
 namespace VXMonster.Core.UI
 {
@@ -108,6 +109,7 @@ namespace VXMonster.Core.UI
             Time.timeScale = 1f;
 
             stageSave.IsPlaying = false;
+            GameSessionManager.Instance?.ClearSessionContext();
 
             StageController.ReturnToMainMenu();
         }

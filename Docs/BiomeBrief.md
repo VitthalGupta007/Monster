@@ -1,34 +1,31 @@
 # VX Monster — Biome Brief (Phase 4)
 
-v1.0 ships **6 unique biomes**. Stages 1–2 are complete. Stages 3–6 are scaffolded with recolored spotlight tints and **placeholder Stage 2 timeline** until you tune in Unity.
+v1.0 ships **6 biomes**. Stages 1–2 are fully authored. Stages 3–6 now have **unique lobby previews** and **distinct enemy/boss mixes** remapped from the existing enemy roster. They still share Stage 2 **field/prop layout** (tiles) — unique StageFieldData remains outstanding.
 
 ## Biome roster
 
-| Stage | Name | Theme | Spotlight tint | Unlock gold |
-|-------|------|-------|----------------|-------------|
-| 1 | VX WILDS | Grass / forest | Green | Free |
-| 2 | VX SHADOW REALM | Stone / cave | Cool blue | 500 |
-| 3 | VX FROST WASTES | Ice / tundra | Ice blue | 750 |
-| 4 | VX EMBER DEPTHS | Lava / volcanic | Orange-red | 1000 |
-| 5 | VX TOXIC SWAMP | Poison / bog | Toxic green | 1250 |
-| 6 | VX VOID NEXUS | Cosmic / void | Purple | 1500 |
+| Stage | Name | Theme | Spotlight tint | Unlock gold | Preview | Enemy mix | Field data |
+|-------|------|-------|----------------|-------------|---------|-----------|------------|
+| 1 | VX WILDS | Grass / forest | Green | Free | Unique | Unique | Unique |
+| 2 | VX SHADOW REALM | Stone / cave | Cool blue | 500 | Unique | Unique | Unique |
+| 3 | VX FROST WASTES | Ice / tundra | Ice blue | 750 | Unique (AI) | Remapped | Shares Stage 2 |
+| 4 | VX EMBER DEPTHS | Lava / volcanic | Orange-red | 1000 | Unique (AI) | Remapped | Shares Stage 2 |
+| 5 | VX TOXIC SWAMP | Poison / bog | Toxic green | 1250 | Unique (AI) | Remapped | Shares Stage 2 |
+| 6 | VX VOID NEXUS | Cosmic / void | Purple | 1500 | Unique (AI) | Remapped | Shares Stage 2 |
 
-## Art approach (fast path — approved)
+## Still outstanding for true unique biomes
 
-1. **Reuse** Stage 1 grass tiles + Stage 2 stone tiles
-2. **Recolor** via spotlight + material tint per stage (`spotlightColor` on `StageData`)
-3. **Recombine** existing props from both stages
-4. **Boss**: reuse one of 6 existing boss prefabs per stage (assign in Timeline)
-5. **Preview sprite**: duplicate `ui_stage_1_preview` / `ui_stage_2_preview` with tint overlay (stages 3–6 currently share stage 2 preview)
+1. Per-stage `StageFieldData` (tiles/props) — currently Stages 3–6 reuse Stage 2 stone field
+2. Hand-authored Timeline wave timing (not only enemy-type remap)
+3. New enemy art families (current remap uses existing EnemyType pool only)
+4. Approve/regenerate AI lobby previews if style gate fails vs Stage 1–2
 
-## Your Unity tasks per new biome
+## Editor menus
 
-1. Duplicate `Stage 2.playable` → `Stage N.playable`
-2. Adjust wave timing and enemy mix in Timeline window
-3. Assign unique `stageFieldData` if prop layout should differ
-4. Export `ui_stage_N_preview.png` for lobby diamond
-5. Playtest HP/damage feel at Normal difficulty
+- `VX Monster/Content/Bind Stage Preview Icons`
+- `VX Monster/Content/Differentiate Stages 3-6 Enemy Mix`
+- `VX Monster/Content/Setup Stages 3-6 Timelines` (no longer overwrites existing unique previews)
 
 ## Post-launch (biomes 7–12)
 
-Planned as content updates — same pipeline as above with new art families when budget allows.
+Planned as content updates — same pipeline with new art families when budget allows.

@@ -14,7 +14,7 @@ namespace VXMonster.Core
         public int CharactersCountOld => characters.Count;
 
         [SerializeField] protected List<CharacterDataSO> characterDatas;
-        public int CharactersCount => characterDatas.Count;
+        public int CharactersCount => characterDatas != null ? characterDatas.Count : 0;
 
         public virtual CharacterData GetCharacterDataOld(int index)
         {

@@ -25,6 +25,11 @@ Run these checks before Play Console submit. Agent cannot run Unity/device tests
 - [ ] Campaign Stage 1 complete without crash
 - [ ] Boss kill awards talent points (check talent tree)
 - [ ] Reroll and banish work in ability picker
+- [ ] Lobby → Talent / Codex / Shop open and return to lobby
+- [ ] Settings → Privacy / Terms show in-app legal text
+- [ ] Fail screen shows stats + Retry; complete screen shows stats
+- [ ] In-run HUD: combo count, difficulty badge, relic slots
+- [ ] Daily modifiers + personal best / streak visible on lobby
 - [ ] Phoenix relic revives once per run
 - [ ] Daily Challenge scored run records local best
 - [ ] Endless loop 10+ maintains playable FPS
@@ -52,6 +57,7 @@ Run **Window → General → Test Runner → EditMode**:
 - `TalentTreeSaveTests` — unlock spend logic
 - `EntitlementsSaveTests` — Remove Ads flag
 - `DifficultyTierTests` — talent points per boss
+- `DailyStreakUtilityTests` — meta talent IDs + streak save defaults
 
 ## Sign-off
 

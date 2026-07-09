@@ -17,9 +17,15 @@ namespace VXMonster.Core.UI
 {
     public class StageFailedScreen : MonoBehaviour
     {
-        private const string AdReviveReadyLabel = "Watch Ad   Revive";
-        private const string AdReviveLoadingLabel = "Loading Ad...";
-        private const string FreeReviveLabel = "Free Revive";
+        private const string AdReviveReadyLabel = "WATCH AD\nREVIVE";
+        private const string AdReviveLoadingLabel = "LOADING AD...";
+        private const string FreeReviveLabel = "FREE REVIVE";
+
+        // Lower-third stack. Only visible buttons consume a slot — no empty Ad gap.
+        private const float ButtonStartY = -120f;
+        private const float ButtonStep = 130f;
+        private const float ButtonWidth = 400f;
+        private const float ButtonHeight = 110f;
 
         [SerializeField] CanvasGroup canvasGroup;
         [SerializeField] Button reviveButton;
@@ -29,6 +35,7 @@ namespace VXMonster.Core.UI
         [SerializeField] TMP_Text statsText;
 
         private TextMeshProUGUI adReviveLabel;
+        private TextMeshProUGUI retryLabel;
         private Coroutine refreshRoutine;
 
         private bool upgradeReviveUsed;
@@ -39,13 +46,60 @@ namespace VXMonster.Core.UI
             if (adReviveButton != null)
             {
                 adReviveButton.onClick.AddListener(AdReviveButtonClick);
-                adReviveLabel = adReviveButton.GetComponentInChildren<TextMeshProUGUI>();
+                adReviveLabel = adReviveButton.GetComponentInChildren<TextMeshProUGUI>(true);
             }
 
             exitButton.onClick.AddListener(ExitButtonClick);
-            if (retryButton != null) retryButton.onClick.AddListener(RetryButtonClick);
+            if (retryButton != null)
+            {
+                retryButton.onClick.AddListener(RetryButtonClick);
+                retryLabel = retryButton.GetComponentInChildren<TextMeshProUGUI>(true);
+            }
 
             upgradeReviveUsed = false;
+            NormalizeButtonLabels();
+        }
+
+        private void NormalizeButtonLabels()
+        {
+            if (retryLabel != null)
+            {
+                ConfigureButtonLabel(retryLabel, "RETRY", 48f, false);
+            }
+
+            if (adReviveLabel != null)
+            {
+                ConfigureButtonLabel(adReviveLabel, AdReviveReadyLabel, 36f, true);
+            }
+
+            var reviveLabel = reviveButton != null
+                ? reviveButton.GetComponentInChildren<TextMeshProUGUI>(true)
+                : null;
+            if (reviveLabel != null)
+            {
+                ConfigureButtonLabel(reviveLabel, "REVIVE", 48f, false);
+            }
+
+            var exitLabel = exitButton != null
+                ? exitButton.GetComponentInChildren<TextMeshProUGUI>(true)
+                : null;
+            if (exitLabel != null)
+            {
+                ConfigureButtonLabel(exitLabel, "EXIT", 48f, false);
+            }
+        }
+
+        private static void ConfigureButtonLabel(TextMeshProUGUI label, string text, float fontSize, bool allowWrap)
+        {
+            label.text = text;
+            label.fontSize = fontSize;
+            label.enableAutoSizing = false;
+            label.alignment = TextAlignmentOptions.Center;
+            label.textWrappingMode = allowWrap ? TextWrappingModes.Normal : TextWrappingModes.NoWrap;
+            label.overflowMode = TextOverflowModes.Overflow;
+            label.characterSpacing = 0f;
+            label.lineSpacing = allowWrap ? -10f : 0f;
+            label.raycastTarget = false;
         }
 
         private static bool HasRemoveAds()
@@ -64,8 +118,23 @@ namespace VXMonster.Core.UI
             if (statsText != null)
             {
                 statsText.text = RunResultsFormatter.BuildSummary(false);
+                var statsRt = statsText.GetComponent<RectTransform>();
+                if (statsRt != null)
+                {
+                    // Band between YOU DIED and the dead character — not on the hat.
+                    statsRt.anchoredPosition = new Vector2(0f, 280f);
+                    statsRt.sizeDelta = new Vector2(860f, 80f);
+                }
+
+                statsText.fontSize = 22f;
+                statsText.enableAutoSizing = false;
+                statsText.alignment = TextAlignmentOptions.Center;
+                statsText.textWrappingMode = TextWrappingModes.Normal;
+                statsText.overflowMode = TextOverflowModes.Overflow;
+                statsText.lineSpacing = 0f;
             }
 
+            NormalizeButtonLabels();
             RefreshReviveButtons();
             refreshRoutine = StartCoroutine(RefreshReviveButtonsUntilReady());
 
@@ -95,7 +164,8 @@ namespace VXMonster.Core.UI
         private void RefreshReviveButtons()
         {
             var session = GameSessionManager.Instance?.RunSession;
-            var canUpgradeRevive = GameController.UpgradesManager.IsUpgradeAquired(UpgradeType.Revive)
+            var canUpgradeRevive = GameController.UpgradesManager != null
+                                   && GameController.UpgradesManager.IsUpgradeAquired(UpgradeType.Revive)
                                    && !upgradeReviveUsed
                                    && (session == null || !session.UpgradeReviveUsed);
 
@@ -103,24 +173,25 @@ namespace VXMonster.Core.UI
             var removeAds = HasRemoveAds();
             var adReady = removeAds || (PlatformServices.AdService != null && PlatformServices.AdService.IsRewardedReady);
 
-            reviveButton.gameObject.SetActive(canUpgradeRevive);
+            if (reviveButton != null) reviveButton.gameObject.SetActive(canUpgradeRevive);
             if (adReviveButton != null)
             {
                 adReviveButton.gameObject.SetActive(canBonusRevive);
                 adReviveButton.interactable = adReady;
-
-                if (adReviveLabel != null)
-                {
-                    if (removeAds)
-                    {
-                        adReviveLabel.text = FreeReviveLabel;
-                    }
-                    else
-                    {
-                        adReviveLabel.text = adReady ? AdReviveReadyLabel : AdReviveLoadingLabel;
-                    }
-                }
             }
+
+            if (adReviveLabel != null)
+            {
+                if (removeAds) adReviveLabel.text = FreeReviveLabel;
+                else adReviveLabel.text = adReady ? AdReviveReadyLabel : AdReviveLoadingLabel;
+            }
+
+            // Pack only active buttons so hiding Ad Revive collapses the Exit gap.
+            var y = ButtonStartY;
+            PlaceActiveButton(retryButton, ref y);
+            PlaceActiveButton(reviveButton, ref y);
+            PlaceActiveButton(adReviveButton, ref y);
+            PlaceActiveButton(exitButton, ref y);
 
             if (canUpgradeRevive)
             {
@@ -130,10 +201,29 @@ namespace VXMonster.Core.UI
             {
                 EventSystem.current.SetSelectedGameObject(adReviveButton.gameObject);
             }
-            else
+            else if (retryButton != null)
+            {
+                EventSystem.current.SetSelectedGameObject(retryButton.gameObject);
+            }
+            else if (exitButton != null)
             {
                 EventSystem.current.SetSelectedGameObject(exitButton.gameObject);
             }
+        }
+
+        private static void PlaceActiveButton(Button button, ref float y)
+        {
+            if (button == null || !button.gameObject.activeSelf) return;
+
+            var rt = button.GetComponent<RectTransform>();
+            if (rt == null) return;
+
+            rt.anchorMin = new Vector2(0.5f, 0.5f);
+            rt.anchorMax = new Vector2(0.5f, 0.5f);
+            rt.pivot = new Vector2(0.5f, 0.5f);
+            rt.anchoredPosition = new Vector2(0f, y);
+            rt.sizeDelta = new Vector2(ButtonWidth, ButtonHeight);
+            y -= ButtonStep;
         }
 
         public void Hide(UnityAction onFinish)
@@ -174,7 +264,7 @@ namespace VXMonster.Core.UI
 
             if (HasRemoveAds())
             {
-                session.AdReviveUsed = true;
+                if (session != null) session.AdReviveUsed = true;
                 Hide(StageController.ResurrectPlayer);
                 return;
             }

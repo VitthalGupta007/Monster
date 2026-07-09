@@ -1,9 +1,12 @@
 #if UNITY_PURCHASING
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Purchasing;
 using UnityEngine.Purchasing.Extension;
+using Unity.Services.Core;
+using Unity.Services.Core.Environments;
 
 namespace VXMonster.Platform.IAP
 {
@@ -31,16 +34,36 @@ namespace VXMonster.Platform.IAP
             }
 
             isInitializing = true;
-
-            var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
-            builder.AddProduct(IAPProductIds.RemoveAds, ProductType.NonConsumable);
-            builder.AddProduct(IAPProductIds.StarterBundle, ProductType.NonConsumable);
-            builder.AddProduct(IAPProductIds.GoldSmall, ProductType.Consumable);
-            builder.AddProduct(IAPProductIds.GoldMedium, ProductType.Consumable);
-            builder.AddProduct(IAPProductIds.GoldLarge, ProductType.Consumable);
-
-            UnityPurchasing.Initialize(this, builder);
             InitializeCallback = onComplete;
+            _ = InitializeAsync();
+        }
+
+        private async Task InitializeAsync()
+        {
+            try
+            {
+                if (UnityServices.State != ServicesInitializationState.Initialized)
+                {
+                    var options = new InitializationOptions().SetEnvironmentName("production");
+                    await UnityServices.InitializeAsync(options);
+                }
+
+                var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
+                builder.AddProduct(IAPProductIds.RemoveAds, ProductType.NonConsumable);
+                builder.AddProduct(IAPProductIds.StarterBundle, ProductType.NonConsumable);
+                builder.AddProduct(IAPProductIds.GoldSmall, ProductType.Consumable);
+                builder.AddProduct(IAPProductIds.GoldMedium, ProductType.Consumable);
+                builder.AddProduct(IAPProductIds.GoldLarge, ProductType.Consumable);
+
+                UnityPurchasing.Initialize(this, builder);
+            }
+            catch (Exception ex)
+            {
+                isInitializing = false;
+                Debug.LogWarning($"[IAP] UGS/IAP init failed: {ex.Message}");
+                InitializeCallback?.Invoke(false);
+                InitializeCallback = null;
+            }
         }
 
         private Action<bool> InitializeCallback;

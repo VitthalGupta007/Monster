@@ -1,6 +1,8 @@
 # VX Monster — Prefab Hookup Checklist
 
-Wire these in Unity after pulling latest scripts. Optional fields can stay empty; features degrade gracefully.
+Wire these in Unity after pulling latest scripts. **Fast path:** menu **VX Monster → Wire All Prefab Hookup (Phase 1)**. Backup prompt pack: [UnityAI/02-PrefabHookup-Hub.md](UnityAI/02-PrefabHookup-Hub.md).
+
+Optional fields can stay empty; features degrade gracefully.
 
 ## Abilities Popup (`AbilitiesWindowBehavior`)
 
@@ -62,7 +64,7 @@ Add `DailyModifierPreviewBehavior` with `modifiersLabel` near Daily Challenge bu
 
 ## Stages 3–6
 
-See [BiomeBrief.md](BiomeBrief.md). Duplicate timelines and preview sprites in Unity.
+See [BiomeBrief.md](BiomeBrief.md). Editor menu: **VX Monster → Content → Setup Stages 3-6 Timelines**.
 
 ## Package install
 

@@ -26,6 +26,7 @@ namespace VXMonster.UI
         private const float LabelFontSizeMin = 18f;
 
         // Midpoint between Attempts Text bottom (~-359) and Play button top (~-457).
+        // Keep this band exclusive — no Talent/Codex/Shop surface buttons here.
         private const float PanelCenterY = -408f;
 
         [SerializeField] LobbyWindowBehavior lobbyWindow;
@@ -103,8 +104,9 @@ namespace VXMonster.UI
                 new Vector2(DifficultyButtonWidth, RowHeight),
                 OnDifficultyClicked,
                 buttonSprite,
-                VXDifficultySelection.Selected.DisplayLabel());
+                VXDifficultySelection.Selected.DisplayLabel().ToUpperInvariant());
             difficultyLabel = diffGo.GetComponentInChildren<TextMeshProUGUI>();
+            RefreshDifficultyLabel();
 
             CreateModeButton(
                 rootRect,
@@ -140,8 +142,13 @@ namespace VXMonster.UI
         {
             if (difficultyLabel != null)
             {
-                difficultyLabel.text = VXDifficultySelection.Selected.DisplayLabel();
+                difficultyLabel.text = FormatDifficultyLabel(VXDifficultySelection.Selected);
             }
+        }
+
+        private static string FormatDifficultyLabel(DifficultyTier tier)
+        {
+            return $"DIFF · {tier.DisplayLabel().ToUpperInvariant()}";
         }
 
         private void OnDifficultyClicked()

@@ -1,5 +1,7 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 using VXMonster.Core;
 using VXMonster.Save;
 
@@ -8,6 +10,7 @@ namespace VXMonster.UI
     public class CodexWindowBehavior : MonoBehaviour
     {
         [SerializeField] TMP_Text bodyText;
+        [SerializeField] Button backButton;
 
         private CodexSave codexSave;
 
@@ -17,6 +20,11 @@ namespace VXMonster.UI
             {
                 codexSave = GameController.SaveManager.GetSave<CodexSave>("VX Codex");
             }
+        }
+
+        public void Init(UnityAction onBackClicked)
+        {
+            if (backButton != null) backButton.onClick.AddListener(onBackClicked);
         }
 
         public void Open()

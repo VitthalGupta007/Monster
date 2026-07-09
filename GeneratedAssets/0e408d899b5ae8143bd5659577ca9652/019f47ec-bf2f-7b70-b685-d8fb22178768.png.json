@@ -1,0 +1,41 @@
+{
+    "asset": "0e408d899b5ae8143bd5659577ca9652",
+    "fileName": "019f47ec-bf2f-7b70-b685-d8fb22178768.png",
+    "prompt": "Keep EXACT same chibi bust framing, black background, shadowed face with two white oval eyes, no limbs. Transform into RANGER: forest green cloak, leather hood instead of tall wizard hat, leaf/feather accents, archer scout look. Same art style and proportions as reference.",
+    "negativePrompt": "",
+    "model": "gpt-image-1-5",
+    "modelName": "GPT Image 1.5",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": [
+            {
+                "doodleReferenceType": 7,
+                "doodle": [],
+                "label": "Image",
+                "strength": 0.25,
+                "invertStrength": false,
+                "assetReferenceGuid": "0e408d899b5ae8143bd5659577ca9652",
+                "unlabeledIndex": -1
+            }
+        ]
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 1024,
+        "height": 1024
+    },
+    "spriteSheet": false,
+    "duration": 0.0,
+    "dynamicParams": {
+        "serializedData": []
+    }
+}

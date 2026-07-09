@@ -10,7 +10,7 @@ namespace VXMonster.Core.UI
             "- Anonymous gameplay and crash analytics when enabled\n" +
             "- Local save data stored on your device\n\n" +
             "We do not sell personal data. Ad partners may collect data per their policies when ads are shown.\n\n" +
-            "Contact: support@vitthalxstudios.com\n" +
+            "Contact: vitthalgupta007@gmail.com\n" +
             "Last updated: July 2026";
 
         public const string TermsTitle = "Terms of Use";

@@ -1,0 +1,31 @@
+{
+    "asset": "4378ff97b713cb64cb49adc04fa79d31",
+    "fileName": "019f47cc-ed60-7096-8ff3-ad72d429f547.png",
+    "prompt": "Top-down survivor arena stage preview diamond framing, ember depths lava volcanic cavern biome, molten cracks orange-red glow, dark stone, purple-gold survivor game UI style matching pixel monster survivors, thick readable silhouettes, no text, no UI chrome, game art only",
+    "negativePrompt": "",
+    "model": "rpg-environment",
+    "modelName": "RPG Environment",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": []
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 512,
+        "height": 512
+    },
+    "spriteSheet": false,
+    "duration": 0.0,
+    "dynamicParams": {
+        "serializedData": []
+    }
+}

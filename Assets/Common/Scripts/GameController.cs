@@ -244,7 +244,13 @@ namespace VXMonster.Core
             }
 
             LoadingProgressReporter.Report(0.35f, "Preparing stage...");
-            yield return UnloadAsyncScene(mainMenuSceneName);
+            // Only unload Main Menu when it is actually loaded (fresh start from lobby).
+            // Retry from Stage Failed already sits in Game — unloading Main Menu throws.
+            if (!string.IsNullOrEmpty(mainMenuSceneName) && IsSceneLoaded(mainMenuSceneName))
+            {
+                yield return UnloadAsyncScene(mainMenuSceneName);
+            }
+
             LoadingProgressReporter.Report(0.55f, "Loading game...");
             yield return LoadAsyncScene(gameSceneName, LoadSceneMode.Single, "Starting run...");
             LoadingProgressReporter.Report(1f, "Ready");
@@ -264,7 +270,11 @@ namespace VXMonster.Core
             }
 
             LoadingProgressReporter.Report(0.4f, "Leaving stage...");
-            yield return UnloadAsyncScene(gameSceneName);
+            if (!string.IsNullOrEmpty(gameSceneName) && IsSceneLoaded(gameSceneName))
+            {
+                yield return UnloadAsyncScene(gameSceneName);
+            }
+
             LoadingProgressReporter.Report(0.7f, "Main menu...");
             yield return LoadAsyncScene(mainMenuSceneName, LoadSceneMode.Single, "Welcome back");
             LoadingProgressReporter.Report(1f, "Ready");
@@ -315,13 +325,36 @@ namespace VXMonster.Core
 
         protected static IEnumerator UnloadAsyncScene(string sceneName)
         {
+            // Retry / mid-run reloads call LoadStage while already in Game — Main Menu is not loaded.
+            if (string.IsNullOrEmpty(sceneName) || !IsSceneLoaded(sceneName))
+            {
+                yield break;
+            }
+
             var asyncLoad = SceneManager.UnloadSceneAsync(sceneName);
-            asyncLoad.allowSceneActivation = false;
-            //wait until the asynchronous scene fully loads
+            if (asyncLoad == null)
+            {
+                yield break;
+            }
+
             while (!asyncLoad.isDone)
             {
                 yield return null;
             }
+        }
+
+        protected static bool IsSceneLoaded(string sceneName)
+        {
+            for (var i = 0; i < SceneManager.sceneCount; i++)
+            {
+                var scene = SceneManager.GetSceneAt(i);
+                if (scene.IsValid() && scene.isLoaded && scene.name == sceneName)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         protected static IEnumerator LoadAsyncScene(string sceneName, LoadSceneMode loadSceneMode, string status = null)

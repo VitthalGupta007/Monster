@@ -32,6 +32,11 @@ namespace VXMonster.UI
             if (skipButton != null) skipButton.onClick.AddListener(Complete);
         }
 
+        private void Start()
+        {
+            TryShowFirstRun();
+        }
+
         public void TryShowFirstRun()
         {
             if (GameController.SaveManager == null) return;

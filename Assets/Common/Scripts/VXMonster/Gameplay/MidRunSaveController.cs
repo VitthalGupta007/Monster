@@ -46,6 +46,7 @@ namespace VXMonster.Gameplay
             var stageSave = GameController.SaveManager.GetSave<StageSave>("Stage");
             if (stageSave == null || !stageSave.IsPlaying) return;
 
+            GameSessionManager.Instance?.CaptureSessionToSave();
             GameController.SaveManager.Save(true);
         }
     }

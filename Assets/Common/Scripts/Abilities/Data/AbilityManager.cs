@@ -199,9 +199,35 @@ namespace VXMonster.Core.Abilities
             }
         }
 
-        public List<AbilityData> RefreshAbilityChoicesAfterBanish()
+        /// <summary>
+        /// After banishing one offered ability, keep the other offers and replace only that slot.
+        /// </summary>
+        public List<AbilityData> RefreshAbilityChoicesAfterBanish(IReadOnlyList<AbilityData> currentChoices, AbilityType banishedType)
         {
-            return SelectWeightedAbilities(lastAbilityPickLevel, 3);
+            var result = new List<AbilityData>();
+            if (currentChoices != null)
+            {
+                for (var i = 0; i < currentChoices.Count; i++)
+                {
+                    var choice = currentChoices[i];
+                    if (choice == null || choice.AbilityType == banishedType) continue;
+                    result.Add(choice);
+                }
+            }
+
+            var exclude = new HashSet<AbilityType> { banishedType };
+            for (var i = 0; i < result.Count; i++)
+            {
+                exclude.Add(result[i].AbilityType);
+            }
+
+            var replacements = SelectWeightedAbilities(lastAbilityPickLevel, 1, exclude);
+            if (replacements.Count > 0)
+            {
+                result.Add(replacements[0]);
+            }
+
+            return result;
         }
 
         public bool TryRerollAbilityChoices(out List<AbilityData> newChoices)
@@ -230,7 +256,23 @@ namespace VXMonster.Core.Abilities
 
         public List<AbilityData> SelectWeightedAbilities(int level, int maxCount)
         {
+            return SelectWeightedAbilities(level, maxCount, null);
+        }
+
+        public List<AbilityData> SelectWeightedAbilities(int level, int maxCount, HashSet<AbilityType> excludeTypes)
+        {
             var abilities = GetAvailableAbilities();
+            if (excludeTypes != null && excludeTypes.Count > 0)
+            {
+                for (var i = abilities.Count - 1; i >= 0; i--)
+                {
+                    if (excludeTypes.Contains(abilities[i].AbilityType))
+                    {
+                        abilities.RemoveAt(i);
+                    }
+                }
+            }
+
             var selectedAbilities = new List<AbilityData>();
             var weightedAbilities = new List<WeightedAbility>();
 

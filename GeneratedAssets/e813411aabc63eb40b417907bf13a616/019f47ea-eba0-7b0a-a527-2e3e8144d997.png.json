@@ -1,0 +1,41 @@
+{
+    "asset": "e813411aabc63eb40b417907bf13a616",
+    "fileName": "019f47ea-eba0-7b0a-a527-2e3e8144d997.png",
+    "prompt": "Recolor this seamless tileable top-down game ground texture into VOID NEXUS: dark purple void stone tiles with violet neon glow in cracks, same tile pattern and resolution, seamless tiling, flat 2D game texture, no characters, no props, no text.",
+    "negativePrompt": "",
+    "model": "gpt-image-1-5",
+    "modelName": "GPT Image 1.5",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": [
+            {
+                "doodleReferenceType": 7,
+                "doodle": [],
+                "label": "Image",
+                "strength": 0.25,
+                "invertStrength": false,
+                "assetReferenceGuid": "e813411aabc63eb40b417907bf13a616",
+                "unlabeledIndex": -1
+            }
+        ]
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 1024,
+        "height": 1024
+    },
+    "spriteSheet": false,
+    "duration": 0.0,
+    "dynamicParams": {
+        "serializedData": []
+    }
+}

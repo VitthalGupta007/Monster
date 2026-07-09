@@ -266,17 +266,17 @@ PlayerSettings:
   templateDefaultScene: Assets/Common/Scenes/Main Menu.unity
   useCustomMainManifest: 1
   useCustomLauncherManifest: 0
-  useCustomMainGradleTemplate: 0
+  useCustomMainGradleTemplate: 1
   useCustomLauncherGradleManifest: 0
   useCustomBaseGradleTemplate: 0
-  useCustomGradlePropertiesTemplate: 0
-  useCustomGradleSettingsTemplate: 0
+  useCustomGradlePropertiesTemplate: 1
+  useCustomGradleSettingsTemplate: 1
   useCustomProguardFile: 0
   AndroidTargetArchitectures: 2
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: 
-  AndroidKeyaliasName: 
+  AndroidKeystoreName: '{inproject}: vx-monster-upload.keystore'
+  AndroidKeyaliasName: vxmonster
   AndroidEnableArmv9SecurityFeatures: 0
   AndroidEnableArm64MTE: 0
   AndroidBuildApkPerCpuArchitecture: 0
@@ -288,7 +288,7 @@ PlayerSettings:
   AndroidEnableTango: 0
   androidEnableBanner: 1
   androidUseLowAccuracyLocation: 0
-  androidUseCustomKeystore: 0
+  androidUseCustomKeystore: 1
   m_AndroidBanners:
   - width: 320
     height: 180
@@ -859,7 +859,7 @@ PlayerSettings:
   webWasm2023: 0
   webEnableSubmoduleStrippingCompatibility: 0
   scriptingDefineSymbols:
-    Android: GOOGLE_MOBILE_ADS_AVAILABLE;APP_UI_EDITOR_ONLY;UNITY_PURCHASING
+    Android: GOOGLE_MOBILE_ADS_AVAILABLE;UNITY_PURCHASING;APP_UI_EDITOR_ONLY
     Standalone: GOOGLE_MOBILE_ADS_AVAILABLE;APP_UI_EDITOR_ONLY;UNITY_PURCHASING
     iPhone: GOOGLE_MOBILE_ADS_AVAILABLE;UNITY_PURCHASING
   additionalCompilerArguments: {}
@@ -953,7 +953,8 @@ PlayerSettings:
   XboxOneXTitleMemory: 8
   XboxOneOverrideIdentityName: 
   XboxOneOverrideIdentityPublisher: 
-  cloudServicesEnabled: {}
+  cloudServicesEnabled:
+    Purchasing: 0
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 

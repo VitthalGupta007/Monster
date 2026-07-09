@@ -1,0 +1,41 @@
+{
+    "asset": "c8db4195791b36643b936765bb620049",
+    "fileName": "019f47d4-078f-7011-b188-1e7889fd9246.png",
+    "prompt": "Keep EXACT same flat 2D top-down survivor lobby preview composition and art style. Recolor the stone tile background to dark volcanic rock with orange-red lava cracks. Recolor enemies to ember theme: fire slime brighter, red-orange bat, molten eye, ember wasp. Keep thick black outlines, soft oval shadows, same enemy positions and silhouette shapes. Warm orange vignette. No isometric, no buildings, no text, no NPCs.",
+    "negativePrompt": "",
+    "model": "gpt-image-1-5",
+    "modelName": "GPT Image 1.5",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": [
+            {
+                "doodleReferenceType": 7,
+                "doodle": [],
+                "label": "Image",
+                "strength": 0.25,
+                "invertStrength": false,
+                "assetReferenceGuid": "c8db4195791b36643b936765bb620049",
+                "unlabeledIndex": -1
+            }
+        ]
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 1024,
+        "height": 1024
+    },
+    "spriteSheet": false,
+    "duration": 0.0,
+    "dynamicParams": {
+        "serializedData": []
+    }
+}

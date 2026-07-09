@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c801fcc7816b1c4289ed895d09dc109, type: 3}
+  m_Name: PhoenixAsh
+  m_EditorClassIdentifier: Assembly-CSharp::VXMonster.Gameplay.RelicData
+  id: phoenix_ash
+  displayName: Phoenix Ash
+  description: Revive once per run at low HP.
+  icon: {fileID: 21300000, guid: 28c3cbc02ecf99d45b8092c5628bf0bf, type: 3}
+  effectType: 8
+  magnitude: 1

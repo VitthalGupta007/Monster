@@ -34,7 +34,10 @@ namespace VXMonster.Gameplay
             if (triggered)
             {
                 GameSessionManager.Instance?.RunSession?.IncrementComboBurstCount();
-                GameSessionManager.Instance?.Codex?.MarkFirstCombo();
+                if (GameSessionManager.Instance?.Codex?.MarkFirstCombo() == true)
+                {
+                    CodexRewardUtility.OnFirstComboDiscovered();
+                }
             }
 
             return triggered;

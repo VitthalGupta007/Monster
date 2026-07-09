@@ -45,6 +45,15 @@ namespace VXMonster.UI
                 icon.color = Color.white;
                 var relicId = session.ActiveRelicIds[i];
                 var relic = manager.GetRelicById(relicId);
+                if (relic != null && relic.Icon != null)
+                {
+                    icon.sprite = relic.Icon;
+                }
+                else if (emptySlotSprite != null)
+                {
+                    icon.sprite = emptySlotSprite;
+                }
+
                 if (i < slotLabels.Count && slotLabels[i] != null)
                 {
                     slotLabels[i].text = relic != null ? relic.DisplayName : relicId;

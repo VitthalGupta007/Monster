@@ -219,10 +219,20 @@ namespace VXMonster.Core.Abilities.UI
         {
             if (banishModeActive)
             {
+                var currentChoices = new List<AbilityData>(cards.Count);
+                for (int i = 0; i < cards.Count; i++)
+                {
+                    if (cards[i] != null && cards[i].Data != null)
+                    {
+                        currentChoices.Add(cards[i].Data);
+                    }
+                }
+
                 if (!StageController.AbilityManager.TryBanishAbility(ability.AbilityType)) return;
 
                 banishModeActive = false;
-                var refreshed = StageController.AbilityManager.RefreshAbilityChoicesAfterBanish();
+                // Keep the other two offers; only replace the banished slot (not a full reroll).
+                var refreshed = StageController.AbilityManager.RefreshAbilityChoicesAfterBanish(currentChoices, ability.AbilityType);
                 if (refreshed.Count > 0)
                 {
                     SetData(refreshed);

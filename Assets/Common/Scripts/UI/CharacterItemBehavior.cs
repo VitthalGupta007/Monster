@@ -63,15 +63,39 @@ namespace VXMonster.Core.UI
                 Currency.onAmountChanged -= OnCurrencyAmountChanged;
             }
 
-            Currency = GameController.CurrenciesManager.GetCurrency(characterData.Price.CurrencyId, false);
-            Currency.onAmountChanged += OnCurrencyAmountChanged;
+            Currency = GameController.CurrenciesManager != null
+                ? GameController.CurrenciesManager.GetCurrency(characterData.Price.CurrencyId, false)
+                : null;
+            if (Currency == null && GameController.CurrenciesManager != null)
+            {
+                Currency = GameController.CurrenciesManager.GetDefaultCurrency(false);
+            }
 
-            startingAbilityObject.SetActive(characterData.HasStartingAbility);
+            if (Currency != null)
+            {
+                Currency.onAmountChanged += OnCurrencyAmountChanged;
+            }
+            else
+            {
+                Debug.LogError($"[Characters] Missing currency '{characterData.Price.CurrencyId}' for {characterData.Name}.");
+            }
 
-            if(characterData.HasStartingAbility)
+            if (startingAbilityObject != null)
+            {
+                startingAbilityObject.SetActive(characterData.HasStartingAbility);
+            }
+
+            if (characterData.HasStartingAbility && database != null && startingAbilityImage != null)
             {
                 var abilityData = database.GetAbility(characterData.StartingAbility);
-                startingAbilityImage.sprite = abilityData.Icon;
+                if (abilityData != null && abilityData.Icon != null)
+                {
+                    startingAbilityImage.sprite = abilityData.Icon;
+                }
+                else
+                {
+                    Debug.LogError($"[Characters] Missing starting ability '{characterData.StartingAbility}' for {characterData.Name}.");
+                }
             }
 
             Data = characterData;
@@ -119,18 +143,14 @@ namespace VXMonster.Core.UI
                 buttonText.gameObject.SetActive(false);
 
                 costLabel.SetAmount(Data.Price.Amount);
-                costLabel.SetIcon(Currency.Data.Icon);
+                if (Currency != null && Currency.Data != null)
+                {
+                    costLabel.SetIcon(Currency.Data.Icon);
+                }
 
-                if (Currency.CanAfford(Data.Price.Amount))
-                {
-                    upgradeButton.interactable = true;
-                    upgradeButton.image.sprite = enabledButtonSprite;
-                }
-                else
-                {
-                    upgradeButton.interactable = false;
-                    upgradeButton.image.sprite = disabledButtonSprite;
-                }
+                var canAfford = Currency != null && Currency.CanAfford(Data.Price.Amount);
+                upgradeButton.interactable = canAfford;
+                upgradeButton.image.sprite = canAfford ? enabledButtonSprite : disabledButtonSprite;
             }
         }
 
@@ -138,6 +158,11 @@ namespace VXMonster.Core.UI
         {
             if (!charactersSave.HasCharacterBeenBought(CharacterId))
             {
+                if (Currency == null || !Currency.CanAfford(Data.Price.Amount))
+                {
+                    return;
+                }
+
                 Currency.Withdraw(Data.Price.Amount);
                 charactersSave.AddBoughtCharacter(CharacterId);
             }

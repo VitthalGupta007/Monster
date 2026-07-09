@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using VXMonster.Core.Save;
+using VXMonster.Gameplay;
 using UnityEngine;
 
 namespace VXMonster.Save
@@ -13,6 +14,13 @@ namespace VXMonster.Save
         [SerializeField] protected bool adReviveUsed;
         [SerializeField] protected bool upgradeReviveUsed;
         [SerializeField] protected bool phoenixReviveUsed;
+
+        [SerializeField] protected bool hasSessionContext;
+        [SerializeField] protected int runMode;
+        [SerializeField] protected int difficulty;
+        [SerializeField] protected int endlessLoopCount;
+        [SerializeField] protected int dailySeed;
+        [SerializeField] protected bool isDailyScoredRun;
 
         public IReadOnlyList<string> ActiveRelicIds => activeRelicIds;
 
@@ -50,6 +58,33 @@ namespace VXMonster.Save
         {
             get => phoenixReviveUsed;
             set => phoenixReviveUsed = value;
+        }
+
+        public bool HasSessionContext => hasSessionContext;
+        public RunMode SavedRunMode => (RunMode)runMode;
+        public DifficultyTier SavedDifficulty => (DifficultyTier)difficulty;
+        public int SavedEndlessLoopCount => endlessLoopCount;
+        public int SavedDailySeed => dailySeed;
+        public bool SavedIsDailyScoredRun => isDailyScoredRun;
+
+        public void CaptureSessionContext(RunMode mode, DifficultyTier tier, int endlessLoops, int seed, bool dailyScored)
+        {
+            hasSessionContext = true;
+            runMode = (int)mode;
+            difficulty = (int)tier;
+            endlessLoopCount = endlessLoops;
+            dailySeed = seed;
+            isDailyScoredRun = dailyScored;
+        }
+
+        public void ClearSessionContext()
+        {
+            hasSessionContext = false;
+            runMode = 0;
+            difficulty = (int)DifficultyTier.Normal;
+            endlessLoopCount = 0;
+            dailySeed = 0;
+            isDailyScoredRun = false;
         }
 
         public void ResetForNewRun(int startingRerolls = 1)

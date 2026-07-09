@@ -61,6 +61,7 @@ namespace VXMonster.Gameplay
             DailySeed = 0;
             activeModifiers.Clear();
             RunSession?.ResetForNewRun(GetBonusRerolls());
+            CaptureSessionToSave();
         }
 
         public void ConfigureDailyChallenge(bool scoredAttempt)
@@ -73,6 +74,7 @@ namespace VXMonster.Gameplay
             activeModifiers.Clear();
             activeModifiers.AddRange(RunModifierUtility.GetDailyModifiers(DailySeed));
             RunSession?.ResetForNewRun(GetBonusRerolls());
+            CaptureSessionToSave();
         }
 
         public void ConfigureEndless(DifficultyTier difficulty)
@@ -84,12 +86,44 @@ namespace VXMonster.Gameplay
             DailySeed = 0;
             activeModifiers.Clear();
             RunSession?.ResetForNewRun(GetBonusRerolls());
+            CaptureSessionToSave();
         }
 
         public void IncrementEndlessLoop()
         {
             EndlessLoopCount++;
             LifetimeStats?.UpdateEndlessLoopsBest(EndlessLoopCount);
+            CaptureSessionToSave();
+        }
+
+        public void CaptureSessionToSave()
+        {
+            RunSession?.CaptureSessionContext(RunMode, Difficulty, EndlessLoopCount, DailySeed, IsDailyScoredRun);
+        }
+
+        public bool TryRestoreSessionFromSave()
+        {
+            if (RunSession == null || !RunSession.HasSessionContext) return false;
+
+            RunMode = RunSession.SavedRunMode;
+            Difficulty = RunSession.SavedDifficulty;
+            EndlessLoopCount = RunSession.SavedEndlessLoopCount;
+            DailySeed = RunSession.SavedDailySeed;
+            IsDailyScoredRun = RunSession.SavedIsDailyScoredRun;
+
+            activeModifiers.Clear();
+            if (RunMode == RunMode.DailyChallenge && DailySeed != 0)
+            {
+                activeModifiers.AddRange(RunModifierUtility.GetDailyModifiers(DailySeed));
+            }
+
+            VXDifficultySelection.Set(Difficulty);
+            return true;
+        }
+
+        public void ClearSessionContext()
+        {
+            RunSession?.ClearSessionContext();
         }
 
         public float GetEnemyHpMultiplier()
@@ -186,6 +220,26 @@ namespace VXMonster.Gameplay
             }
 
             return 1f;
+        }
+
+        public float GetTalentMoveSpeedMultiplier()
+        {
+            if (TalentTree != null && TalentTree.IsUnlocked(TalentTreeIds.QuickFeet))
+            {
+                return 1.08f;
+            }
+
+            return 1f;
+        }
+
+        public float GetTalentMaxHpBonus()
+        {
+            if (TalentTree != null && TalentTree.IsUnlocked(TalentTreeIds.IronWill))
+            {
+                return 20f;
+            }
+
+            return 0f;
         }
 
         public int CalculateDailyScore(int kills, float survivalTime, int comboBursts)

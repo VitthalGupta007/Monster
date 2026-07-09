@@ -43,15 +43,38 @@ namespace VXMonster.Core.UI
                 charactersSave.SetSelectedCharacterId(firstCharacter.Id);
             }
 
+            if (database == null || itemPrefab == null || itemsParent == null)
+            {
+                Debug.LogError($"[Characters] Window missing refs. database={(database != null)} itemPrefab={(itemPrefab != null)} itemsParent={(itemsParent != null)}");
+                return;
+            }
+
+            if (database.CharactersCount <= 0)
+            {
+                Debug.LogError("[Characters] Characters Database has zero entries.");
+                return;
+            }
+
             for (int i = 0; i < database.CharactersCount; i++)
             {
-                var item = Instantiate(itemPrefab, itemsParent).GetComponent<CharacterItemBehavior>();
-                item.transform.ResetLocal();
+                try
+                {
+                    var item = Instantiate(itemPrefab, itemsParent).GetComponent<CharacterItemBehavior>();
+                    if (item == null)
+                    {
+                        Debug.LogError($"[Characters] itemPrefab is missing CharacterItemBehavior (index {i}).");
+                        continue;
+                    }
 
-                item.Init(database.GetCharacterData(i), abilitiesDatabase);
-                item.onNavigationSelected += OnItemSelected;
-
-                items.Add(item);
+                    item.transform.ResetLocal();
+                    item.Init(database.GetCharacterData(i), abilitiesDatabase);
+                    item.onNavigationSelected += OnItemSelected;
+                    items.Add(item);
+                }
+                catch (System.Exception ex)
+                {
+                    Debug.LogError($"[Characters] Failed to spawn character item {i}: {ex}");
+                }
             }
 
             ResetNavigation();
@@ -145,7 +168,7 @@ namespace VXMonster.Core.UI
             var objPosition = (Vector2)scrollView.transform.InverseTransformPoint(item.Rect.position);
             var scrollHeight = scrollView.GetComponent<RectTransform>().rect.height;
 
-            return objPosition.y < scrollHeight / 2 && objPosition.y < -scrollHeight / 2;
+            return objPosition.y < scrollHeight / 2 && objPosition.y > -scrollHeight / 2;
             
         }
 

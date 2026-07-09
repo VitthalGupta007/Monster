@@ -73,7 +73,8 @@ namespace VXMonster.Core
         [Header("Other")]
         [SerializeField] protected Vector2 fenceOffset;
         [SerializeField] protected Color hitColor;
-        [SerializeField] protected float enemyInsideDamageInterval = 2f;
+        [SerializeField, Tooltip("Vampire Survivors-style global invuln after taking damage (seconds).")]
+        protected float postHitInvulnDuration = 0.24f;
 
         public event UnityAction onPlayerDied;
 
@@ -98,6 +99,7 @@ namespace VXMonster.Core
         public bool IsMovingAlowed { get; set; }
 
         protected bool invincible = false;
+        protected float postHitInvulnUntil;
 
         protected List<EnemyBehavior> enemiesInside = new List<EnemyBehavior>();
 
@@ -140,12 +142,20 @@ namespace VXMonster.Core
         {
             if (healthbar.IsZero) return;
 
-            foreach(var enemy in enemiesInside)
+            if (!IsPostHitInvulnerable() && enemiesInside.Count > 0)
             {
-                if (Time.time - enemy.LastTimeDamagedPlayer > enemyInsideDamageInterval)
+                var strongest = 0f;
+                for (var i = 0; i < enemiesInside.Count; i++)
                 {
-                    TakeDamage(enemy.GetDamage());
-                    enemy.LastTimeDamagedPlayer = Time.time;
+                    var enemy = enemiesInside[i];
+                    if (enemy == null) continue;
+                    var dmg = enemy.GetDamage();
+                    if (dmg > strongest) strongest = dmg;
+                }
+
+                if (strongest > 0f)
+                {
+                    TakeDamage(strongest);
                 }
             }
 
@@ -198,7 +208,8 @@ namespace VXMonster.Core
 
         public virtual void RecalculateMoveSpeed(float moveSpeedMultiplier)
         {
-            Speed = speed * moveSpeedMultiplier;
+            var talentMult = GameSessionManager.Instance?.GetTalentMoveSpeedMultiplier() ?? 1f;
+            Speed = speed * moveSpeedMultiplier * talentMult;
         }
 
         public virtual void RecalculateDamage(float damageMultiplier)
@@ -220,7 +231,7 @@ namespace VXMonster.Core
                 mult *= RelicsManager.Instance.GetMaxHpMultiplier();
             }
 
-            healthbar.ChangeMaxHP((Data.BaseHP + upgradeValue) * mult);
+            healthbar.ChangeMaxHP((Data.BaseHP + upgradeValue + (GameSessionManager.Instance?.GetTalentMaxHpBonus() ?? 0f)) * mult);
         }
 
         public virtual void RecalculateXPMuliplier(float xpMultiplier)
@@ -377,9 +388,10 @@ namespace VXMonster.Core
 
         public virtual void TakeDamage(float damage)
         {
-            if (invincible || healthbar.IsZero) return;
+            if (invincible || IsPostHitInvulnerable() || healthbar.IsZero) return;
 
             healthbar.Subtract(damage * DamageReductionMultiplier);
+            BeginPostHitInvuln();
 
             Character.FlashHit();
 
@@ -418,6 +430,17 @@ namespace VXMonster.Core
                 
                 GameController.AudioManager.PlaySound(RECEIVING_DAMAGE_HASH);
             }
+        }
+
+        protected virtual bool IsPostHitInvulnerable()
+        {
+            return Time.time < postHitInvulnUntil;
+        }
+
+        protected virtual void BeginPostHitInvuln()
+        {
+            var duration = Mathf.Max(0.01f, postHitInvulnDuration);
+            postHitInvulnUntil = Time.time + duration;
         }
 
         protected virtual bool TryPhoenixRevive()

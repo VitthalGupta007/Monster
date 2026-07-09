@@ -87,6 +87,7 @@ namespace VXMonster.Platform.Bootstrap
 
             // AfterSceneLoad may run before this object exists; attach panel for the current scene too.
             TryAttachLobbyModePanel();
+            TryAttachLobbyMetaMenu();
             TryAttachLobbyPersonalBest();
             TryShowLobbyTutorial();
         }
@@ -113,6 +114,7 @@ namespace VXMonster.Platform.Bootstrap
         private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             TryAttachLobbyModePanel();
+            TryAttachLobbyMetaMenu();
             TryAttachLobbyPersonalBest();
             TryShowLobbyTutorial();
             PlatformServices.RefreshBannerForActiveScene();
@@ -126,6 +128,16 @@ namespace VXMonster.Platform.Bootstrap
             if (lobby == null) return;
 
             lobby.gameObject.AddComponent<VXMonster.UI.VXLobbyModePanel>();
+        }
+
+        private static void TryAttachLobbyMetaMenu()
+        {
+            if (FindAnyObjectByType<VXMonster.UI.VXLobbyMetaMenu>() != null) return;
+
+            var lobby = FindAnyObjectByType<VXMonster.Core.UI.LobbyWindowBehavior>();
+            if (lobby == null) return;
+
+            lobby.gameObject.AddComponent<VXMonster.UI.VXLobbyMetaMenu>();
         }
 
         private void Start()

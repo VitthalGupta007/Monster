@@ -1,0 +1,41 @@
+{
+    "asset": "d23581c13deb9ba4098567028b1f52bf",
+    "fileName": "019f47dc-d5d1-790b-86d3-034c0a535b1f.png",
+    "prompt": "Keep the SAME flat 2D top-down survivor lobby preview STYLE (thick black outlines, soft oval drop shadows, tiled ground). REPLACE every creature with DIFFERENT enemy types — do NOT keep bats, plants, or pumpkins from the original. New cast for toxic swamp: carnivorous swamp plant (2), poison bug, toxic slime, swamp vampire, green jellyfish, stag beetle. Background: murky green bog mud tiles with toxic puddles. Green vignette. Same composition density. No text, no buildings, no lily pad platforms, no isometric.",
+    "negativePrompt": "",
+    "model": "gpt-image-1-5",
+    "modelName": "GPT Image 1.5",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": [
+            {
+                "doodleReferenceType": 7,
+                "doodle": [],
+                "label": "Image",
+                "strength": 0.25,
+                "invertStrength": false,
+                "assetReferenceGuid": "d23581c13deb9ba4098567028b1f52bf",
+                "unlabeledIndex": -1
+            }
+        ]
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 1024,
+        "height": 1024
+    },
+    "spriteSheet": false,
+    "duration": 0.0,
+    "dynamicParams": {
+        "serializedData": []
+    }
+}

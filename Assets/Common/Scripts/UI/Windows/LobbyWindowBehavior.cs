@@ -27,6 +27,9 @@ namespace VXMonster.Core.UI
         [SerializeField] protected Button upgradesButton;
         [SerializeField] protected Button settingsButton;
         [SerializeField] protected Button charactersButton;
+        [SerializeField] protected Button talentButton;
+        [SerializeField] protected Button codexButton;
+        [SerializeField] protected Button shopButton;
         [SerializeField] protected Button leftButton;
         [SerializeField] protected Button rightButton;
 
@@ -55,6 +58,10 @@ namespace VXMonster.Core.UI
         protected PurchasedCondition PurchaseCondition { get; set; }
         protected CurrencySave PurchaseCurrency { get; set; }
 
+        protected UnityAction talentAction;
+        protected UnityAction codexAction;
+        protected UnityAction shopAction;
+
         protected virtual void Awake()
         {
             playButton.onClick.AddListener(OnPlayButtonClicked);
@@ -64,6 +71,17 @@ namespace VXMonster.Core.UI
             confirmButton.onClick.AddListener(ConfirmButtonClicked);
             cancelButton.onClick.AddListener(CancelButtonClicked);
             if(infoButton != null && infoPopup != null) infoButton.onClick.AddListener(InfoButtonClicked);
+
+            // Bake-independent: Mode/Meta must exist even if PlatformBootstrapper did not run.
+            if (GetComponent<VXMonster.UI.VXLobbyModePanel>() == null)
+            {
+                gameObject.AddComponent<VXMonster.UI.VXLobbyModePanel>();
+            }
+
+            if (GetComponent<VXMonster.UI.VXLobbyMetaMenu>() == null)
+            {
+                gameObject.AddComponent<VXMonster.UI.VXLobbyMetaMenu>();
+            }
         }
 
         protected virtual void Start()
@@ -117,12 +135,25 @@ namespace VXMonster.Core.UI
             }
         }
 
-        public virtual void Init(UnityAction onUpgradesButtonClicked, UnityAction onSettingsButtonClicked, UnityAction onCharactersButtonClicked)
+        public virtual void Init(UnityAction onUpgradesButtonClicked, UnityAction onSettingsButtonClicked, UnityAction onCharactersButtonClicked,
+            UnityAction onTalentButtonClicked = null, UnityAction onCodexButtonClicked = null, UnityAction onShopButtonClicked = null)
         {
             upgradesButton.onClick.AddListener(onUpgradesButtonClicked);
             settingsButton.onClick.AddListener(onSettingsButtonClicked);
             charactersButton.onClick.AddListener(onCharactersButtonClicked);
+
+            talentAction = onTalentButtonClicked;
+            codexAction = onCodexButtonClicked;
+            shopAction = onShopButtonClicked;
+
+            if (talentButton != null && onTalentButtonClicked != null) talentButton.onClick.AddListener(onTalentButtonClicked);
+            if (codexButton != null && onCodexButtonClicked != null) codexButton.onClick.AddListener(onCodexButtonClicked);
+            if (shopButton != null && onShopButtonClicked != null) shopButton.onClick.AddListener(onShopButtonClicked);
         }
+
+        public void OpenTalentMenu() => talentAction?.Invoke();
+        public void OpenCodexMenu() => codexAction?.Invoke();
+        public void OpenShopMenu() => shopAction?.Invoke();
 
         public virtual void InitStage(int stageId)
         {
@@ -438,6 +469,7 @@ namespace VXMonster.Core.UI
         protected virtual void ConfirmButtonClicked()
         {
             save.ResetStageData = false;
+            GameSessionManager.Instance?.TryRestoreSessionFromSave();
 
             GameController.AudioManager.PlaySound(AudioManager.BUTTON_CLICK_HASH);
             GameController.LoadStage();
@@ -446,6 +478,7 @@ namespace VXMonster.Core.UI
         protected virtual void CancelButtonClicked()
         {
             save.IsPlaying = false;
+            GameSessionManager.Instance?.ClearSessionContext();
 
             continueBackgroundImage.DoAlpha(0, 0.3f).SetOnFinish(() => continueBackgroundImage.gameObject.SetActive(false));
             contituePopupRect.DoAnchorPosition(Vector2.down * 2500, 0.3f).SetEasing(EasingType.SineIn).SetOnFinish(() => contituePopupRect.gameObject.SetActive(false));

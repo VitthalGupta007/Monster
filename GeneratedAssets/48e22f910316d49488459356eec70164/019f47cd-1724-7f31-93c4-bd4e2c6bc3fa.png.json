@@ -1,0 +1,31 @@
+{
+    "asset": "48e22f910316d49488459356eec70164",
+    "fileName": "019f47cd-1724-7f31-93c4-bd4e2c6bc3fa.png",
+    "prompt": "Top-down survivor arena stage preview diamond framing, void nexus cosmic rift biome, violet black swirl, stars nebula portal, purple void energy, purple-gold survivor game UI style matching pixel monster survivors, thick readable silhouettes, no text, no UI chrome, game art only",
+    "negativePrompt": "",
+    "model": "rpg-environment",
+    "modelName": "RPG Environment",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": []
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 512,
+        "height": 512
+    },
+    "spriteSheet": false,
+    "duration": 0.0,
+    "dynamicParams": {
+        "serializedData": []
+    }
+}

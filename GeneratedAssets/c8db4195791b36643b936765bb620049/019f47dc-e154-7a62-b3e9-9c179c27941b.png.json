@@ -1,0 +1,41 @@
+{
+    "asset": "c8db4195791b36643b936765bb620049",
+    "fileName": "019f47dc-e154-7a62-b3e9-9c179c27941b.png",
+    "prompt": "Keep the SAME flat 2D top-down survivor lobby preview STYLE (thick black outlines, soft oval drop shadows, tiled ground). REPLACE every creature with DIFFERENT enemy types — do NOT keep jellyfish trio, wasp, green eye, red bat, fire slime from the original. New cast for ember stage: fire slime, lava hand, molten floating eye, stag beetle with ember glow, pumpkin with fire cracks, small fire bug. Background: dark volcanic stone with orange lava cracks. Warm vignette. Same composition density. No text, no buildings, no NPCs, no isometric.",
+    "negativePrompt": "",
+    "model": "gpt-image-1-5",
+    "modelName": "GPT Image 1.5",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": [
+            {
+                "doodleReferenceType": 7,
+                "doodle": [],
+                "label": "Image",
+                "strength": 0.25,
+                "invertStrength": false,
+                "assetReferenceGuid": "c8db4195791b36643b936765bb620049",
+                "unlabeledIndex": -1
+            }
+        ]
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 1024,
+        "height": 1024
+    },
+    "spriteSheet": false,
+    "duration": 0.0,
+    "dynamicParams": {
+        "serializedData": []
+    }
+}

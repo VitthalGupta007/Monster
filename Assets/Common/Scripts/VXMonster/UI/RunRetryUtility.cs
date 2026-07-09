@@ -24,6 +24,7 @@ namespace VXMonster.UI
 
             if (session != null)
             {
+                // OnGameFailed clears persisted mid-run snapshot but keeps in-memory RunMode.
                 switch (session.RunMode)
                 {
                     case RunMode.Campaign:

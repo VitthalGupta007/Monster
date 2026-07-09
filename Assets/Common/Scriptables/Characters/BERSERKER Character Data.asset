@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: feb45cd27482a5f418be6b1cad9dc14a, type: 3}
+  m_Name: BERSERKER Character Data
+  m_EditorClassIdentifier: Assembly-CSharp::VXMonster.Core.CharacterDataSO
+  id:
+    value: bdfa7213-0f58-4aa2-8dc9-c5e007fc0a4e
+    canEdit: 0
+  characterName: BERSERKER
+  price:
+    currencyId: gold
+    amount: 1600
+  icon: {fileID: 21300000, guid: f732c85210a311741abc947ab8af1424, type: 3}
+  prefab: {fileID: 2921880940271959218, guid: 54121bc69e709ef4aae3deb8291032d8, type: 3}
+  hasStartingAbility: 1
+  startingAbility: 3
+  baseHP: 85
+  baseDamage: 1.35

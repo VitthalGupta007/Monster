@@ -15,17 +15,17 @@ MonoBehaviour:
   id:
     value: 5c3f4d5e-6f70-8192-a3b4-c5d6e7f8091a
     canEdit: 0
-  icon: {fileID: 21300000, guid: 9000f7664ecafea498cba3b07fa1f838, type: 3}
+  icon: {fileID: 21300000, guid: 8bbd587972cde7c419691a3055d48398, type: 3}
   displayName: VX TOXIC SWAMP
-  timeline: {fileID: 11400000, guid: b0f895641243c3540b636140e9d64276, type: 2}
+  timeline: {fileID: 11400000, guid: abaee3872d802bc47a09630db1628ad2, type: 2}
   stageType: 0
   stageFieldData: {fileID: 11400000, guid: 4784fb39006132f48ad76bf040e6db27, type: 2}
   spawnProp: 1
   removePropFromBossfight: 1
   spotlightColor: {r: 0.45, g: 1, b: 0.35, a: 0.28}
   spotlightShadowColor: {r: 0.02, g: 0.12, b: 0.04, a: 0.95}
-  enemyDamage: 1
-  enemyHP: 1
+  enemyDamage: 1.15
+  enemyHP: 1.4
   useCustomMusic: 0
   musicName: Stage Music
   stageUnlockData:

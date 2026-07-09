@@ -142,6 +142,7 @@ namespace VXMonster.Core
             stageSave.CompleteStage(Stage);
 
             stageSave.IsPlaying = false;
+            session?.ClearSessionContext();
             GameController.SaveManager.Save(true);
 
             session?.LifetimeStats?.AddKills(stageSave.EnemiesKilled);
@@ -149,8 +150,10 @@ namespace VXMonster.Core
 
             if (session != null && session.RunMode == RunMode.DailyChallenge && session.IsDailyScoredRun)
             {
+                var dateKey = GameSessionManager.GetUtcDateKey();
                 var score = session.CalculateDailyScore(stageSave.EnemiesKilled, stageSave.Time, session.RunSession?.ComboBurstCount ?? 0);
-                session.DailyChallenge?.RecordScore(GameSessionManager.GetUtcDateKey(), score);
+                session.DailyChallenge?.RecordScore(dateKey, score);
+                DailyStreakUtility.RecordScoredDailyRun(dateKey);
                 PlatformServices.SubmitDailyScore(score);
             }
 
@@ -170,6 +173,8 @@ namespace VXMonster.Core
             Time.timeScale = 0;
 
             stageSave.IsPlaying = false;
+            // Keep in-memory RunMode for Retry; only clear persisted mid-run snapshot.
+            GameSessionManager.Instance?.ClearSessionContext();
             GameController.SaveManager.Save(true);
 
             var session = GameSessionManager.Instance;
@@ -184,8 +189,10 @@ namespace VXMonster.Core
 
             if (session != null && session.RunMode == RunMode.DailyChallenge && session.IsDailyScoredRun)
             {
+                var dateKey = GameSessionManager.GetUtcDateKey();
                 var score = session.CalculateDailyScore(stageSave.EnemiesKilled, stageSave.Time, session.RunSession?.ComboBurstCount ?? 0);
-                session.DailyChallenge?.RecordScore(GameSessionManager.GetUtcDateKey(), score);
+                session.DailyChallenge?.RecordScore(dateKey, score);
+                DailyStreakUtility.RecordScoredDailyRun(dateKey);
             }
 
             gameScreen.Hide();
