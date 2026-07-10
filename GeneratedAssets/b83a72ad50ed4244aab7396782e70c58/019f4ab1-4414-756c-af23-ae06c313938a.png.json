@@ -1,0 +1,31 @@
+{
+    "asset": "b83a72ad50ed4244aab7396782e70c58",
+    "fileName": "019f4ab1-4414-756c-af23-ae06c313938a.png",
+    "prompt": "Mobile app icon for an indie survivor game called VX Monster. Square 1:1 composition, centered subject, bold readable silhouette at small sizes. Cute chubby round monster mascot with big glowing eyes and tiny horns, soft cartoon shading, thick clean outlines, vibrant purple and teal color palette, simple solid dark navy circular badge background, subtle rim light, polished casual mobile game store icon look. No text, no letters, no logos, no watermarks, no Unity logo, no wizard hat, no cloak, no humanoid wizard. Hand-crafted game-art feel, not photoreal, not messy AI collage.",
+    "negativePrompt": "",
+    "model": "game-ui-essentials-2",
+    "modelName": "Game UI Essentials 2.0",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": []
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 1024,
+        "height": 1024
+    },
+    "spriteSheet": false,
+    "duration": 0.0,
+    "dynamicParams": {
+        "serializedData": []
+    }
+}

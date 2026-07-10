@@ -1,0 +1,31 @@
+{
+    "asset": "eaeef6a328f9ba444b564c29aea4492a",
+    "fileName": "019f4ab0-7968-7028-8a8d-04202f6be33d.png",
+    "prompt": "Premium Android app icon, square, centered. Stylized monster eye emblem inside a rounded square badge. Deep violet background, electric cyan iris, sharp graphic shapes, soft gradients, high contrast, looks like a shipped indie mobile game icon from 2024. Clean edges, simple shapes that stay clear at 48px. No text, no letters, no watermarks, no Unity logo, no wizard character, no hat, no cloak. Polished hand-designed game UI aesthetic.",
+    "negativePrompt": "",
+    "model": "gpt-image-1-5",
+    "modelName": "GPT Image 1.5",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": []
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 1024,
+        "height": 1024
+    },
+    "spriteSheet": false,
+    "duration": 0.0,
+    "dynamicParams": {
+        "serializedData": []
+    }
+}

@@ -15,10 +15,14 @@ Do **not** block Phase 1A–1C on this section. Ship retention content first; pl
 ### Play Console
 
 - [ ] App ID: `com.vitthalxstudios.monster` (draft exists)
-- [ ] Create IAP products matching [IAPProductIds.cs](../Assets/Platform/Android/IAP/IAPProductIds.cs):
-  - `remove_ads`, `gold_small`, `gold_medium`, `gold_large`, `starter_bundle`
+- [ ] Create IAP products matching [IAPProductIds.cs](../Assets/Platform/Android/IAP/IAPProductIds.cs) (full IDs):
+  - `com.vitthalxstudios.monster.remove_ads`
+  - `com.vitthalxstudios.monster.gold_small`
+  - `com.vitthalxstudios.monster.gold_medium`
+  - `com.vitthalxstudios.monster.gold_large`
+  - `com.vitthalxstudios.monster.starter_bundle`
 - [ ] Closed testing track + tester emails
-- [ ] Store listing: short/long description, screenshots, feature graphic
+- [ ] Store listing: short/long description, screenshots, feature graphic — copy in [PlayAlphaReady.md](PlayAlphaReady.md)
 - [ ] Privacy policy URL: `https://www.vitthalxstudios.com/privacy.html`
 
 ### Ads & consent

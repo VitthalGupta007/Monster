@@ -20,6 +20,9 @@ namespace VXMonster.EditorTools
         const string StageCompletePath = "Assets/Common/Prefabs/UI/Screens/Stage Complete Screen.prefab";
         const string GameScreenPath = "Assets/Common/Prefabs/UI/Screens/Game Screen.prefab";
         const string TalentNodePrefabPath = "Assets/Common/Prefabs/UI/VX/Talent Node Button.prefab";
+        const string ModeButtonsPrefabPath = "Assets/Common/Prefabs/UI/VX/VX Mode Buttons.prefab";
+        const string GreenButtonSpritePath = "Assets/Common/Sprites/UI/Generic/ui_button_green.png";
+        const string YellowButtonSpritePath = "Assets/Common/Sprites/UI/Generic/ui_button_yellow.png";
         const string ButtonSpriteGuid = "4b9abba727e1c924cba2bcc0ee5bb8de";
         const string GrayButtonSpriteGuid = "3877251ea12389449ad7cb7bad961758";
         const string FontPath = "Assets/Common/Fonts/TMP Font Assets/NeverMindRounded-Bold/Shadow Outline NeverMindRounded-Bold.asset";
@@ -110,7 +113,8 @@ namespace VXMonster.EditorTools
                 if (back.objectReferenceValue is Button backBtn)
                 {
                     var rt = backBtn.GetComponent<RectTransform>();
-                    rt.anchoredPosition = new Vector2(0f, -480f);
+                    // Android hides Exit; keep Back above the home-indicator band.
+                    rt.anchoredPosition = new Vector2(0f, -400f);
                     rt.sizeDelta = new Vector2(420f, 140f);
                 }
 
@@ -300,11 +304,26 @@ namespace VXMonster.EditorTools
 
                 var badge = GetOrAdd<DifficultyBadgeHudBehavior>(hudRoot.gameObject);
                 var badgeSo = new SerializedObject(badge);
-                if (badgeSo.FindProperty("badgeLabel").objectReferenceValue == null)
+                var badgeProp = badgeSo.FindProperty("badgeLabel");
+                TMP_Text badgeLabel = badgeProp.objectReferenceValue as TMP_Text;
+                if (badgeLabel == null)
                 {
-                    var label = CreateHudLabel(hudRoot, "Difficulty Badge", new Vector2(360f, -80f), TextAlignmentOptions.TopRight);
-                    badgeSo.FindProperty("badgeLabel").objectReferenceValue = label;
+                    badgeLabel = CreateHudLabel(hudRoot, "Difficulty Badge", new Vector2(0f, -16f), TextAlignmentOptions.Center, 22f);
+                    badgeProp.objectReferenceValue = badgeLabel;
                 }
+
+                // Always pin to top-center — old mid-screen offset was unreadable on Android.
+                var badgeRt = badgeLabel.GetComponent<RectTransform>();
+                badgeRt.anchorMin = new Vector2(0.5f, 1f);
+                badgeRt.anchorMax = new Vector2(0.5f, 1f);
+                badgeRt.pivot = new Vector2(0.5f, 1f);
+                badgeRt.anchoredPosition = new Vector2(0f, -16f);
+                badgeRt.sizeDelta = new Vector2(420f, 36f);
+                badgeLabel.fontSize = 22f;
+                badgeLabel.enableAutoSizing = false;
+                badgeLabel.alignment = TextAlignmentOptions.Center;
+                badgeLabel.textWrappingMode = TextWrappingModes.NoWrap;
+                badgeLabel.overflowMode = TextOverflowModes.Ellipsis;
                 badgeSo.ApplyModifiedPropertiesWithoutUndo();
 
                 var relicHudGo = hudRoot.Find("Relic HUD");
@@ -371,13 +390,7 @@ namespace VXMonster.EditorTools
 
                 so.ApplyModifiedPropertiesWithoutUndo();
 
-                if (root.GetComponent<VXLobbyModePanel>() == null)
-                {
-                    var mode = root.AddComponent<VXLobbyModePanel>();
-                    var modeSo = new SerializedObject(mode);
-                    modeSo.FindProperty("lobbyWindow").objectReferenceValue = lobby;
-                    modeSo.ApplyModifiedPropertiesWithoutUndo();
-                }
+                WireLobbyModeButtonsInto(root, lobby);
 
                 if (root.GetComponent<VXLobbyMetaMenu>() == null)
                 {
@@ -387,12 +400,11 @@ namespace VXMonster.EditorTools
                     metaSo.ApplyModifiedPropertiesWithoutUndo();
                 }
 
-                // Logo bottoms ~y=636; stage diamond top ~y=443. Pack a non-overlapping strip
-                // (36px tall, 44px step) so TMP glyphs never stack into the garbled band.
-                PlaceOrCreateHudLabel(root.transform, "Daily Best Label", new Vector2(0f, 620f), TextAlignmentOptions.Center, 22f, 36f);
-                PlaceOrCreateHudLabel(root.transform, "Endless Best Label", new Vector2(0f, 576f), TextAlignmentOptions.Center, 22f, 36f);
-                PlaceOrCreateHudLabel(root.transform, "Streak Label", new Vector2(0f, 532f), TextAlignmentOptions.Center, 22f, 36f);
-                PlaceOrCreateHudLabel(root.transform, "Daily Modifiers Label", new Vector2(0f, 488f), TextAlignmentOptions.Center, 20f, 36f);
+                // Top-anchored under logo (logo top -240, h 204 → bottom -444). Center Y breaks on short iPhones.
+                PlaceOrCreateHudLabel(root.transform, "Daily Best Label", new Vector2(0f, -468f), TextAlignmentOptions.Center, 20f, 32f, topAnchored: true);
+                PlaceOrCreateHudLabel(root.transform, "Endless Best Label", new Vector2(0f, -500f), TextAlignmentOptions.Center, 20f, 32f, topAnchored: true);
+                PlaceOrCreateHudLabel(root.transform, "Streak Label", new Vector2(0f, -532f), TextAlignmentOptions.Center, 20f, 32f, topAnchored: true);
+                PlaceOrCreateHudLabel(root.transform, "Daily Modifiers Label", new Vector2(0f, -564f), TextAlignmentOptions.Center, 18f, 32f, topAnchored: true);
 
                 var pb = root.GetComponent<LocalPersonalBestBehavior>();
                 if (pb == null) pb = root.AddComponent<LocalPersonalBestBehavior>();
@@ -857,7 +869,7 @@ namespace VXMonster.EditorTools
             return tmp;
         }
 
-        static void PlaceOrCreateHudLabel(Transform parent, string name, Vector2 anchoredPosition, TextAlignmentOptions align, float fontSize, float height = 36f)
+        static void PlaceOrCreateHudLabel(Transform parent, string name, Vector2 anchoredPosition, TextAlignmentOptions align, float fontSize, float height = 36f, bool topAnchored = false)
         {
             var existing = parent.Find(name);
             if (existing != null)
@@ -865,6 +877,13 @@ namespace VXMonster.EditorTools
                 var rt = existing.GetComponent<RectTransform>();
                 if (rt != null)
                 {
+                    if (topAnchored)
+                    {
+                        rt.anchorMin = new Vector2(0.5f, 1f);
+                        rt.anchorMax = new Vector2(0.5f, 1f);
+                        rt.pivot = new Vector2(0.5f, 0.5f);
+                    }
+
                     rt.anchoredPosition = anchoredPosition;
                     rt.sizeDelta = new Vector2(900f, height);
                 }
@@ -884,7 +903,19 @@ namespace VXMonster.EditorTools
 
             var created = CreateHudLabel(parent, name, anchoredPosition, align, fontSize);
             var createdRt = created.GetComponent<RectTransform>();
-            if (createdRt != null) createdRt.sizeDelta = new Vector2(900f, height);
+            if (createdRt != null)
+            {
+                if (topAnchored)
+                {
+                    createdRt.anchorMin = new Vector2(0.5f, 1f);
+                    createdRt.anchorMax = new Vector2(0.5f, 1f);
+                    createdRt.pivot = new Vector2(0.5f, 0.5f);
+                    createdRt.anchoredPosition = anchoredPosition;
+                }
+
+                createdRt.sizeDelta = new Vector2(900f, height);
+            }
+
             created.enableAutoSizing = false;
             created.overflowMode = TextOverflowModes.Ellipsis;
             created.textWrappingMode = TextWrappingModes.NoWrap;
@@ -910,8 +941,182 @@ namespace VXMonster.EditorTools
             return c != null ? c : go.AddComponent<T>();
         }
 
+        [MenuItem("VX Monster/Wire Lobby Mode Buttons Prefab")]
+        public static void WireLobbyModeButtonsMenu()
+        {
+            var root = PrefabUtility.LoadPrefabContents(LobbyPath);
+            try
+            {
+                var lobby = root.GetComponent<LobbyWindowBehavior>();
+                WireLobbyModeButtonsInto(root, lobby);
+                PrefabUtility.SaveAsPrefabAsset(root, LobbyPath);
+                Debug.Log("[VX] Lobby mode buttons prefab created and wired. Drag them in Lobby Window to reposition.");
+            }
+            finally
+            {
+                PrefabUtility.UnloadPrefabContents(root);
+            }
+        }
+
+        /// <summary>
+        /// Builds editable mode buttons under Lobby Window and saves a reusable prefab copy.
+        /// Simple Image+Button+Label only (no hit-split components). Uses Play/Upgrade sprites.
+        /// </summary>
+        static void WireLobbyModeButtonsInto(GameObject lobbyRoot, LobbyWindowBehavior lobby)
+        {
+            const string rootName = "VX Mode Buttons";
+
+            for (var i = lobbyRoot.transform.childCount - 1; i >= 0; i--)
+            {
+                var child = lobbyRoot.transform.GetChild(i);
+                if (child.name == rootName || child.name.StartsWith(rootName + "_"))
+                {
+                    Object.DestroyImmediate(child.gameObject);
+                }
+            }
+
+            // Restore production lobby anchors (pre-touch-target experiment).
+            var attempts = FindDeepChild(lobbyRoot.transform, "Attempts Text (TMP)") as RectTransform;
+            if (attempts != null)
+            {
+                attempts.anchoredPosition = new Vector2(0f, -289.5f);
+                attempts.sizeDelta = new Vector2(500f, 50f);
+            }
+
+            SetAnchoredY(FindDeepChild(lobbyRoot.transform, "Play Button Background"), -550f);
+            SetAnchoredY(FindDeepChild(lobbyRoot.transform, "Upgrade Button Background"), -780f);
+            SetAnchoredY(FindDeepChild(lobbyRoot.transform, "Characters Button Background"), -780f);
+            // Do NOT move Upgrade/Characters Button children — they are bottom-anchored
+            // inside the backgrounds; world Y would push icons off the frames.
+
+            var infoBtn = FindDeepChild(lobbyRoot.transform, "Info Button") as RectTransform;
+            if (infoBtn != null)
+            {
+                infoBtn.anchoredPosition = new Vector2(400f, -400f);
+            }
+
+            var folder = Path.GetDirectoryName(ModeButtonsPrefabPath)?.Replace('\\', '/');
+            if (!string.IsNullOrEmpty(folder) && !AssetDatabase.IsValidFolder(folder))
+            {
+                Directory.CreateDirectory(folder);
+                AssetDatabase.Refresh();
+            }
+
+            var modeRoot = new GameObject(rootName, typeof(RectTransform));
+            var modeRt = modeRoot.GetComponent<RectTransform>();
+            modeRt.SetParent(lobbyRoot.transform, false);
+            modeRt.anchorMin = new Vector2(0.5f, 0.5f);
+            modeRt.anchorMax = new Vector2(0.5f, 0.5f);
+            modeRt.pivot = new Vector2(0.5f, 0.5f);
+            modeRt.anchoredPosition = Vector2.zero;
+            modeRt.sizeDelta = Vector2.zero;
+
+            // Fits between Attempts (~-315) and Play top (~-448) without overlap.
+            const float rowH = 64f;
+            const float modeW = 180f;
+            const float diffW = 500f;
+            const float modeY = -410f;
+            const float diffY = -340f;
+            const float step = 195f;
+
+            var yellow = AssetDatabase.LoadAssetAtPath<Sprite>(YellowButtonSpritePath) ?? LoadButtonSprite();
+            var green = AssetDatabase.LoadAssetAtPath<Sprite>(GreenButtonSpritePath) ?? yellow;
+
+            var difficulty = CreateLobbyModeButton(modeRt, "Difficulty Button", "DIFF · NORMAL", new Vector2(0f, diffY), new Vector2(diffW, rowH), yellow, Color.white);
+            var daily = CreateLobbyModeButton(modeRt, "Daily Challenge", "DAILY", new Vector2(-step, modeY), new Vector2(modeW, rowH), green, Color.white);
+            var practice = CreateLobbyModeButton(modeRt, "Practice", "PRACTICE", new Vector2(0f, modeY), new Vector2(modeW, rowH), yellow, Color.white);
+            var endless = CreateLobbyModeButton(modeRt, "Endless", "ENDLESS", new Vector2(step, modeY), new Vector2(modeW, rowH), yellow, Color.white);
+
+            PrefabUtility.SaveAsPrefabAsset(modeRoot, ModeButtonsPrefabPath);
+
+            var mode = lobbyRoot.GetComponent<VXLobbyModePanel>();
+            if (mode == null) mode = lobbyRoot.AddComponent<VXLobbyModePanel>();
+            var modeSo = new SerializedObject(mode);
+            modeSo.FindProperty("lobbyWindow").objectReferenceValue = lobby;
+            modeSo.FindProperty("difficultyButton").objectReferenceValue = difficulty.GetComponent<Button>();
+            modeSo.FindProperty("dailyButton").objectReferenceValue = daily.GetComponent<Button>();
+            modeSo.FindProperty("practiceButton").objectReferenceValue = practice.GetComponent<Button>();
+            modeSo.FindProperty("endlessButton").objectReferenceValue = endless.GetComponent<Button>();
+            modeSo.FindProperty("difficultyLabel").objectReferenceValue = difficulty.GetComponentInChildren<TMP_Text>();
+            modeSo.ApplyModifiedPropertiesWithoutUndo();
+        }
+
+        static void SetAnchoredY(Transform t, float y)
+        {
+            var rt = t as RectTransform;
+            if (rt == null) return;
+            rt.anchoredPosition = new Vector2(rt.anchoredPosition.x, y);
+        }
+
+        static GameObject CreateLobbyModeButton(
+            Transform parent,
+            string name,
+            string label,
+            Vector2 anchoredPosition,
+            Vector2 size,
+            Sprite sprite,
+            Color tint)
+        {
+            var font = LoadFont();
+            var go = new GameObject(name, typeof(RectTransform), typeof(CanvasRenderer), typeof(Image), typeof(Button));
+            var rt = go.GetComponent<RectTransform>();
+            rt.SetParent(parent, false);
+            rt.anchorMin = new Vector2(0.5f, 0.5f);
+            rt.anchorMax = new Vector2(0.5f, 0.5f);
+            rt.pivot = new Vector2(0.5f, 0.5f);
+            rt.anchoredPosition = anchoredPosition;
+            rt.sizeDelta = size;
+
+            var image = go.GetComponent<Image>();
+            image.sprite = sprite;
+            image.type = Image.Type.Sliced;
+            image.color = tint;
+            image.pixelsPerUnitMultiplier = 1.85f;
+            image.raycastTarget = true;
+
+            var button = go.GetComponent<Button>();
+            button.targetGraphic = image;
+
+            var textGo = new GameObject("Label", typeof(RectTransform), typeof(CanvasRenderer), typeof(TextMeshProUGUI));
+            var textRt = textGo.GetComponent<RectTransform>();
+            textRt.SetParent(rt, false);
+            textRt.anchorMin = Vector2.zero;
+            textRt.anchorMax = Vector2.one;
+            textRt.offsetMin = new Vector2(8f, 4f);
+            textRt.offsetMax = new Vector2(-8f, -4f);
+
+            var tmp = textGo.GetComponent<TextMeshProUGUI>();
+            tmp.text = label;
+            tmp.font = font;
+            tmp.fontSize = 26f;
+            tmp.enableAutoSizing = true;
+            tmp.fontSizeMin = 16f;
+            tmp.fontSizeMax = 26f;
+            tmp.alignment = TextAlignmentOptions.Center;
+            tmp.color = Color.white;
+            tmp.raycastTarget = false;
+            tmp.overflowMode = TextOverflowModes.Ellipsis;
+            tmp.textWrappingMode = TextWrappingModes.NoWrap;
+            return go;
+        }
+
+        static Transform FindDeepChild(Transform parent, string childName)
+        {
+            for (var i = 0; i < parent.childCount; i++)
+            {
+                var child = parent.GetChild(i);
+                if (child.name == childName) return child;
+                var nested = FindDeepChild(child, childName);
+                if (nested != null) return nested;
+            }
+
+            return null;
+        }
+
         static Sprite LoadButtonSprite()
         {
+            var yellow = AssetDatabase.LoadAssetAtPath<Sprite>(YellowButtonSpritePath);
+            if (yellow != null) return yellow;
             return AssetDatabase.LoadAssetAtPath<Sprite>(AssetDatabase.GUIDToAssetPath(ButtonSpriteGuid));
         }
 
