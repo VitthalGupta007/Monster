@@ -52,7 +52,7 @@ Run these checks before Play Console submit. Agent cannot run Unity/device tests
 
 ## Automated tests (Editor)
 
-Run **Window → General → Test Runner → EditMode**:
+Run **Window → General → Test Runner → EditMode** (tests live in `Assets/Tests/Editor`):
 
 - `TalentTreeSaveTests` — unlock spend logic
 - `EntitlementsSaveTests` — Remove Ads flag

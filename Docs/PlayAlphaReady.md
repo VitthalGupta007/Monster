@@ -7,7 +7,7 @@ Use this for Google Play **closed testing (alpha)**. Last prepared: 10 July 2026
 | Item | Status |
 |------|--------|
 | Package ID | `com.vitthalxstudios.monster` |
-| Version name / code | `1.0.0` / `2` |
+| Version name / code | `1.0.0` / `3` |
 | Min / target SDK | 26 / 35 |
 | Upload keystore on disk | `vx-monster-upload.keystore` (alias `vxmonster`) — passwords not in repo |
 | AdMob app + unit IDs | Set in `AdMobConfig.cs` |
@@ -15,6 +15,7 @@ Use this for Google Play **closed testing (alpha)**. Last prepared: 10 July 2026
 | Privacy policy live | https://www.vitthalxstudios.com/privacy.html |
 | In-app legal text | `LegalTexts.cs` |
 | Lobby HUD label overlap (small phones) | Top-anchored under logo |
+| EditMode tests excluded from player | Moved to `Assets/Tests/Editor` (fixes IL2CPP / nunit build fail) |
 | Firebase `google-services.json` | **Missing** (gitignored) — analytics optional for first alpha |
 | Play Console forms | **You** must complete (agent cannot access your account) |
 
@@ -136,7 +137,7 @@ Activate products. They only work after the app is on a testing track with licen
 7. Review and **Start rollout**
 8. Testers open the opt-in link → install from Play Store
 
-Suggested release name: `1.0.0 (2) — closed alpha`
+Suggested release name: `1.0.0 (3) — closed alpha`
 
 ---
 
