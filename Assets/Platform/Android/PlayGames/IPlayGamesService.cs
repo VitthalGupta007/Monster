@@ -13,5 +13,7 @@ namespace VXMonster.Platform.PlayGames
         void UnlockAchievement(string achievementId, Action<bool> onComplete = null);
         void ShowLeaderboard(string leaderboardId = null);
         void ShowAchievements();
+        void SyncCloudSave(Action<bool> onComplete = null);
+        void PushCloudSave(Action<bool> onComplete = null);
     }
 }

@@ -1,4 +1,6 @@
 #if UNITY_PURCHASING
+// IAP v4 listener APIs remain valid until Unity Purchasing v5 migration (tracked separately).
+#pragma warning disable CS0618
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -157,4 +159,5 @@ namespace VXMonster.Platform.IAP
         }
     }
 }
+#pragma warning restore CS0618
 #endif

@@ -39,6 +39,7 @@ namespace VXMonster.Core.Save
         public bool IsSaveLoaded { get; private set; }
 
         public event UnityAction OnSaveLoaded;
+        public event UnityAction OnSaveCompleted;
 
         private Coroutine saveCoroutine;
 
@@ -72,6 +73,24 @@ namespace VXMonster.Core.Save
             }
 
             GameController.RegisterSaveManager(this);
+        }
+
+        /// <summary>
+        /// Re-reads the on-disk save file (e.g. after Play Games cloud restore).
+        /// </summary>
+        public void ReloadFromDisk()
+        {
+            if (saveType != SaveType.SaveFile) return;
+
+            SaveDatabase = LoadSave();
+            SaveDatabase.Init();
+            IsSaveLoaded = true;
+            OnSaveLoaded?.Invoke();
+        }
+
+        private void NotifySaveCompleted()
+        {
+            OnSaveCompleted?.Invoke();
         }
 
         /// <summary>
@@ -212,6 +231,7 @@ namespace VXMonster.Core.Save
 
             isSaving = false;
             saveCoroutine = null;
+            NotifySaveCompleted();
         }
 
         private void ForceSave()
@@ -234,6 +254,8 @@ namespace VXMonster.Core.Save
                 }
 #endif
             }
+
+            NotifySaveCompleted();
         }
 
         /// <summary>
@@ -249,6 +271,7 @@ namespace VXMonster.Core.Save
             {
                 PlayerPrefs.SetString("save", JsonUtility.ToJson(SaveDatabase));
                 PlayerPrefs.Save();
+                NotifySaveCompleted();
             } else
             {
 #if UNITY_WEBGL && !UNITY_EDITOR

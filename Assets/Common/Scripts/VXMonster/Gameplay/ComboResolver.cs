@@ -1,5 +1,6 @@
 using VXMonster.Core;
 using UnityEngine;
+using VXMonster.Platform;
 
 namespace VXMonster.Gameplay
 {
@@ -37,6 +38,7 @@ namespace VXMonster.Gameplay
                 if (GameSessionManager.Instance?.Codex?.MarkFirstCombo() == true)
                 {
                     CodexRewardUtility.OnFirstComboDiscovered();
+                    PlatformServices.UnlockFirstCombo();
                 }
             }
 

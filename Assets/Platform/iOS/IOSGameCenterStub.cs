@@ -16,5 +16,7 @@ namespace VXMonster.Platform.iOS
         public void UnlockAchievement(string achievementId, Action<bool> onComplete = null) => onComplete?.Invoke(true);
         public void ShowLeaderboard(string leaderboardId = null) { }
         public void ShowAchievements() { }
+        public void SyncCloudSave(Action<bool> onComplete = null) => onComplete?.Invoke(true);
+        public void PushCloudSave(Action<bool> onComplete = null) => onComplete?.Invoke(true);
     }
 }

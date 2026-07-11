@@ -1,6 +1,6 @@
-# VX Monster — public legal site
+# VitthalX Studio — public site
 
-Static pages for Play Console privacy URL and BillDesk website field.
+Static pages for the studio site, Play Console privacy URL, data deletion, and BillDesk website field.
 
 ## Host (fastest): Netlify Drop
 
@@ -10,6 +10,21 @@ Static pages for Play Console privacy URL and BillDesk website field.
 4. Use:
    - **BillDesk website:** `https://something.netlify.app`
    - **Play Console privacy policy:** `https://something.netlify.app/privacy.html`
+   - **Play Console data deletion:** `https://something.netlify.app/delete-data.html`
+
+## Files
+
+| File | URL path |
+|------|----------|
+| `index.html` | `/` — VitthalX Studio home |
+| `vx-monster.html` | `/vx-monster.html` — VX Monster game page |
+| `download.html` | `/download.html` |
+| `privacy.html` | `/privacy.html` |
+| `terms.html` | `/terms.html` |
+| `delete-data.html` | `/delete-data.html` |
+| `downloads/vx-monster.apk` | `/downloads/vx-monster.apk` |
+| `styles.css` | `/styles.css` |
+| `assets/vx-monster-icon.png` | `/assets/vx-monster-icon.png` |
 
 ## Privacy policy sources used
 
@@ -22,17 +37,6 @@ Content was written to cover requirements described in:
 - AdMob / Google ads disclosure expectations (name AdMob; advertising identifiers; purposes; third-party tech; opt-out links; link to Google partner data use)
 
 This is **not legal advice**. Have a lawyer review before relying on it for regulated markets.
-
-## Files
-
-| File | URL path |
-|------|----------|
-| `index.html` | `/` |
-| `download.html` | `/download.html` |
-| `privacy.html` | `/privacy.html` |
-| `terms.html` | `/terms.html` |
-| `downloads/vx-monster.apk` | `/downloads/vx-monster.apk` |
-| `styles.css` | `/styles.css` |
 
 ## Host APK for BillDesk
 

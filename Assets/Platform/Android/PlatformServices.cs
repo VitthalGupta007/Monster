@@ -38,29 +38,45 @@ namespace VXMonster.Platform
 
             IapService.Initialize(_ => { });
 
-            if (!GoogleMobileAdsConsentController.CanRequestAds)
-            {
-                IsReady = true;
-                return;
-            }
-
-            if (!AdsEnabled)
-            {
-                IsReady = true;
-                return;
-            }
-
             PlayGames.Initialize(_ =>
             {
-                AdService.Initialize(success =>
-                {
-                    IsReady = success;
-                    if (success)
-                    {
-                        RefreshBannerForActiveScene();
-                    }
-                });
+                InitializeAds();
             });
+        }
+
+        private static void InitializeAds()
+        {
+            if (!GoogleMobileAdsConsentController.CanRequestAds || !AdsEnabled)
+            {
+                IsReady = true;
+                RefreshBannerForActiveScene();
+                return;
+            }
+
+            AdService.Initialize(success =>
+            {
+                IsReady = success;
+                if (success)
+                {
+                    RefreshBannerForActiveScene();
+                }
+            });
+        }
+
+        public static void TryPushCloudSave()
+        {
+            if (PlayGames == null || !PlayGames.IsAuthenticated) return;
+            PlayGames.PushCloudSave();
+        }
+
+        public static void UnlockFirstCombo()
+        {
+            PlayGames?.UnlockAchievement(PlayGamesIds.AchievementFirstCombo);
+        }
+
+        public static void UnlockDailyComplete()
+        {
+            PlayGames?.UnlockAchievement(PlayGamesIds.AchievementDailyComplete);
         }
 
         public static bool TryShowInterstitial(Action onClosed)
@@ -129,17 +145,17 @@ namespace VXMonster.Platform
 
         public static void SubmitDailyScore(int score)
         {
-            PlayGames?.SubmitScore(GPGSIds.LeaderboardDailyChallenge, score);
+            PlayGames?.SubmitScore(PlayGamesIds.LeaderboardDailyChallenge, score);
         }
 
         public static void SubmitEndlessScore(int loops)
         {
-            PlayGames?.SubmitScore(GPGSIds.LeaderboardEndlessWaves, loops);
+            PlayGames?.SubmitScore(PlayGamesIds.LeaderboardEndlessWaves, loops);
         }
 
         public static void SubmitLifetimeKills(int totalKills)
         {
-            PlayGames?.SubmitScore(GPGSIds.LeaderboardLifetimeKills, totalKills);
+            PlayGames?.SubmitScore(PlayGamesIds.LeaderboardLifetimeKills, totalKills);
         }
     }
 }

@@ -82,13 +82,19 @@ namespace VXMonster.Platform.Bootstrap
 #else
                 var iapService = new MockIapService();
 #endif
-                PlatformServices.Initialize(adMobConfig, adService, new MockPlayGamesService(), iapService);
+#if UNITY_ANDROID && !UNITY_EDITOR && GOOGLE_PLAY_GAMES_AVAILABLE
+                var playGamesService = new GooglePlayGamesService();
+#else
+                var playGamesService = new MockPlayGamesService();
+#endif
+                PlatformServices.Initialize(adMobConfig, adService, playGamesService, iapService);
             });
 
             // AfterSceneLoad may run before this object exists; attach panel for the current scene too.
             TryAttachLobbyModePanel();
             TryAttachLobbyMetaMenu();
             TryAttachLobbyPersonalBest();
+            TryAttachPlayGamesLobby();
             TryShowLobbyTutorial();
         }
 
@@ -109,6 +115,11 @@ namespace VXMonster.Platform.Bootstrap
         private void OnDestroy()
         {
             SceneManager.sceneLoaded -= OnSceneLoaded;
+
+            if (GameController.SaveManager != null)
+            {
+                GameController.SaveManager.OnSaveCompleted -= PlatformServices.TryPushCloudSave;
+            }
         }
 
         private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -116,6 +127,7 @@ namespace VXMonster.Platform.Bootstrap
             TryAttachLobbyModePanel();
             TryAttachLobbyMetaMenu();
             TryAttachLobbyPersonalBest();
+            TryAttachPlayGamesLobby();
             TryShowLobbyTutorial();
             PlatformServices.RefreshBannerForActiveScene();
         }
@@ -140,6 +152,14 @@ namespace VXMonster.Platform.Bootstrap
             lobby.gameObject.AddComponent<VXMonster.UI.VXLobbyMetaMenu>();
         }
 
+        private static void TryAttachPlayGamesLobby()
+        {
+            var lobby = FindAnyObjectByType<VXMonster.Core.UI.LobbyWindowBehavior>();
+            if (lobby == null) return;
+            if (lobby.GetComponent<VXMonster.UI.PlayGamesLobbyBehavior>() != null) return;
+            lobby.gameObject.AddComponent<VXMonster.UI.PlayGamesLobbyBehavior>();
+        }
+
         private void Start()
         {
             BindPersistentSaves();
@@ -147,6 +167,7 @@ namespace VXMonster.Platform.Bootstrap
             if (GameController.SaveManager != null)
             {
                 PlatformServices.BindEntitlements(GameController.SaveManager.GetSave<EntitlementsSave>("VX Entitlements"));
+                GameController.SaveManager.OnSaveCompleted += PlatformServices.TryPushCloudSave;
             }
 
             PlatformServices.ShowMainMenuBanner();

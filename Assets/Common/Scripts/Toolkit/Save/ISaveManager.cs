@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace VXMonster.Core.Save
 {
@@ -10,5 +11,8 @@ namespace VXMonster.Core.Save
         T GetSave<T>(string uniqueName) where T : ISave, new();
 
         void Save(bool multithreading = false);
+        void ReloadFromDisk();
+
+        event UnityAction OnSaveCompleted;
     }
 }

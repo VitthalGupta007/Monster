@@ -155,6 +155,7 @@ namespace VXMonster.Core
                 session.DailyChallenge?.RecordScore(dateKey, score);
                 DailyStreakUtility.RecordScoredDailyRun(dateKey);
                 PlatformServices.SubmitDailyScore(score);
+                PlatformServices.UnlockDailyComplete();
             }
 
             if (session?.LifetimeStats != null)

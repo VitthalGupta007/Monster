@@ -32,5 +32,9 @@ namespace VXMonster.Platform.PlayGames
         public void ShowLeaderboard(string leaderboardId = null) { }
 
         public void ShowAchievements() { }
+
+        public void SyncCloudSave(Action<bool> onComplete = null) => onComplete?.Invoke(true);
+
+        public void PushCloudSave(Action<bool> onComplete = null) => onComplete?.Invoke(true);
     }
 }
