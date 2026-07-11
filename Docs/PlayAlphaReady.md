@@ -7,7 +7,7 @@ Use this for Google Play **closed testing (alpha)**. Last prepared: 10 July 2026
 | Item | Status |
 |------|--------|
 | Package ID | `com.vitthalxstudios.monster` |
-| Version name / code | `1.0.0` / `3` |
+| Version name / code | `1.0.0` / `4` |
 | Min / target SDK | 26 / 35 |
 | Upload keystore on disk | `vx-monster-upload.keystore` (alias `vxmonster`) — passwords not in repo |
 | AdMob app + unit IDs | Set in `AdMobConfig.cs` |
@@ -16,6 +16,8 @@ Use this for Google Play **closed testing (alpha)**. Last prepared: 10 July 2026
 | In-app legal text | `LegalTexts.cs` |
 | Lobby HUD label overlap (small phones) | Top-anchored under logo |
 | EditMode tests excluded from player | Moved to `Assets/Tests/Editor` (fixes IL2CPP / nunit build fail) |
+| Feature graphic / store icon | `Docs/StoreAssets/` |
+| Phone screenshots (live Game View) | `Docs/StoreAssets/Screenshots/phone_01..04_*.png` — upload all 4 |
 | Firebase `google-services.json` | **Missing** (gitignored) — analytics optional for first alpha |
 | Play Console forms | **You** must complete (agent cannot access your account) |
 
