@@ -27,20 +27,15 @@ namespace VXMonster.EditorTools
         [MenuItem("VX Monster/Content/Setup All (Stages+Relics+Characters)")]
         public static void SetupAll()
         {
-            if (!EditorUtility.DisplayDialog(
-                    "Setup All",
-                    "This can clobber character icons and stage bindings. Use individual Rebrand menus during visual rebrand. Continue?",
-                    "Continue", "Cancel"))
-                return;
-
-            SetupStages3To6();
-            DifferentiateStages3To6EnemyMix();
-            BindStagePreviewIcons();
-            SetupRelicsDatabase();
-            SetupCharacterRoster();
-            AssetDatabase.SaveAssets();
-            AssetDatabase.Refresh();
-            Debug.Log("[VX] Content pipeline complete.");
+            EditorUtility.DisplayDialog(
+                "Setup All — Disabled",
+                "This menu is disabled during the VX visual rebrand.\n\n" +
+                "Use individual menus instead:\n" +
+                "• VX Monster/Content/Bind Stage Field Data 3-6 Only\n" +
+                "• VX Monster/Rebrand/Setup Biome Props 3-6\n" +
+                "• VX Monster/Rebrand/Run All Audits\n\n" +
+                "Re-enable only after Phase 9 visual gates complete.",
+                "OK");
         }
 
         [MenuItem("VX Monster/Content/Bind Stage Field Data 3-6 Only")]

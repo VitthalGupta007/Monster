@@ -1,5 +1,7 @@
 # Generator Art Brief — VX Monster
 
+> **Superseded for palette decisions** by the locked rebrand plan: pack-native look, minimal recolor — not a forced global purple/gold recolor. Keep this doc for Generator workflow reference only.
+
 Use Unity **Generators** for icons and preview art. Every asset must pass the **style gate** against existing Mage/Wizard sprites and [UIStyleGuide.md](UIStyleGuide.md).
 
 ## Style gate (reject if failed)

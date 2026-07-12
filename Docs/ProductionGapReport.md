@@ -15,9 +15,10 @@
 | Limit | Why |
 |-------|-----|
 | In-run character bodies | Prefabs still Wizard/Mage — only **lobby portraits** are unique |
-| Prop variety | Only Bush + Stone prop prefabs exist; stages vary which/how many, not new prop art |
+| Prop variety | Biome-tinted Bush/Stone clones (`Prop Frost Crystal` … `Prop Void Crystal`); not bespoke prop sprites yet |
 | Border tiles | Endless mode ignores side/corner prefabs; only background chunk + props matter |
-| Style gate | Human should spot-check AI portraits/relics/tiles in Unity |
+| Style gate | Human should spot-check AI portraits/relics/tiles in Unity — Phase 7 gates PASS |
+| Balance audit | Stage 1–6 `enemyHP`/`enemyDamage` + hero base stats verified; feel gates PASS (Stages 1, 3, 6) |
 
 ## Still CRITICAL (Play ship)
 
