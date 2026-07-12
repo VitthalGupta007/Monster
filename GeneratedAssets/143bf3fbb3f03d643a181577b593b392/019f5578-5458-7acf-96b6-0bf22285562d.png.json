@@ -1,0 +1,41 @@
+{
+    "asset": "143bf3fbb3f03d643a181577b593b392",
+    "fileName": "019f5578-5458-7acf-96b6-0bf22285562d.png",
+    "prompt": "Replace this floor completely with a genuinely distinct seamless top-down BLIGHT MARSH terrain tile for a polished 2D survivor game. Dark muddy earth, shallow olive-green water channels, scattered moss patches and subtle root veins. Organic irregular shapes, not masonry. Flat orthographic ground only, no characters, no standalone props, no text. IMPORTANT: do not retain the circular cobblestone pattern, radial motifs, or merely recolor the source. Low visual noise and seamless edges.",
+    "negativePrompt": "",
+    "model": "gpt-image-1-5",
+    "modelName": "GPT Image 1.5",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": [
+            {
+                "doodleReferenceType": 7,
+                "doodle": [],
+                "label": "Image",
+                "strength": 0.25,
+                "invertStrength": false,
+                "assetReferenceGuid": "143bf3fbb3f03d643a181577b593b392",
+                "unlabeledIndex": -1
+            }
+        ]
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 1024,
+        "height": 1024
+    },
+    "spriteSheet": false,
+    "duration": 0.0,
+    "dynamicParams": {
+        "serializedData": []
+    }
+}

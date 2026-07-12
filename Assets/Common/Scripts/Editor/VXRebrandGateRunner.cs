@@ -9,6 +9,7 @@ using UnityEngine.UI;
 using VXMonster.Core;
 using VXMonster.Core.Abilities.UI;
 using VXMonster.Core.UI;
+using VXMonster.Gameplay;
 
 namespace VXMonster.EditorTools
 {
@@ -71,6 +72,67 @@ namespace VXMonster.EditorTools
             StartCombatSelectWeaponAndCapture();
         }
 
+        [MenuItem("VX Monster/Rebrand/Gate 7.3/Stage 3 Props (Play Mode Now)")]
+        public static void Gate73Stage3Now() => CaptureStageEndlessGate(2, "gate_7_3_stage_3_props");
+
+        [MenuItem("VX Monster/Rebrand/Gate 7.3/Stage 4 Props (Play Mode Now)")]
+        public static void Gate73Stage4Now() => CaptureStageEndlessGate(3, "gate_7_3_stage_4_props");
+
+        [MenuItem("VX Monster/Rebrand/Gate 7.3/Stage 5 Props (Play Mode Now)")]
+        public static void Gate73Stage5Now() => CaptureStageEndlessGate(4, "gate_7_3_stage_5_props");
+
+        [MenuItem("VX Monster/Rebrand/Gate 7.3/Stage 6 Props (Play Mode Now)")]
+        public static void Gate73Stage6Now() => CaptureStageEndlessGate(5, "gate_7_3_stage_6_props");
+
+        [MenuItem("VX Monster/Rebrand/Gate 7.5/Stage 1 Balance (Play Mode Now)")]
+        public static void Gate75Stage1Now() => CaptureStageEndlessGate(0, "gate_7_5_stage_1_balance");
+
+        [MenuItem("VX Monster/Rebrand/Gate 7.5/Stage 3 Balance (Play Mode Now)")]
+        public static void Gate75Stage3Now() => CaptureStageEndlessGate(2, "gate_7_5_stage_3_balance");
+
+        [MenuItem("VX Monster/Rebrand/Gate 7.5/Stage 6 Balance (Play Mode Now)")]
+        public static void Gate75Stage6Now() => CaptureStageEndlessGate(5, "gate_7_5_stage_6_balance");
+
+        static void CaptureStageEndlessGate(int stageIndex, string gateLabel)
+        {
+            if (!EditorApplication.isPlaying)
+            {
+                Debug.LogError("[VX Gate] Enter Play Mode first.");
+                return;
+            }
+
+            DismissContinuePopupIfNeeded();
+            UnlockAllStagesForGate();
+
+            var save = GameController.SaveManager.GetSave<StageSave>("Stage");
+            save.SetSelectedStageId(stageIndex);
+
+            var lobby = FindUiBehavior<LobbyWindowBehavior>();
+            if (lobby == null)
+            {
+                Debug.LogError("[VX Gate] LobbyWindowBehavior not found.");
+                return;
+            }
+
+            lobby.StartEndlessRun(DifficultyTier.Normal);
+            Schedule(() => TrySelectFirstWeapon(gateLabel), 3.5f);
+        }
+
+        static void UnlockAllStagesForGate()
+        {
+            var lobby = FindUiBehavior<LobbyWindowBehavior>();
+            if (lobby == null) return;
+
+            var dbField = typeof(LobbyWindowBehavior).GetField("stagesDatabase",
+                BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+            var database = dbField?.GetValue(lobby) as StagesDatabase;
+            if (database == null) return;
+
+            var save = GameController.SaveManager.GetSave<StageSave>("Stage");
+            for (var i = 0; i < database.StagesCount; i++)
+                save.UnlockStage(database.GetStage(i));
+        }
+
         static void StartCombatSelectWeaponAndCapture()
         {
             var lobby = FindUiBehavior<LobbyWindowBehavior>();
@@ -81,10 +143,10 @@ namespace VXMonster.EditorTools
             }
 
             lobby.OnPlayButtonClicked();
-            Schedule(TrySelectFirstWeapon, 3.5f);
+            Schedule(() => TrySelectFirstWeapon("gate_4_3_combat_walk"), 3.5f);
         }
 
-        static void TrySelectFirstWeapon()
+        static void TrySelectFirstWeapon(string gateLabel = "gate_4_3_combat_walk")
         {
 #if UNITY_2022_2_OR_NEWER
             var cards = UnityEngine.Object.FindObjectsByType<AbilityCardBehavior>(FindObjectsInactive.Include, FindObjectsSortMode.None);
@@ -93,7 +155,7 @@ namespace VXMonster.EditorTools
 #endif
             if (cards == null || cards.Length == 0)
             {
-                Schedule(TrySelectFirstWeapon, 0.5f);
+                Schedule(() => TrySelectFirstWeapon(gateLabel), 0.5f);
                 return;
             }
 
@@ -104,7 +166,7 @@ namespace VXMonster.EditorTools
                 FindUiBehavior<AbilitiesWindowBehavior>()?.Hide();
             }
 
-            Schedule(() => CaptureGate("gate_4_3_combat_walk"), 3f);
+            Schedule(() => CaptureGate(gateLabel), 3f);
         }
 
         static void SelectFirstWeaponAndCaptureWalk()

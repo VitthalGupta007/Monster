@@ -15,6 +15,8 @@ namespace VXMonster.EditorTools
         const string CharactersFolder = "Assets/Common/Scriptables/Characters";
         const string StageFolder = "Assets/Common/Scriptables/Stages";
         const string Stage2FieldGuid = "4784fb39006132f48ad76bf040e6db27";
+        const string StockBushPropGuid = "2accda9df7a5e08479ce38f9b320104f";
+        const string StockStonePropGuid = "1f9045912c762e44186e2735add53554";
 
         static readonly (string file, int minW, int maxW, int h)[] WizardDimensionRules =
         {
@@ -22,6 +24,14 @@ namespace VXMonster.EditorTools
             ("wizard_walk_new.png", 2560, 2560, 512),
             ("wizard_defeat.png", 2048, 2560, 512),
             ("wizard_revive.png", 2048, 2560, 512),
+        };
+
+        static readonly (int stage, float hp, float dmg)[] StageTuneTargets =
+        {
+            (3, 1.12f, 1.05f),
+            (4, 1.25f, 1.10f),
+            (5, 1.40f, 1.15f),
+            (6, 1.55f, 1.20f),
         };
 
         [MenuItem("VX Monster/Rebrand/Run All Audits")]
@@ -32,6 +42,8 @@ namespace VXMonster.EditorTools
             AuditCharIcons(results);
             AuditCharacterIconGuids(results);
             AuditStageFieldBindings(results);
+            AuditStagePropBindings(results);
+            AuditStageBalance(results);
 
             foreach (var line in results)
                 Debug.Log(line);
@@ -41,6 +53,15 @@ namespace VXMonster.EditorTools
                 Debug.Log("[VX Gate] All audits PASS.");
             else
                 Debug.LogWarning($"[VX Gate] {failCount} audit(s) FAILED.");
+        }
+
+        [MenuItem("VX Monster/Rebrand/Audit Stage Balance")]
+        public static void AuditStageBalanceMenu()
+        {
+            var results = new List<string>();
+            AuditStageBalance(results);
+            foreach (var line in results)
+                Debug.Log(line);
         }
 
         static void AuditWizardSheets(List<string> results)
@@ -139,6 +160,124 @@ namespace VXMonster.EditorTools
                     results.Add($"PASS Stage {stageNum} field → {fieldPath}");
                 else
                     results.Add($"INFO Stage {stageNum} field → {fieldPath}");
+            }
+        }
+
+        static void AuditStagePropBindings(List<string> results)
+        {
+            results.Add("--- Stage prop bindings (biome props 3–6) ---");
+
+            for (var stageNum = 3; stageNum <= 6; stageNum++)
+            {
+                var stagePath = $"{StageFolder}/Stage {stageNum}.asset";
+                var stageData = AssetDatabase.LoadAssetAtPath<StageData>(stagePath);
+                if (stageData?.StageFieldData == null)
+                {
+                    results.Add($"FAIL Stage {stageNum}: missing field data");
+                    continue;
+                }
+
+                var props = stageData.StageFieldData.PropChances;
+                if (props == null || props.Count == 0)
+                {
+                    results.Add($"FAIL Stage {stageNum}: no propChances configured");
+                    continue;
+                }
+
+                var usesStock = false;
+                foreach (var prop in props)
+                {
+                    if (prop.Prefab == null)
+                    {
+                        results.Add($"FAIL Stage {stageNum}: null prop prefab");
+                        continue;
+                    }
+
+                    var guid = AssetDatabase.AssetPathToGUID(AssetDatabase.GetAssetPath(prop.Prefab));
+                    if (guid == StockBushPropGuid || guid == StockStonePropGuid)
+                        usesStock = true;
+
+                    results.Add($"INFO Stage {stageNum}: {prop.Prefab.name} chance={prop.Chance}% max={prop.MaxAmount}");
+                }
+
+                if (usesStock)
+                    results.Add($"FAIL Stage {stageNum}: still uses stock Bush/Stone prop");
+                else
+                    results.Add($"PASS Stage {stageNum}: biome prop wired");
+            }
+        }
+
+        static void AuditStageBalance(List<string> results)
+        {
+            results.Add("--- Stage balance (enemyHP / enemyDamage) ---");
+            var prevHp = 0f;
+            var prevDmg = 0f;
+
+            for (var stageNum = 1; stageNum <= 6; stageNum++)
+            {
+                var stagePath = $"{StageFolder}/Stage {stageNum}.asset";
+                var stageData = AssetDatabase.LoadAssetAtPath<StageData>(stagePath);
+                if (stageData == null)
+                {
+                    results.Add($"FAIL Stage {stageNum}: missing asset");
+                    continue;
+                }
+
+                var hp = stageData.EnemyHP;
+                var dmg = stageData.EnemyDamage;
+                results.Add($"INFO Stage {stageNum}: enemyHP={hp:0.##} enemyDamage={dmg:0.##}");
+
+                if (stageNum > 1 && (hp < prevHp || dmg < prevDmg))
+                    results.Add($"FAIL Stage {stageNum}: scaling regressed (prev HP={prevHp:0.##} DMG={prevDmg:0.##})");
+                else if (stageNum > 1)
+                    results.Add($"PASS Stage {stageNum}: monotonic scaling");
+
+                if (stageNum <= 2 && (hp < 1f || dmg < 1f))
+                    results.Add($"FAIL Stage {stageNum}: baseline below 1.0");
+                else if (stageNum >= 3 && (hp < 1f || dmg < 1f))
+                    results.Add($"FAIL Stage {stageNum}: multiplier below 1.0");
+
+                foreach (var (targetStage, targetHp, targetDmg) in StageTuneTargets)
+                {
+                    if (targetStage != stageNum) continue;
+                    if (Mathf.Abs(hp - targetHp) > 0.001f)
+                        results.Add($"FAIL Stage {stageNum}: enemyHP {hp:0.##} ≠ target {targetHp:0.##}");
+                    else
+                        results.Add($"PASS Stage {stageNum}: enemyHP matches StageTune");
+                    if (Mathf.Abs(dmg - targetDmg) > 0.001f)
+                        results.Add($"FAIL Stage {stageNum}: enemyDamage {dmg:0.##} ≠ target {targetDmg:0.##}");
+                    else
+                        results.Add($"PASS Stage {stageNum}: enemyDamage matches StageTune");
+                }
+
+                prevHp = hp;
+                prevDmg = dmg;
+            }
+
+            results.Add("--- Hero base stats (baseHP / baseDamage) ---");
+            foreach (var asset in Directory.GetFiles(CharactersFolder, "* Character Data.asset").OrderBy(f => f))
+            {
+                var path = asset.Replace('\\', '/');
+                var data = AssetDatabase.LoadAssetAtPath<VXMonster.Core.CharacterDataSO>(path);
+                if (data == null)
+                {
+                    results.Add($"FAIL {Path.GetFileName(path)}: could not load");
+                    continue;
+                }
+
+                var hp = data.BaseHP;
+                var dmg = data.BaseDamage;
+                results.Add($"INFO {data.name}: baseHP={hp:0.##} baseDamage={dmg:0.##}");
+
+                if (hp < 1f || dmg <= 0f)
+                    results.Add($"FAIL {data.name}: invalid base stats");
+                else if (dmg < 1f)
+                    results.Add($"INFO {data.name}: baseDamage {dmg:0.##} < 1 (tank tradeoff OK)");
+                else
+                    results.Add($"PASS {data.name}: base stats valid");
+
+                if (data.name.StartsWith("WIZARD") && (Mathf.Abs(hp - 100f) > 0.001f || Mathf.Abs(dmg - 1f) > 0.001f))
+                    results.Add($"INFO WIZARD: non-default baseline (HP={hp:0.##} DMG={dmg:0.##})");
             }
         }
     }

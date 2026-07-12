@@ -1,0 +1,41 @@
+{
+    "asset": "e2c0df394f4b673499ca2502cb0ee89c",
+    "fileName": "019f5578-474f-72e6-95ef-db12b4572bca.png",
+    "prompt": "Replace this floor completely with a genuinely distinct seamless top-down FROST WASTES terrain tile for a polished 2D survivor game. Large irregular cracked ice slabs, packed snow pockets, subtle frozen blue depth and sparse embedded frost crystals. Flat orthographic ground only, no walls, no characters, no props, no text. IMPORTANT: do not retain the circular cobblestone pattern, radial motifs, or merely recolor the source. Low visual noise so enemies remain readable. Seamless edges.",
+    "negativePrompt": "",
+    "model": "gpt-image-1-5",
+    "modelName": "GPT Image 1.5",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": [
+            {
+                "doodleReferenceType": 7,
+                "doodle": [],
+                "label": "Image",
+                "strength": 0.25,
+                "invertStrength": false,
+                "assetReferenceGuid": "e2c0df394f4b673499ca2502cb0ee89c",
+                "unlabeledIndex": -1
+            }
+        ]
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 1024,
+        "height": 1024
+    },
+    "spriteSheet": false,
+    "duration": 0.0,
+    "dynamicParams": {
+        "serializedData": []
+    }
+}

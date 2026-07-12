@@ -35,6 +35,8 @@ namespace VXMonster.Core
             row.Add(chunk);
             chunks.Add(row);
 
+            SpawnProp(chunk);
+
             wait = false;
             EasingManager.DoNextFrame().SetOnFinish(() => wait = true);
         }
@@ -187,6 +189,8 @@ namespace VXMonster.Core
             chunk.transform.position = PlayerBehavior.Player.transform.position.SetZ(0);
             chunk.transform.rotation = Quaternion.identity;
             chunk.transform.localScale = Vector3.one;
+
+            SpawnProp(chunk);
 
             row.Add(chunk);
             chunks.Add(row);

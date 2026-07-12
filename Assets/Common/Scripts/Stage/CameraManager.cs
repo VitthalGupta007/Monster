@@ -48,6 +48,7 @@ namespace VXMonster.Core
         {
             spotlightRenderer.color = stageData.SpotlightColor;
             spotlightShadowRenderer.color = stageData.SpotlightShadowColor;
+            spotlightRenderer.enabled = stageData.SpotlightColor.a > 0.001f;
         }
 
         protected virtual void LateUpdate()

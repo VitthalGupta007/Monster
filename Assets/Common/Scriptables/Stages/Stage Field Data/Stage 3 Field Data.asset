@@ -31,8 +31,12 @@ MonoBehaviour:
     type: 3}
   bottomLeftPrefab: {fileID: 3541167979401028516, guid: 0ac3ae68764071149bd1343a25075113,
     type: 3}
+  leftMargin: 0
+  rightMargin: 0
+  topMargin: 0
+  bottomMargin: 0
   propChances:
-  - prefab: {fileID: 1028214238412592778, guid: 2accda9df7a5e08479ce38f9b320104f,
+  - prefab: {fileID: 1028214238412592778, guid: f3a1c2d4e5b6789012345678abcdef01,
       type: 3}
     maxAmount: 3
-    chance: 60
+    chance: 100

@@ -22,8 +22,8 @@ MonoBehaviour:
   stageFieldData: {fileID: 11400000, guid: b2222222222222222222222222222226, type: 2}
   spawnProp: 1
   removePropFromBossfight: 1
-  spotlightColor: {r: 0.75, g: 0.35, b: 1, a: 0.32}
-  spotlightShadowColor: {r: 0.08, g: 0.02, b: 0.15, a: 0.95}
+  spotlightColor: {r: 0.75, g: 0.35, b: 1, a: 0}
+  spotlightShadowColor: {r: 0.08, g: 0.02, b: 0.15, a: 0.45}
   enemyDamage: 1.2
   enemyHP: 1.55
   useCustomMusic: 0
