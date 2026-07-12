@@ -1,0 +1,41 @@
+{
+    "asset": "4b9abba727e1c924cba2bcc0ee5bb8de",
+    "fileName": "019f5560-f50c-7b4d-9b6a-1082908668bc.png",
+    "prompt": "Replace brown brick texture with a smooth warm amber-orange cartoon mobile game UI panel. Thick dark brown outline, rounded corners, subtle inner highlight, flat center area suitable for 9-slice scaling. Match warm VX MONSTER logo palette. No text, no logos, no brick pattern. Keep same square panel shape and border proportions.",
+    "negativePrompt": "",
+    "model": "gpt-image-1-5",
+    "modelName": "GPT Image 1.5",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": [
+            {
+                "doodleReferenceType": 7,
+                "doodle": [],
+                "label": "Image",
+                "strength": 0.25,
+                "invertStrength": false,
+                "assetReferenceGuid": "4b9abba727e1c924cba2bcc0ee5bb8de",
+                "unlabeledIndex": -1
+            }
+        ]
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 1024,
+        "height": 640
+    },
+    "spriteSheet": false,
+    "duration": 0.0,
+    "dynamicParams": {
+        "serializedData": []
+    }
+}

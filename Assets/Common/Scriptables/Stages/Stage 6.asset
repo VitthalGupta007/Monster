@@ -19,7 +19,7 @@ MonoBehaviour:
   displayName: VX VOID NEXUS
   timeline: {fileID: 11400000, guid: 552fe359aa8b6ff4d853bd5a1897eb89, type: 2}
   stageType: 0
-  stageFieldData: {fileID: 11400000, guid: 4784fb39006132f48ad76bf040e6db27, type: 2}
+  stageFieldData: {fileID: 11400000, guid: b2222222222222222222222222222226, type: 2}
   spawnProp: 1
   removePropFromBossfight: 1
   spotlightColor: {r: 0.75, g: 0.35, b: 1, a: 0.32}

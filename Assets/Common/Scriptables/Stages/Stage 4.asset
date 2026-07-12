@@ -19,7 +19,7 @@ MonoBehaviour:
   displayName: VX EMBER DEPTHS
   timeline: {fileID: 11400000, guid: c592b7d4901900540ae9532f414b32aa, type: 2}
   stageType: 0
-  stageFieldData: {fileID: 11400000, guid: 4784fb39006132f48ad76bf040e6db27, type: 2}
+  stageFieldData: {fileID: 11400000, guid: b2222222222222222222222222222224, type: 2}
   spawnProp: 1
   removePropFromBossfight: 1
   spotlightColor: {r: 1, g: 0.55, b: 0.25, a: 0.28}

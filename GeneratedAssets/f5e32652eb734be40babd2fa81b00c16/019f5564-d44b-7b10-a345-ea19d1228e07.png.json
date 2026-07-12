@@ -1,0 +1,41 @@
+{
+    "asset": "f5e32652eb734be40babd2fa81b00c16",
+    "fileName": "019f5564-d44b-7b10-a345-ea19d1228e07.png",
+    "prompt": "Polished mobile game UI button sprite. Rich violet-purple glossy rounded button with thick dark outline, subtle 3D bevel, empty flat center for text. Warm VX Monster cartoon style. 9-slice friendly borders, same square layout.",
+    "negativePrompt": "",
+    "model": "game-ui-essentials-2",
+    "modelName": "Game UI Essentials 2.0",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": [
+            {
+                "doodleReferenceType": 7,
+                "doodle": [],
+                "label": "Image",
+                "strength": 0.25,
+                "invertStrength": false,
+                "assetReferenceGuid": "f5e32652eb734be40babd2fa81b00c16",
+                "unlabeledIndex": -1
+            }
+        ]
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 256,
+        "height": 256
+    },
+    "spriteSheet": false,
+    "duration": 0.0,
+    "dynamicParams": {
+        "serializedData": []
+    }
+}

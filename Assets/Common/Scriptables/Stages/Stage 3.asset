@@ -19,7 +19,7 @@ MonoBehaviour:
   displayName: VX FROST WASTES
   timeline: {fileID: 11400000, guid: 30e7455d741cefa41b18abea3706ae5d, type: 2}
   stageType: 0
-  stageFieldData: {fileID: 11400000, guid: 4784fb39006132f48ad76bf040e6db27, type: 2}
+  stageFieldData: {fileID: 11400000, guid: b2222222222222222222222222222223, type: 2}
   spawnProp: 1
   removePropFromBossfight: 1
   spotlightColor: {r: 0.6, g: 0.85, b: 1, a: 0.28}

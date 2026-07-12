@@ -19,7 +19,7 @@ MonoBehaviour:
   price:
     currencyId: gold
     amount: 1600
-  icon: {fileID: 21300000, guid: f732c85210a311741abc947ab8af1424, type: 3}
+  icon: {fileID: 21300000, guid: f4b35121dcc69aa42988d441c7373de7, type: 3}
   prefab: {fileID: 2921880940271959218, guid: 54121bc69e709ef4aae3deb8291032d8, type: 3}
   hasStartingAbility: 1
   startingAbility: 3

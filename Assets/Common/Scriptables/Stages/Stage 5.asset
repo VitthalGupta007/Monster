@@ -19,7 +19,7 @@ MonoBehaviour:
   displayName: VX TOXIC SWAMP
   timeline: {fileID: 11400000, guid: abaee3872d802bc47a09630db1628ad2, type: 2}
   stageType: 0
-  stageFieldData: {fileID: 11400000, guid: 4784fb39006132f48ad76bf040e6db27, type: 2}
+  stageFieldData: {fileID: 11400000, guid: b2222222222222222222222222222225, type: 2}
   spawnProp: 1
   removePropFromBossfight: 1
   spotlightColor: {r: 0.45, g: 1, b: 0.35, a: 0.28}

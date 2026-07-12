@@ -21,9 +21,18 @@ namespace VXMonster.EditorTools
         const string CharactersDbPath = "Assets/Common/Scriptables/Characters Database.asset";
         const string StagePreviewFolder = "Assets/Common/Sprites/UI/Stage";
 
+        const string CharIconFolder = "Assets/Common/Sprites/UI/Char Select/Characters";
+        const string CharactersPrefabsFolder = "Assets/Common/Prefabs/Characters";
+
         [MenuItem("VX Monster/Content/Setup All (Stages+Relics+Characters)")]
         public static void SetupAll()
         {
+            if (!EditorUtility.DisplayDialog(
+                    "Setup All",
+                    "This can clobber character icons and stage bindings. Use individual Rebrand menus during visual rebrand. Continue?",
+                    "Continue", "Cancel"))
+                return;
+
             SetupStages3To6();
             DifferentiateStages3To6EnemyMix();
             BindStagePreviewIcons();
@@ -34,11 +43,35 @@ namespace VXMonster.EditorTools
             Debug.Log("[VX] Content pipeline complete.");
         }
 
+        [MenuItem("VX Monster/Content/Bind Stage Field Data 3-6 Only")]
+        public static void BindStageFieldData3To6Only()
+        {
+            for (var stageNum = 3; stageNum <= 6; stageNum++)
+            {
+                var stagePath = $"{StageFolder}/Stage {stageNum}.asset";
+                var fieldPath = $"{StageFolder}/Stage Field Data/Stage {stageNum} Field Data.asset";
+                var stage = AssetDatabase.LoadAssetAtPath<StageData>(stagePath);
+                var field = AssetDatabase.LoadAssetAtPath<StageFieldData>(fieldPath);
+                if (stage == null || field == null)
+                {
+                    Debug.LogWarning($"[VX] Bind field skip: stage={stagePath} field={fieldPath}");
+                    continue;
+                }
+
+                var so = new SerializedObject(stage);
+                so.FindProperty("stageFieldData").objectReferenceValue = field;
+                so.ApplyModifiedPropertiesWithoutUndo();
+                EditorUtility.SetDirty(stage);
+            }
+
+            AssetDatabase.SaveAssets();
+            Debug.Log("[VX] Stages 3-6 bound to their own field data assets.");
+        }
+
         [MenuItem("VX Monster/Content/Setup Stages 3-6 Timelines")]
         public static void SetupStages3To6()
         {
             var stage2Playable = $"{StageFolder}/Stage 2.playable";
-            var stage2FieldGuid = AssetDatabase.AssetPathToGUID($"{StageFolder}/Stage Field Data/Stage 2 Field Data 1.asset");
 
             var stageConfigs = new[]
             {
@@ -77,11 +110,13 @@ namespace VXMonster.EditorTools
                 else Debug.LogWarning($"[VX] Could not load Sprite at {previewPath} for {config.StageName}.");
                 so.FindProperty("enemyHP").floatValue = config.EnemyHp;
                 so.FindProperty("enemyDamage").floatValue = config.EnemyDamage;
-                if (!string.IsNullOrEmpty(stage2FieldGuid))
-                {
-                    var field = AssetDatabase.LoadAssetAtPath<StageFieldData>(AssetDatabase.GUIDToAssetPath(stage2FieldGuid));
-                    if (field != null) so.FindProperty("stageFieldData").objectReferenceValue = field;
-                }
+
+                var fieldPath = $"{StageFolder}/Stage Field Data/{config.StageName} Field Data.asset";
+                var field = AssetDatabase.LoadAssetAtPath<StageFieldData>(fieldPath);
+                if (field != null)
+                    so.FindProperty("stageFieldData").objectReferenceValue = field;
+                else
+                    Debug.LogWarning($"[VX] Missing field data {fieldPath} for {config.StageName}.");
 
                 so.ApplyModifiedPropertiesWithoutUndo();
                 EditorUtility.SetDirty(stage);
@@ -316,19 +351,31 @@ namespace VXMonster.EditorTools
             };
 
             var db = AssetDatabase.LoadAssetAtPath<CharactersDatabase>(CharactersDbPath);
+            if (db == null)
+            {
+                Debug.LogError("[VX] Characters Database missing.");
+                return;
+            }
+
             var dbSo = new SerializedObject(db);
             var list = dbSo.FindProperty("characterDatas");
-            list.ClearArray();
 
-            void Add(CharacterDataSO data)
+            void UpsertInDatabase(CharacterDataSO data)
             {
+                for (var i = 0; i < list.arraySize; i++)
+                {
+                    var elem = list.GetArrayElementAtIndex(i).objectReferenceValue as CharacterDataSO;
+                    if (elem != data) continue;
+                    return;
+                }
+
                 var idx = list.arraySize;
                 list.InsertArrayElementAtIndex(idx);
                 list.GetArrayElementAtIndex(idx).objectReferenceValue = data;
             }
 
-            Add(wizard);
-            Add(mage);
+            UpsertInDatabase(wizard);
+            UpsertInDatabase(mage);
 
             foreach (var spec in specs)
             {
@@ -341,26 +388,32 @@ namespace VXMonster.EditorTools
                 }
 
                 var template = spec.useMage ? mage : wizard;
+                var iconPath = $"{CharIconFolder}/ui_char_{spec.name.ToLowerInvariant()}.png";
+                var icon = AssetDatabase.LoadAssetAtPath<Sprite>(iconPath);
+                if (icon == null) icon = template.Icon;
+
+                var prefabPath = $"{CharactersPrefabsFolder}/{spec.name}.prefab";
+                var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
+                if (prefab == null) prefab = template.Prefab;
+
                 var so = new SerializedObject(data);
                 var idProp = so.FindProperty("id");
-                if (idProp != null)
-                {
+                var idValue = idProp?.FindPropertyRelative("value")?.stringValue;
+                if (idProp != null && string.IsNullOrEmpty(idValue))
                     idProp.FindPropertyRelative("value").stringValue = System.Guid.NewGuid().ToString();
-                }
 
                 so.FindProperty("characterName").stringValue = spec.name;
                 so.FindProperty("price").FindPropertyRelative("currencyId").stringValue = "gold";
                 so.FindProperty("price").FindPropertyRelative("amount").intValue = spec.price;
-                so.FindProperty("icon").objectReferenceValue = template.Icon;
-                so.FindProperty("prefab").objectReferenceValue = template.Prefab;
+                so.FindProperty("icon").objectReferenceValue = icon;
+                so.FindProperty("prefab").objectReferenceValue = prefab;
                 so.FindProperty("hasStartingAbility").boolValue = spec.startAbility;
-                // AbilityType values are sparse (0..9, 100+, 200+, …). Use intValue, not enumValueIndex.
                 so.FindProperty("startingAbility").intValue = (int)spec.ability;
                 so.FindProperty("baseHP").floatValue = spec.hp;
                 so.FindProperty("baseDamage").floatValue = spec.dmg;
                 so.ApplyModifiedPropertiesWithoutUndo();
                 EditorUtility.SetDirty(data);
-                Add(data);
+                UpsertInDatabase(data);
             }
 
             dbSo.ApplyModifiedPropertiesWithoutUndo();

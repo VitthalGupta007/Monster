@@ -1,0 +1,41 @@
+{
+    "asset": "a4088e99fa611aa4b9d9c04d5c43b541",
+    "fileName": "019f5564-fa29-775d-80ce-c2d3ffd7fd15.png",
+    "prompt": "Polished mobile game UI button sprite. Rich amber-orange glossy rounded button with thick dark brown outline, subtle 3D bevel, empty flat center for text. Warm VX Monster cartoon style. 9-slice friendly borders, same square layout.",
+    "negativePrompt": "",
+    "model": "game-ui-essentials-2",
+    "modelName": "Game UI Essentials 2.0",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": [
+            {
+                "doodleReferenceType": 7,
+                "doodle": [],
+                "label": "Image",
+                "strength": 0.25,
+                "invertStrength": false,
+                "assetReferenceGuid": "a4088e99fa611aa4b9d9c04d5c43b541",
+                "unlabeledIndex": -1
+            }
+        ]
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 256,
+        "height": 256
+    },
+    "spriteSheet": false,
+    "duration": 0.0,
+    "dynamicParams": {
+        "serializedData": []
+    }
+}

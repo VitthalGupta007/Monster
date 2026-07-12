@@ -1,0 +1,41 @@
+{
+    "asset": "7fc7960ead63ae042a765959b8db3274",
+    "fileName": "019f5557-8dd9-76df-8def-f805f899cda7.png",
+    "prompt": "Full-screen mobile game lobby backdrop matching warm yellow-orange VX MONSTER logo palette. Soft warm gradient from deep terracotta brown at edges to warm amber center. Subtle vertical brick or panel texture. No text, no characters, no logos. Clean casual mobile game UI background. Same composition and framing as current image.",
+    "negativePrompt": "",
+    "model": "gpt-image-1-5",
+    "modelName": "GPT Image 1.5",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": [
+            {
+                "doodleReferenceType": 7,
+                "doodle": [],
+                "label": "Image",
+                "strength": 0.25,
+                "invertStrength": false,
+                "assetReferenceGuid": "7fc7960ead63ae042a765959b8db3274",
+                "unlabeledIndex": -1
+            }
+        ]
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 640,
+        "height": 1024
+    },
+    "spriteSheet": false,
+    "duration": 0.0,
+    "dynamicParams": {
+        "serializedData": []
+    }
+}
