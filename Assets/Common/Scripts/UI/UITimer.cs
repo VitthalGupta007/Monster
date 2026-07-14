@@ -22,15 +22,16 @@ namespace VXMonster.Core.UI
 
         private void Update()
         {
+            if (!StageController.IsLoaded) return;
+
             var timespan = TimeSpan.FromSeconds(StageController.Director.time);
             if(timespan.Seconds != lastSeconds)
             {
                 lastSeconds = timespan.Seconds;
-
                 timerText.text = string.Format("{0:mm\\:ss}", timespan);
-
-                stageSave.Time = (float)StageController.Director.time;
             }
+
+            stageSave.Time = (float)StageController.Director.time;
         }
 
         public void Show()

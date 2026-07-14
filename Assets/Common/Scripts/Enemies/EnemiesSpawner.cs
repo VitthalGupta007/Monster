@@ -413,14 +413,7 @@ namespace VXMonster.Core
                         enemy.Kill();
 
                         foreach (var dropData in enemy.GetDropData())
-                        {
-                            if (dropData.Chance == 0) continue;
-
-                            if (Random.value * 100 <= dropData.Chance && StageController.DropManager.CheckDropCooldown(dropData.DropType))
-                            {
-                                StageController.DropManager.Drop(dropData.DropType, enemy.transform.position.XY() + Random.insideUnitCircle * 0.2f);
-                            }
-                        }
+                            TrySpawnEnemyDrop(enemy, dropData);
                     } else
                     {
                         aliveEnemies.Add(enemy);
@@ -453,13 +446,7 @@ namespace VXMonster.Core
             enemy.onEnemyHidden -= OnEnemyHidden;
 
             foreach(var dropData in enemy.GetDropData())
-            {
-                if(dropData.Chance == 0) continue;
-                if(Random.value * 100 <= dropData.Chance && StageController.DropManager.CheckDropCooldown(dropData.DropType))
-                {
-                    StageController.DropManager.Drop(dropData.DropType, enemy.transform.position.XY() + Random.insideUnitCircle * 0.2f);
-                }
-            }
+                TrySpawnEnemyDrop(enemy, dropData);
 
             enemiesDiedCounter++;
             stageSave.EnemiesKilled = enemiesDiedCounter;
@@ -471,6 +458,23 @@ namespace VXMonster.Core
             enemies.RemoveSwapBack(enemy);
             enemy.onEnemyDied -= OnEnemyDied;
             enemy.onEnemyHidden -= OnEnemyHidden;
+        }
+
+        protected virtual void TrySpawnEnemyDrop(EnemyBehavior enemy, EnemyDropData dropData)
+        {
+            if (enemy == null || dropData == null || dropData.Chance == 0) return;
+            if (!StageController.IsLoaded || StageController.DropManager == null) return;
+
+            var tierBias = RunXpScaling.GetCurrentGemTierBias();
+            var rollChance = RunXpScaling.GetBiasedGemDropChance(dropData.DropType, dropData.Chance, tierBias);
+            if (Random.value * 100f > rollChance) return;
+
+            var dropType = RunXpScaling.ResolveGemDrop(dropData.DropType, tierBias);
+            if (!StageController.DropManager.CheckDropCooldown(dropType)) return;
+
+            StageController.DropManager.Drop(
+                dropType,
+                enemy.transform.position.XY() + Random.insideUnitCircle * 0.2f);
         }
 
         protected virtual void OnBossDied(EnemyBehavior boss)

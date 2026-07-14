@@ -158,26 +158,111 @@ namespace VXMonster.EditorTools
         [MenuItem("VX Monster/Content/Differentiate Stages 3-6 Enemy Mix")]
         public static void DifferentiateStages3To6EnemyMix()
         {
-            // Remap Stage-2-cloned timelines onto distinct existing enemy/boss pools.
-            // Does NOT invent new enemy art — uses EnemyType / BossType already in the project.
-            ApplyStageEnemyMix("Stage 3.playable",
-                new[] { EnemyType.Jellyfish, EnemyType.PurpleJellyfish, EnemyType.ShadeJellyfish, EnemyType.Bat, EnemyType.ShadeBat, EnemyType.Plant, EnemyType.Slime, EnemyType.Bug, EnemyType.Wasp, EnemyType.Eye, EnemyType.Hand },
-                new[] { BossType.Crab, BossType.QueenWasp, BossType.Void });
+            ApplyGraduatedEnemyMix1To6();
+        }
 
-            ApplyStageEnemyMix("Stage 4.playable",
-                new[] { EnemyType.FireSlime, EnemyType.Hand, EnemyType.Eye, EnemyType.Wasp, EnemyType.StagBeetle, EnemyType.Pumpkin, EnemyType.Bug, EnemyType.Slime, EnemyType.Vampire, EnemyType.Plant, EnemyType.Bat },
-                new[] { BossType.MegaSlime, BossType.Mask, BossType.Bell });
-
-            ApplyStageEnemyMix("Stage 5.playable",
-                new[] { EnemyType.Plant, EnemyType.Bug, EnemyType.Slime, EnemyType.Vampire, EnemyType.Jellyfish, EnemyType.Shade, EnemyType.PurpleJellyfish, EnemyType.Hand, EnemyType.Wasp, EnemyType.Pumpkin, EnemyType.StagBeetle },
-                new[] { BossType.QueenWasp, BossType.Crab, BossType.MegaSlime });
-
-            ApplyStageEnemyMix("Stage 6.playable",
-                new[] { EnemyType.Shade, EnemyType.ShadeBat, EnemyType.ShadeVampire, EnemyType.ShadeJellyfish, EnemyType.Eye, EnemyType.Hand, EnemyType.Vampire, EnemyType.FireSlime, EnemyType.PurpleJellyfish, EnemyType.StagBeetle, EnemyType.Wasp },
-                new[] { BossType.Void, BossType.Bell, BossType.Mask });
+        [MenuItem("VX Monster/Content/Apply Graduated Enemy Mix 1-6")]
+        public static void ApplyGraduatedEnemyMix1To6()
+        {
+            foreach (var mix in StageEnemyProgression.StageMixes)
+            {
+                ApplyStageEnemyMix(
+                    $"Stage {mix.Stage}.playable",
+                    mix.Enemies,
+                    mix.Bosses);
+            }
 
             AssetDatabase.SaveAssets();
-            Debug.Log("[VX] Stages 3-6 enemy/boss mixes differentiated from Stage 2 clone.");
+            Debug.Log("[VX] Graduated enemy/boss mixes applied for Stages 1-6.");
+        }
+
+        [MenuItem("VX Monster/Content/Apply Stage XP Multipliers 1-6")]
+        public static void ApplyStageXpMultipliers1To6()
+        {
+            foreach (var (stage, multiplier) in StageEnemyProgression.StageXpGainTargets)
+            {
+                var stagePath = $"{StageFolder}/Stage {stage}.asset";
+                var stageData = AssetDatabase.LoadAssetAtPath<StageData>(stagePath);
+                if (stageData == null)
+                {
+                    Debug.LogError($"[VX] Missing {stagePath}");
+                    continue;
+                }
+
+                var so = new SerializedObject(stageData);
+                var xpProp = so.FindProperty("xpGainMultiplier");
+                if (xpProp == null)
+                {
+                    Debug.LogError("[VX] StageData missing xpGainMultiplier field — recompile scripts first.");
+                    return;
+                }
+
+                xpProp.floatValue = multiplier;
+                so.ApplyModifiedPropertiesWithoutUndo();
+                EditorUtility.SetDirty(stageData);
+                Debug.Log($"[VX] Stage {stage} xpGainMultiplier → {multiplier:0.##}");
+            }
+
+            AssetDatabase.SaveAssets();
+        }
+
+        [MenuItem("VX Monster/Content/Apply Graduated Enemy Drop Tables")]
+        public static void ApplyGraduatedEnemyDropTables()
+        {
+            const string dbPath = "Assets/Common/Scriptables/Enemies Database.asset";
+            var db = AssetDatabase.LoadAssetAtPath<EnemiesDatabase>(dbPath);
+            if (db == null)
+            {
+                Debug.LogError($"[VX] Missing {dbPath}");
+                return;
+            }
+
+            var so = new SerializedObject(db);
+            var enemiesProp = so.FindProperty("enemies");
+            if (enemiesProp == null)
+            {
+                Debug.LogError("[VX] Enemies Database missing enemies list.");
+                return;
+            }
+
+            for (var i = 0; i < enemiesProp.arraySize; i++)
+            {
+                var enemyProp = enemiesProp.GetArrayElementAtIndex(i);
+                var typeProp = enemyProp.FindPropertyRelative("type");
+                var dropProp = enemyProp.FindPropertyRelative("enemyDrop");
+                if (typeProp == null || dropProp == null) continue;
+
+                var type = (EnemyType)typeProp.intValue;
+                var profile = StageEnemyProgression.GetGraduatedDropProfile(type);
+                ApplyGraduatedDropProfile(dropProp, profile);
+                Debug.Log($"[VX] {type} drop table → ~{profile.ExpectedGemXp:0.#} gem XP/kill (min stage {StageEnemyProgression.GetMinStageForEnemy(type)})");
+            }
+
+            so.ApplyModifiedPropertiesWithoutUndo();
+            EditorUtility.SetDirty(db);
+            AssetDatabase.SaveAssets();
+            Debug.Log("[VX] Graduated enemy drop tables applied to Enemies Database.");
+        }
+
+        static void ApplyGraduatedDropProfile(SerializedProperty dropList, StageEnemyProgression.GraduatedDropProfile profile)
+        {
+            dropList.ClearArray();
+            var entries = profile.ToEntries();
+            for (var i = 0; i < entries.Length; i++)
+            {
+                dropList.InsertArrayElementAtIndex(i);
+                var elem = dropList.GetArrayElementAtIndex(i);
+                elem.FindPropertyRelative("dropType").intValue = (int)entries[i].type;
+                elem.FindPropertyRelative("chance").floatValue = entries[i].chance;
+            }
+        }
+
+        [MenuItem("VX Monster/Content/Differentiate Stages 3-6 Enemy Mix", true)]
+        [MenuItem("VX Monster/Content/Apply Graduated Enemy Mix 1-6", true)]
+        [MenuItem("VX Monster/Content/Apply Graduated Enemy Drop Tables", true)]
+        static bool ValidateGraduatedEnemyMixMenu()
+        {
+            return !EditorApplication.isPlayingOrWillChangePlaymode;
         }
 
         static void ApplyStageEnemyMix(string playableFile, EnemyType[] enemyCycle, BossType[] bossCycle)

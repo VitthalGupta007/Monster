@@ -1,5 +1,6 @@
 using VXMonster.Core.Drop;
 using UnityEngine;
+using VXMonster.Gameplay;
 
 namespace VXMonster.Core
 {
@@ -13,7 +14,12 @@ namespace VXMonster.Core
             base.OnPickedUp();
 
             gameObject.SetActive(false);
-            StageController.ExperienceManager.AddXP(XP);
+
+            if (StageController.ExperienceManager == null)
+                return;
+
+            var xpAmount = XP * RunXpScaling.GetCurrentGemXpMultiplier();
+            StageController.ExperienceManager.AddXP(xpAmount);
         }
     }
 }

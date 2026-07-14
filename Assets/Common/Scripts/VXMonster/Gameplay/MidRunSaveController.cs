@@ -35,6 +35,29 @@ namespace VXMonster.Gameplay
             PersistRun();
         }
 
+        private void OnApplicationPause(bool paused)
+        {
+            if (!paused) return;
+            FlushStageTime();
+            PersistRun();
+        }
+
+        private void OnApplicationQuit()
+        {
+            FlushStageTime();
+            PersistRun();
+        }
+
+        private static void FlushStageTime()
+        {
+            if (!StageController.IsLoaded) return;
+
+            var stageSave = GameController.SaveManager?.GetSave<StageSave>("Stage");
+            if (stageSave == null || !stageSave.IsPlaying) return;
+
+            stageSave.Time = (float)StageController.Director.time;
+        }
+
         private void OnLevelUp(int _)
         {
             PersistRun();

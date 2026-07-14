@@ -142,6 +142,11 @@ namespace VXMonster.Core
 
             shadowSprite.SetAlpha(shadowAlpha);
 
+            if (StageBiomeTint.TryGetEnemyTint(StageController.Stage, out var biomeTint))
+                spriteRenderer.color = biomeTint;
+            else
+                spriteRenderer.color = Color.white;
+
             enemyCollider.enabled = true;
             if (shouldFadeIn)
             {

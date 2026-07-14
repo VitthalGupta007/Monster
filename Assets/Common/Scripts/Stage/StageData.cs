@@ -47,6 +47,9 @@ namespace VXMonster.Core
         [SerializeField] protected float enemyHP;
         public float EnemyHP => enemyHP;
 
+        [SerializeField] protected float xpGainMultiplier = 1f;
+        public float XpGainMultiplier => Mathf.Max(0.1f, xpGainMultiplier);
+
         [Space]
         [SerializeField] protected bool useCustomMusic;
         public bool UseCustomMusic => useCustomMusic;

@@ -12,7 +12,7 @@ namespace VXMonster.Core.Timeline
         public override void OnBehaviourPlay(Playable playable, FrameData info)
         {
             spawnRate = 1f / ContinuousSpawnPerSecond;
-            lastSpawnTime = -spawnRate;
+            lastSpawnTime = (float)playable.GetTime();
         }
 
         public override void ProcessFrame(Playable playable, FrameData info, object playerData)

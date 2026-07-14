@@ -380,7 +380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11f7a3d6739d4c041a49b1cfb4f44189, type: 3}
   m_Name: Boss(Clone)(Clone)
   m_EditorClassIdentifier: 
-  bossType: 0
+  bossType: 1
   bossUIWarningDuration: 2
   bossRedCircleSpawnDuration: 1
   bossRedCircleStayDuration: 2
@@ -1325,7 +1325,7 @@ MonoBehaviour:
     m_DisplayName: Continuous
   m_Markers:
     m_Objects: []
-  enemyType: 12
+  enemyType: 10
 --- !u!114 &-8024893890980066971
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1484,7 +1484,7 @@ MonoBehaviour:
     m_DisplayName: Burst
   m_Markers:
     m_Objects: []
-  enemyType: 3
+  enemyType: 14
 --- !u!114 &-7521422873764676284
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1522,7 +1522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11f7a3d6739d4c041a49b1cfb4f44189, type: 3}
   m_Name: Boss
   m_EditorClassIdentifier: 
-  bossType: 1
+  bossType: 0
   bossUIWarningDuration: 2
   bossRedCircleSpawnDuration: 1
   bossRedCircleStayDuration: 2
@@ -1880,7 +1880,7 @@ MonoBehaviour:
     m_DisplayName: Burst
   m_Markers:
     m_Objects: []
-  enemyType: 14
+  enemyType: 12
 --- !u!114 &-4508371871841182362
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2204,7 +2204,7 @@ MonoBehaviour:
     m_DisplayName: Burst
   m_Markers:
     m_Objects: []
-  enemyType: 2
+  enemyType: 3
 --- !u!114 &-2398857761232901989
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2758,7 +2758,7 @@ MonoBehaviour:
     m_DisplayName: Continuous
   m_Markers:
     m_Objects: []
-  enemyType: 10
+  enemyType: 0
 --- !u!114 &-500177020245908283
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3091,7 +3091,7 @@ MonoBehaviour:
     m_DisplayName: Burst
   m_Markers:
     m_Objects: []
-  enemyType: 0
+  enemyType: 8
 --- !u!114 &-355948323876061689
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3433,7 +3433,7 @@ MonoBehaviour:
     m_DisplayName: Burst
   m_Markers:
     m_Objects: []
-  enemyType: 8
+  enemyType: 9
 --- !u!114 &1735497828996439206
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4118,7 +4118,7 @@ MonoBehaviour:
     m_DisplayName: Burst
   m_Markers:
     m_Objects: []
-  enemyType: 11
+  enemyType: 2
 --- !u!114 &7649540114541299300
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4349,4 +4349,4 @@ MonoBehaviour:
     m_DisplayName: Continuous
   m_Markers:
     m_Objects: []
-  enemyType: 9
+  enemyType: 11

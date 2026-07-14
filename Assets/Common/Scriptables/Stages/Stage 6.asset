@@ -26,6 +26,7 @@ MonoBehaviour:
   spotlightShadowColor: {r: 0.08, g: 0.02, b: 0.15, a: 0.45}
   enemyDamage: 1.2
   enemyHP: 1.55
+  xpGainMultiplier: 1.2
   useCustomMusic: 0
   musicName: Stage Music
   stageUnlockData:

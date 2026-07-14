@@ -6,8 +6,11 @@ using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using VXMonster.Core;
+using VXMonster.Core.Abilities;
 using VXMonster.Core.Abilities.UI;
+using VXMonster.Core.Audio;
 using VXMonster.Core.UI;
 using VXMonster.Gameplay;
 
@@ -20,8 +23,15 @@ namespace VXMonster.EditorTools
         const int Height = 1920;
 
         static string _pendingGate;
-        static float _waitUntil;
-        static Action _pendingAction;
+        static readonly System.Collections.Generic.List<ScheduledGateAction> _scheduledActions = new();
+
+        struct ScheduledGateAction
+        {
+            public Action Action;
+            public float RunAt;
+        }
+
+        static bool HasScheduledActions => _scheduledActions.Count > 0;
         static bool _initialized;
 
         [InitializeOnLoadMethod]
@@ -73,27 +83,142 @@ namespace VXMonster.EditorTools
         }
 
         [MenuItem("VX Monster/Rebrand/Gate 7.3/Stage 3 Props (Play Mode Now)")]
-        public static void Gate73Stage3Now() => CaptureStageEndlessGate(2, "gate_7_3_stage_3_props");
+        public static void Gate73Stage3Now() => BeginStageGateCapture(2, "gate_7_3_stage_3_props");
 
         [MenuItem("VX Monster/Rebrand/Gate 7.3/Stage 4 Props (Play Mode Now)")]
-        public static void Gate73Stage4Now() => CaptureStageEndlessGate(3, "gate_7_3_stage_4_props");
+        public static void Gate73Stage4Now() => BeginStageGateCapture(3, "gate_7_3_stage_4_props");
 
         [MenuItem("VX Monster/Rebrand/Gate 7.3/Stage 5 Props (Play Mode Now)")]
-        public static void Gate73Stage5Now() => CaptureStageEndlessGate(4, "gate_7_3_stage_5_props");
+        public static void Gate73Stage5Now() => BeginStageGateCapture(4, "gate_7_3_stage_5_props");
 
         [MenuItem("VX Monster/Rebrand/Gate 7.3/Stage 6 Props (Play Mode Now)")]
-        public static void Gate73Stage6Now() => CaptureStageEndlessGate(5, "gate_7_3_stage_6_props");
+        public static void Gate73Stage6Now() => BeginStageGateCapture(5, "gate_7_3_stage_6_props");
 
         [MenuItem("VX Monster/Rebrand/Gate 7.5/Stage 1 Balance (Play Mode Now)")]
-        public static void Gate75Stage1Now() => CaptureStageEndlessGate(0, "gate_7_5_stage_1_balance");
+        public static void Gate75Stage1Now() => BeginStageGateCapture(0, "gate_7_5_stage_1_balance");
 
         [MenuItem("VX Monster/Rebrand/Gate 7.5/Stage 3 Balance (Play Mode Now)")]
-        public static void Gate75Stage3Now() => CaptureStageEndlessGate(2, "gate_7_5_stage_3_balance");
+        public static void Gate75Stage3Now() => BeginStageGateCapture(2, "gate_7_5_stage_3_balance");
 
         [MenuItem("VX Monster/Rebrand/Gate 7.5/Stage 6 Balance (Play Mode Now)")]
-        public static void Gate75Stage6Now() => CaptureStageEndlessGate(5, "gate_7_5_stage_6_balance");
+        public static void Gate75Stage6Now() => BeginStageGateCapture(5, "gate_7_5_stage_6_balance");
 
-        static void CaptureStageEndlessGate(int stageIndex, string gateLabel)
+        [MenuItem("VX Monster/Rebrand/Gate 8.1/Stage 3 Enemies (Play Mode Now)")]
+        public static void Gate81Stage3Now() => BeginStageGateCapture(2, "gate_8_1_stage_3_enemies", 10f);
+
+        [MenuItem("VX Monster/Rebrand/Gate 8.1/Stage 4 Enemies (Play Mode Now)")]
+        public static void Gate81Stage4Now() => BeginStageGateCapture(3, "gate_8_1_stage_4_enemies", 10f);
+
+        [MenuItem("VX Monster/Rebrand/Gate 8.1/Stage 6 Enemies (Play Mode Now)")]
+        public static void Gate81Stage6Now() => BeginStageGateCapture(5, "gate_8_1_stage_6_enemies", 10f);
+
+        [MenuItem("VX Monster/Rebrand/Enter Play Mode (Unpaused)")]
+        public static void EnterPlayModeUnpaused()
+        {
+            EditorApplication.isPaused = false;
+            if (!EditorApplication.isPlaying)
+                EditorApplication.isPlaying = true;
+        }
+
+        [MenuItem("VX Monster/Rebrand/Capture Missing Gates (Play Mode Now)")]
+        public static void CaptureMissingGatesNow()
+        {
+            if (!EditorApplication.isPlaying)
+            {
+                Debug.LogError("[VX Gate] Enter Play Mode from Main Menu first.");
+                return;
+            }
+
+            Init();
+            _captureQueueIndex = 0;
+            Schedule(RunNextQueuedCapture, 1f);
+        }
+
+        static int _captureQueueIndex;
+
+        static readonly (string menuPath, float waitSeconds)[] MissingGateQueue =
+        {
+            ("VX Monster/Rebrand/Gate 8.1/Stage 3 Enemies (Play Mode Now)", 70f),
+            ("VX Monster/Rebrand/Gate 8.1/Stage 4 Enemies (Play Mode Now)", 70f),
+            ("VX Monster/Rebrand/Gate 8.1/Stage 6 Enemies (Play Mode Now)", 70f),
+            ("VX Monster/Rebrand/Gate 7.3/Stage 4 Props (Play Mode Now)", 55f),
+            ("VX Monster/Rebrand/Gate 7.3/Stage 5 Props (Play Mode Now)", 55f),
+            ("VX Monster/Rebrand/Gate 7.3/Stage 6 Props (Play Mode Now)", 55f),
+        };
+
+        static void RunNextQueuedCapture()
+        {
+            if (_captureQueueIndex >= MissingGateQueue.Length)
+            {
+                Debug.Log("[VX Gate] Missing gate capture queue complete.");
+                return;
+            }
+
+            var (menuPath, waitSeconds) = MissingGateQueue[_captureQueueIndex];
+            _captureQueueIndex++;
+
+            if (!EditorApplication.ExecuteMenuItem(menuPath))
+                Debug.LogError($"[VX Gate] Menu failed: {menuPath}");
+
+            Schedule(() => WaitForLobbyBetweenCaptures(0), waitSeconds);
+        }
+
+        static void WaitForLobbyBetweenCaptures(int attempt)
+        {
+            var sceneName = GetActiveSceneName();
+            if (sceneName == "Main Menu" && FindUiBehavior<LobbyWindowBehavior>() != null)
+            {
+                RunNextQueuedCapture();
+                return;
+            }
+
+            if (attempt < 90)
+            {
+                EditorApplication.isPaused = false;
+                Schedule(() => WaitForLobbyBetweenCaptures(attempt + 1), 1f);
+                return;
+            }
+
+            Debug.LogWarning("[VX Gate] Lobby wait timed out — continuing queue.");
+            RunNextQueuedCapture();
+        }
+
+        static void BeginStageGateCapture(int stageIndex, string gateLabel, float captureDelaySeconds = 3f)
+        {
+            Init();
+
+            if (!EditorApplication.isPlaying)
+            {
+                Debug.LogError("[VX Gate] Enter Play Mode first.");
+                return;
+            }
+
+            EnsureGameReady(() => CaptureStageEndlessGate(stageIndex, gateLabel, captureDelaySeconds));
+        }
+
+        static void EnsureGameReady(Action whenReady, int attempt = 0)
+        {
+            if (!EditorApplication.isPlaying) return;
+
+            EditorApplication.isPaused = false;
+            DismissContinuePopupIfNeeded();
+
+            if (GameController.SaveManager == null)
+            {
+                if (attempt < 120)
+                {
+                    Schedule(() => EnsureGameReady(whenReady, attempt + 1), 0.5f);
+                    return;
+                }
+
+                Debug.LogError("[VX Gate] SaveManager never initialized.");
+                return;
+            }
+
+            whenReady();
+        }
+
+        static void CaptureStageEndlessGate(int stageIndex, string gateLabel, float captureDelaySeconds = 3f, int lobbyAttempt = 0)
         {
             if (!EditorApplication.isPlaying)
             {
@@ -110,12 +235,94 @@ namespace VXMonster.EditorTools
             var lobby = FindUiBehavior<LobbyWindowBehavior>();
             if (lobby == null)
             {
+                if (lobbyAttempt < 40)
+                {
+                    var sceneName = GetActiveSceneName();
+                    if (StageController.IsLoaded || sceneName == "Game")
+                    {
+                        _stageLoadInProgress = false;
+                        CleanupStrayLoadingScenes();
+                        SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
+                    }
+
+                    Schedule(() => CaptureStageEndlessGate(stageIndex, gateLabel, captureDelaySeconds, lobbyAttempt + 1), 2.5f);
+                    return;
+                }
+
                 Debug.LogError("[VX Gate] LobbyWindowBehavior not found.");
                 return;
             }
 
-            lobby.StartEndlessRun(DifficultyTier.Normal);
-            Schedule(() => TrySelectFirstWeapon(gateLabel), 3.5f);
+            StartEndlessRunForGate(stageIndex);
+            Schedule(() => WaitForStageThenCapture(gateLabel, captureDelaySeconds), 2f);
+        }
+
+        static bool _stageLoadInProgress;
+
+        static void StartEndlessRunForGate(int stageIndex)
+        {
+            GameSessionManager.Instance?.ConfigureEndless(DifficultyTier.Normal);
+
+            var save = GameController.SaveManager.GetSave<StageSave>("Stage");
+            save.SetSelectedStageId(stageIndex);
+            save.IsPlaying = true;
+            save.ResetStageData = true;
+            save.Time = 0f;
+            save.XP = 0f;
+            save.XPLEVEL = 0;
+            save.EnemiesKilled = 0;
+
+            if (GameController.AudioManager != null)
+                GameController.AudioManager.PlaySound(AudioManager.BUTTON_CLICK_HASH);
+
+            EditorApplication.isPaused = false;
+            Time.timeScale = 1f;
+
+            if (_stageLoadInProgress)
+            {
+                Debug.LogWarning("[VX Gate] Stage load already in progress — waiting.");
+                return;
+            }
+
+            _stageLoadInProgress = true;
+            CleanupStrayLoadingScenes();
+
+            Debug.Log($"[VX Gate] Loading stage {stageIndex + 1} (scene={GetActiveSceneName()}).");
+            SceneManager.LoadScene("Game", LoadSceneMode.Single);
+        }
+
+        static void CleanupStrayLoadingScenes()
+        {
+            for (var i = SceneManager.sceneCount - 1; i >= 0; i--)
+            {
+                var scene = SceneManager.GetSceneAt(i);
+                if (scene.isLoaded && scene.name == "Loading Screen")
+                    SceneManager.UnloadSceneAsync(scene);
+            }
+        }
+
+        static void WaitForStageThenCapture(string gateLabel, float captureDelaySeconds, int attempt = 0)
+        {
+            EditorApplication.isPaused = false;
+
+            if (StageController.IsLoaded)
+            {
+                _stageLoadInProgress = false;
+                Schedule(() => TrySelectFirstWeapon(gateLabel, captureDelaySeconds), 1f);
+                return;
+            }
+
+            if (attempt < 100)
+            {
+                if (attempt > 0 && attempt % 20 == 0)
+                    Debug.Log($"[VX Gate] Waiting for StageController... attempt {attempt}, scene={GetActiveSceneName()}");
+
+                Schedule(() => WaitForStageThenCapture(gateLabel, captureDelaySeconds, attempt + 1), 0.5f);
+                return;
+            }
+
+            Debug.LogError("[VX Gate] StageController never loaded — cannot capture.");
+            _stageLoadInProgress = false;
         }
 
         static void UnlockAllStagesForGate()
@@ -146,8 +353,20 @@ namespace VXMonster.EditorTools
             Schedule(() => TrySelectFirstWeapon("gate_4_3_combat_walk"), 3.5f);
         }
 
-        static void TrySelectFirstWeapon(string gateLabel = "gate_4_3_combat_walk")
+        static void TrySelectFirstWeapon(string gateLabel = "gate_4_3_combat_walk", float captureDelaySeconds = 3f, int attempt = 0)
         {
+            if (!StageController.IsLoaded)
+            {
+                if (attempt < 20)
+                {
+                    Schedule(() => TrySelectFirstWeapon(gateLabel, captureDelaySeconds, attempt + 1), 0.5f);
+                    return;
+                }
+
+                Debug.LogError("[VX Gate] StageController not ready for weapon select.");
+                return;
+            }
+
 #if UNITY_2022_2_OR_NEWER
             var cards = UnityEngine.Object.FindObjectsByType<AbilityCardBehavior>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 #else
@@ -155,7 +374,19 @@ namespace VXMonster.EditorTools
 #endif
             if (cards == null || cards.Length == 0)
             {
-                Schedule(() => TrySelectFirstWeapon(gateLabel), 0.5f);
+                if (attempt < 30)
+                {
+                    Schedule(() => TrySelectFirstWeapon(gateLabel, captureDelaySeconds, attempt + 1), 0.5f);
+                    return;
+                }
+
+                if (!TryInjectWoodenWand())
+                {
+                    Debug.LogError("[VX Gate] Could not select or inject starting weapon.");
+                    return;
+                }
+
+                Schedule(() => CaptureGate(gateLabel), captureDelaySeconds);
                 return;
             }
 
@@ -163,10 +394,42 @@ namespace VXMonster.EditorTools
             if (ability != null && StageController.AbilityManager != null)
             {
                 StageController.AbilityManager.AddAbility(ability);
-                FindUiBehavior<AbilitiesWindowBehavior>()?.Hide();
+                SuppressAbilityUi();
+            }
+            else if (!TryInjectWoodenWand())
+            {
+                Debug.LogError("[VX Gate] Ability card had null data and wand injection failed.");
+                return;
             }
 
-            Schedule(() => CaptureGate(gateLabel), 3f);
+            Schedule(() => CaptureGate(gateLabel), captureDelaySeconds);
+        }
+
+        const string WoodenWandDataPath = "Assets/Common/Scriptables/Abilities/Active Abilities/Wooden Wand Data.asset";
+
+        static bool TryInjectWoodenWand()
+        {
+            if (!StageController.IsLoaded || StageController.AbilityManager == null) return false;
+
+            var wand = AssetDatabase.LoadAssetAtPath<AbilityData>(WoodenWandDataPath);
+            if (wand == null) return false;
+
+            StageController.AbilityManager.AddAbility(wand);
+            SuppressAbilityUi();
+            return true;
+        }
+
+        static void SuppressAbilityUi()
+        {
+            FindUiBehavior<AbilitiesWindowBehavior>()?.Hide();
+
+#if UNITY_2022_2_OR_NEWER
+            var windows = UnityEngine.Object.FindObjectsByType<AbilitiesWindowBehavior>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+#else
+            var windows = UnityEngine.Object.FindObjectsOfType<AbilitiesWindowBehavior>(true);
+#endif
+            foreach (var window in windows)
+                window.Hide();
         }
 
         static void SelectFirstWeaponAndCaptureWalk()
@@ -209,7 +472,7 @@ namespace VXMonster.EditorTools
         static void OnPlayModeStateChanged(PlayModeStateChange state)
         {
             if (state != PlayModeStateChange.EnteredPlayMode || string.IsNullOrEmpty(_pendingGate)) return;
-            if (_pendingAction != null) return;
+            if (HasScheduledActions) return;
 
             if (_pendingGate.Contains("shop"))
                 Schedule(OpenShopAndCapture, 2.5f);
@@ -221,26 +484,39 @@ namespace VXMonster.EditorTools
 
         static void OnEditorUpdate()
         {
-            if (_pendingAction == null) return;
-            if (!EditorApplication.isPlaying) return;
-            if (EditorApplication.timeSinceStartup < _waitUntil) return;
+            if (!EditorApplication.isPlaying || _scheduledActions.Count == 0) return;
 
-            var action = _pendingAction;
-            _pendingAction = null;
-            try
+            EditorApplication.isPaused = false;
+
+            var now = (float)EditorApplication.timeSinceStartup;
+            for (var i = 0; i < _scheduledActions.Count;)
             {
-                action();
-            }
-            catch (Exception ex)
-            {
-                Debug.LogError($"[VX Gate] Capture failed: {ex}");
+                if (_scheduledActions[i].RunAt > now)
+                {
+                    i++;
+                    continue;
+                }
+
+                var action = _scheduledActions[i].Action;
+                _scheduledActions.RemoveAt(i);
+                try
+                {
+                    action();
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogError($"[VX Gate] Capture failed: {ex}");
+                }
             }
         }
 
         static void Schedule(Action action, float delaySeconds)
         {
-            _pendingAction = action;
-            _waitUntil = (float)EditorApplication.timeSinceStartup + delaySeconds;
+            _scheduledActions.Add(new ScheduledGateAction
+            {
+                Action = action,
+                RunAt = (float)EditorApplication.timeSinceStartup + delaySeconds,
+            });
         }
 
         static void CaptureLobby()
@@ -353,7 +629,21 @@ namespace VXMonster.EditorTools
             for (var i = 0; i < 10; i++)
                 EditorApplication.Step();
 
-            Debug.Log($"[VX Gate] CAPTURE_PATH={path}");
+            Schedule(() =>
+            {
+                if (File.Exists(path))
+                {
+                    Debug.Log($"[VX Gate] CAPTURE_PATH={path}");
+                    if (StageController.IsLoaded)
+                    {
+                        _stageLoadInProgress = false;
+                        CleanupStrayLoadingScenes();
+                        SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
+                    }
+                }
+                else
+                    Debug.LogError($"[VX Gate] Capture file missing: {path}");
+            }, 0.75f);
         }
 
         static void FocusGameView()
@@ -431,6 +721,12 @@ namespace VXMonster.EditorTools
         {
             var projectRoot = Directory.GetParent(Application.dataPath)!.FullName;
             return Path.Combine(projectRoot, GateFolder);
+        }
+
+        static string GetActiveSceneName()
+        {
+            var scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+            return scene.IsValid() ? scene.name : null;
         }
     }
 }

@@ -1183,9 +1183,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: Burst
-  m_Markers:
-    m_Objects: []
-  enemyType: 1
+  enemyType: 2
 --- !u!114 &-8040230213244376689
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1906,9 +1904,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: Burst
-  m_Markers:
-    m_Objects: []
-  enemyType: 0
+  enemyType: 8
 --- !u!114 &-107261137663079435
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2231,9 +2227,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 11f7a3d6739d4c041a49b1cfb4f44189, type: 3}
-  m_Name: Boss
-  m_EditorClassIdentifier: 
-  bossType: 3
+  bossType: 1
   bossUIWarningDuration: 2
   bossRedCircleSpawnDuration: 1
   bossRedCircleStayDuration: 2
@@ -2727,9 +2721,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: Burst
-  m_Markers:
-    m_Objects: []
-  enemyType: 3
+  enemyType: 9
 --- !u!114 &5555024024589501109
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2889,9 +2881,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 11f7a3d6739d4c041a49b1cfb4f44189, type: 3}
-  m_Name: Boss
-  m_EditorClassIdentifier: 
-  bossType: 1
+  bossType: 3
   bossUIWarningDuration: 2
   bossRedCircleSpawnDuration: 1
   bossRedCircleStayDuration: 2
@@ -3379,9 +3369,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: Burst
-  m_Markers:
-    m_Objects: []
-  enemyType: 4
+  enemyType: 1
 --- !u!114 &7491260068709142420
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3392,9 +3380,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 11f7a3d6739d4c041a49b1cfb4f44189, type: 3}
-  m_Name: Boss
-  m_EditorClassIdentifier: 
-  bossType: 2
+  bossType: 0
   bossUIWarningDuration: 2
   bossRedCircleSpawnDuration: 1
   bossRedCircleStayDuration: 2
@@ -3644,7 +3630,7 @@ MonoBehaviour:
     m_DisplayName: Continuous
   m_Markers:
     m_Objects: []
-  enemyType: 2
+  enemyType: 0
 --- !u!114 &7748127034473814588
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4160,9 +4146,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: Continuous
-  m_Markers:
-    m_Objects: []
-  enemyType: 8
+  enemyType: 5
 --- !u!114 &8653470031898022253
 MonoBehaviour:
   m_ObjectHideFlags: 1

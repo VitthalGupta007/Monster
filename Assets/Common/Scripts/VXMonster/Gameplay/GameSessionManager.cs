@@ -175,6 +175,11 @@ namespace VXMonster.Gameplay
             return mult;
         }
 
+        public float GetXpGainMultiplier()
+        {
+            return RunXpScaling.GetCurrentGemXpMultiplier();
+        }
+
         public int GetPassiveSlotBonus()
         {
             var bonus = 0;

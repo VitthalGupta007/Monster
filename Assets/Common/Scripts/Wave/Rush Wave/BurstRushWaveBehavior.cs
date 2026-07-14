@@ -14,12 +14,15 @@ namespace VXMonster.Core.Timeline
             burstData = new List<BurstData>();
 
             float duration = (float)playable.GetDuration();
+            float currentTime = (float)playable.GetTime();
 
             if (BurstCount > 0)
             {
                 for (int i = 0; i < BurstCount; i++)
                 {
                     float time = duration / BurstCount * i;
+
+                    if (time < currentTime) continue;
 
                     burstData.Add(new BurstData { time = time, count = EnemiesCount });
                 }

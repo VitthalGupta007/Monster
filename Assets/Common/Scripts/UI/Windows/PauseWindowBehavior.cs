@@ -108,9 +108,15 @@ namespace VXMonster.Core.UI
             GameController.AudioManager.PlaySound(AudioManager.BUTTON_CLICK_HASH);
             Time.timeScale = 1f;
 
+            if (StageController.IsLoaded)
+            {
+                stageSave.Time = (float)StageController.Director.time;
+            }
+
             stageSave.IsPlaying = false;
             GameSessionManager.Instance?.ClearSessionContext();
 
+            GameController.SaveManager?.Save(true);
             StageController.ReturnToMainMenu();
         }
 
