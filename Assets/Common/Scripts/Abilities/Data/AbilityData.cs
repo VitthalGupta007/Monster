@@ -41,6 +41,10 @@ namespace VXMonster.Core.Abilities
         [SerializeField] bool isEvolution;
         public bool IsEvolution => isEvolution;
 
+        [Tooltip("Lowest stage index (0 = Stage 1) that may offer this ability as a new/upgrade pick")]
+        [SerializeField, Min(0)] int minStageId;
+        public int MinStageId => minStageId;
+
         [Tooltip("The requirements for this ability to be shown to the player. Ignore this field if the 'isEvolution' field is false")]
         [SerializeField] List<EvolutionRequirement> evolutionRequirements;
         public List<EvolutionRequirement> EvolutionRequirements => evolutionRequirements;

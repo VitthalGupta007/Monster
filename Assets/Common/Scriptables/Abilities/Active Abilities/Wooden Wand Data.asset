@@ -20,6 +20,7 @@ MonoBehaviour:
   isActiveAbility: 1
   isWeaponAbility: 1
   isEvolution: 0
+  minStageId: 0
   evolutionRequirements: []
   levels:
   - abilityCooldown: 1

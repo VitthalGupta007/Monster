@@ -20,6 +20,7 @@ MonoBehaviour:
   isActiveAbility: 0
   isWeaponAbility: 0
   isEvolution: 0
+  minStageId: 0
   evolutionRequirements: []
   levels:
   - xpMultiplier: 1.1

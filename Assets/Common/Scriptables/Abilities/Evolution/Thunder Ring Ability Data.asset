@@ -19,7 +19,9 @@ MonoBehaviour:
   prefab: {fileID: 924860060412471070, guid: 43f0ac2cddc68e54a94d3713d3a8dcf5, type: 3}
   isActiveAbility: 1
   isWeaponAbility: 0
+  isEndgameAbility: 0
   isEvolution: 1
+  minStageId: 2
   evolutionRequirements:
   - abilityType: 2
     requiredAbilityLevel: 4

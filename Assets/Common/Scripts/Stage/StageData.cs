@@ -50,6 +50,14 @@ namespace VXMonster.Core
         [SerializeField] protected float xpGainMultiplier = 1f;
         public float XpGainMultiplier => Mathf.Max(0.1f, xpGainMultiplier);
 
+        [Tooltip("Added to AbilityManager chestChanceTier3 on this stage (0–1)")]
+        [SerializeField, Range(0f, 1f)] protected float chestTier3Bonus;
+        public float ChestTier3Bonus => Mathf.Clamp01(chestTier3Bonus);
+
+        [Tooltip("Added to AbilityManager chestChanceTier5 on this stage (0–1)")]
+        [SerializeField, Range(0f, 1f)] protected float chestTier5Bonus;
+        public float ChestTier5Bonus => Mathf.Clamp01(chestTier5Bonus);
+
         [Space]
         [SerializeField] protected bool useCustomMusic;
         public bool UseCustomMusic => useCustomMusic;

@@ -21,6 +21,7 @@ MonoBehaviour:
   isWeaponAbility: 0
   isEndgameAbility: 0
   isEvolution: 0
+  minStageId: 3
   evolutionRequirements: []
   levels:
   - goldMultiplier: 1.1

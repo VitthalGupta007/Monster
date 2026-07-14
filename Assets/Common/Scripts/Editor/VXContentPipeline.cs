@@ -257,9 +257,83 @@ namespace VXMonster.EditorTools
             }
         }
 
+        [MenuItem("VX Monster/Content/Apply Ability Stage Gates")]
+        public static void ApplyAbilityStageGates()
+        {
+            const string dbPath = "Assets/Common/Scriptables/Abilities/Abilities Database.asset";
+            var db = AssetDatabase.LoadAssetAtPath<VXMonster.Core.Abilities.AbilitiesDatabase>(dbPath);
+            if (db == null)
+            {
+                Debug.LogError($"[VX] Missing {dbPath}");
+                return;
+            }
+
+            var updated = 0;
+            for (var i = 0; i < db.AbilitiesCount; i++)
+            {
+                var ability = db.GetAbility(i);
+                if (ability == null) continue;
+
+                var minStage = StageAbilityProgression.GetMinStageId(ability.AbilityType);
+                var so = new SerializedObject(ability);
+                var prop = so.FindProperty("minStageId");
+                if (prop == null)
+                {
+                    Debug.LogError("[VX] AbilityData missing minStageId — recompile scripts first.");
+                    return;
+                }
+
+                if (prop.intValue != minStage)
+                {
+                    prop.intValue = minStage;
+                    so.ApplyModifiedPropertiesWithoutUndo();
+                    EditorUtility.SetDirty(ability);
+                    updated++;
+                    Debug.Log($"[VX] {ability.AbilityType} minStageId → {minStage} (Stage {minStage + 1}+)");
+                }
+            }
+
+            AssetDatabase.SaveAssets();
+            Debug.Log($"[VX] Ability stage gates applied ({updated} assets updated).");
+        }
+
+        [MenuItem("VX Monster/Content/Apply Stage Chest Bonuses 1-6")]
+        public static void ApplyStageChestBonuses1To6()
+        {
+            foreach (var (stage, tier3, tier5) in StageAbilityProgression.StageChestBonusTargets)
+            {
+                var stagePath = $"{StageFolder}/Stage {stage}.asset";
+                var stageData = AssetDatabase.LoadAssetAtPath<StageData>(stagePath);
+                if (stageData == null)
+                {
+                    Debug.LogError($"[VX] Missing {stagePath}");
+                    continue;
+                }
+
+                var so = new SerializedObject(stageData);
+                var tier3Prop = so.FindProperty("chestTier3Bonus");
+                var tier5Prop = so.FindProperty("chestTier5Bonus");
+                if (tier3Prop == null || tier5Prop == null)
+                {
+                    Debug.LogError("[VX] StageData missing chestTier*Bonus fields — recompile scripts first.");
+                    return;
+                }
+
+                tier3Prop.floatValue = tier3;
+                tier5Prop.floatValue = tier5;
+                so.ApplyModifiedPropertiesWithoutUndo();
+                EditorUtility.SetDirty(stageData);
+                Debug.Log($"[VX] Stage {stage} chest bonuses → tier3 +{tier3:0.##}, tier5 +{tier5:0.##}");
+            }
+
+            AssetDatabase.SaveAssets();
+        }
+
         [MenuItem("VX Monster/Content/Differentiate Stages 3-6 Enemy Mix", true)]
         [MenuItem("VX Monster/Content/Apply Graduated Enemy Mix 1-6", true)]
         [MenuItem("VX Monster/Content/Apply Graduated Enemy Drop Tables", true)]
+        [MenuItem("VX Monster/Content/Apply Ability Stage Gates", true)]
+        [MenuItem("VX Monster/Content/Apply Stage Chest Bonuses 1-6", true)]
         static bool ValidateGraduatedEnemyMixMenu()
         {
             return !EditorApplication.isPlayingOrWillChangePlaymode;

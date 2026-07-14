@@ -52,6 +52,7 @@ namespace VXMonster.EditorTools
             AuditStageEnemyProgression(results);
             AuditStageExperienceYield(results);
             AuditEnemyDropTables(results);
+            AuditStagePowerupPools(results);
 
             foreach (var line in results)
                 Debug.Log(line);
@@ -104,6 +105,15 @@ namespace VXMonster.EditorTools
         {
             var results = new List<string>();
             AuditEnemyDropTables(results);
+            foreach (var line in results)
+                Debug.Log(line);
+        }
+
+        [MenuItem("VX Monster/Rebrand/Audit Stage Powerup Pools")]
+        public static void AuditStagePowerupPoolsMenu()
+        {
+            var results = new List<string>();
+            AuditStagePowerupPools(results);
             foreach (var line in results)
                 Debug.Log(line);
         }
@@ -596,6 +606,96 @@ namespace VXMonster.EditorTools
                 else
                     results.Add($"PASS {type}: ~{actualXp:0.#} gem XP/kill, tier {tier}, min stage {minStage}");
             }
+        }
+
+        static void AuditStagePowerupPools(List<string> results)
+        {
+            results.Add("--- Stage powerup pools (ability minStage + chest bonuses) ---");
+
+            var abilitiesDb = AssetDatabase.LoadAssetAtPath<VXMonster.Core.Abilities.AbilitiesDatabase>(
+                "Assets/Common/Scriptables/Abilities/Abilities Database.asset");
+            if (abilitiesDb == null)
+            {
+                results.Add("FAIL Abilities Database.asset missing");
+                return;
+            }
+
+            var previousBonus3 = -1f;
+            var previousBonus5 = -1f;
+
+            for (var stageZero = 0; stageZero < 6; stageZero++)
+            {
+                var stageNum = stageZero + 1;
+                var eligible = StageAbilityProgression.CountEligibleAbilities(abilitiesDb, stageZero);
+                if (eligible < 8)
+                    results.Add($"FAIL Stage {stageNum}: only {eligible} eligible abilities (need ≥8)");
+                else
+                    results.Add($"PASS Stage {stageNum}: {eligible} eligible abilities");
+
+                // Late-stage exclusives must not appear on Stage 1 pool
+                if (stageZero == 0)
+                {
+                    AbilityType[] lateOnly =
+                    {
+                        AbilityType.IceShard, AbilityType.Fireball, AbilityType.MagicRune,
+                        AbilityType.FlyingDagger, AbilityType.SolarMagnifier, AbilityType.Duration,
+                        AbilityType.IncreasedGold,
+                    };
+                    foreach (var late in lateOnly)
+                    {
+                        if (StageAbilityProgression.IsEligibleForStage(late, 0))
+                            results.Add($"FAIL Stage 1 pool includes late ability {late}");
+                    }
+                }
+
+                var stagePath = $"{StageFolder}/Stage {stageNum}.asset";
+                var stageData = AssetDatabase.LoadAssetAtPath<StageData>(stagePath);
+                if (stageData == null)
+                {
+                    results.Add($"FAIL Missing {stagePath}");
+                    continue;
+                }
+
+                var target = StageAbilityProgression.GetChestTierBonus(stageZero);
+                if (Mathf.Abs(stageData.ChestTier3Bonus - target.Tier3) > 0.001f
+                    || Mathf.Abs(stageData.ChestTier5Bonus - target.Tier5) > 0.001f)
+                {
+                    results.Add(
+                        $"FAIL Stage {stageNum}: chest bonuses {stageData.ChestTier3Bonus:0.##}/{stageData.ChestTier5Bonus:0.##} ≠ target {target.Tier3:0.##}/{target.Tier5:0.##}");
+                }
+                else
+                {
+                    results.Add($"PASS Stage {stageNum}: chest tier3 +{target.Tier3:0.##}, tier5 +{target.Tier5:0.##}");
+                }
+
+                if (previousBonus3 >= 0f && stageData.ChestTier3Bonus + 0.001f < previousBonus3)
+                    results.Add($"FAIL Stage {stageNum}: chestTier3Bonus regressed");
+                if (previousBonus5 >= 0f && stageData.ChestTier5Bonus + 0.001f < previousBonus5)
+                    results.Add($"FAIL Stage {stageNum}: chestTier5Bonus regressed");
+
+                previousBonus3 = stageData.ChestTier3Bonus;
+                previousBonus5 = stageData.ChestTier5Bonus;
+            }
+
+            // Asset minStageId should match progression table after Apply
+            var mismatch = 0;
+            for (var i = 0; i < abilitiesDb.AbilitiesCount; i++)
+            {
+                var ability = abilitiesDb.GetAbility(i);
+                if (ability == null) continue;
+                var expected = StageAbilityProgression.GetMinStageId(ability.AbilityType);
+                if (ability.MinStageId != expected)
+                {
+                    mismatch++;
+                    if (mismatch <= 5)
+                        results.Add($"FAIL {ability.AbilityType}: minStageId asset={ability.MinStageId} code={expected}");
+                }
+            }
+
+            if (mismatch == 0)
+                results.Add("PASS Ability asset minStageId matches StageAbilityProgression");
+            else if (mismatch > 5)
+                results.Add($"FAIL {mismatch} abilities have mismatched minStageId (run Apply Ability Stage Gates)");
         }
     }
 }

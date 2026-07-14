@@ -19,7 +19,9 @@ MonoBehaviour:
   prefab: {fileID: 6119386174245202466, guid: 460c16e3997ff1d43b013c9b00f6ec69, type: 3}
   isActiveAbility: 1
   isWeaponAbility: 0
+  isEndgameAbility: 0
   isEvolution: 0
+  minStageId: 3
   evolutionRequirements: []
   levels:
   - minesCount: 2

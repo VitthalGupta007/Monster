@@ -27,6 +27,8 @@ MonoBehaviour:
   enemyDamage: 1
   enemyHP: 1
   xpGainMultiplier: 1
+  chestTier3Bonus: 0
+  chestTier5Bonus: 0
   useCustomMusic: 0
   musicName: Stage Music
   stageUnlockData:

@@ -300,6 +300,8 @@ namespace VXMonster.Core.Abilities
                     if (moreActive) weight *= abilitiesDatabase.LessAbilitiesOfTypeWeightMultiplier;
                 }
 
+                weight *= StageAbilityProgression.GetStageWeightMultiplier(ability.AbilityType, stageSave.SelectedStageId);
+
                 weightedAbilities.Add(new WeightedAbility() { abilityData = ability, weight = weight });
             }
 
@@ -381,6 +383,11 @@ namespace VXMonster.Core.Abilities
                 // Usually it's some kind of heal or gold
 
                 if (abilityData.IsEndgameAbility) continue;
+
+                // Stage-gated powerup pool (Phase 7.7) — weapons / endgame keep their own rules
+                if (!abilityData.IsWeaponAbility
+                    && !StageAbilityProgression.IsEligibleForStage(abilityData.AbilityType, stageSave.SelectedStageId))
+                    continue;
 
                 // The ability is at it's last level. There are no way to upgrade it further
 
@@ -582,11 +589,26 @@ namespace VXMonster.Core.Abilities
 
             var selectedAbilitiesCount = 1;
             var tierId = 0;
-            if(counter >= 5 && Random.value < chestChanceTier5)
+
+            var chanceTier5 = chestChanceTier5;
+            var chanceTier3 = chestChanceTier3;
+            if (StageController.IsLoaded && StageController.Stage != null)
+            {
+                chanceTier5 = Mathf.Clamp01(chanceTier5 + StageController.Stage.ChestTier5Bonus);
+                chanceTier3 = Mathf.Clamp01(chanceTier3 + StageController.Stage.ChestTier3Bonus);
+            }
+            else
+            {
+                var bonus = StageAbilityProgression.GetChestTierBonus(stageSave.SelectedStageId);
+                chanceTier5 = Mathf.Clamp01(chanceTier5 + bonus.Tier5);
+                chanceTier3 = Mathf.Clamp01(chanceTier3 + bonus.Tier3);
+            }
+
+            if(counter >= 5 && Random.value < chanceTier5)
             {
                 selectedAbilitiesCount = 5;
                 tierId = 2;
-            } else if(counter >= 3 && Random.value < chestChanceTier3)
+            } else if(counter >= 3 && Random.value < chanceTier3)
             {
                 selectedAbilitiesCount = 3;
                 tierId = 1;
