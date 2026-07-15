@@ -411,7 +411,7 @@ namespace VXMonster.EditorTools
             }
 
 #if UNITY_2022_2_OR_NEWER
-            var cards = UnityEngine.Object.FindObjectsByType<AbilityCardBehavior>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            var cards = UnityEngine.Object.FindObjectsByType<AbilityCardBehavior>(FindObjectsInactive.Include);
 #else
             var cards = UnityEngine.Object.FindObjectsOfType<AbilityCardBehavior>(true);
 #endif
@@ -467,7 +467,7 @@ namespace VXMonster.EditorTools
             FindUiBehavior<AbilitiesWindowBehavior>()?.Hide();
 
 #if UNITY_2022_2_OR_NEWER
-            var windows = UnityEngine.Object.FindObjectsByType<AbilitiesWindowBehavior>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            var windows = UnityEngine.Object.FindObjectsByType<AbilitiesWindowBehavior>(FindObjectsInactive.Include);
 #else
             var windows = UnityEngine.Object.FindObjectsOfType<AbilitiesWindowBehavior>(true);
 #endif
@@ -635,7 +635,7 @@ namespace VXMonster.EditorTools
         static void DismissContinuePopupIfNeeded()
         {
 #if UNITY_2022_2_OR_NEWER
-            var buttons = UnityEngine.Object.FindObjectsByType<Button>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            var buttons = UnityEngine.Object.FindObjectsByType<Button>(FindObjectsInactive.Include);
 #else
             var buttons = UnityEngine.Object.FindObjectsOfType<Button>(true);
 #endif

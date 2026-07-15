@@ -93,7 +93,7 @@ namespace VXMonster.UI
 
         private static bool IsOwned(string productId)
         {
-            if (productId != IAPProductIds.RemoveAds && productId != IAPProductIds.StarterBundle) return false;
+            if (productId != IAPProductIds.RemoveAds) return false;
             if (GameController.SaveManager == null) return false;
 
             return GameController.SaveManager.GetSave<EntitlementsSave>("VX Entitlements").RemoveAdsPurchased;

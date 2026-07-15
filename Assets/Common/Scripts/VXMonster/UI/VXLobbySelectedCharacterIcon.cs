@@ -55,7 +55,7 @@ namespace VXMonster.Core.UI
 
         static CharactersDatabase ResolveDatabase()
         {
-            var windows = FindObjectsByType<CharactersWindowBehavior>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            var windows = FindObjectsByType<CharactersWindowBehavior>(FindObjectsInactive.Include);
             var field = typeof(CharactersWindowBehavior).GetField("database",
                 BindingFlags.Instance | BindingFlags.NonPublic);
             if (field == null) return null;

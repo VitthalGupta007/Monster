@@ -260,7 +260,7 @@ namespace VXMonster.EditorTools
             Time.timeScale = 1f;
 
 #if UNITY_2022_2_OR_NEWER
-            var enemies = UnityEngine.Object.FindObjectsByType<EnemyBehavior>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+            var enemies = UnityEngine.Object.FindObjectsByType<EnemyBehavior>(FindObjectsInactive.Exclude);
 #else
             var enemies = UnityEngine.Object.FindObjectsOfType<EnemyBehavior>();
 #endif
@@ -282,7 +282,7 @@ namespace VXMonster.EditorTools
             EditorApplication.isPaused = false;
             Time.timeScale = 1f;
 #if UNITY_2022_2_OR_NEWER
-            var enemies = UnityEngine.Object.FindObjectsByType<EnemyBehavior>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+            var enemies = UnityEngine.Object.FindObjectsByType<EnemyBehavior>(FindObjectsInactive.Exclude);
 #else
             var enemies = UnityEngine.Object.FindObjectsOfType<EnemyBehavior>();
 #endif
@@ -371,7 +371,7 @@ namespace VXMonster.EditorTools
                     else
                     {
 #if UNITY_2022_2_OR_NEWER
-                        var transforms = UnityEngine.Object.FindObjectsByType<Transform>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+                        var transforms = UnityEngine.Object.FindObjectsByType<Transform>(FindObjectsInactive.Include);
 #else
                         var transforms = UnityEngine.Object.FindObjectsOfType<Transform>(true);
 #endif
@@ -395,7 +395,7 @@ namespace VXMonster.EditorTools
         static void HideLegacyPlayGamesSignInRow()
         {
 #if UNITY_2022_2_OR_NEWER
-            var transforms = UnityEngine.Object.FindObjectsByType<Transform>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            var transforms = UnityEngine.Object.FindObjectsByType<Transform>(FindObjectsInactive.Include);
 #else
             var transforms = UnityEngine.Object.FindObjectsOfType<Transform>(true);
 #endif
@@ -505,7 +505,7 @@ namespace VXMonster.EditorTools
             if (!StageController.IsLoaded || StageController.AbilityManager == null) return;
 
 #if UNITY_2022_2_OR_NEWER
-            var cards = UnityEngine.Object.FindObjectsByType<AbilityCardBehavior>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            var cards = UnityEngine.Object.FindObjectsByType<AbilityCardBehavior>(FindObjectsInactive.Include);
 #else
             var cards = UnityEngine.Object.FindObjectsOfType<AbilityCardBehavior>(true);
 #endif
@@ -642,7 +642,7 @@ namespace VXMonster.EditorTools
             try
             {
 #if UNITY_2022_2_OR_NEWER
-                var buttons = UnityEngine.Object.FindObjectsByType<Button>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+                var buttons = UnityEngine.Object.FindObjectsByType<Button>(FindObjectsInactive.Include);
 #else
                 var buttons = UnityEngine.Object.FindObjectsOfType<Button>(true);
 #endif
@@ -666,7 +666,7 @@ namespace VXMonster.EditorTools
         static void ClickButtonNamed(string objectName)
         {
 #if UNITY_2022_2_OR_NEWER
-            var buttons = UnityEngine.Object.FindObjectsByType<Button>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            var buttons = UnityEngine.Object.FindObjectsByType<Button>(FindObjectsInactive.Include);
 #else
             var buttons = UnityEngine.Object.FindObjectsOfType<Button>(true);
 #endif

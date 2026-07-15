@@ -115,8 +115,26 @@ namespace VXMonster.Platform.IAP
             storeController = controller;
             extensionProvider = extensions;
             isInitializing = false;
+            SyncOwnedNonConsumables();
             InitializeCallback?.Invoke(true);
             InitializeCallback = null;
+        }
+
+        /// <summary>
+        /// Re-apply owned non-consumables (e.g. Remove Ads) after reinstall or account restore on Google Play.
+        /// </summary>
+        private void SyncOwnedNonConsumables()
+        {
+            if (storeController == null) return;
+
+            foreach (var product in storeController.products.all)
+            {
+                if (product == null || !product.hasReceipt) continue;
+
+                var id = product.definition.id;
+                if (id == IAPProductIds.RemoveAds || id == IAPProductIds.StarterBundle)
+                    PurchaseFulfillment.TryFulfill(id);
+            }
         }
 
         public void OnInitializeFailed(InitializationFailureReason error)
