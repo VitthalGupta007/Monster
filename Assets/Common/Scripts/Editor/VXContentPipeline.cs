@@ -494,14 +494,15 @@ namespace VXMonster.EditorTools
                 return;
             }
 
-            var specs = new (string file, string name, int price, float hp, float dmg, bool startAbility, AbilityType ability, bool useMage)[]
+            // file = asset basename; name = UI display; iconStem + prefabTitle keep legacy folder paths (Rogue.prefab, ui_char_rogue.png).
+            var specs = new (string file, string name, string iconStem, string prefabTitle, int price, float hp, float dmg, bool startAbility, AbilityType ability, bool useMage)[]
             {
-                ("ROGUE Character Data", "ROGUE", 800, 90f, 1.15f, true, AbilityType.FlyingDagger, false),
-                ("PALADIN Character Data", "PALADIN", 1000, 140f, 0.95f, true, AbilityType.GuardianEye, true),
-                ("NECROMANCER Character Data", "NECROMANCER", 1200, 100f, 1.2f, true, AbilityType.MagicRune, false),
-                ("RANGER Character Data", "RANGER", 1400, 105f, 1.1f, true, AbilityType.Boomerang, false),
-                ("BERSERKER Character Data", "BERSERKER", 1600, 85f, 1.35f, true, AbilityType.RollingStone, true),
-                ("SAGE Character Data", "SAGE", 1800, 110f, 1.05f, true, AbilityType.SolarMagnifier, false),
+                ("ROGUE Character Data", "SHADE", "rogue", "Rogue", 800, 90f, 1.15f, true, AbilityType.FlyingDagger, false),
+                ("PALADIN Character Data", "AEGIS", "paladin", "Paladin", 1000, 140f, 0.95f, true, AbilityType.GuardianEye, true),
+                ("NECROMANCER Character Data", "HEX", "necromancer", "Necromancer", 1200, 100f, 1.2f, true, AbilityType.MagicRune, false),
+                ("RANGER Character Data", "QUILL", "ranger", "Ranger", 1400, 105f, 1.1f, true, AbilityType.Boomerang, false),
+                ("BERSERKER Character Data", "FANG", "berserker", "Berserker", 1600, 85f, 1.35f, true, AbilityType.RollingStone, true),
+                ("SAGE Character Data", "LUMEN", "sage", "Sage", 1800, 110f, 1.05f, true, AbilityType.SolarMagnifier, false),
             };
 
             var db = AssetDatabase.LoadAssetAtPath<CharactersDatabase>(CharactersDbPath);
@@ -531,6 +532,21 @@ namespace VXMonster.EditorTools
             UpsertInDatabase(wizard);
             UpsertInDatabase(mage);
 
+            // Starter pair display names (asset files stay WIZARD/MAGE Character Data.asset).
+            {
+                var soW = new SerializedObject(wizard);
+                soW.FindProperty("characterName").stringValue = "SPIKE";
+                soW.ApplyModifiedPropertiesWithoutUndo();
+                EditorUtility.SetDirty(wizard);
+
+                var soM = new SerializedObject(mage);
+                soM.FindProperty("characterName").stringValue = "EMBER";
+                var mageIcon = AssetDatabase.LoadAssetAtPath<Sprite>($"{CharIconFolder}/ui_char_mage.png");
+                if (mageIcon != null) soM.FindProperty("icon").objectReferenceValue = mageIcon;
+                soM.ApplyModifiedPropertiesWithoutUndo();
+                EditorUtility.SetDirty(mage);
+            }
+
             foreach (var spec in specs)
             {
                 var path = $"{CharactersFolder}/{spec.file}.asset";
@@ -542,14 +558,13 @@ namespace VXMonster.EditorTools
                 }
 
                 var template = spec.useMage ? mage : wizard;
-                var iconPath = $"{CharIconFolder}/ui_char_{spec.name.ToLowerInvariant()}.png";
+                var iconPath = $"{CharIconFolder}/ui_char_{spec.iconStem}.png";
                 var icon = AssetDatabase.LoadAssetAtPath<Sprite>(iconPath);
                 if (icon == null) icon = template.Icon;
 
-                // Prefer TitleCase prefab (Rogue.prefab) matching Wizard/Mage naming; fall back to UPPERCASE.
-                var titleName = char.ToUpperInvariant(spec.name[0]) + spec.name.Substring(1).ToLowerInvariant();
-                var prefabPathTitle = $"{CharactersPrefabsFolder}/{titleName}.prefab";
-                var prefabPathUpper = $"{CharactersPrefabsFolder}/{spec.name}.prefab";
+                // Prefab folder titles stay legacy (Rogue.prefab) while UI name is VX branded (SHADE).
+                var prefabPathTitle = $"{CharactersPrefabsFolder}/{spec.prefabTitle}.prefab";
+                var prefabPathUpper = $"{CharactersPrefabsFolder}/{spec.prefabTitle.ToUpperInvariant()}.prefab";
                 var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPathTitle)
                              ?? AssetDatabase.LoadAssetAtPath<GameObject>(prefabPathUpper);
 

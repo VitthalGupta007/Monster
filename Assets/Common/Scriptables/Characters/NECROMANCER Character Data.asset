@@ -15,7 +15,7 @@ MonoBehaviour:
   id:
     value: f3a3a7a7-4e36-431c-b354-d57b1876ffef
     canEdit: 0
-  characterName: NECROMANCER
+  characterName: HEX
   price:
     currencyId: gold
     amount: 1200

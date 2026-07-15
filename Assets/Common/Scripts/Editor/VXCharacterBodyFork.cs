@@ -38,15 +38,28 @@ namespace VXMonster.EditorTools
             ("Revive.anim", "wizard_revive.png"),
         };
 
-        static readonly Dictionary<string, (string spriteFolder, string animFolder, Color tint, float strength)> Specs =
-            new Dictionary<string, (string, string, Color, float)>(StringComparer.OrdinalIgnoreCase)
+        // Display name → (sourceSpriteFolder, sourceAnimFolder, destinationTitle, tint, strength)
+        // destinationTitle keeps existing Rogue/Paladin/... asset folders.
+        static readonly Dictionary<string, (string spriteFolder, string animFolder, string destTitle, Color tint, float strength)> Specs =
+            new Dictionary<string, (string, string, string, Color, float)>(StringComparer.OrdinalIgnoreCase)
             {
-                { "ROGUE", ("Wizard", "Wizard", new Color(0.25f, 0.55f, 0.28f), 0.55f) },
-                { "NECROMANCER", ("Wizard", "Wizard", new Color(0.45f, 0.22f, 0.55f), 0.55f) },
-                { "RANGER", ("Wizard", "Wizard", new Color(0.40f, 0.52f, 0.22f), 0.50f) },
-                { "SAGE", ("Wizard", "Wizard", new Color(0.22f, 0.55f, 0.62f), 0.50f) },
-                { "PALADIN", ("Wizard Crimson", "Wizard Crimson", new Color(0.85f, 0.78f, 0.45f), 0.45f) },
-                { "BERSERKER", ("Wizard Crimson", "Wizard Crimson", new Color(0.75f, 0.28f, 0.18f), 0.55f) },
+                { "SPIKE", ("Wizard", "Wizard", "Wizard", Color.white, 0f) },
+                { "WIZARD", ("Wizard", "Wizard", "Wizard", Color.white, 0f) },
+                { "SHADE", ("Wizard", "Wizard", "Rogue", new Color(0.22f, 0.55f, 0.42f), 0.55f) },
+                { "HEX", ("Wizard", "Wizard", "Necromancer", new Color(0.42f, 0.28f, 0.72f), 0.55f) },
+                { "QUILL", ("Wizard", "Wizard", "Ranger", new Color(0.35f, 0.58f, 0.22f), 0.52f) },
+                { "LUMEN", ("Wizard", "Wizard", "Sage", new Color(0.25f, 0.62f, 0.72f), 0.52f) },
+                { "AEGIS", ("Wizard", "Wizard", "Paladin", new Color(0.90f, 0.78f, 0.35f), 0.48f) },
+                { "FANG", ("Wizard", "Wizard", "Berserker", new Color(0.82f, 0.32f, 0.16f), 0.58f) },
+                { "EMBER", ("Wizard", "Wizard", "Mage", new Color(0.85f, 0.28f, 0.22f), 0.58f) },
+                // Legacy keys (pre-rename) so old data still forks correctly mid-migration
+                { "ROGUE", ("Wizard", "Wizard", "Rogue", new Color(0.22f, 0.55f, 0.42f), 0.55f) },
+                { "NECROMANCER", ("Wizard", "Wizard", "Necromancer", new Color(0.42f, 0.28f, 0.72f), 0.55f) },
+                { "RANGER", ("Wizard", "Wizard", "Ranger", new Color(0.35f, 0.58f, 0.22f), 0.52f) },
+                { "SAGE", ("Wizard", "Wizard", "Sage", new Color(0.25f, 0.62f, 0.72f), 0.52f) },
+                { "PALADIN", ("Wizard", "Wizard", "Paladin", new Color(0.90f, 0.78f, 0.35f), 0.48f) },
+                { "BERSERKER", ("Wizard", "Wizard", "Berserker", new Color(0.82f, 0.32f, 0.16f), 0.58f) },
+                { "MAGE", ("Wizard", "Wizard", "Mage", new Color(0.85f, 0.28f, 0.22f), 0.58f) },
             };
 
         [MenuItem("VX Monster/Rebrand/Characters/Fork Unique Combat Bodies")]
@@ -74,7 +87,10 @@ namespace VXMonster.EditorTools
                 var prefabPath = AssetDatabase.GetAssetPath(data.Prefab);
                 var prefabGuid = AssetDatabase.AssetPathToGUID(prefabPath);
                 var entryName = data.Name;
-                var title = ToTitleCase(entryName);
+                Specs.TryGetValue(entryName, out var namedSpec);
+                var title = !string.IsNullOrEmpty(namedSpec.destTitle)
+                    ? namedSpec.destTitle
+                    : ToTitleCase(entryName);
                 var expectedUnique = $"{PrefabFolder}/{title}.prefab";
 
                 // Already forked?
@@ -151,10 +167,10 @@ namespace VXMonster.EditorTools
             return assets;
         }
 
-        static bool ForkEntry(CharacterDataSO data, (string spriteFolder, string animFolder, Color tint, float strength) spec)
+        static bool ForkEntry(CharacterDataSO data, (string spriteFolder, string animFolder, string destTitle, Color tint, float strength) spec)
         {
             var entryName = data.Name;
-            var title = ToTitleCase(entryName);
+            var title = string.IsNullOrEmpty(spec.destTitle) ? ToTitleCase(entryName) : spec.destTitle;
             var spriteFolder = $"{SpriteRoot}/{title}";
             var animFolder = $"{AnimRoot}/{title}";
             var prefabPath = $"{PrefabFolder}/{title}.prefab";

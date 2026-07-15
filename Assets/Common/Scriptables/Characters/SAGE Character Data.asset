@@ -15,7 +15,7 @@ MonoBehaviour:
   id:
     value: 20587bc1-9e63-43a2-b6aa-b264e55c6a3e
     canEdit: 0
-  characterName: SAGE
+  characterName: LUMEN
   price:
     currencyId: gold
     amount: 1800

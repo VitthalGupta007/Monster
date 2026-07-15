@@ -15,7 +15,7 @@ MonoBehaviour:
   id:
     value: 050cbd99-7363-418d-979d-e263bd14288f
     canEdit: 0
-  characterName: PALADIN
+  characterName: AEGIS
   price:
     currencyId: gold
     amount: 1000

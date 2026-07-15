@@ -15,7 +15,7 @@ MonoBehaviour:
   id:
     value: ebb77753-7342-49b2-9e8c-d228fc5f320d
     canEdit: 0
-  characterName: RANGER
+  characterName: QUILL
   price:
     currencyId: gold
     amount: 1400

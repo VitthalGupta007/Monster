@@ -15,7 +15,7 @@ MonoBehaviour:
   id:
     value: 29ea9dea-2551-452c-9f84-f36515e08c64
     canEdit: 0
-  characterName: WIZARD
+  characterName: SPIKE
   price:
     currencyId: gold
     amount: 0

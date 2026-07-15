@@ -375,8 +375,11 @@ namespace VXMonster.EditorTools
                 else
                     results.Add($"PASS {data.name}: base stats valid");
 
-                if (data.name.StartsWith("WIZARD") && (Mathf.Abs(hp - 100f) > 0.001f || Mathf.Abs(dmg - 1f) > 0.001f))
-                    results.Add($"INFO WIZARD: non-default baseline (HP={hp:0.##} DMG={dmg:0.##})");
+                if (data.name.StartsWith("WIZARD") || data.Name == "SPIKE")
+                {
+                    if (Mathf.Abs(hp - 100f) > 0.001f || Mathf.Abs(dmg - 1f) > 0.001f)
+                        results.Add($"INFO SPIKE/WIZARD: non-default baseline (HP={hp:0.##} DMG={dmg:0.##})");
+                }
             }
         }
 

@@ -15,7 +15,7 @@ MonoBehaviour:
   id:
     value: 41f25653-c84e-4be2-93b9-f4c2d86e8040
     canEdit: 0
-  characterName: MAGE
+  characterName: EMBER
   price:
     currencyId: gold
     amount: 500

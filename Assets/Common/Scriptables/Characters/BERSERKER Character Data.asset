@@ -15,7 +15,7 @@ MonoBehaviour:
   id:
     value: bdfa7213-0f58-4aa2-8dc9-c5e007fc0a4e
     canEdit: 0
-  characterName: BERSERKER
+  characterName: FANG
   price:
     currencyId: gold
     amount: 1600
