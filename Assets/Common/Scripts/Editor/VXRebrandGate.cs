@@ -45,6 +45,7 @@ namespace VXMonster.EditorTools
             AuditWizardSheets(results);
             AuditCharIcons(results);
             AuditCharacterIconGuids(results);
+            AuditCharacterPrefabUniqueness(results);
             AuditStageFieldBindings(results);
             AuditStagePropBindings(results);
             AuditStageBalance(results);
@@ -191,6 +192,50 @@ namespace VXMonster.EditorTools
                 results.Add("PASS character icon GUIDs (duplicates OK on stock baseline)");
             else
                 results.Add($"INFO character icon duplicates: {string.Join(", ", dupes)}");
+        }
+
+        static void AuditCharacterPrefabUniqueness(List<string> results)
+        {
+            results.Add("--- Character combat prefab uniqueness ---");
+            var byGuid = new Dictionary<string, List<string>>();
+
+            foreach (var asset in Directory.GetFiles(CharactersFolder, "* Character Data.asset"))
+            {
+                var path = asset.Replace('\\', '/');
+                var data = AssetDatabase.LoadAssetAtPath<VXMonster.Core.CharacterDataSO>(path);
+                if (data == null) continue;
+
+                if (data.Prefab == null)
+                {
+                    results.Add($"FAIL {Path.GetFileName(path)}: null prefab");
+                    continue;
+                }
+
+                var guid = AssetDatabase.AssetPathToGUID(AssetDatabase.GetAssetPath(data.Prefab));
+                if (!byGuid.TryGetValue(guid, out var owners))
+                {
+                    owners = new List<string>();
+                    byGuid[guid] = owners;
+                }
+
+                owners.Add(data.Name);
+            }
+
+            var shared = false;
+            foreach (var kv in byGuid)
+            {
+                if (kv.Value.Count == 1)
+                {
+                    results.Add($"PASS {kv.Value[0]} → unique prefab");
+                    continue;
+                }
+
+                shared = true;
+                results.Add($"FAIL shared prefab GUID {kv.Key}: {string.Join(", ", kv.Value)}");
+            }
+
+            if (!shared && byGuid.Count > 0)
+                results.Add($"PASS all {byGuid.Count} character entries have unique combat prefabs");
         }
 
         static void AuditStageFieldBindings(List<string> results)

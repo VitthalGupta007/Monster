@@ -1,0 +1,41 @@
+{
+    "asset": "b166980d55020f748a1697d067ecd7f1",
+    "fileName": "019f653b-cb58-7d6c-a451-d07528b9ddbb.png",
+    "prompt": "Pose-only cleanup. Same exact purple VX monster. Keep upright frightened pose with orange eye OPEN. REMOVE sweat drops and vibration squiggle lines around the body. Clean silhouette only. Side profile facing RIGHT, black background. Do not redesign.",
+    "negativePrompt": "",
+    "model": "gpt-image-1-5",
+    "modelName": "GPT Image 1.5",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": [
+            {
+                "doodleReferenceType": 7,
+                "doodle": [],
+                "label": "Image",
+                "strength": 0.25,
+                "invertStrength": false,
+                "assetReferenceGuid": "b166980d55020f748a1697d067ecd7f1",
+                "unlabeledIndex": -1
+            }
+        ]
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 1024,
+        "height": 1024
+    },
+    "spriteSheet": false,
+    "duration": 0.0,
+    "dynamicParams": {
+        "serializedData": []
+    }
+}

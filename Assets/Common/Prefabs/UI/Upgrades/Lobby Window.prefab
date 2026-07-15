@@ -5710,6 +5710,7 @@ GameObject:
   - component: {fileID: 6220421509633654490}
   - component: {fileID: 7102844193058172201}
   - component: {fileID: 7102844193058172202}
+  - component: {fileID: 591317348038342772}
   m_Layer: 5
   m_Name: Lobby Window
   m_TagString: Untagged
@@ -5899,6 +5900,20 @@ MonoBehaviour:
   lobbyWindow: {fileID: 2773094446415335397}
   buttonSprite: {fileID: 0}
   labelFont: {fileID: 0}
+--- !u!114 &591317348038342772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8401933773176376946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47acbefec55e40849b498353da4a2e9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VXMonster.Core.UI.VXLobbySelectedCharacterIcon
+  charactersDatabase: {fileID: 11400000, guid: 94ea5f0fdccb79e4cbdd7bd522bc3dc2, type: 2}
+  targetImage: {fileID: 7141927254351683804}
 --- !u!1 &8432949235252861709
 GameObject:
   m_ObjectHideFlags: 0

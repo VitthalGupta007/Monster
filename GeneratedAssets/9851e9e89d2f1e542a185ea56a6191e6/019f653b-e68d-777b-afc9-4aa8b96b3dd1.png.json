@@ -1,0 +1,41 @@
+{
+    "asset": "9851e9e89d2f1e542a185ea56a6191e6",
+    "fileName": "019f653b-e68d-777b-afc9-4aa8b96b3dd1.png",
+    "prompt": "Pose-only edit. Same exact purple VX monster (cream horns, teal spikes, pink blush, thick outlines, black background). DEFEAT late-mid: more collapsed/slumped low, side profile facing RIGHT. Eyes ALMOST FULLY CLOSED — only tiny dark slits, NO bright orange iris glow. Sad mouth. No walk pose. Do not redesign.",
+    "negativePrompt": "",
+    "model": "gpt-image-1-5",
+    "modelName": "GPT Image 1.5",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": [
+            {
+                "doodleReferenceType": 7,
+                "doodle": [],
+                "label": "Image",
+                "strength": 0.25,
+                "invertStrength": false,
+                "assetReferenceGuid": "9851e9e89d2f1e542a185ea56a6191e6",
+                "unlabeledIndex": -1
+            }
+        ]
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 1024,
+        "height": 1024
+    },
+    "spriteSheet": false,
+    "duration": 0.0,
+    "dynamicParams": {
+        "serializedData": []
+    }
+}

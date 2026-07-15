@@ -1,0 +1,41 @@
+{
+    "asset": "96c6a6aba84c44b43bb0a59c8b5a0082",
+    "fileName": "019f6520-9f64-713a-9995-2125ab1c4d88.png",
+    "prompt": "Keep this EXACT same character design and colors. Only change the pose slightly: closing walk contact facing right, complementary to standing walk. Keep transparent background. Do not change horns, spikes, eye, or body proportions.",
+    "negativePrompt": "",
+    "model": "gpt-image-1-5",
+    "modelName": "GPT Image 1.5",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": [
+            {
+                "doodleReferenceType": 7,
+                "doodle": [],
+                "label": "Image",
+                "strength": 0.25,
+                "invertStrength": false,
+                "assetReferenceGuid": "96c6a6aba84c44b43bb0a59c8b5a0082",
+                "unlabeledIndex": -1
+            }
+        ]
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 1024,
+        "height": 1024
+    },
+    "spriteSheet": false,
+    "duration": 0.0,
+    "dynamicParams": {
+        "serializedData": []
+    }
+}

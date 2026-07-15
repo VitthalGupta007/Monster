@@ -1,0 +1,41 @@
+{
+    "asset": "f7e7cf801cc57404fbaf21b7c67224b3",
+    "fileName": "019f6548-48e8-7ff7-89ea-443549a9dc44.png",
+    "prompt": "MINIMAL pose edit only. Keep this exact upright purple VX monster: same body, horns, teal spikes, orange eye, pink blush, thick outlines, black background, facing RIGHT. Body stays UPRIGHT — zero sprint lean. ONLY change the LEGS: walk contact — FRONT leg (right side) stepped slightly forward, BACK leg (left) slightly back. Tiny stride only, both feet touching the ground. Arms barely reverse-swing. Do not redesign. Do not change body silhouette.",
+    "negativePrompt": "",
+    "model": "gpt-image-1-5",
+    "modelName": "GPT Image 1.5",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": [
+            {
+                "doodleReferenceType": 7,
+                "doodle": [],
+                "label": "Image",
+                "strength": 0.25,
+                "invertStrength": false,
+                "assetReferenceGuid": "f7e7cf801cc57404fbaf21b7c67224b3",
+                "unlabeledIndex": -1
+            }
+        ]
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 1024,
+        "height": 1024
+    },
+    "spriteSheet": false,
+    "duration": 0.0,
+    "dynamicParams": {
+        "serializedData": []
+    }
+}

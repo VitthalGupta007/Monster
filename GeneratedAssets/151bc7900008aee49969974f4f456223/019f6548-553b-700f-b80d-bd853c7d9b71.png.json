@@ -1,0 +1,41 @@
+{
+    "asset": "151bc7900008aee49969974f4f456223",
+    "fileName": "019f6548-553b-700f-b80d-bd853c7d9b71.png",
+    "prompt": "MINIMAL pose edit only. Keep this exact upright purple VX monster identical. Body UPRIGHT, no lean. ONLY move LEGS: walk recoil — both feet closer under body, tiny step, both feet on ground. Facing RIGHT, black background. Do not redesign body.",
+    "negativePrompt": "",
+    "model": "gpt-image-1-5",
+    "modelName": "GPT Image 1.5",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": [
+            {
+                "doodleReferenceType": 7,
+                "doodle": [],
+                "label": "Image",
+                "strength": 0.25,
+                "invertStrength": false,
+                "assetReferenceGuid": "151bc7900008aee49969974f4f456223",
+                "unlabeledIndex": -1
+            }
+        ]
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 1024,
+        "height": 1024
+    },
+    "spriteSheet": false,
+    "duration": 0.0,
+    "dynamicParams": {
+        "serializedData": []
+    }
+}

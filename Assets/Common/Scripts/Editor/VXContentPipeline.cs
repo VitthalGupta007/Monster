@@ -546,15 +546,32 @@ namespace VXMonster.EditorTools
                 var icon = AssetDatabase.LoadAssetAtPath<Sprite>(iconPath);
                 if (icon == null) icon = template.Icon;
 
-                var prefabPath = $"{CharactersPrefabsFolder}/{spec.name}.prefab";
-                var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
-                if (prefab == null) prefab = template.Prefab;
+                // Prefer TitleCase prefab (Rogue.prefab) matching Wizard/Mage naming; fall back to UPPERCASE.
+                var titleName = char.ToUpperInvariant(spec.name[0]) + spec.name.Substring(1).ToLowerInvariant();
+                var prefabPathTitle = $"{CharactersPrefabsFolder}/{titleName}.prefab";
+                var prefabPathUpper = $"{CharactersPrefabsFolder}/{spec.name}.prefab";
+                var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPathTitle)
+                             ?? AssetDatabase.LoadAssetAtPath<GameObject>(prefabPathUpper);
 
                 var so = new SerializedObject(data);
                 var idProp = so.FindProperty("id");
                 var idValue = idProp?.FindPropertyRelative("value")?.stringValue;
                 if (idProp != null && string.IsNullOrEmpty(idValue))
                     idProp.FindPropertyRelative("value").stringValue = System.Guid.NewGuid().ToString();
+
+                // Do not clobber an already-unique combat prefab back onto the Wizard/Mage templates.
+                var existingPrefab = so.FindProperty("prefab").objectReferenceValue as GameObject;
+                var templatePrefab = template.Prefab;
+                var keepExisting = existingPrefab != null
+                                   && templatePrefab != null
+                                   && existingPrefab != templatePrefab
+                                   && existingPrefab != wizard.Prefab
+                                   && existingPrefab != mage.Prefab;
+
+                if (prefab == null)
+                    prefab = keepExisting ? existingPrefab : templatePrefab;
+                else if (keepExisting)
+                    prefab = existingPrefab;
 
                 so.FindProperty("characterName").stringValue = spec.name;
                 so.FindProperty("price").FindPropertyRelative("currencyId").stringValue = "gold";

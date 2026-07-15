@@ -1,0 +1,41 @@
+{
+    "asset": "151bc7900008aee49969974f4f456223",
+    "fileName": "019f654a-47e3-7d55-a873-6211b7ea3fea.png",
+    "prompt": "MINIMAL edit. Same upright purple VX monster, body MUST stay upright no lean. Change ONLY legs: clear mid-walk — LEFT foot lifting slightly forward as a small step, RIGHT foot planted flat. Tiny motion only. Both near ground. Facing RIGHT. Black background. Keep identical design.",
+    "negativePrompt": "",
+    "model": "gpt-image-1-5",
+    "modelName": "GPT Image 1.5",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": [
+            {
+                "doodleReferenceType": 7,
+                "doodle": [],
+                "label": "Image",
+                "strength": 0.25,
+                "invertStrength": false,
+                "assetReferenceGuid": "151bc7900008aee49969974f4f456223",
+                "unlabeledIndex": -1
+            }
+        ]
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 1024,
+        "height": 1024
+    },
+    "spriteSheet": false,
+    "duration": 0.0,
+    "dynamicParams": {
+        "serializedData": []
+    }
+}

@@ -1,0 +1,41 @@
+{
+    "asset": "b166980d55020f748a1697d067ecd7f1",
+    "fileName": "019f6539-67cc-7036-af4a-df4573f04a02.png",
+    "prompt": "Tiny pose-only edit of this exact VX purple monster mascot. Keep identical design: round purple body, cream horns, teal spikes, pink blush, thick black outlines, solid black background, facing RIGHT. DEFEAT frame 1 of 5: standing upright still alive, orange eye WIDE OPEN, slight wobble. Same large character size filling frame. Do not redesign.",
+    "negativePrompt": "",
+    "model": "gpt-image-1-5",
+    "modelName": "GPT Image 1.5",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": [
+            {
+                "doodleReferenceType": 7,
+                "doodle": [],
+                "label": "Image",
+                "strength": 0.25,
+                "invertStrength": false,
+                "assetReferenceGuid": "b166980d55020f748a1697d067ecd7f1",
+                "unlabeledIndex": -1
+            }
+        ]
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 1024,
+        "height": 1024
+    },
+    "spriteSheet": false,
+    "duration": 0.0,
+    "dynamicParams": {
+        "serializedData": []
+    }
+}

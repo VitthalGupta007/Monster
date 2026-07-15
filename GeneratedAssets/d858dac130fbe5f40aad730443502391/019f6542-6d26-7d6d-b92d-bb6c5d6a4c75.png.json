@@ -1,0 +1,41 @@
+{
+    "asset": "d858dac130fbe5f40aad730443502391",
+    "fileName": "019f6542-6d26-7d6d-b92d-bb6c5d6a4c75.png",
+    "prompt": "Pose-only edit of this exact purple VX monster. CRITICAL: straighten the body — UPRIGHT rounded blob standing, almost NO forward lean (max 5 degrees). Both stubby feet planted close together on the ground under the body. Arms relaxed at sides. Side profile facing RIGHT. Keep identical design: cream horns, teal back spikes, orange eye OPEN, pink blush, thick black outlines, solid black background. Same large size filling the frame. Clean silhouette, no shadow oval, no props. This is the walk-cycle BASE pose (calm idle-walk stance), not a sprint.",
+    "negativePrompt": "",
+    "model": "gpt-image-1-5",
+    "modelName": "GPT Image 1.5",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": [
+            {
+                "doodleReferenceType": 7,
+                "doodle": [],
+                "label": "Image",
+                "strength": 0.25,
+                "invertStrength": false,
+                "assetReferenceGuid": "d858dac130fbe5f40aad730443502391",
+                "unlabeledIndex": -1
+            }
+        ]
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 1024,
+        "height": 1024
+    },
+    "spriteSheet": false,
+    "duration": 0.0,
+    "dynamicParams": {
+        "serializedData": []
+    }
+}

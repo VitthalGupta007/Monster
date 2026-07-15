@@ -1,0 +1,41 @@
+{
+    "asset": "09db3a27e9a16f946b72294609fdb503",
+    "fileName": "019f6539-b80a-7c83-bd78-b42ac8a78e9f.png",
+    "prompt": "Tiny pose-only edit of this exact VX purple monster mascot. Keep identical design: round purple body, cream horns, teal spikes, pink blush, thick black outlines, solid black background, facing RIGHT. DEFEAT frame 4 of 5: heavily collapsed/slumped low, defeated posture. CRITICAL: eyes FULLY CLOSED — no orange iris visible, only a simple curved closed eyelid line (sleeping X or closed crescent). No glowing eye. Same character size. Do not redesign.",
+    "negativePrompt": "",
+    "model": "gpt-image-1-5",
+    "modelName": "GPT Image 1.5",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": [
+            {
+                "doodleReferenceType": 7,
+                "doodle": [],
+                "label": "Image",
+                "strength": 0.25,
+                "invertStrength": false,
+                "assetReferenceGuid": "09db3a27e9a16f946b72294609fdb503",
+                "unlabeledIndex": -1
+            }
+        ]
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 1024,
+        "height": 1024
+    },
+    "spriteSheet": false,
+    "duration": 0.0,
+    "dynamicParams": {
+        "serializedData": []
+    }
+}

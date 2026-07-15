@@ -20,7 +20,7 @@ MonoBehaviour:
     currencyId: gold
     amount: 1000
   icon: {fileID: 21300000, guid: 5b9b118bd7064b94ea57e51e18fc8741, type: 3}
-  prefab: {fileID: 2921880940271959218, guid: 54121bc69e709ef4aae3deb8291032d8, type: 3}
+  prefab: {fileID: 2921880940271959218, guid: bcb9b0606c29ad84cbecd060280a9a9f, type: 3}
   hasStartingAbility: 1
   startingAbility: 1
   baseHP: 140

@@ -1,0 +1,31 @@
+{
+    "asset": "6a867608c3853a2429c0f8054585cb25",
+    "fileName": "019f651d-a4fa-7a9f-93ae-2ddedd0662f3.png",
+    "prompt": "Side-view GAME CHARACTER SPRITE single frame 512x512. VX Monster mascot: round chubby purple body, cream beige horns, three teal back spikes, yellow glowing eyes with orange pupils, pink blush, stubby arms and legs with tiny beige claws, facing RIGHT, walk pose contact foot plant, thick black outline, flat mobile cartoon shading, FULLY TRANSPARENT background, no ground, no effects.",
+    "negativePrompt": "",
+    "model": "gpt-image-1-5",
+    "modelName": "GPT Image 1.5",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": []
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 1024,
+        "height": 640
+    },
+    "spriteSheet": false,
+    "duration": 0.0,
+    "dynamicParams": {
+        "serializedData": []
+    }
+}

@@ -1,0 +1,41 @@
+{
+    "asset": "4993f94b74c46514392c92b97cc83490",
+    "fileName": "019f653b-c77f-7d6e-a6f6-d7a8fab22863.png",
+    "prompt": "Pose-only edit. Same exact purple VX monster (cream horns, teal spikes, pink blush, thick outlines, black background). DEFEAT mid: tip/slump FORWARD like fainting, body leaning down, head dipped. Eyes HALF CLOSED as heavy lids — orange iris only a thin crescent, almost shut. Side profile facing RIGHT. No sweat drops, no vibration lines, no walk pose. Do not redesign.",
+    "negativePrompt": "",
+    "model": "gpt-image-1-5",
+    "modelName": "GPT Image 1.5",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": [
+            {
+                "doodleReferenceType": 7,
+                "doodle": [],
+                "label": "Image",
+                "strength": 0.25,
+                "invertStrength": false,
+                "assetReferenceGuid": "4993f94b74c46514392c92b97cc83490",
+                "unlabeledIndex": -1
+            }
+        ]
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 1024,
+        "height": 1024
+    },
+    "spriteSheet": false,
+    "duration": 0.0,
+    "dynamicParams": {
+        "serializedData": []
+    }
+}

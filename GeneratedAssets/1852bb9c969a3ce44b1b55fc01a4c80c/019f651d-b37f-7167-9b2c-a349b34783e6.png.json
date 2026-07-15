@@ -1,0 +1,31 @@
+{
+    "asset": "1852bb9c969a3ce44b1b55fc01a4c80c",
+    "fileName": "019f651d-b37f-7167-9b2c-a349b34783e6.png",
+    "prompt": "Side-view GAME CHARACTER SPRITE single frame 512x512. Same VX Monster as sibling frames: round chubby purple body, cream horns, teal spikes, yellow eyes, stubby clawed limbs, facing RIGHT, walk pose passing through (leg mid-stride, body slightly lower), thick outline, flat cartoon, FULLY TRANSPARENT background.",
+    "negativePrompt": "",
+    "model": "gpt-image-1-5",
+    "modelName": "GPT Image 1.5",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": []
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 1024,
+        "height": 640
+    },
+    "spriteSheet": false,
+    "duration": 0.0,
+    "dynamicParams": {
+        "serializedData": []
+    }
+}

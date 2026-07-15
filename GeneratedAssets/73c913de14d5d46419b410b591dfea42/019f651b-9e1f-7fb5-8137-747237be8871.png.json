@@ -1,0 +1,41 @@
+{
+    "asset": "73c913de14d5d46419b410b591dfea42",
+    "fileName": "019f651b-9e1f-7fb5-8137-747237be8871.png",
+    "prompt": "Edit this horizontal 5-frame side-view GAME SPRITE SHEET in place. Keep EXACT canvas 2560x512 with FIVE equal 512x512 frames left-to-right. Replace the humanoid wizard with VX Monster mascot: round chubby purple body, cream beige horns, teal crystalline back spikes, glowing yellow-orange angry cute eyes, pink cheek blush, stubby arms and legs with tiny beige claws. Each frame is a side-view walk cycle facing RIGHT matching original pose timing. Thick clean cartoon outline, flat mobile survivor shading, FULLY TRANSPARENT background (alpha), no floor, no UI badge, no frame. NOT a front icon. Production sprite sheet.",
+    "negativePrompt": "",
+    "model": "gpt-image-1-5",
+    "modelName": "GPT Image 1.5",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": [
+            {
+                "doodleReferenceType": 7,
+                "doodle": [],
+                "label": "Image",
+                "strength": 0.25,
+                "invertStrength": false,
+                "assetReferenceGuid": "73c913de14d5d46419b410b591dfea42",
+                "unlabeledIndex": -1
+            }
+        ]
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 2048,
+        "height": 1344
+    },
+    "spriteSheet": false,
+    "duration": 0.0,
+    "dynamicParams": {
+        "serializedData": []
+    }
+}
