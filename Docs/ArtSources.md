@@ -15,6 +15,9 @@ Used during Milestone A/B when pack crops were insufficient. Provenance JSON per
 | Shop portraits | `ui_char_{class}.png` (8) | Phase 3 — distinct GUIDs bound |
 | Stage chunk tiles | `back_stage_3..6.png` | Phase 7.2 gates PASS |
 | Stage lobby previews | `ui_stage_{3..6}_preview.png` | Phase 7.4 gates PASS |
-| Relic icons | `ui_relic_*.png` (9) | Bound; Phase 9 HUD gate pending |
+| Stage 1–2 lobby fronts | `ui_stage_1_preview.png`, `ui_stage_2_preview.png` | Phase 7.8 — Stage 3 painted style; mixes from `StageEnemyProgression` |
+| Relic icons | `ui_relic_*.png` (9) | Bound; HUD empty slots use upgrade frame |
+| App icon | `vx_app_icon_a.png` → Android + `ui_game_icon.png` synced | Phase 9 — identity unified |
+| Combat HUD chrome | Pause / joystick tint toward lobby accents | Phase 9 — soft tint (stock sprites kept) |
 
 **Style gate:** Pack-native look where possible; minimal recolor. AI fills gaps — not a forced purple/gold global palette (see locked plan decisions).

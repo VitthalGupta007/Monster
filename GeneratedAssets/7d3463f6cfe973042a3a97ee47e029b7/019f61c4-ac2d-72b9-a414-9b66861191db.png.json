@@ -1,0 +1,41 @@
+{
+    "asset": "7d3463f6cfe973042a3a97ee47e029b7",
+    "fileName": "019f61c4-ac2d-72b9-a414-9b66861191db.png",
+    "prompt": "Keep the EXACT same production lobby-preview art style as this Stage 3 reference: polished painted 2D, soft oval ground shadows, same collage framing and enemy scale, no UI text. REPLACE the frost theme completely. Floor = VX SHADOW REALM: dark blue-grey circular cobblestone tiles with cool vignette (NOT ice). REPLACE every enemy with ONLY these unique Stage 2 enemies: (1) translucent lime-green slime with dark skull inside glowing eyes, (2) brown beetle/bug, (3) orange-yellow black striped wasp, (4) black bat with yellow/orange eyes, (5) coral/pink banded jellyfish, (6) purple horizontally-banded jellyfish with four tentacles, (7) orange jack-o-lantern pumpkin, (8) pink carnivorous plant with jagged mouth on green stem from dirt, (9) grey undead hand rising from dirt. No frost enemies, no fire eye orbs, no ice. Clean vignette edges.",
+    "negativePrompt": "",
+    "model": "gpt-image-1-5",
+    "modelName": "GPT Image 1.5",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": [
+            {
+                "doodleReferenceType": 7,
+                "doodle": [],
+                "label": "Image",
+                "strength": 0.25,
+                "invertStrength": false,
+                "assetReferenceGuid": "7d3463f6cfe973042a3a97ee47e029b7",
+                "unlabeledIndex": -1
+            }
+        ]
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 1024,
+        "height": 1024
+    },
+    "spriteSheet": false,
+    "duration": 0.0,
+    "dynamicParams": {
+        "serializedData": []
+    }
+}

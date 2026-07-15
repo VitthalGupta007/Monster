@@ -1,0 +1,41 @@
+{
+    "asset": "60a7791f5573d0046a770622de9280ba",
+    "fileName": "019f61c4-923f-70ca-93cb-ca64efdb3622.png",
+    "prompt": "Keep the EXACT same production lobby-preview art style as this Stage 3 reference: polished painted 2D, soft oval ground shadows, same collage framing and enemy scale, no UI text. REPLACE the frost theme completely. Floor = VX WILDS: green grassy cracked stone tiles with grass tufts (NOT ice). REPLACE every enemy with ONLY these 6 in-game enemy designs: (1) translucent lime-green slime blob with a dark green skull visible inside and glowing green eye sockets, (2) small brown ground beetle/bug, (3) orange-yellow and black striped wasp with translucent wings and large black eyes, (4) black bat with glowing yellow eyes, (5) orange carved jack-o-lantern pumpkin, (6) coral/pink horizontally-banded jellyfish dome with four thick tentacles and NO face. No plants, no hands, no eye orbs, no frost glow, no ice. Clean vignette edges.",
+    "negativePrompt": "",
+    "model": "gpt-image-1-5",
+    "modelName": "GPT Image 1.5",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": [
+            {
+                "doodleReferenceType": 7,
+                "doodle": [],
+                "label": "Image",
+                "strength": 0.25,
+                "invertStrength": false,
+                "assetReferenceGuid": "60a7791f5573d0046a770622de9280ba",
+                "unlabeledIndex": -1
+            }
+        ]
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 1024,
+        "height": 1024
+    },
+    "spriteSheet": false,
+    "duration": 0.0,
+    "dynamicParams": {
+        "serializedData": []
+    }
+}

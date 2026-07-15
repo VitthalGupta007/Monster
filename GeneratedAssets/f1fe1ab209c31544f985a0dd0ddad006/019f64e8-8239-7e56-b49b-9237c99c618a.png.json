@@ -1,0 +1,41 @@
+{
+    "asset": "f1fe1ab209c31544f985a0dd0ddad006",
+    "fileName": "019f64e8-8239-7e56-b49b-9237c99c618a.png",
+    "prompt": "Keep this exact character and transparent background. Add two CLEAR short black stick legs under the cloak hem, same style as Vampire Survivors hooded mascot: two vertical thick black sticks with tiny feet, clearly visible and about 12-18% of the character height. Do not crop the body. No black box background.",
+    "negativePrompt": "",
+    "model": "gpt-image-1-5",
+    "modelName": "GPT Image 1.5",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": [
+            {
+                "doodleReferenceType": 7,
+                "doodle": [],
+                "label": "Image",
+                "strength": 0.25,
+                "invertStrength": false,
+                "assetReferenceGuid": "f1fe1ab209c31544f985a0dd0ddad006",
+                "unlabeledIndex": -1
+            }
+        ]
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 1024,
+        "height": 1024
+    },
+    "spriteSheet": false,
+    "duration": 0.0,
+    "dynamicParams": {
+        "serializedData": []
+    }
+}

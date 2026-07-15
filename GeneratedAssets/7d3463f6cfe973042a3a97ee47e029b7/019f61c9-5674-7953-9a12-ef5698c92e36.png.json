@@ -1,0 +1,41 @@
+{
+    "asset": "7d3463f6cfe973042a3a97ee47e029b7",
+    "fileName": "019f61c9-5674-7953-9a12-ef5698c92e36.png",
+    "prompt": "Keep the same painted Stage-3-quality lobby preview style and dark blue cobblestone floor. Fix enemies only to match the game roster precisely: keep green skull-slime, orange pumpkin, zombie hand from dirt, purple banded jellyfish (no face), coral/pink banded jellyfish (NO smile/face, four tentacles like game), yellow-black wasp. REPLACE the owl-like bat with a normal black mobile-game bat with yellow eyes and spread wings. REPLACE the giant stag beetle with a SMALL brown pill-bug style ground bug. Keep ONLY ONE pink carnivorous plant (remove any duplicate plant). No extra enemies. No frost. No UI text.",
+    "negativePrompt": "",
+    "model": "gpt-image-1-5",
+    "modelName": "GPT Image 1.5",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": [
+            {
+                "doodleReferenceType": 7,
+                "doodle": [],
+                "label": "Image",
+                "strength": 0.25,
+                "invertStrength": false,
+                "assetReferenceGuid": "7d3463f6cfe973042a3a97ee47e029b7",
+                "unlabeledIndex": -1
+            }
+        ]
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 1024,
+        "height": 1024
+    },
+    "spriteSheet": false,
+    "duration": 0.0,
+    "dynamicParams": {
+        "serializedData": []
+    }
+}

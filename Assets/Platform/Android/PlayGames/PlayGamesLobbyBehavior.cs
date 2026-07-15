@@ -8,8 +8,9 @@ using VXMonster.Platform.PlayGames;
 namespace VXMonster.UI
 {
     /// <summary>
-    /// Lobby affordances for Google Play Games sign-in and leaderboards.
-    /// Injects rows into the meta menu sheet without duplicating Talent/Codex/Shop entries.
+    /// Injects a single Leaderboards row into the meta menu sheet.
+    /// Layout stays dynamic — the panel grows for the extra row.
+    /// If the player is not signed in, Leaderboards triggers Play Games sign-in first.
     /// </summary>
     [DefaultExecutionOrder(115)]
     public class PlayGamesLobbyBehavior : MonoBehaviour
@@ -17,8 +18,9 @@ namespace VXMonster.UI
         private const string SheetName = "VX Meta Menu Sheet";
         private const string PanelName = "Panel";
         private const string CloseRowName = "Close Row";
+        private const string LeaderboardRowName = "Play Games Leaderboard Row";
+        private const string LegacySignInRowName = "Play Games Sign In Row";
 
-        private TextMeshProUGUI signInLabel;
         private bool injected;
 
         private void Start()
@@ -40,11 +42,6 @@ namespace VXMonster.UI
             }
         }
 
-        private void Update()
-        {
-            RefreshSignInLabel();
-        }
-
         private bool TryInjectRows()
         {
             var lobby = FindAnyObjectByType<LobbyWindowBehavior>();
@@ -56,9 +53,16 @@ namespace VXMonster.UI
             var panel = sheet.Find(PanelName) as RectTransform;
             if (panel == null) return false;
 
-            if (panel.Find("Play Games Sign In Row") != null)
+            // Remove legacy dual-row Sign In entry if a prior session left it around.
+            var legacySignIn = panel.Find(LegacySignInRowName);
+            if (legacySignIn != null)
             {
-                signInLabel = panel.Find("Play Games Sign In Row/Label")?.GetComponent<TextMeshProUGUI>();
+                Destroy(legacySignIn.gameObject);
+            }
+
+            if (panel.Find(LeaderboardRowName) != null)
+            {
+                FitPanelToContents(panel);
                 return true;
             }
 
@@ -68,40 +72,62 @@ namespace VXMonster.UI
             var buttonSprite = ResolveButtonSprite(panel);
             var labelFont = ResolveLabelFont(panel);
 
-            var signInRow = CreateSheetRow(panel, "Play Games Sign In Row", "SIGN IN TO PLAY", buttonSprite, labelFont, OnSignInClicked);
-            signInRow.SetSiblingIndex(insertIndex++);
-            signInLabel = signInRow.Find("Label")?.GetComponent<TextMeshProUGUI>();
-
-            var leaderboardRow = CreateSheetRow(panel, "Play Games Leaderboard Row", "LEADERBOARDS", buttonSprite, labelFont, OnLeaderboardsClicked);
+            var leaderboardRow = CreateSheetRow(
+                panel,
+                LeaderboardRowName,
+                "LEADERBOARDS",
+                buttonSprite,
+                labelFont,
+                OnLeaderboardsClicked);
             leaderboardRow.SetSiblingIndex(insertIndex);
 
-            RefreshSignInLabel();
+            FitPanelToContents(panel);
             return true;
         }
 
-        private void RefreshSignInLabel()
+        /// <summary>
+        /// Purple panel height was fixed for 4 rows; expand it so CLOSE stays covered after inject.
+        /// </summary>
+        private static void FitPanelToContents(RectTransform panel)
         {
-            if (signInLabel == null || PlayGames == null) return;
+            var fitter = panel.GetComponent<ContentSizeFitter>();
+            if (fitter == null)
+            {
+                fitter = panel.gameObject.AddComponent<ContentSizeFitter>();
+            }
 
-            signInLabel.text = PlayGames.IsAuthenticated ? "ACHIEVEMENTS" : "SIGN IN TO PLAY";
+            fitter.horizontalFit = ContentSizeFitter.FitMode.Unconstrained;
+            fitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+
+            LayoutRebuilder.ForceRebuildLayoutImmediate(panel);
+
+            // Keep width stable; ContentSizeFitter only drives height.
+            var size = panel.sizeDelta;
+            if (size.x < 400f)
+            {
+                size.x = 560f;
+                panel.sizeDelta = size;
+            }
         }
 
-        private void OnSignInClicked()
+        private void OnLeaderboardsClicked()
         {
             if (PlayGames == null) return;
 
             if (PlayGames.IsAuthenticated)
             {
-                PlayGames.ShowAchievements();
+                PlayGames.ShowLeaderboard();
                 return;
             }
 
-            PlayGames.SignIn(_ => RefreshSignInLabel());
-        }
-
-        private void OnLeaderboardsClicked()
-        {
-            PlayGames?.ShowLeaderboard();
+            // One button: sign in when needed, then open leaderboards.
+            PlayGames.SignIn(success =>
+            {
+                if (success)
+                {
+                    PlayGames.ShowLeaderboard();
+                }
+            });
         }
 
         private static IPlayGamesService PlayGames => PlatformServices.PlayGames;

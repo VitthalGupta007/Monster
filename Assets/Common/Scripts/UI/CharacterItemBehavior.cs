@@ -107,6 +107,11 @@ namespace VXMonster.Core.UI
         protected virtual void RedrawVisuals()
         {
             titleLabel.text = Data.Name;
+            titleLabel.enableAutoSizing = true;
+            titleLabel.fontSizeMin = 18f;
+            titleLabel.fontSizeMax = titleLabel.fontSize > 18f ? titleLabel.fontSize : 28f;
+            titleLabel.overflowMode = TextOverflowModes.Ellipsis;
+            titleLabel.textWrappingMode = TextWrappingModes.NoWrap;
             iconImage.sprite = Data.Icon;
 
             hpText.text = Data.BaseHP.ToString();

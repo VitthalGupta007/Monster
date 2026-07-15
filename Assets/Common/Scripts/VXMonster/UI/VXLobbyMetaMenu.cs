@@ -151,7 +151,6 @@ namespace VXMonster.UI
             var rowHeight = 80f;
             var rowWidth = 480f;
             var panelWidth = rowWidth + 80f;
-            var panelHeight = rowHeight * 4f + gap * 5f + 160f;
 
             var root = new GameObject(SheetName, typeof(RectTransform), typeof(CanvasRenderer), typeof(Image), typeof(CanvasGroup));
             var rootRt = root.GetComponent<RectTransform>();
@@ -163,12 +162,12 @@ namespace VXMonster.UI
             rootRt.offsetMax = Vector2.zero;
             root.GetComponent<Image>().color = new Color(0.05f, 0.03f, 0.1f, 0.92f);
 
-            var panel = new GameObject("Panel", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image), typeof(VerticalLayoutGroup));
+            var panel = new GameObject("Panel", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image), typeof(VerticalLayoutGroup), typeof(ContentSizeFitter));
             var panelRt = panel.GetComponent<RectTransform>();
             panelRt.SetParent(rootRt, false);
             panelRt.anchorMin = new Vector2(0.5f, 0.5f);
             panelRt.anchorMax = new Vector2(0.5f, 0.5f);
-            panelRt.sizeDelta = new Vector2(panelWidth, panelHeight);
+            panelRt.sizeDelta = new Vector2(panelWidth, 0f);
             panelRt.anchoredPosition = Vector2.zero;
             panel.GetComponent<Image>().color = new Color(0.12f, 0.08f, 0.2f, 0.98f);
 
@@ -180,6 +179,11 @@ namespace VXMonster.UI
             panelLayout.childControlHeight = false;
             panelLayout.childForceExpandWidth = true;
             panelLayout.childForceExpandHeight = false;
+
+            // Grow with injected rows (e.g. Leaderboards) so CLOSE stays inside the purple panel.
+            var fitter = panel.GetComponent<ContentSizeFitter>();
+            fitter.horizontalFit = ContentSizeFitter.FitMode.Unconstrained;
+            fitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
 
             CreateLabel(panelRt, "MENU", 40f, null, new Vector2(rowWidth, Mathf.Max(64f, touch * 0.55f)), useLayout: true);
 

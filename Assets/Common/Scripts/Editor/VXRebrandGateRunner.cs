@@ -112,6 +112,49 @@ namespace VXMonster.EditorTools
         [MenuItem("VX Monster/Rebrand/Gate 8.1/Stage 6 Enemies (Play Mode Now)")]
         public static void Gate81Stage6Now() => BeginStageGateCapture(5, "gate_8_1_stage_6_enemies", 10f);
 
+        [MenuItem("VX Monster/Rebrand/Gate 9/Combat HUD (Play Mode Now)")]
+        public static void Gate9HudNow() => BeginStageGateCapture(0, "gate_9_hud_combat", 4f);
+
+        [MenuItem("VX Monster/Rebrand/Gate 7.8/Stage 1 Lobby Front (Play Mode Now)")]
+        public static void Gate78Stage1LobbyNow() => CaptureLobbyStageFront(0, "gate_7_8_stage_1_front");
+
+        [MenuItem("VX Monster/Rebrand/Gate 7.8/Stage 2 Lobby Front (Play Mode Now)")]
+        public static void Gate78Stage2LobbyNow() => CaptureLobbyStageFront(1, "gate_7_8_stage_2_front");
+
+        static void CaptureLobbyStageFront(int stageIndex, string gateLabel, int attempt = 0)
+        {
+            Init();
+            if (!EditorApplication.isPlaying)
+            {
+                Debug.LogError("[VX Gate] Enter Play Mode from Main Menu first.");
+                return;
+            }
+
+            EditorApplication.isPaused = false;
+            DismissContinuePopupIfNeeded();
+            UnlockAllStagesForGate();
+
+            var save = GameController.SaveManager.GetSave<StageSave>("Stage");
+            save.SetSelectedStageId(stageIndex);
+
+            var lobby = FindUiBehavior<LobbyWindowBehavior>();
+            if (lobby == null)
+            {
+                if (attempt < 20)
+                {
+                    Schedule(() => CaptureLobbyStageFront(stageIndex, gateLabel, attempt + 1), 0.5f);
+                    return;
+                }
+
+                Debug.LogError("[VX Gate] LobbyWindowBehavior not found for stage front capture.");
+                return;
+            }
+
+            lobby.InitStage(stageIndex);
+
+            Schedule(() => CaptureGate(gateLabel), 1.2f);
+        }
+
         [MenuItem("VX Monster/Rebrand/Enter Play Mode (Unpaused)")]
         public static void EnterPlayModeUnpaused()
         {
