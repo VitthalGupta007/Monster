@@ -12,26 +12,34 @@ namespace VXMonster.UI
     public class TalentTreeWindowBehavior : MonoBehaviour
     {
         [SerializeField] TMP_Text pointsLabel;
-        [SerializeField] Transform nodesContainer;
-        [SerializeField] GameObject nodeButtonPrefab;
         [SerializeField] Button backButton;
+        [SerializeField] List<TalentNodeRow> nodeRows = new List<TalentNodeRow>();
+
+        [System.Serializable]
+        public class TalentNodeRow
+        {
+            public string nodeId;
+            public string title;
+            public int cost;
+            public Button unlockButton;
+            public TMP_Text label;
+        }
 
         private TalentTreeSave talentSave;
-        private readonly List<TalentNodeDefinition> nodes = new List<TalentNodeDefinition>
-        {
-            new TalentNodeDefinition(TalentTreeIds.ExtraReroll, "Extra Reroll", "Start runs with +1 reroll.", 3),
-            new TalentNodeDefinition(TalentTreeIds.ExpandedMind, "Expanded Mind", "+1 passive ability slot.", 5),
-            new TalentNodeDefinition(TalentTreeIds.GoldenInstinct, "Golden Instinct", "+10% gold from runs.", 8),
-            new TalentNodeDefinition(TalentTreeIds.IronWill, "Iron Will", "+20 max HP.", 4),
-            new TalentNodeDefinition(TalentTreeIds.QuickFeet, "Quick Feet", "+8% move speed.", 6),
-            new TalentNodeDefinition(TalentTreeIds.ScholarsEye, "Scholar's Eye", "Bonus gold on codex discoveries.", 7),
-        };
 
         private void Awake()
         {
             if (GameController.SaveManager != null)
             {
                 talentSave = GameController.SaveManager.GetSave<TalentTreeSave>("VX Talent Tree");
+            }
+
+            foreach (var row in nodeRows)
+            {
+                if (row.unlockButton == null || string.IsNullOrEmpty(row.nodeId)) continue;
+
+                var captured = row;
+                row.unlockButton.onClick.AddListener(() => TryUnlockRow(captured));
             }
         }
 
@@ -58,58 +66,35 @@ namespace VXMonster.UI
                 pointsLabel.text = $"Talent Points: {talentSave.TalentPoints}";
             }
 
-            if (nodesContainer == null || nodeButtonPrefab == null || talentSave == null) return;
-
-            for (var i = nodesContainer.childCount - 1; i >= 0; i--)
-            {
-                Destroy(nodesContainer.GetChild(i).gameObject);
-            }
-
-            foreach (var node in nodes)
-            {
-                var go = Instantiate(nodeButtonPrefab, nodesContainer);
-                var label = go.GetComponentInChildren<TMP_Text>();
-                var unlocked = talentSave.IsUnlocked(node.Id);
-                if (label != null)
-                {
-                    label.text = unlocked
-                        ? $"{node.Title} (Unlocked)"
-                        : $"{node.Title} ({node.Cost} pts)";
-                }
-
-                var button = go.GetComponent<Button>();
-                if (button != null)
-                {
-                    var captured = node;
-                    button.interactable = !unlocked;
-                    button.onClick.AddListener(() => TryUnlockNode(captured));
-                }
-            }
-        }
-
-        private void TryUnlockNode(TalentNodeDefinition node)
-        {
             if (talentSave == null) return;
-            if (!talentSave.TryUnlock(node.Id, node.Cost)) return;
-            GameController.SaveManager?.Save(false);
-            VXMonster.Platform.Analytics.AnalyticsEvents.LogTalentUnlock(node.Id);
-            Refresh();
+
+            foreach (var row in nodeRows)
+            {
+                if (string.IsNullOrEmpty(row.nodeId)) continue;
+
+                var unlocked = talentSave.IsUnlocked(row.nodeId);
+                if (row.label != null)
+                {
+                    row.label.text = unlocked
+                        ? $"{row.title} (Unlocked)"
+                        : $"{row.title} ({row.cost} pts)";
+                }
+
+                if (row.unlockButton != null)
+                {
+                    row.unlockButton.interactable = !unlocked;
+                }
+            }
         }
 
-        private readonly struct TalentNodeDefinition
+        private void TryUnlockRow(TalentNodeRow row)
         {
-            public TalentNodeDefinition(string id, string title, string description, int cost)
-            {
-                Id = id;
-                Title = title;
-                Description = description;
-                Cost = cost;
-            }
+            if (talentSave == null || string.IsNullOrEmpty(row.nodeId)) return;
+            if (!talentSave.TryUnlock(row.nodeId, row.cost)) return;
 
-            public string Id { get; }
-            public string Title { get; }
-            public string Description { get; }
-            public int Cost { get; }
+            GameController.SaveManager?.Save(false);
+            VXMonster.Platform.Analytics.AnalyticsEvents.LogTalentUnlock(row.nodeId);
+            Refresh();
         }
     }
 }

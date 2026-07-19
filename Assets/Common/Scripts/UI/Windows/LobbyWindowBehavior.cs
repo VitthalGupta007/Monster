@@ -27,9 +27,6 @@ namespace VXMonster.Core.UI
         [SerializeField] protected Button upgradesButton;
         [SerializeField] protected Button settingsButton;
         [SerializeField] protected Button charactersButton;
-        [SerializeField] protected Button talentButton;
-        [SerializeField] protected Button codexButton;
-        [SerializeField] protected Button shopButton;
         [SerializeField] protected Button leftButton;
         [SerializeField] protected Button rightButton;
 
@@ -71,17 +68,6 @@ namespace VXMonster.Core.UI
             confirmButton.onClick.AddListener(ConfirmButtonClicked);
             cancelButton.onClick.AddListener(CancelButtonClicked);
             if(infoButton != null && infoPopup != null) infoButton.onClick.AddListener(InfoButtonClicked);
-
-            // Bake-independent: Mode/Meta must exist even if PlatformBootstrapper did not run.
-            if (GetComponent<VXMonster.UI.VXLobbyModePanel>() == null)
-            {
-                gameObject.AddComponent<VXMonster.UI.VXLobbyModePanel>();
-            }
-
-            if (GetComponent<VXMonster.UI.VXLobbyMetaMenu>() == null)
-            {
-                gameObject.AddComponent<VXMonster.UI.VXLobbyMetaMenu>();
-            }
         }
 
         protected virtual void Start()
@@ -145,10 +131,6 @@ namespace VXMonster.Core.UI
             talentAction = onTalentButtonClicked;
             codexAction = onCodexButtonClicked;
             shopAction = onShopButtonClicked;
-
-            if (talentButton != null && onTalentButtonClicked != null) talentButton.onClick.AddListener(onTalentButtonClicked);
-            if (codexButton != null && onCodexButtonClicked != null) codexButton.onClick.AddListener(onCodexButtonClicked);
-            if (shopButton != null && onShopButtonClicked != null) shopButton.onClick.AddListener(onShopButtonClicked);
         }
 
         public void OpenTalentMenu() => talentAction?.Invoke();

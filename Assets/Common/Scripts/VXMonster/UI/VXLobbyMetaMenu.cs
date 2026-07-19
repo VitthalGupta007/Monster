@@ -35,7 +35,6 @@ namespace VXMonster.UI
 
             if (lobbyWindow == null) return;
 
-            HideSurfaceHubButtons(lobbyWindow.transform);
             Wire();
         }
 
@@ -123,19 +122,6 @@ namespace VXMonster.UI
             {
                 if (success) playGames.ShowLeaderboard();
             });
-        }
-
-        private static void HideSurfaceHubButtons(Transform lobby)
-        {
-            HideChild(lobby, "Talent Button");
-            HideChild(lobby, "Codex Button");
-            HideChild(lobby, "Shop Button");
-        }
-
-        private static void HideChild(Transform parent, string childName)
-        {
-            var child = parent.Find(childName);
-            if (child != null) child.gameObject.SetActive(false);
         }
 
         private void OpenSheet()

@@ -19,7 +19,6 @@ namespace VXMonster.EditorTools
         const string StageFailedPath = "Assets/Common/Prefabs/UI/Screens/Stage Failed Screen.prefab";
         const string StageCompletePath = "Assets/Common/Prefabs/UI/Screens/Stage Complete Screen.prefab";
         const string GameScreenPath = "Assets/Common/Prefabs/UI/Screens/Game Screen.prefab";
-        const string TalentNodePrefabPath = "Assets/Common/Prefabs/UI/VX/Talent Node Button.prefab";
         const string ModeButtonsPrefabPath = "Assets/Common/Prefabs/UI/VX/VX Mode Buttons.prefab";
         const string GreenButtonSpritePath = "Assets/Common/Sprites/UI/Generic/ui_button_green.png";
         const string YellowButtonSpritePath = "Assets/Common/Sprites/UI/Generic/ui_button_yellow.png";
@@ -35,7 +34,6 @@ namespace VXMonster.EditorTools
         [MenuItem("VX Monster/Wire All Prefab Hookup (Phase 1)")]
         public static void WireAll()
         {
-            EnsureTalentNodePrefab();
             WireSettingsLegal();
             WireStageResults();
             WireGameHud();
@@ -375,20 +373,10 @@ namespace VXMonster.EditorTools
             try
             {
                 var lobby = root.GetComponent<LobbyWindowBehavior>();
-                var so = new SerializedObject(lobby);
 
-                // Meta destinations live in VXLobbyMetaMenu (corner MENU sheet), not on the mode band.
-                // Keep serialized refs for Init() listeners, but hide surface buttons so they cannot overlap modes.
-                HideHubButtonIfPresent(root.transform, "Talent Button");
-                HideHubButtonIfPresent(root.transform, "Codex Button");
-                HideHubButtonIfPresent(root.transform, "Shop Button");
-
-                // Ensure serialized refs still exist for LobbyWindowBehavior.Init wiring.
-                EnsureHubButton(so, root.transform, "talentButton", "Talent Button", "TALENT", new Vector2(4000f, 4000f), startInactive: true);
-                EnsureHubButton(so, root.transform, "codexButton", "Codex Button", "CODEX", new Vector2(4000f, 4000f), startInactive: true);
-                EnsureHubButton(so, root.transform, "shopButton", "Shop Button", "SHOP", new Vector2(4000f, 4000f), startInactive: true);
-
-                so.ApplyModifiedPropertiesWithoutUndo();
+                DestroyChildIfPresent(root.transform, "Talent Button");
+                DestroyChildIfPresent(root.transform, "Codex Button");
+                DestroyChildIfPresent(root.transform, "Shop Button");
 
                 WireLobbyModeButtonsInto(root, lobby);
 
@@ -424,7 +412,7 @@ namespace VXMonster.EditorTools
                 dailySo.ApplyModifiedPropertiesWithoutUndo();
 
                 PrefabUtility.SaveAsPrefabAsset(root, LobbyPath);
-                Debug.Log("[VX] Lobby hub buttons + PB + daily modifiers wired.");
+                Debug.Log("[VX] Lobby hub wired (prefab menu, ghost hub buttons removed).");
             }
             finally
             {
@@ -536,52 +524,6 @@ namespace VXMonster.EditorTools
             }
         }
 
-        static void EnsureTalentNodePrefab()
-        {
-            if (!AssetDatabase.IsValidFolder("Assets/Common/Prefabs/UI/VX"))
-            {
-                AssetDatabase.CreateFolder("Assets/Common/Prefabs/UI", "VX");
-            }
-
-            if (File.Exists(TalentNodePrefabPath)) return;
-
-            var temp = new GameObject("Talent Node Button", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image), typeof(Button));
-            var rt = temp.GetComponent<RectTransform>();
-            rt.sizeDelta = new Vector2(900f, 72f);
-            var image = temp.GetComponent<Image>();
-            image.color = PrimaryPurple;
-            var font = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(FontPath);
-            var labelGo = new GameObject("Label", typeof(RectTransform), typeof(CanvasRenderer), typeof(TextMeshProUGUI));
-            labelGo.transform.SetParent(temp.transform, false);
-            var labelRt = labelGo.GetComponent<RectTransform>();
-            labelRt.anchorMin = Vector2.zero;
-            labelRt.anchorMax = Vector2.one;
-            labelRt.offsetMin = new Vector2(16f, 0f);
-            labelRt.offsetMax = new Vector2(-16f, 0f);
-            var tmp = labelGo.GetComponent<TextMeshProUGUI>();
-            tmp.font = font;
-            tmp.fontSize = 28f;
-            tmp.alignment = TextAlignmentOptions.MidlineLeft;
-            tmp.color = Color.white;
-
-            PrefabUtility.SaveAsPrefabAsset(temp, TalentNodePrefabPath);
-            Object.DestroyImmediate(temp);
-        }
-
-        static LegalTextWindowBehavior CreateLegalTextWindow(Transform parent)
-        {
-            var window = CreateModalShell(parent, "Legal Text Window", false);
-            var body = CreateScrollBody(window.transform, "Legal Body");
-            var back = CreateModalButton(window.transform, "Back Button", "BACK", new Vector2(0f, -720f), PrimaryPurple);
-            var behavior = window.AddComponent<LegalTextWindowBehavior>();
-            var so = new SerializedObject(behavior);
-            so.FindProperty("bodyText").objectReferenceValue = body;
-            so.FindProperty("scrollRect").objectReferenceValue = body.GetComponentInParent<ScrollRect>();
-            so.FindProperty("backButton").objectReferenceValue = back.GetComponent<Button>();
-            so.ApplyModifiedPropertiesWithoutUndo();
-            return behavior;
-        }
-
         static TalentTreeWindowBehavior CreateTalentTreeModal(Transform parent)
         {
             var window = CreateModalShell(parent, "VX Talent Tree", true);
@@ -603,11 +545,58 @@ namespace VXMonster.EditorTools
             layout.childForceExpandHeight = false;
 
             var behavior = window.AddComponent<TalentTreeWindowBehavior>();
-            var nodePrefab = AssetDatabase.LoadAssetAtPath<GameObject>(TalentNodePrefabPath);
             var so = new SerializedObject(behavior);
             so.FindProperty("pointsLabel").objectReferenceValue = points;
-            so.FindProperty("nodesContainer").objectReferenceValue = containerRt;
-            so.FindProperty("nodeButtonPrefab").objectReferenceValue = nodePrefab;
+            so.FindProperty("backButton").objectReferenceValue = back.GetComponent<Button>();
+
+            var rows = so.FindProperty("nodeRows");
+            rows.ClearArray();
+            AddTalentNodeRow(rows, containerRt, TalentTreeIds.ExtraReroll, "Extra Reroll", 3, 0);
+            AddTalentNodeRow(rows, containerRt, TalentTreeIds.ExpandedMind, "Expanded Mind", 5, 1);
+            AddTalentNodeRow(rows, containerRt, TalentTreeIds.GoldenInstinct, "Golden Instinct", 8, 2);
+            AddTalentNodeRow(rows, containerRt, TalentTreeIds.IronWill, "Iron Will", 4, 3);
+            AddTalentNodeRow(rows, containerRt, TalentTreeIds.QuickFeet, "Quick Feet", 6, 4);
+            AddTalentNodeRow(rows, containerRt, TalentTreeIds.ScholarsEye, "Scholar's Eye", 7, 5);
+            so.ApplyModifiedPropertiesWithoutUndo();
+            return behavior;
+        }
+
+        static void AddTalentNodeRow(SerializedProperty rows, Transform parent, string nodeId, string title, int cost, int index)
+        {
+            var rowGo = CreateModalButton(parent, title, title, Vector2.zero, PrimaryPurple);
+            var rowRt = rowGo.GetComponent<RectTransform>();
+            rowRt.sizeDelta = new Vector2(900f, 72f);
+            var layout = rowGo.AddComponent<LayoutElement>();
+            layout.preferredHeight = 72f;
+            layout.minHeight = 72f;
+
+            var label = rowGo.GetComponentInChildren<TMP_Text>();
+            if (label != null)
+            {
+                label.alignment = TextAlignmentOptions.MidlineLeft;
+                var labelRt = label.rectTransform;
+                labelRt.offsetMin = new Vector2(16f, 0f);
+                labelRt.offsetMax = new Vector2(-16f, 0f);
+            }
+
+            rows.InsertArrayElementAtIndex(index);
+            var element = rows.GetArrayElementAtIndex(index);
+            element.FindPropertyRelative("nodeId").stringValue = nodeId;
+            element.FindPropertyRelative("title").stringValue = title;
+            element.FindPropertyRelative("cost").intValue = cost;
+            element.FindPropertyRelative("unlockButton").objectReferenceValue = rowGo.GetComponent<Button>();
+            element.FindPropertyRelative("label").objectReferenceValue = label;
+        }
+
+        static LegalTextWindowBehavior CreateLegalTextWindow(Transform parent)
+        {
+            var window = CreateModalShell(parent, "Legal Text Window", false);
+            var body = CreateScrollBody(window.transform, "Legal Body");
+            var back = CreateModalButton(window.transform, "Back Button", "BACK", new Vector2(0f, -720f), PrimaryPurple);
+            var behavior = window.AddComponent<LegalTextWindowBehavior>();
+            var so = new SerializedObject(behavior);
+            so.FindProperty("bodyText").objectReferenceValue = body;
+            so.FindProperty("scrollRect").objectReferenceValue = body.GetComponentInParent<ScrollRect>();
             so.FindProperty("backButton").objectReferenceValue = back.GetComponent<Button>();
             so.ApplyModifiedPropertiesWithoutUndo();
             return behavior;
@@ -818,43 +807,6 @@ namespace VXMonster.EditorTools
         {
             var existing = root.Find(objectName);
             if (existing != null) Object.DestroyImmediate(existing.gameObject);
-        }
-
-        static void HideHubButtonIfPresent(Transform root, string objectName)
-        {
-            var existing = root.Find(objectName);
-            if (existing != null) existing.gameObject.SetActive(false);
-        }
-
-        static void EnsureHubButton(SerializedObject lobbySo, Transform root, string propertyName, string objectName, string label, Vector2 anchoredPosition, bool startInactive = false)
-        {
-            var prop = lobbySo.FindProperty(propertyName);
-            Button button = prop.objectReferenceValue as Button;
-            if (button == null)
-            {
-                var existing = root.Find(objectName);
-                if (existing != null) Object.DestroyImmediate(existing.gameObject);
-                button = CreateHubButton(root, objectName, label, anchoredPosition).GetComponent<Button>();
-                prop.objectReferenceValue = button;
-            }
-
-            var rt = button.GetComponent<RectTransform>();
-            rt.anchorMin = new Vector2(0.5f, 0.5f);
-            rt.anchorMax = new Vector2(0.5f, 0.5f);
-            rt.pivot = new Vector2(0.5f, 0.5f);
-            rt.anchoredPosition = anchoredPosition;
-            rt.sizeDelta = new Vector2(180f, 56f);
-            button.gameObject.SetActive(!startInactive);
-        }
-
-        static GameObject CreateHubButton(Transform parent, string name, string label, Vector2 anchoredPosition)
-        {
-            var go = CreateModalButton(parent, name, label, anchoredPosition, PrimaryPurple);
-            var rt = go.GetComponent<RectTransform>();
-            rt.anchorMin = new Vector2(0.5f, 0.5f);
-            rt.anchorMax = new Vector2(0.5f, 0.5f);
-            rt.sizeDelta = new Vector2(180f, 56f);
-            return go;
         }
 
         static GameObject CreateModalButton(Transform parent, string name, string label, Vector2 anchoredPosition, Color tint)

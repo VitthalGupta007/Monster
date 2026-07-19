@@ -92,20 +92,7 @@ namespace VXMonster.Platform.Bootstrap
                 PlayIntegrityBootstrap.RequestCheckOnce();
             });
 
-            // AfterSceneLoad may run before this object exists; attach panel for the current scene too.
-            TryAttachLobbyModePanel();
-            TryAttachLobbyMetaMenu();
-            TryAttachLobbyPersonalBest();
-            TryAttachPlayGamesLobby();
             TryShowLobbyTutorial();
-        }
-
-        private static void TryAttachLobbyPersonalBest()
-        {
-            var lobby = FindAnyObjectByType<VXMonster.Core.UI.LobbyWindowBehavior>();
-            if (lobby == null) return;
-            if (lobby.GetComponent<VXMonster.UI.LocalPersonalBestBehavior>() != null) return;
-            lobby.gameObject.AddComponent<VXMonster.UI.LocalPersonalBestBehavior>();
         }
 
         private static void TryShowLobbyTutorial()
@@ -126,40 +113,8 @@ namespace VXMonster.Platform.Bootstrap
 
         private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            TryAttachLobbyModePanel();
-            TryAttachLobbyMetaMenu();
-            TryAttachLobbyPersonalBest();
-            TryAttachPlayGamesLobby();
             TryShowLobbyTutorial();
             PlatformServices.RefreshBannerForActiveScene();
-        }
-
-        private static void TryAttachLobbyModePanel()
-        {
-            if (FindAnyObjectByType<VXMonster.UI.VXLobbyModePanel>() != null) return;
-
-            var lobby = FindAnyObjectByType<VXMonster.Core.UI.LobbyWindowBehavior>();
-            if (lobby == null) return;
-
-            lobby.gameObject.AddComponent<VXMonster.UI.VXLobbyModePanel>();
-        }
-
-        private static void TryAttachLobbyMetaMenu()
-        {
-            if (FindAnyObjectByType<VXMonster.UI.VXLobbyMetaMenu>() != null) return;
-
-            var lobby = FindAnyObjectByType<VXMonster.Core.UI.LobbyWindowBehavior>();
-            if (lobby == null) return;
-
-            lobby.gameObject.AddComponent<VXMonster.UI.VXLobbyMetaMenu>();
-        }
-
-        private static void TryAttachPlayGamesLobby()
-        {
-            var lobby = FindAnyObjectByType<VXMonster.Core.UI.LobbyWindowBehavior>();
-            if (lobby == null) return;
-            if (lobby.GetComponent<VXMonster.UI.PlayGamesLobbyBehavior>() != null) return;
-            lobby.gameObject.AddComponent<VXMonster.UI.PlayGamesLobbyBehavior>();
         }
 
         private void Start()
