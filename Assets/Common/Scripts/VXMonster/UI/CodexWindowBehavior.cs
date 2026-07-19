@@ -46,13 +46,16 @@ namespace VXMonster.UI
                 return;
             }
 
-            var text = "Discovered:\n";
             var relics = codexSave.DiscoveredRelicIds;
-            text += relics.Count > 0 ? string.Join(", ", relics) : "(none yet)";
-            text += "\n\nEvolutions:\n";
             var evolutions = codexSave.DiscoveredEvolutionIds;
-            text += evolutions.Count > 0 ? string.Join(", ", evolutions) : "(none yet)";
-            text += "\n\nFirst combo discovered: " + (codexSave.HasDiscoveredFirstCombo ? "Yes" : "No");
+
+            var text =
+                "RELICS\n" +
+                (relics.Count > 0 ? string.Join("\n", relics) : "None discovered yet.") +
+                "\n\nEVOLUTIONS\n" +
+                (evolutions.Count > 0 ? string.Join("\n", evolutions) : "None discovered yet.") +
+                "\n\nCOMBOS\n" +
+                "First combo discovered: " + (codexSave.HasDiscoveredFirstCombo ? "Yes" : "Not yet");
 
             bodyText.text = text;
         }

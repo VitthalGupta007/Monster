@@ -394,11 +394,10 @@ namespace VXMonster.EditorTools
 
                 if (root.GetComponent<VXLobbyMetaMenu>() == null)
                 {
-                    var meta = root.AddComponent<VXLobbyMetaMenu>();
-                    var metaSo = new SerializedObject(meta);
-                    metaSo.FindProperty("lobbyWindow").objectReferenceValue = lobby;
-                    metaSo.ApplyModifiedPropertiesWithoutUndo();
+                    root.AddComponent<VXLobbyMetaMenu>();
                 }
+
+                VXClassicMenuWiring.WireClassicMetaMenuSheet(root, lobby);
 
                 // Top-anchored under logo (logo top -240, h 204 → bottom -444). Center Y breaks on short iPhones.
                 PlaceOrCreateHudLabel(root.transform, "Daily Best Label", new Vector2(0f, -468f), TextAlignmentOptions.Center, 20f, 32f, topAnchored: true);
@@ -426,6 +425,51 @@ namespace VXMonster.EditorTools
 
                 PrefabUtility.SaveAsPrefabAsset(root, LobbyPath);
                 Debug.Log("[VX] Lobby hub buttons + PB + daily modifiers wired.");
+            }
+            finally
+            {
+                PrefabUtility.UnloadPrefabContents(root);
+            }
+        }
+
+        [MenuItem("VX Monster/Rewire Menu Flow Modals")]
+        public static void ForceRewireMainMenuModalsMenu()
+        {
+            ForceRewireMainMenuModals();
+        }
+
+        public static void ForceRewireMainMenuModals()
+        {
+            var root = PrefabUtility.LoadPrefabContents(MainMenuPath);
+            try
+            {
+                var menu = root.GetComponent<MainMenuScreenBehavior>();
+                var so = new SerializedObject(menu);
+
+                var modalsRoot = root.transform.Find("VX Modals");
+                if (modalsRoot == null)
+                {
+                    var go = new GameObject("VX Modals", typeof(RectTransform));
+                    modalsRoot = go.transform;
+                    var rt = go.GetComponent<RectTransform>();
+                    rt.SetParent(root.transform, false);
+                    rt.anchorMin = Vector2.zero;
+                    rt.anchorMax = Vector2.one;
+                    rt.offsetMin = Vector2.zero;
+                    rt.offsetMax = Vector2.zero;
+                }
+
+                DestroyChildIfPresent(modalsRoot, "VX Shop");
+                DestroyChildIfPresent(modalsRoot, "VX Talent Tree");
+                DestroyChildIfPresent(modalsRoot, "VX Codex");
+
+                so.FindProperty("shopWindow").objectReferenceValue = CreateShopModal(modalsRoot);
+                so.FindProperty("talentTreeWindow").objectReferenceValue = CreateTalentTreeModal(modalsRoot);
+                so.FindProperty("codexWindow").objectReferenceValue = CreateCodexModal(modalsRoot);
+                so.ApplyModifiedPropertiesWithoutUndo();
+
+                PrefabUtility.SaveAsPrefabAsset(root, MainMenuPath);
+                Debug.Log("[VX] Main menu modals force-rewired (classic layout).");
             }
             finally
             {
@@ -541,7 +585,7 @@ namespace VXMonster.EditorTools
         static TalentTreeWindowBehavior CreateTalentTreeModal(Transform parent)
         {
             var window = CreateModalShell(parent, "VX Talent Tree", true);
-            var points = CreateHudLabel(window.transform, "Points Label", new Vector2(0f, 760f), TextAlignmentOptions.Center, 32f);
+            var points = CreateHudLabel(window.transform, "Points Label", new Vector2(0f, 760f), TextAlignmentOptions.Center, 36f);
             var back = CreateModalButton(window.transform, "Back Button", "BACK", new Vector2(0f, -760f), PrimaryPurple);
             var containerGo = new GameObject("Nodes Container", typeof(RectTransform), typeof(VerticalLayoutGroup));
             var containerRt = containerGo.GetComponent<RectTransform>();
@@ -572,6 +616,8 @@ namespace VXMonster.EditorTools
         static CodexWindowBehavior CreateCodexModal(Transform parent)
         {
             var window = CreateModalShell(parent, "VX Codex", true);
+            var title = CreateHudLabel(window.transform, "Title Label", new Vector2(0f, 760f), TextAlignmentOptions.Center, 40f);
+            title.text = "CODEX";
             var body = CreateScrollBody(window.transform, "Codex Body");
             var back = CreateModalButton(window.transform, "Back Button", "BACK", new Vector2(0f, -760f), PrimaryPurple);
             var behavior = window.AddComponent<CodexWindowBehavior>();
@@ -585,7 +631,9 @@ namespace VXMonster.EditorTools
         static ShopWindowBehavior CreateShopModal(Transform parent)
         {
             var window = CreateModalShell(parent, "VX Shop", true);
-            var status = CreateHudLabel(window.transform, "Status Label", new Vector2(0f, -700f), TextAlignmentOptions.Center, 24f);
+            var status = CreateHudLabel(window.transform, "Status Label", new Vector2(0f, -700f), TextAlignmentOptions.Center, 26f);
+            var title = CreateHudLabel(window.transform, "Title Label", new Vector2(0f, 760f), TextAlignmentOptions.Center, 40f);
+            title.text = "SHOP";
             var back = CreateModalButton(window.transform, "Back Button", "BACK", new Vector2(0f, -760f), PrimaryPurple);
             var restore = CreateModalButton(window.transform, "Restore Button", "RESTORE", new Vector2(0f, 700f), PrimaryPurple);
 
@@ -622,24 +670,24 @@ namespace VXMonster.EditorTools
             var rowGo = new GameObject(title, typeof(RectTransform), typeof(HorizontalLayoutGroup));
             var rowRt = rowGo.GetComponent<RectTransform>();
             rowRt.SetParent(parent, false);
-            rowRt.sizeDelta = new Vector2(880f, 72f);
+            rowRt.sizeDelta = new Vector2(880f, 88f);
             var rowLayout = rowGo.GetComponent<HorizontalLayoutGroup>();
             rowLayout.spacing = 16f;
             rowLayout.childAlignment = TextAnchor.MiddleLeft;
             rowLayout.childControlWidth = false;
             rowLayout.childForceExpandWidth = false;
 
-            var titleLabel = CreateHudLabel(rowRt, "Title", new Vector2(0f, 0f), TextAlignmentOptions.MidlineLeft, 26f);
+            var titleLabel = CreateHudLabel(rowRt, "Title", new Vector2(0f, 0f), TextAlignmentOptions.MidlineLeft, 30f);
             var titleRt = titleLabel.rectTransform;
-            titleRt.sizeDelta = new Vector2(360f, 56f);
+            titleRt.sizeDelta = new Vector2(360f, 64f);
             titleLabel.text = title;
 
-            var priceLabel = CreateHudLabel(rowRt, "Price", new Vector2(0f, 0f), TextAlignmentOptions.MidlineLeft, 24f);
-            priceLabel.rectTransform.sizeDelta = new Vector2(180f, 56f);
+            var priceLabel = CreateHudLabel(rowRt, "Price", new Vector2(0f, 0f), TextAlignmentOptions.MidlineLeft, 28f);
+            priceLabel.rectTransform.sizeDelta = new Vector2(180f, 64f);
             priceLabel.text = "...";
 
             var buy = CreateModalButton(rowRt, "Buy", "BUY", Vector2.zero, PrimaryGreen);
-            buy.GetComponent<RectTransform>().sizeDelta = new Vector2(180f, 64f);
+            buy.GetComponent<RectTransform>().sizeDelta = new Vector2(180f, 72f);
 
             rows.InsertArrayElementAtIndex(index);
             var element = rows.GetArrayElementAtIndex(index);
@@ -748,7 +796,7 @@ namespace VXMonster.EditorTools
             textRt.offsetMax = new Vector2(-16f, -16f);
             var tmp = textGo.GetComponent<TextMeshProUGUI>();
             tmp.font = LoadFont();
-            tmp.fontSize = 28f;
+            tmp.fontSize = 32f;
             tmp.alignment = TextAlignmentOptions.TopLeft;
             tmp.color = Color.white;
             tmp.textWrappingMode = TextWrappingModes.Normal;
@@ -764,6 +812,12 @@ namespace VXMonster.EditorTools
         static GameObject CreateSettingsFooterButton(Transform parent, string name, string label, float y)
         {
             return CreateModalButton(parent, name, label, new Vector2(0f, y), PrimaryPurple);
+        }
+
+        static void DestroyChildIfPresent(Transform root, string objectName)
+        {
+            var existing = root.Find(objectName);
+            if (existing != null) Object.DestroyImmediate(existing.gameObject);
         }
 
         static void HideHubButtonIfPresent(Transform root, string objectName)
@@ -1129,6 +1183,10 @@ namespace VXMonster.EditorTools
         {
             return AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(FontPath);
         }
+
+        internal static Sprite LoadButtonSpriteForEditor() => LoadButtonSprite();
+
+        internal static TMP_FontAsset LoadFontForEditor() => LoadFont();
     }
 }
 #endif

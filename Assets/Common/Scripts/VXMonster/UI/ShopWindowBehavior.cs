@@ -25,6 +25,7 @@ namespace VXMonster.UI
             public Button buyButton;
             public TMP_Text priceLabel;
             public TMP_Text titleLabel;
+            public TMP_Text subtitleLabel;
         }
 
         Coroutine refreshRoutine;
@@ -100,14 +101,20 @@ namespace VXMonster.UI
 
             foreach (var row in productRows)
             {
+                var owned = IsOwned(row.productId);
+
                 if (row.priceLabel != null && iap != null)
                 {
-                    row.priceLabel.text = iap.GetLocalizedPrice(row.productId);
+                    row.priceLabel.text = owned
+                        ? "Owned"
+                        : IapPriceDisplay.Format(iap.GetLocalizedPrice(row.productId));
                 }
 
                 if (row.buyButton != null)
                 {
-                    row.buyButton.interactable = ready && !IsOwned(row.productId);
+                    row.buyButton.interactable = ready && !owned;
+                    var buyLabel = row.buyButton.GetComponentInChildren<TMP_Text>();
+                    if (buyLabel != null) buyLabel.text = owned ? "OWNED" : "BUY";
                 }
             }
 

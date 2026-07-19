@@ -53,7 +53,6 @@ namespace VXMonster.UI
             var panel = sheet.Find(PanelName) as RectTransform;
             if (panel == null) return false;
 
-            // Remove legacy dual-row Sign In entry if a prior session left it around.
             var legacySignIn = panel.Find(LegacySignInRowName);
             if (legacySignIn != null)
             {
@@ -85,9 +84,6 @@ namespace VXMonster.UI
             return true;
         }
 
-        /// <summary>
-        /// Purple panel height was fixed for 4 rows; expand it so CLOSE stays covered after inject.
-        /// </summary>
         private static void FitPanelToContents(RectTransform panel)
         {
             var fitter = panel.GetComponent<ContentSizeFitter>();
@@ -98,10 +94,8 @@ namespace VXMonster.UI
 
             fitter.horizontalFit = ContentSizeFitter.FitMode.Unconstrained;
             fitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
-
             LayoutRebuilder.ForceRebuildLayoutImmediate(panel);
 
-            // Keep width stable; ContentSizeFitter only drives height.
             var size = panel.sizeDelta;
             if (size.x < 400f)
             {
@@ -120,13 +114,9 @@ namespace VXMonster.UI
                 return;
             }
 
-            // One button: sign in when needed, then open leaderboards.
             PlayGames.SignIn(success =>
             {
-                if (success)
-                {
-                    PlayGames.ShowLeaderboard();
-                }
+                if (success) PlayGames.ShowLeaderboard();
             });
         }
 
@@ -166,14 +156,15 @@ namespace VXMonster.UI
             TMP_FontAsset labelFont,
             UnityEngine.Events.UnityAction onClick)
         {
+            const float rowHeight = 96f;
             var go = new GameObject(name, typeof(RectTransform), typeof(CanvasRenderer), typeof(Image), typeof(Button), typeof(LayoutElement));
             var rt = go.GetComponent<RectTransform>();
             rt.SetParent(parent, false);
-            rt.sizeDelta = new Vector2(480f, 80f);
+            rt.sizeDelta = new Vector2(480f, rowHeight);
 
             var layout = go.GetComponent<LayoutElement>();
-            layout.preferredHeight = 80f;
-            layout.minHeight = 80f;
+            layout.preferredHeight = rowHeight;
+            layout.minHeight = rowHeight;
             layout.flexibleWidth = 1f;
 
             var image = go.GetComponent<Image>();
@@ -196,7 +187,7 @@ namespace VXMonster.UI
 
             var tmp = textGo.GetComponent<TextMeshProUGUI>();
             tmp.text = label;
-            tmp.fontSize = 32f;
+            tmp.fontSize = 36f;
             tmp.alignment = TextAlignmentOptions.Center;
             tmp.color = Color.white;
             tmp.raycastTarget = false;
