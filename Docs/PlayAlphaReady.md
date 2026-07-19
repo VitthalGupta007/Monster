@@ -7,7 +7,7 @@ Use this for Google Play **closed testing (alpha)**. Last prepared: 10 July 2026
 | Item | Status |
 |------|--------|
 | Package ID | `com.vitthalxstudios.monster` |
-| Version name / code | `1.0.0` / `4` |
+| Version name / code | `1.1.0` / `5` (next ship: **6+**) |
 | Min / target SDK | 26 / 35 |
 | Upload keystore on disk | `vx-monster-upload.keystore` (alias `vxmonster`) — passwords not in repo |
 | AdMob app + unit IDs | Set in `AdMobConfig.cs` |
@@ -18,7 +18,7 @@ Use this for Google Play **closed testing (alpha)**. Last prepared: 10 July 2026
 | EditMode tests excluded from player | Moved to `Assets/Tests/Editor` (fixes IL2CPP / nunit build fail) |
 | Feature graphic / store icon | `Docs/StoreAssets/` |
 | Phone screenshots (live Game View) | `Docs/StoreAssets/Screenshots/phone_01..08_*.png` — upload (min 2; prefer full set) |
-| Firebase `google-services.json` | **Missing** (gitignored) — analytics optional for first alpha |
+| Firebase `google-services.json` | Local at `Assets/Plugins/Android/` (gitignored) + `UNITY_FIREBASE` |
 | Play Console forms | **You** must complete (agent cannot access your account) |
 
 ---
@@ -112,19 +112,19 @@ Be honest; adjust if your Firebase/AdMob setup differs.
 
 ---
 
-## IAP products to create (Monetize → Products → In-app products)
+## IAP products (Monetize → Products → One-time products)
 
-Product IDs **must match code exactly**:
+Product IDs **must match code exactly**. India prices (INR):
 
-| Product ID | Type | Name (suggestion) | Notes |
-|------------|------|-------------------|--------|
-| `com.vitthalxstudios.monster.remove_ads` | Non-consumable | Remove Ads | Disables ads + free revive/run |
-| `com.vitthalxstudios.monster.starter_bundle` | Non-consumable | Starter Bundle | Remove Ads + 1000 gold |
-| `com.vitthalxstudios.monster.gold_small` | Consumable | Gold Small | 500 gold |
-| `com.vitthalxstudios.monster.gold_medium` | Consumable | Gold Medium | 1500 gold |
-| `com.vitthalxstudios.monster.gold_large` | Consumable | Gold Large | 5000 gold |
+| Product ID | Unity type | INR | Notes |
+|------------|------------|-----|-------|
+| `com.vitthalxstudios.monster.remove_ads` | Non-consumable | **₹250** | Remove ads + free revive |
+| `com.vitthalxstudios.monster.starter_bundle` | Non-consumable | **₹300** | Remove ads + 1000 gold (once) |
+| `com.vitthalxstudios.monster.gold_small` | Consumable | **₹100** | 500 gold |
+| `com.vitthalxstudios.monster.gold_medium` | Consumable | **₹199** | 1500 gold |
+| `com.vitthalxstudios.monster.gold_large` | Consumable | **₹300** | 5000 gold |
 
-Activate products. They only work after the app is on a testing track with license testers.
+Activate all products. Purchase option ID: `default`.
 
 ---
 

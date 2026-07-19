@@ -111,6 +111,13 @@ Assets/Platform/Android/Config/GPGSConfig.asset.meta
 *.keystore
 *.jks
 google-services.json
+google-services-desktop.json
+google-services-desktop.json.meta
+Assets/Plugins/Android/google-services.json.meta
+Assets/Plugins/Android/FirebaseApp.androidlib/
+Assets/Plugins/Android/FirebaseApp.androidlib.meta
+Assets/Plugins/Android/FirebaseCrashlytics.androidlib/
+Assets/Plugins/Android/FirebaseCrashlytics.androidlib.meta
 
 # Auto-generated scenes by play mode tests
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*

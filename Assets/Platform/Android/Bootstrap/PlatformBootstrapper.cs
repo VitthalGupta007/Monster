@@ -7,6 +7,7 @@ using VXMonster.Platform;
 using VXMonster.Platform.Analytics;
 using VXMonster.Platform.Ads;
 using VXMonster.Platform.IAP;
+using VXMonster.Platform.Integrity;
 using VXMonster.Platform.PlayGames;
 using VXMonster.Save;
 
@@ -88,6 +89,7 @@ namespace VXMonster.Platform.Bootstrap
                 var playGamesService = new MockPlayGamesService();
 #endif
                 PlatformServices.Initialize(adMobConfig, adService, playGamesService, iapService);
+                PlayIntegrityBootstrap.RequestCheckOnce();
             });
 
             // AfterSceneLoad may run before this object exists; attach panel for the current scene too.

@@ -36,7 +36,13 @@ namespace VXMonster.Platform
             PlayGames = playGamesService ?? new MockPlayGamesService();
             IapService = iapService ?? new MockIapService();
 
-            IapService.Initialize(_ => { });
+            IapService.Initialize(success =>
+            {
+                if (success)
+                    Debug.Log("[IAP] Store initialized.");
+                else
+                    Debug.LogWarning("[IAP] Store init failed.");
+            });
 
             PlayGames.Initialize(_ =>
             {
@@ -102,7 +108,18 @@ namespace VXMonster.Platform
             if (Time.unscaledTime - lastAppOpenTime < cooldown) return false;
 
             lastAppOpenTime = Time.unscaledTime;
+            Analytics.AnalyticsEvents.LogAdImpression("app_open");
             AdService.ShowAppOpen(onClosed);
+            return true;
+        }
+
+        public static bool TryShowRewarded(Action onRewardGranted, Action onClosed)
+        {
+            if (!AdsEnabled) return false;
+            if (AdService == null || !AdService.IsRewardedReady) return false;
+
+            Analytics.AnalyticsEvents.LogAdImpression("rewarded");
+            AdService.ShowRewarded(onRewardGranted, onClosed);
             return true;
         }
 

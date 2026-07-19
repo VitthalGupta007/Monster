@@ -10,6 +10,7 @@
   ],
   "dependencies": {
     "com.google.ads.mobile": "11.2.0",
+    "com.google.play.integrity": "1.4.1",
     "com.unity.2d.pixel-perfect": "6.0.0",
     "com.unity.ai.assistant": "2.14.0-pre.1",
     "com.unity.ai.navigation": "2.0.13",

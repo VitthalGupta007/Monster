@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -25,6 +26,8 @@ namespace VXMonster.UI
             public TMP_Text priceLabel;
             public TMP_Text titleLabel;
         }
+
+        Coroutine refreshRoutine;
 
         private void Awake()
         {
@@ -58,11 +61,34 @@ namespace VXMonster.UI
         {
             gameObject.SetActive(true);
             Refresh();
+            if (refreshRoutine != null) StopCoroutine(refreshRoutine);
+            refreshRoutine = StartCoroutine(RefreshUntilStoreReady());
         }
 
         public void Close()
         {
+            if (refreshRoutine != null)
+            {
+                StopCoroutine(refreshRoutine);
+                refreshRoutine = null;
+            }
             gameObject.SetActive(false);
+        }
+
+        private IEnumerator RefreshUntilStoreReady()
+        {
+            for (var i = 0; i < 24 && !PlatformServices.IsIapReady; i++)
+            {
+                SetStatus("Connecting to Google Play…");
+                yield return new WaitForSeconds(0.5f);
+                Refresh();
+            }
+
+            if (!PlatformServices.IsIapReady)
+                SetStatus("Store not ready. Check Play Console product is Active and you are a license tester.");
+
+            Refresh();
+            refreshRoutine = null;
         }
 
         private void Refresh()
@@ -93,10 +119,16 @@ namespace VXMonster.UI
 
         private static bool IsOwned(string productId)
         {
-            if (productId != IAPProductIds.RemoveAds) return false;
             if (GameController.SaveManager == null) return false;
 
-            return GameController.SaveManager.GetSave<EntitlementsSave>("VX Entitlements").RemoveAdsPurchased;
+            var entitlements = GameController.SaveManager.GetSave<EntitlementsSave>("VX Entitlements");
+            if (productId == IAPProductIds.RemoveAds)
+                return entitlements.RemoveAdsPurchased;
+
+            if (productId == IAPProductIds.StarterBundle)
+                return entitlements.StarterBundlePurchased;
+
+            return false;
         }
 
         private void OnBuyClicked(ShopProductRow row)

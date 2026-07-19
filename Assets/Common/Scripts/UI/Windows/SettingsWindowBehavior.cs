@@ -1,5 +1,8 @@
 using VXMonster.Core.Easing;
 using VXMonster.Core.Input;
+#if GOOGLE_MOBILE_ADS_AVAILABLE
+using VXMonster.Platform.Ads;
+#endif
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -45,10 +48,7 @@ namespace VXMonster.Core.UI
 
             if (privacyButton != null && legalTextWindow != null)
             {
-                privacyButton.onClick.AddListener(() =>
-                {
-                    legalTextWindow.Open(LegalTexts.PrivacyPolicyTitle, LegalTexts.PrivacyPolicyBody);
-                });
+                privacyButton.onClick.AddListener(OnPrivacyButtonClicked);
             }
 
             if (termsButton != null && legalTextWindow != null)
@@ -110,6 +110,22 @@ namespace VXMonster.Core.UI
 #else
             Application.Quit();
 #endif
+        }
+
+        private void OnPrivacyButtonClicked()
+        {
+#if GOOGLE_MOBILE_ADS_AVAILABLE
+            if (GoogleMobileAdsConsentController.PrivacyOptionsRequired)
+            {
+                GoogleMobileAdsConsentController.ShowPrivacyOptionsForm(message =>
+                {
+                    if (!string.IsNullOrEmpty(message))
+                        Debug.LogWarning($"[UMP] Privacy options: {message}");
+                });
+                return;
+            }
+#endif
+            legalTextWindow?.Open(LegalTexts.PrivacyPolicyTitle, LegalTexts.PrivacyPolicyBody);
         }
 
         private void CloseLegalWindow()

@@ -32,12 +32,41 @@ namespace VXMonster.Platform.IAP
                     GrantGold(GoldLargeAmount);
                     return true;
                 case IAPProductIds.StarterBundle:
-                    GrantRemoveAds();
-                    GrantGold(StarterBundleGoldAmount);
-                    return true;
+                    return FulfillStarterBundle();
                 default:
                     return false;
             }
+        }
+
+        public static void SyncOwnedNonConsumable(string productId)
+        {
+            if (productId == IAPProductIds.RemoveAds)
+            {
+                GrantRemoveAds();
+                return;
+            }
+
+            if (productId == IAPProductIds.StarterBundle)
+                FulfillStarterBundle();
+        }
+
+        private static bool FulfillStarterBundle()
+        {
+            GrantRemoveAds();
+
+            if (GameController.SaveManager == null) return true;
+
+            var entitlements = GameController.SaveManager.GetSave<EntitlementsSave>("VX Entitlements");
+            entitlements.StarterBundlePurchased = true;
+
+            if (!entitlements.StarterBundleGoldGranted)
+            {
+                entitlements.StarterBundleGoldGranted = true;
+                GrantGold(StarterBundleGoldAmount);
+            }
+
+            GameController.SaveManager.Save(false);
+            return true;
         }
 
         private static void GrantRemoveAds()
@@ -45,6 +74,8 @@ namespace VXMonster.Platform.IAP
             if (GameController.SaveManager == null) return;
 
             var entitlements = GameController.SaveManager.GetSave<EntitlementsSave>("VX Entitlements");
+            if (entitlements.RemoveAdsPurchased) return;
+
             entitlements.RemoveAdsPurchased = true;
             GameController.SaveManager.Save(false);
             PlatformServices.BindEntitlements(entitlements);

@@ -3,10 +3,25 @@
     <package>androidx.constraintlayout:constraintlayout:2.1.4</package>
     <package>androidx.lifecycle:lifecycle-process:2.6.2</package>
     <package>com.google.android.gms:play-services-ads:25.3.0</package>
+    <package>com.google.android.gms:play-services-base:18.10.0</package>
+    <package>com.google.android.play:core-common:2.0.4</package>
+    <package>com.google.android.play:integrity:1.4.0</package>
     <package>com.google.android.ump:user-messaging-platform:4.0.0</package>
+    <package>com.google.firebase:firebase-analytics:23.2.0</package>
+    <package>com.google.firebase:firebase-analytics-unity:13.14.0</package>
+    <package>com.google.firebase:firebase-app-unity:13.14.0</package>
+    <package>com.google.firebase:firebase-common:22.1.0</package>
+    <package>com.google.firebase:firebase-crashlytics-ndk:20.1.0</package>
+    <package>com.google.firebase:firebase-crashlytics-unity:13.14.0</package>
     <package>com.google.games:gpgs-plugin-support:2.1.0</package>
   </packages>
   <files>
+    <file>Assets/GeneratedLocalRepo/Firebase/m2repository/com/google/firebase/firebase-analytics-unity/13.14.0/firebase-analytics-unity-13.14.0.aar</file>
+    <file>Assets/GeneratedLocalRepo/Firebase/m2repository/com/google/firebase/firebase-analytics-unity/13.14.0/firebase-analytics-unity-13.14.0.pom</file>
+    <file>Assets/GeneratedLocalRepo/Firebase/m2repository/com/google/firebase/firebase-app-unity/13.14.0/firebase-app-unity-13.14.0.aar</file>
+    <file>Assets/GeneratedLocalRepo/Firebase/m2repository/com/google/firebase/firebase-app-unity/13.14.0/firebase-app-unity-13.14.0.pom</file>
+    <file>Assets/GeneratedLocalRepo/Firebase/m2repository/com/google/firebase/firebase-crashlytics-unity/13.14.0/firebase-crashlytics-unity-13.14.0.aar</file>
+    <file>Assets/GeneratedLocalRepo/Firebase/m2repository/com/google/firebase/firebase-crashlytics-unity/13.14.0/firebase-crashlytics-unity-13.14.0.pom</file>
     <file>Assets/GeneratedLocalRepo/GooglePlayGames/com.google.play.games/Editor/m2repository/com/google/games/gpgs-plugin-support/2.1.0/gpgs-plugin-support-2.1.0.aar</file>
     <file>Assets/GeneratedLocalRepo/GooglePlayGames/com.google.play.games/Editor/m2repository/com/google/games/gpgs-plugin-support/2.1.0/gpgs-plugin-support-2.1.0.pom</file>
   </files>

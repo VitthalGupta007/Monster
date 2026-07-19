@@ -23,6 +23,14 @@ namespace VXMonster.Tests.EditMode
 
             Assert.IsTrue(save.RemoveAdsPurchased);
         }
+
+        [Test]
+        public void StarterBundleFlags_DefaultFalse()
+        {
+            var save = new EntitlementsSave();
+            Assert.IsFalse(save.StarterBundlePurchased);
+            Assert.IsFalse(save.StarterBundleGoldGranted);
+        }
     }
 }
 #endif

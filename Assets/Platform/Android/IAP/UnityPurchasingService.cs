@@ -44,10 +44,17 @@ namespace VXMonster.Platform.IAP
         {
             try
             {
-                if (UnityServices.State != ServicesInitializationState.Initialized)
+                try
                 {
-                    var options = new InitializationOptions().SetEnvironmentName("production");
-                    await UnityServices.InitializeAsync(options);
+                    if (UnityServices.State != ServicesInitializationState.Initialized)
+                    {
+                        var options = new InitializationOptions().SetEnvironmentName("production");
+                        await UnityServices.InitializeAsync(options);
+                    }
+                }
+                catch (Exception ugsEx)
+                {
+                    Debug.LogWarning($"[IAP] Unity Services init skipped: {ugsEx.Message}");
                 }
 
                 var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
@@ -133,7 +140,7 @@ namespace VXMonster.Platform.IAP
 
                 var id = product.definition.id;
                 if (id == IAPProductIds.RemoveAds || id == IAPProductIds.StarterBundle)
-                    PurchaseFulfillment.TryFulfill(id);
+                    PurchaseFulfillment.SyncOwnedNonConsumable(id);
             }
         }
 

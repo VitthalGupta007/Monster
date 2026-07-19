@@ -53,5 +53,12 @@ namespace VXMonster.Platform.Analytics
         {
             service?.LogEvent("talent_unlock", ("node_id", nodeId));
         }
+
+        public static void LogIntegrityCheck(bool tokenOk, string detail = null)
+        {
+            service?.LogEvent("integrity_check",
+                ("token_ok", tokenOk ? 1 : 0),
+                ("detail", detail ?? string.Empty));
+        }
     }
 }

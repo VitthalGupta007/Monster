@@ -276,7 +276,7 @@ namespace VXMonster.Core.UI
                 adReviveButton.interactable = false;
             }
 
-            PlatformServices.AdService.ShowRewarded(
+            PlatformServices.TryShowRewarded(
                 onRewardGranted: () =>
                 {
                     if (GameSessionManager.Instance?.RunSession != null)
@@ -290,7 +290,8 @@ namespace VXMonster.Core.UI
                 {
                     if (adReviveButton != null && gameObject.activeInHierarchy)
                     {
-                        adReviveButton.interactable = PlatformServices.AdService.IsRewardedReady;
+                        adReviveButton.interactable = PlatformServices.AdService != null
+                            && PlatformServices.AdService.IsRewardedReady;
                     }
                 });
         }
