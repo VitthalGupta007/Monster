@@ -79,7 +79,7 @@ namespace VXMonster.UI
                 });
             }
 
-#if UNITY_ANDROID && !UNITY_EDITOR
+#if UNITY_ANDROID
             WireLeaderboardsRow();
 #else
             if (leaderboardsRowButton != null)
