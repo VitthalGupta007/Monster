@@ -1,52 +1,75 @@
-# One-time IAP — test checklist
+# IAP — Production & pre-launch checklist
 
-All product IDs must match [`IAPProductIds.cs`](../Assets/Platform/Android/IAP/IAPProductIds.cs) exactly.
+Product IDs must match [`IAPProductIds.cs`](../Assets/Platform/Android/IAP/IAPProductIds.cs) exactly.
 
-Play Console path: **Monetize with Play → Products → One-time products**  
-Purchase option ID for each: `default` · Purchase type: **Buy**
+Play Console: **Monetize with Play → Products → One-time products**  
+Purchase option ID: `default` · Purchase type: **Buy**
 
 ---
 
-## Active products and India (INR) prices
+## Products (India INR)
 
-| Product ID | Play Console type | Unity type | India (INR) | In-game |
-|------------|-------------------|------------|---------------|---------|
+| Product ID | Play type | Unity type | INR | In-game |
+|------------|-----------|------------|-----|---------|
 | `com.vitthalxstudios.monster.remove_ads` | One-time | NonConsumable | **₹250** | Remove ads + free revive |
 | `com.vitthalxstudios.monster.starter_bundle` | One-time | NonConsumable | **₹300** | Remove ads + 1,000 gold (once) |
-| `com.vitthalxstudios.monster.gold_small` | One-time* | Consumable | **₹100** | +500 gold (repeatable) |
-| `com.vitthalxstudios.monster.gold_medium` | One-time* | Consumable | **₹199** | +1,500 gold (repeatable) |
-| `com.vitthalxstudios.monster.gold_large` | One-time* | Consumable | **₹300** | +5,000 gold (repeatable) |
+| `com.vitthalxstudios.monster.gold_small` | One-time* | Consumable | **₹100** | +500 gold |
+| `com.vitthalxstudios.monster.gold_medium` | One-time* | Consumable | **₹199** | +1,500 gold |
+| `com.vitthalxstudios.monster.gold_large` | One-time* | Consumable | **₹300** | +5,000 gold |
 
-\*Play Console lists all as **One-time products**; gold packs are **Consumable** in Unity code (buy again after consume).
+\*Gold packs are **Consumable** in Unity (repeatable purchases).
 
----
-
-## License testers (required for test buys)
-
-1. Play Console → **Settings** → **License testing**
-2. Add tester Gmail accounts
-3. Set **RESPOND_NORMALLY**
-4. On device: same Gmail in Play Store; install from **closed testing opt-in link**
+**Starter Bundle** calls `GrantRemoveAds()` — buyer gets Remove Ads without a separate purchase.
 
 ---
 
-## Upload AAB (single v6+ build)
+## Pre-launch QA (closed testing track)
 
-1. Unity → **Build App Bundle (Google Play)** with upload keystore
-2. Bump **Version Code** to **6+** if Play has **5**
-3. Closed testing → upload → roll out → install via opt-in link
+Use **license testers** only for final QA before Production — not for live players.
+
+1. Play Console → **Settings → License testing** → add QA Gmail accounts → **RESPOND_NORMALLY**
+2. Install from **closed testing opt-in link** (same Gmail on device Play Store)
+3. Build **release-signed AAB** with incremented version code
+4. Upload to **Closed testing** → roll out
+
+### In-game tests
+
+1. Wait ~10s after launch (IAP init; shop polls up to 12s)
+2. **MENU → SHOP** — titles, descriptions, prices visible
+3. **Restore** — status text; syncs Remove Ads & Starter Bundle from Google Play
+4. Buy **Remove Ads** → ads stop; row shows **Owned**
+5. Buy gold pack → gold increases
+6. **Starter Bundle** (fresh save) → ads off + 1,000 gold once
+7. Force-stop → reopen → entitlements persist
+8. logcat: `[IAP]`, `[PlayIntegrity]`; Firebase `iap_purchase` event
 
 ---
 
-## Test in-game
+## Production (live on Play Store)
 
-1. Wait ~10s after launch (IAP init + shop poll up to 12s)
-2. **MENU → SHOP** — all rows show real prices (not `—`)
-3. Buy **Remove Ads** → ads stop, Buy disabled
-4. Buy gold pack → gold increases, Buy stays enabled
-5. Buy **Starter Bundle** on fresh account → ads off + 1,000 gold once
-6. Force-stop → reopen → Remove Ads still owned (receipt sync)
-7. logcat: `[IAP]`, `[PlayIntegrity]`, Firebase DebugView for `integrity_check`
+After **Production rollout**:
+
+- **No license testers required** — any user with a valid payment method can purchase
+- Prices shown are localized by Google Play (INR set in Console)
+- **Restore** uses `IGooglePlayStoreExtensions.RestoreTransactions` + `SyncOwnedNonConsumables()` for Remove Ads and Starter Bundle
+- Gold packs are consumable — **not** restored (by design)
+
+Monitor: Play Console → **Monetize → Monetization setup** for order issues.
+
+---
+
+## Restore — how it works
+
+| Step | What happens |
+|------|----------------|
+| User taps **RESTORE** | Shop calls `IapService.RestorePurchases` |
+| Google Play (Android) | `RestoreTransactions` queries past non-consumable purchases |
+| App | `SyncOwnedNonConsumables()` reads receipts → updates `EntitlementsSave` |
+| Remove Ads | `RemoveAdsPurchased = true` → ads hidden |
+| Starter Bundle | `StarterBundlePurchased = true` + Remove Ads + gold (once) |
+| Gold packs | Not restored (consumables) |
+
+Shop footer: *"Restore syncs Remove Ads & Starter Bundle after reinstall."*
 
 ---
 
@@ -54,9 +77,10 @@ Purchase option ID for each: `default` · Purchase type: **Buy**
 
 | Symptom | Check |
 |---------|-------|
-| Price `—` | Product inactive, payments profile, not Play-installed, IAP init |
+| Price `Loading…` forever | Product inactive, payments profile incomplete, not installed from Play |
 | `Store not ready` | Wait 12s; logcat `[IAP] Store init failed` |
-| Billing unavailable | Play Services, tester Gmail, license list |
+| Billing unavailable | Play Services updated, signed into Play Store |
+| Restore does nothing | Same Google account as original purchase; store must be ready |
 
 Logcat filters: `IAP`, `PlayIntegrity`, `Firebase`
 
@@ -64,8 +88,11 @@ Logcat filters: `IAP`, `PlayIntegrity`, `Firebase`
 
 ## Code map
 
-- IDs: `Assets/Platform/Android/IAP/IAPProductIds.cs`
-- Init: `UnityPurchasingService.cs`
-- Fulfillment: `PurchaseFulfillment.cs` (starter bundle gold grants once)
-- Shop: `ShopWindowBehavior.cs` (poll until store ready)
-- Entitlements: `EntitlementsSave.cs`
+| File | Role |
+|------|------|
+| `IAPProductIds.cs` | Product ID constants |
+| `UnityPurchasingService.cs` | Google Play billing + restore |
+| `PurchaseFulfillment.cs` | Grants ads off, gold, bundle |
+| `ShopWindowBehavior.cs` | Shop UI + restore button |
+| `ShopProductCatalog.cs` | Product titles & descriptions |
+| `EntitlementsSave.cs` | Persistent ownership flags |

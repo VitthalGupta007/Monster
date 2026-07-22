@@ -1,35 +1,48 @@
-# VX Monster — Production Gap Report (post HIGH checklist)
+# VX Monster — Production Gap Report
 
-## HIGH checklist — DONE this pass
+**Updated:** 22 July 2026 — Play Store production launch track
 
-| Item | Status | Evidence |
-|------|--------|----------|
-| Stage tiles/props | Done (tiles + field assets) | Unique `back_stage_3..6.png`, `Stage N Field Data.asset`, BG prefabs; Stages 3–6 no longer share Stage 2 field GUID |
-| Wave timing | Done | Stage 3×1.08, 4×0.92, 5×1.15, 6×0.85 on `m_Start` clips |
-| Character portraits | Done (lobby icons) | Unique `ui_char_{rogue,necromancer,ranger,sage,paladin,berserker}.png` bound on Character Data |
-| Relic icons | Done | Unique `ui_relic_*.png` bound on all 9 RelicData assets |
-| Website mojibake | Done | `privacy.html` / `terms.html` — 0 `â€` matches |
+---
 
-## Honest remaining limits (not claimed done)
+## Ready for production
 
-| Limit | Why |
-|-------|-----|
-| In-run character bodies | Prefabs still Wizard/Mage — only **lobby portraits** are unique |
-| Prop variety | Biome-tinted Bush/Stone clones (`Prop Frost Crystal` … `Prop Void Crystal`); not bespoke prop sprites yet |
-| Border tiles | Endless mode ignores side/corner prefabs; only background chunk + props matter |
-| Style gate | Human should spot-check AI portraits/relics/tiles in Unity — Phase 7 gates PASS |
-| Balance audit | Stage 1–6 `enemyHP`/`enemyDamage` + hero base stats verified; feel gates PASS (Stages 1, 3, 6) |
+| Area | Status |
+|------|--------|
+| Core gameplay loop | Campaign, Daily, Endless, talents, relics, codex |
+| Lobby UI (menu, shop, settings, talent info) | Wired + recent fixes |
+| IAP code (purchase, restore, starter bundle → remove ads) | Implemented |
+| UMP + AdMob integration | In project |
+| Legal (web + in-app) | Live URL + `LegalTexts.cs` |
+| Upload keystore | On disk (not in repo) |
+| Store listing copy | [PlayAlphaReady.md](PlayAlphaReady.md) |
 
-## Still CRITICAL (Play ship)
+---
 
-1. Firebase `google-services.json` + `UNITY_FIREBASE`
-2. Signed AAB upload + Play Console payments/IAP products
-3. Website APK file missing
-4. Device ProductionGates
+## Must complete before Production rollout
 
-## Still MEDIUM
+1. **Firebase production config** — RTDB **locked mode**, fresh `google-services.json`, API key restrictions ([FirebaseSetup.md](FirebaseSetup.md))
+2. **Play Console** — all app content declarations, IAP products active, production AAB
+3. **ProductionGates** — device sign-off on release-signed build
+4. **Version code** — bump above any prior upload
 
-- GPGS / iOS stubs
-- EditMode test gaps
-- Relic HUD empty-slot polish
-- Timeline track display names still Stage-2 labels
+---
+
+## Known limits (acceptable for v1.0)
+
+| Limit | Notes |
+|-------|-------|
+| In-run character bodies | Lobby portraits unique; combat sprites shared Wizard base |
+| Prop variety | Biome-tinted clones; bespoke art later |
+| GPGS / iOS | Post-launch |
+| Style gate | Human spot-check portraits/tiles in Unity |
+
+---
+
+## Doc index (production)
+
+| Doc | Use |
+|-----|-----|
+| [PlayAlphaReady.md](PlayAlphaReady.md) | 5-day launch checklist + store copy |
+| [FirebaseSetup.md](FirebaseSetup.md) | Locked-mode RTDB + production Firebase |
+| [ProductionGates.md](ProductionGates.md) | Pre-release QA sign-off |
+| [IAP_OneTimePurchase_Checklist.md](IAP_OneTimePurchase_Checklist.md) | IAP + restore testing |

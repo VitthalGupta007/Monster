@@ -1,29 +1,68 @@
-# VX Monster — Alpha / Closed Testing Ready Pack
+# VX Monster — Play Store Production Launch
 
-Use this for Google Play **closed testing (alpha)**. Last prepared: 10 July 2026.
+**Target:** Public production release on Google Play (not closed alpha / test mode).  
+**Last updated:** 22 July 2026
 
-## Already verified in project (agent)
+Use this as the single launch checklist. Complete every **Required** item before **Production → Create release**.
+
+---
+
+## Already in the project
 
 | Item | Status |
 |------|--------|
 | Package ID | `com.vitthalxstudios.monster` |
-| Version name / code | `1.1.0` / `5` (next ship: **6+**) |
 | Min / target SDK | 26 / 35 |
-| Upload keystore on disk | `vx-monster-upload.keystore` (alias `vxmonster`) — passwords not in repo |
-| AdMob app + unit IDs | Set in `AdMobConfig.cs` |
-| IAP product IDs in code | See table below |
-| Privacy policy live | https://www.vitthalxstudios.com/privacy.html |
+| Upload keystore | `vx-monster-upload.keystore` (alias `vxmonster`) — passwords **not** in repo |
+| AdMob + UMP | `AdMobConfig` |
+| IAP product IDs | Match [IAPProductIds.cs](../Assets/Platform/Android/IAP/IAPProductIds.cs) |
+| Privacy policy (web) | https://www.vitthalxstudios.com/privacy.html |
 | In-app legal text | `LegalTexts.cs` |
-| Lobby HUD label overlap (small phones) | Top-anchored under logo |
-| EditMode tests excluded from player | Moved to `Assets/Tests/Editor` (fixes IL2CPP / nunit build fail) |
-| Feature graphic / store icon | `Docs/StoreAssets/` |
-| Phone screenshots (live Game View) | `Docs/StoreAssets/Screenshots/phone_01..08_*.png` — upload (min 2; prefer full set) |
-| Firebase `google-services.json` | Local at `Assets/Plugins/Android/` (gitignored) + `UNITY_FIREBASE` |
-| Play Console forms | **You** must complete (agent cannot access your account) |
+| Store assets | `Docs/StoreAssets/` |
+| Firebase SDK | Analytics + Crashlytics (config: [FirebaseSetup.md](FirebaseSetup.md)) |
 
 ---
 
-## Paste into Play Console — Store listing
+## 5-day launch order
+
+### Day 1 — Console & Firebase (production, not test)
+
+1. **Firebase Realtime Database** → **Start in locked mode** → Enable → re-download `google-services.json`  
+   See [FirebaseSetup.md](FirebaseSetup.md)
+2. **Play Console → Monetize → Products → One-time** — all 5 products **Active** (INR prices below)
+3. **Play Console → App content** — finish every red item (privacy, ads, content rating, data safety, target audience)
+4. Restrict Firebase **Android API key** to release SHA-1 + package name
+
+### Day 2 — Production gates on device
+
+Run [ProductionGates.md](ProductionGates.md) on **release-signed** build (or closed track AAB):
+
+- UMP consent (EEA geography test)
+- IAP purchase + Restore (license tester account until live)
+- Core gameplay smoke (lobby, shop, settings, talent, codex)
+- Firebase DebugView: `run_start`, `iap_purchase`
+
+### Day 3 — Store listing & assets
+
+Paste store copy below. Upload feature graphic + screenshots from `Docs/StoreAssets/`.
+
+### Day 4 — Release AAB
+
+1. Bump **Version Code** (must be higher than any uploaded build)
+2. Unity → **Build App Bundle** with **upload keystore** (not debug)
+3. Play Console → **Testing → Closed testing** — upload AAB, final QA with license testers
+4. When QA passes → promote same release to **Production**
+
+### Day 5 — Production rollout
+
+1. **Production → Create new release** → add tested AAB
+2. **Countries/regions** → your launch countries
+3. **Start rollout to Production** (staged rollout 10% → 100% recommended)
+4. Monitor Crashlytics + Play Console vitals for 48 hours
+
+---
+
+## Store listing (paste into Play Console)
 
 ### App name
 ```
@@ -51,7 +90,7 @@ FEATURES
 • Optional Remove Ads and gold packs
 
 CONTROLS
-Move with the virtual stick (or keyboard in editor). Abilities fire automatically — focus on positioning, pickups, and surviving the next wave.
+Move with the virtual stick. Abilities fire automatically — focus on positioning, pickups, and surviving the next wave.
 
 PRIVACY
 Ads use Google AdMob with consent where required. Purchases go through Google Play. Privacy policy: https://www.vitthalxstudios.com/privacy.html
@@ -69,95 +108,76 @@ Game → Action (or Arcade)
 
 ---
 
-## Play Console answers (your 5 errors + common dashboard)
+## Play Console — required declarations
 
-### 1) Store listing
-Paste short + full description above → **Save**.
+| Section | Answer |
+|---------|--------|
+| Financial features | **No** |
+| Health app | **No** |
+| Ads | **Yes** |
+| Target audience | **13+** or **16+** (not Designed for Families) |
+| News app | **No** |
+| App access | All functionality available without login |
 
-### 2) Countries / regions
-Release → **Countries/regions** → select countries (or all available) → Save.
+### Data safety (summary)
 
-### 3) Financial features
-**Go to Financial features** → for this game answer **No** (no banking, wallets, crypto trading, lending, etc.). IAP gold/Remove Ads alone is not a “financial feature” in Play’s sense.
-
-### 4) Health declaration
-**Go to declaration** → this is a normal entertainment game → **not** a health/fitness/medical app. Answer accordingly and submit.
-
-### 5) Dashboard leftovers (finish every red item)
-Typical remaining items:
-- **App content → Privacy policy** → paste URL above
-- **App content → Ads** → Yes, app contains ads
-- **App content → Content rating** → start questionnaire (Violence: fantasy mild; no real gambling)
-- **App content → Target audience** → 13+ or 16+ (not Designed for Families / not primarily children)
-- **App content → News app** → No
-- **App content → Data safety** → see section below
-- **App access** → All functionality available without special login (or “no restrictions”)
-
----
-
-## Data safety (suggested answers)
-
-Be honest; adjust if your Firebase/AdMob setup differs.
-
-| Question | Suggested |
-|----------|-----------|
-| Collects / shares user data? | **Yes** (ads / advertising ID; analytics if Firebase enabled) |
+| Question | Answer |
+|----------|--------|
+| Collects / shares data? | **Yes** (Advertising ID; analytics/diagnostics via Firebase) |
 | Encrypted in transit? | **Yes** |
-| Users can request deletion? | **Yes** (contact email; local data cleared by uninstall) |
-| Data collected | Device or other IDs (Advertising ID); App activity / diagnostics if analytics on |
-| Collected for | Advertising / analytics / app functionality |
-| Shared with third parties? | **Yes** — Google (AdMob / Play services) |
+| Deletion request? | **Yes** (contact email; uninstall clears local data) |
+| Shared with third parties? | **Yes** — Google (AdMob, Play, Firebase) |
 | Sold? | **No** |
-| Required vs optional | Ads-related data optional where consent applies; local save required for gameplay |
 
 ---
 
-## IAP products (Monetize → Products → One-time products)
+## IAP products (must match code exactly)
 
-Product IDs **must match code exactly**. India prices (INR):
+Play Console: **Monetize with Play → Products → One-time products** · Purchase option: `default`
 
-| Product ID | Unity type | INR | Notes |
-|------------|------------|-----|-------|
+| Product ID | Type | INR | In-game |
+|------------|------|-----|---------|
 | `com.vitthalxstudios.monster.remove_ads` | Non-consumable | **₹250** | Remove ads + free revive |
-| `com.vitthalxstudios.monster.starter_bundle` | Non-consumable | **₹300** | Remove ads + 1000 gold (once) |
-| `com.vitthalxstudios.monster.gold_small` | Consumable | **₹100** | 500 gold |
-| `com.vitthalxstudios.monster.gold_medium` | Consumable | **₹199** | 1500 gold |
-| `com.vitthalxstudios.monster.gold_large` | Consumable | **₹300** | 5000 gold |
+| `com.vitthalxstudios.monster.starter_bundle` | Non-consumable | **₹300** | Remove ads + 1,000 gold (once) |
+| `com.vitthalxstudios.monster.gold_small` | Consumable | **₹100** | +500 gold |
+| `com.vitthalxstudios.monster.gold_medium` | Consumable | **₹199** | +1,500 gold |
+| `com.vitthalxstudios.monster.gold_large` | Consumable | **₹300** | +5,000 gold |
 
-Activate all products. Purchase option ID: `default`.
+**Starter Bundle** automatically grants **Remove Ads** in code (`PurchaseFulfillment.FulfillStarterBundle`).
 
----
-
-## Build & upload (you)
-
-1. Unity → **File → Build Settings → Android → App Bundle (AAB)**
-2. Confirm Publishing Settings use `vx-monster-upload.keystore` / alias `vxmonster` (enter passwords)
-3. Build AAB
-4. Play Console → **Testing → Closed testing** (or Internal) → Create release → upload AAB
-5. Add **tester emails** (or Google Group)
-6. Add **countries**
-7. Review and **Start rollout**
-8. Testers open the opt-in link → install from Play Store
-
-Suggested release name: `1.0.0 (3) — closed alpha`
+Pre-launch IAP QA: [IAP_OneTimePurchase_Checklist.md](IAP_OneTimePurchase_Checklist.md)  
+After launch: remove reliance on license testers; real users purchase through Production track.
 
 ---
 
-## Optional before / during alpha
+## Build & upload (production AAB)
 
-| Item | Priority |
-|------|----------|
-| Add license testers under Setup → License testing | High if testing IAP |
-| Device smoke test (`Docs/ProductionGates.md` Gate 3) | High |
-| UMP consent on EEA test device (Gate 1) | High if you show ads in EEA |
-| Firebase `google-services.json` + `UNITY_FIREBASE` | Medium (analytics) |
-| Feature graphic 1024×500 + phone screenshots | Required for listing polish / often for closed track |
+1. Unity → **File → Build Settings → Android**
+2. **Build App Bundle (Google Play)**
+3. **Publishing Settings** → custom keystore `vx-monster-upload.keystore` / alias `vxmonster`
+4. Increment **Version Code** every upload
+5. Upload to **Closed testing** first → QA → **Promote to Production**
+
+**Do not** upload debug-signed APK/AAB to Production.
 
 ---
 
-## What the agent cannot do
+## Testing vs production (important)
 
-- Log into your Play Console / click declarations
-- Enter keystore passwords or upload the AAB for you
-- Create AdMob/Firebase console resources you don’t already have
-- Run physical-device QA
+| | Pre-launch QA | Live on Play Store |
+|--|---------------|-------------------|
+| **Track** | Closed / internal testing | **Production** |
+| **Firebase RTDB** | Locked mode | Locked mode (never test mode) |
+| **IAP** | License testers in Play Console | Real purchases |
+| **Analytics** | DebugView on QA devices | Production dashboard |
+| **Ads** | Test ad units / test devices OK for QA | Production AdMob units only |
+
+---
+
+## What you must do manually
+
+- Play Console declarations and rollout clicks
+- Firebase locked-mode database + API key restrictions
+- Keystore passwords (team vault)
+- Physical device QA ([ProductionGates.md](ProductionGates.md))
+- Production rollout monitoring

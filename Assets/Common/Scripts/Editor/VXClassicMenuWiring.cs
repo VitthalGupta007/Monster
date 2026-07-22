@@ -16,7 +16,6 @@ namespace VXMonster.EditorTools
         const string InfoIconPath = "Assets/Common/Sprites/UI/Main Menu/ui_info.png";
 
         static readonly Color PrimaryPurple = new Color(0.42f, 0.25f, 0.63f, 1f);
-        static readonly Color CloseGray = new Color(0.35f, 0.35f, 0.4f, 1f);
         static readonly Color PanelDark = new Color(0.12f, 0.08f, 0.2f, 0.98f);
 
         const float RowHeight = 96f;
@@ -100,7 +99,7 @@ namespace VXMonster.EditorTools
             CreateMenuRow(panelRt, "Codex Row", "CODEX", sprite, font, PrimaryPurple);
             CreateMenuRow(panelRt, "Shop Row", "SHOP", sprite, font, PrimaryPurple);
             CreateMenuRow(panelRt, "Play Games Leaderboard Row", "LEADERBOARDS", sprite, font, PrimaryPurple);
-            CreateMenuRow(panelRt, "Close Row", "CLOSE", sprite, font, CloseGray);
+            CreateMenuRow(panelRt, "Close Row", "CLOSE", sprite, font, Color.white);
 
             CreateInfoPopup(rootRt, sprite, font);
 
@@ -159,28 +158,37 @@ namespace VXMonster.EditorTools
             cardRt.SetParent(popupRt, false);
             cardRt.anchorMin = new Vector2(0.5f, 0.5f);
             cardRt.anchorMax = new Vector2(0.5f, 0.5f);
-            cardRt.sizeDelta = new Vector2(520f, 280f);
+            cardRt.sizeDelta = new Vector2(520f, 340f);
             card.GetComponent<Image>().color = PanelDark;
+            var cardVlg = card.GetComponent<VerticalLayoutGroup>();
+            cardVlg.padding = new RectOffset(16, 16, 16, 16);
+            cardVlg.spacing = 8f;
+            cardVlg.childControlWidth = true;
+            cardVlg.childControlHeight = true;
+            cardVlg.childForceExpandWidth = true;
+            cardVlg.childForceExpandHeight = false;
 
             var titleGo = AddLayoutTitle(cardRt, "Popup Title", "Talent Tree", font, 36f, 52f);
             titleGo.fontStyle = FontStyles.Bold;
 
             var bodyGo = new GameObject("Popup Body", typeof(RectTransform), typeof(TextMeshProUGUI), typeof(LayoutElement));
             bodyGo.transform.SetParent(cardRt, false);
-            bodyGo.GetComponent<LayoutElement>().preferredHeight = 140f;
+            ConfigureLayoutChild(bodyGo.GetComponent<RectTransform>(), 120f);
+            bodyGo.GetComponent<LayoutElement>().preferredHeight = 120f;
             var body = bodyGo.GetComponent<TextMeshProUGUI>();
             body.font = font;
             body.fontSize = 28f;
             body.alignment = TextAlignmentOptions.TopLeft;
             body.color = Color.white;
             body.textWrappingMode = TextWrappingModes.Normal;
+            body.raycastTarget = false;
             body.text = "Spend talent points earned from bosses on permanent upgrades between runs.";
 
             var okGo = new GameObject("Close Info", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image), typeof(Button), typeof(LayoutElement));
             okGo.transform.SetParent(cardRt, false);
+            ConfigureLayoutChild(okGo.GetComponent<RectTransform>(), 64f);
             okGo.GetComponent<LayoutElement>().preferredHeight = 64f;
             var okRt = okGo.GetComponent<RectTransform>();
-            okRt.sizeDelta = new Vector2(360f, 64f);
             ApplyRowSprite(okGo.GetComponent<Image>(), sprite, PrimaryPurple);
             okGo.GetComponent<Button>().targetGraphic = okGo.GetComponent<Image>();
             AddCenterLabel(okRt, "OK", font, 30f);
@@ -194,6 +202,7 @@ namespace VXMonster.EditorTools
         {
             var go = new GameObject(name, typeof(RectTransform), typeof(TextMeshProUGUI), typeof(LayoutElement));
             go.transform.SetParent(parent, false);
+            ConfigureLayoutChild(go.GetComponent<RectTransform>(), height);
             go.GetComponent<LayoutElement>().preferredHeight = height;
             var tmp = go.GetComponent<TextMeshProUGUI>();
             tmp.font = font;
@@ -203,6 +212,14 @@ namespace VXMonster.EditorTools
             tmp.color = Color.white;
             tmp.raycastTarget = false;
             return tmp;
+        }
+
+        static void ConfigureLayoutChild(RectTransform rt, float height)
+        {
+            rt.anchorMin = new Vector2(0f, 1f);
+            rt.anchorMax = new Vector2(1f, 1f);
+            rt.pivot = new Vector2(0.5f, 1f);
+            rt.sizeDelta = new Vector2(0f, height);
         }
 
         static void AddCenterLabel(RectTransform parent, string text, TMP_FontAsset font, float size)

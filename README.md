@@ -67,8 +67,9 @@ Ad unit IDs live in `AdMobConfig` (ScriptableObject). Do not commit production k
 | [Docs/PrefabHookup.md](Docs/PrefabHookup.md) | Wire UI prefabs to scripts |
 | [Docs/UIStyleGuide.md](Docs/UIStyleGuide.md) | Colors, typography, conventions |
 | [Docs/ProductionGates.md](Docs/ProductionGates.md) | Pre-submit QA checklist |
+| [Docs/PlayAlphaReady.md](Docs/PlayAlphaReady.md) | **Play Store production launch** (5-day checklist) |
 | [Docs/BiomeBrief.md](Docs/BiomeBrief.md) | Stages 3–6 content pipeline |
-| [Docs/FirebaseSetup.md](Docs/FirebaseSetup.md) | Analytics + Crashlytics install |
+| [Docs/FirebaseSetup.md](Docs/FirebaseSetup.md) | Firebase production (Analytics + Crashlytics) |
 | [Docs/iOS_Parity.md](Docs/iOS_Parity.md) | Phase 8 iOS stubs |
 | [Docs/GPGS_v1.1.md](Docs/GPGS_v1.1.md) | Play Games leaderboards (post-launch) |
 
@@ -78,9 +79,20 @@ Ad unit IDs live in `AdMobConfig` (ScriptableObject). Do not commit production k
 
 Several features ship as C# scripts first; Unity prefab references must be assigned manually. Follow **PrefabHookup.md** after pulling script changes.
 
-### Testing Remove Ads without IAP
+### Android production release
 
-Set `RemoveAdsPurchased = true` on the `VX Entitlements` save, or buy Remove Ads through the Mock Shop in the Editor.
+1. Complete [Docs/FirebaseSetup.md](Docs/FirebaseSetup.md) (Realtime Database **locked mode**, production `google-services.json`)
+2. Follow [Docs/PlayAlphaReady.md](Docs/PlayAlphaReady.md) — 5-day Play Store launch checklist
+3. Run [Docs/ProductionGates.md](Docs/ProductionGates.md) on release-signed AAB
+4. Assign **upload keystore** in **Player Settings → Publishing Settings**
+5. Build **App Bundle (AAB)** — increment version code each upload
+6. IAP products in Play Console must match `IAPProductIds.cs`
+7. Privacy policy URL for Play Console (in-app text in `LegalTexts.cs`)
+
+### Editor / QA only
+
+- `MockIapService` and `MockAnalyticsService` when Firebase/IAP not configured
+- License testers in Play Console for **pre-launch** IAP QA only — not for live Production users
 
 ### Packages
 
@@ -92,18 +104,15 @@ Key dependencies (see `Packages/manifest.json`):
 
 ### Android release build
 
-1. Create or assign a release keystore in **Player Settings → Publishing Settings**
-2. Build **App Bundle** (AAB) for Play Console
-3. Configure AdMob UMP in the AdMob dashboard
-4. Create IAP products matching `IAPProductIds.cs`
-5. Host a privacy policy URL for Play Console (in-app legal text is in `LegalTexts.cs`)
+See **Android production release** above and [Docs/PlayAlphaReady.md](Docs/PlayAlphaReady.md).
 
-## Store checklist (not in repo)
+## Store checklist
 
-- Google Play Developer account ($25)
-- Release keystore backup
-- Firebase / Crashlytics (planned post-v1.0)
-- Google Play Games leaderboards (deferred to v1.1)
+- [ ] Google Play Developer account active
+- [ ] Release keystore backed up securely
+- [ ] Firebase production config ([FirebaseSetup.md](Docs/FirebaseSetup.md))
+- [ ] Production rollout + monitoring (Crashlytics, Play vitals)
+- [ ] Google Play Games leaderboards — deferred post-launch ([GPGS_v1.1.md](Docs/GPGS_v1.1.md))
 
 ## License
 

@@ -64,12 +64,11 @@ namespace VXMonster.Core.UI
                 legalTextWindow.Init(CloseLegalWindow);
             }
 
-#if (UNITY_IOS || UNITY_ANDROID || UNITY_WEBGL) && !UNITY_EDITOR
-            exitButton.gameObject.SetActive(false);
-#else
-            exitButton.gameObject.SetActive(true);
-            exitButton.onClick.AddListener(OnExitButtonClicked);
-#endif
+            if (exitButton != null)
+            {
+                exitButton.gameObject.SetActive(true);
+                exitButton.onClick.AddListener(OnExitButtonClicked);
+            }
         }
 
         public void Open()

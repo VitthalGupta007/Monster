@@ -103,7 +103,7 @@ namespace VXMonster.EditorTools
                 if (exit.objectReferenceValue is Button exitBtn)
                 {
                     var rt = exitBtn.GetComponent<RectTransform>();
-                    rt.anchoredPosition = new Vector2(0f, -300f);
+                    rt.anchoredPosition = new Vector2(0f, -260f);
                     rt.sizeDelta = new Vector2(420f, 140f);
                 }
 
@@ -111,7 +111,7 @@ namespace VXMonster.EditorTools
                 if (back.objectReferenceValue is Button backBtn)
                 {
                     var rt = backBtn.GetComponent<RectTransform>();
-                    // Android hides Exit; keep Back above the home-indicator band.
+                    // Exit sits above Back; keep 140px+ vertical gap to avoid overlap.
                     rt.anchoredPosition = new Vector2(0f, -400f);
                     rt.sizeDelta = new Vector2(420f, 140f);
                 }
@@ -631,7 +631,7 @@ namespace VXMonster.EditorTools
             rowsRt.SetParent(window.transform, false);
             rowsRt.anchorMin = new Vector2(0.5f, 0.5f);
             rowsRt.anchorMax = new Vector2(0.5f, 0.5f);
-            rowsRt.sizeDelta = new Vector2(900f, 520f);
+            rowsRt.sizeDelta = new Vector2(900f, 640f);
             rowsRt.anchoredPosition = new Vector2(0f, 40f);
             var layout = rowsRoot.GetComponent<VerticalLayoutGroup>();
             layout.spacing = 16f;
@@ -659,17 +659,19 @@ namespace VXMonster.EditorTools
             var rowGo = new GameObject(title, typeof(RectTransform), typeof(HorizontalLayoutGroup));
             var rowRt = rowGo.GetComponent<RectTransform>();
             rowRt.SetParent(parent, false);
-            rowRt.sizeDelta = new Vector2(880f, 88f);
+            rowRt.sizeDelta = new Vector2(880f, 112f);
             var rowLayout = rowGo.GetComponent<HorizontalLayoutGroup>();
             rowLayout.spacing = 16f;
             rowLayout.childAlignment = TextAnchor.MiddleLeft;
             rowLayout.childControlWidth = false;
             rowLayout.childForceExpandWidth = false;
 
-            var titleLabel = CreateHudLabel(rowRt, "Title", new Vector2(0f, 0f), TextAlignmentOptions.MidlineLeft, 30f);
+            var titleLabel = CreateHudLabel(rowRt, "Title", new Vector2(0f, 0f), TextAlignmentOptions.TopLeft, 30f);
             var titleRt = titleLabel.rectTransform;
-            titleRt.sizeDelta = new Vector2(360f, 64f);
+            titleRt.sizeDelta = new Vector2(360f, 96f);
             titleLabel.text = title;
+            titleLabel.enableWordWrapping = true;
+            titleLabel.richText = true;
 
             var priceLabel = CreateHudLabel(rowRt, "Price", new Vector2(0f, 0f), TextAlignmentOptions.MidlineLeft, 28f);
             priceLabel.rectTransform.sizeDelta = new Vector2(180f, 64f);

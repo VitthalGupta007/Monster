@@ -110,10 +110,26 @@ namespace VXMonster.Platform.IAP
             var apple = extensionProvider.GetExtension<IAppleExtensions>();
             if (apple != null)
             {
-                apple.RestoreTransactions((success, _) => onComplete?.Invoke(success));
+                apple.RestoreTransactions((success, _) =>
+                {
+                    if (success) SyncOwnedNonConsumables();
+                    onComplete?.Invoke(success);
+                });
                 return;
             }
 
+            var google = extensionProvider.GetExtension<IGooglePlayStoreExtensions>();
+            if (google != null)
+            {
+                google.RestoreTransactions((success, _) =>
+                {
+                    SyncOwnedNonConsumables();
+                    onComplete?.Invoke(success);
+                });
+                return;
+            }
+
+            SyncOwnedNonConsumables();
             onComplete?.Invoke(true);
         }
 

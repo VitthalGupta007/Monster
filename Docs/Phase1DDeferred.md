@@ -1,51 +1,53 @@
-# Phase 1D — Android Platform (DEFERRED)
+# Phase 1D — Android Platform (launch track)
 
-**Status:** Blocked until Play Console $25 account verification completes.
+**Status:** Active — production Play Store release in progress (July 2026).
 
-Do **not** block Phase 1A–1C on this section. Ship retention content first; platform hardening after console access is confirmed.
+Platform work is **no longer deferred**. Use [PlayAlphaReady.md](PlayAlphaReady.md) as the master launch checklist.
 
-## When unblocked — checklist
+---
+
+## Production checklist
 
 ### Keystore
 
-- [ ] Create upload keystore (NOT debug)
-- [ ] Store passwords in team vault — never commit keystore or passwords
-- [ ] `Project Settings → Player → Android → Publishing Settings` → custom keystore
+- [x] Upload keystore on disk (`vx-monster-upload.keystore`, alias `vxmonster`)
+- [ ] Passwords stored in team vault — never commit
+- [ ] Unity **Publishing Settings** → custom keystore for **release** builds
 
 ### Play Console
 
-- [ ] App ID: `com.vitthalxstudios.monster` (draft exists)
-- [ ] Create IAP products matching [IAPProductIds.cs](../Assets/Platform/Android/IAP/IAPProductIds.cs) (full IDs):
-  - `com.vitthalxstudios.monster.remove_ads`
-  - `com.vitthalxstudios.monster.gold_small`
-  - `com.vitthalxstudios.monster.gold_medium`
-  - `com.vitthalxstudios.monster.gold_large`
-  - `com.vitthalxstudios.monster.starter_bundle`
-- [ ] Closed testing track + tester emails
-- [ ] Store listing: short/long description, screenshots, feature graphic — copy in [PlayAlphaReady.md](PlayAlphaReady.md)
-- [ ] Privacy policy URL: `https://www.vitthalxstudios.com/privacy.html`
+- [ ] App ID: `com.vitthalxstudios.monster`
+- [ ] IAP products active (see [IAP_OneTimePurchase_Checklist.md](IAP_OneTimePurchase_Checklist.md))
+- [ ] Store listing + assets ([PlayAlphaReady.md](PlayAlphaReady.md))
+- [ ] Privacy policy: `https://www.vitthalxstudios.com/privacy.html`
+- [ ] **Production** rollout (not permanent closed testing only)
 
 ### Ads & consent
 
-- [ ] AdMob app + ad unit IDs in `AdMobConfig`
-- [ ] UMP consent flow on physical device ([ProductionGates.md](ProductionGates.md))
-- [ ] Test rewarded (revive) + interstitial (exit run)
+- [ ] Production AdMob units in `AdMobConfig`
+- [ ] UMP messages published ([ProductionGates.md](ProductionGates.md) Gate 1)
+- [ ] Rewarded revive + interstitial tested on device
 
-### Firebase
+### Firebase (production)
 
-- [ ] Download `google-services.json` → `Assets/Plugins/Android/`
-- [ ] Enable `UNITY_FIREBASE` via [FirebaseSetup.md](FirebaseSetup.md)
-- [ ] Verify `AnalyticsEvents` in logcat
+- [ ] Realtime Database — **locked mode** ([FirebaseSetup.md](FirebaseSetup.md))
+- [ ] `google-services.json` with `firebase_url`
+- [ ] `UNITY_FIREBASE` define
+- [ ] API key restricted to release SHA-1
+- [ ] Crashlytics + Analytics verified
 
-### BillDesk / payments (if applicable)
+### QA
 
-- Play Store URL for APK field: `https://play.google.com/store/apps/details?id=com.vitthalxstudios.monster`
-- Business site: `vitthalxstudios.com`
+- [ ] [ProductionGates.md](ProductionGates.md) signed off
+
+---
 
 ## iOS
 
-**Deferred indefinitely.** Do not spend Phase 1–2 time on `Assets/Platform/iOS` stubs.
+**Deferred.** No Phase 1–2 time on `Assets/Platform/iOS` stubs until Android production is stable.
+
+---
 
 ## GPGS
 
-After local daily/endless personal bests feel good → [GPGS_v1.1.md](GPGS_v1.1.md).
+After production launch stabilizes → [GPGS_v1.1.md](GPGS_v1.1.md).
