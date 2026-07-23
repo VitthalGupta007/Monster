@@ -670,7 +670,7 @@ namespace VXMonster.EditorTools
             var titleRt = titleLabel.rectTransform;
             titleRt.sizeDelta = new Vector2(360f, 96f);
             titleLabel.text = title;
-            titleLabel.enableWordWrapping = true;
+            titleLabel.textWrappingMode = TextWrappingModes.Normal;
             titleLabel.richText = true;
 
             var priceLabel = CreateHudLabel(rowRt, "Price", new Vector2(0f, 0f), TextAlignmentOptions.MidlineLeft, 28f);

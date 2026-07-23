@@ -12,7 +12,7 @@ Use this as the single launch checklist. Complete every **Required** item before
 | Item | Status |
 |------|--------|
 | Package ID | `com.vitthalxstudios.monster` |
-| Min / target SDK | 26 / 35 |
+| Min / target SDK | 26 / 36 |
 | Upload keystore | `vx-monster-upload.keystore` (alias `vxmonster`) — passwords **not** in repo |
 | AdMob + UMP | `AdMobConfig` |
 | IAP product IDs | Match [IAPProductIds.cs](../Assets/Platform/Android/IAP/IAPProductIds.cs) |
@@ -45,6 +45,53 @@ Run [ProductionGates.md](ProductionGates.md) on **release-signed** build (or clo
 ### Day 3 — Store listing & assets
 
 Paste store copy below. Upload feature graphic + screenshots from `Docs/StoreAssets/`.
+
+#### Refresh screenshots (current UI)
+
+Existing phone/tablet shots are from early July — **re-capture before Production** so Play Console shows the latest lobby, shop, settings, and meta menu.
+
+**Strict QA rule:** Nothing goes into `Docs/StoreAssets/UPLOAD/` until every file passes automated + visual QA individually (up to 20 recapture attempts per file).
+
+1. Open Unity → **Main Menu** scene → **Play**
+2. **VX Monster → Store → Capture All Store Set + Tablets (Play Mode Now)**
+3. Wait ~10–12 minutes (automated lobby → combat → upgrades → meta, staggered tablet resizes, caption overlay, per-shot QA retries)
+4. **VX Monster → Store → Strict QA → Verify All Store Assets (Full Gate)**
+5. Agent/MCP: open each PNG under `Docs/StoreAssets/Screenshots/` — confirm per-shot content (see criteria in `Docs/StoreAssets/QA/qa-report.md`)
+6. Mark visual PASS via QA report or recapture failing shots (**Recapture/** menus)
+7. **VX Monster → Store → Promo → Record Promo From Lobby (Play Mode Now)** → upload MP4 to YouTube
+8. When `qa-report.md` shows **23/23 PASS** (20 screenshots + icon + feature + promo): **Strict QA → Build UPLOAD Bundle**
+
+Output folders:
+
+| Asset | Path | Dimensions |
+|-------|------|------------|
+| Phone | `Docs/StoreAssets/Screenshots/phone_01_lobby.png` … `phone_08_meta.png` | 1080×1920 |
+| 7" tablet landscape | `Docs/StoreAssets/Screenshots/Tablet7/tablet7_01`–`04.png` | 1920×1080 |
+| 7" tablet portrait | `Tablet7/tablet7_portrait_01`–`02.png` | 1080×1920 |
+| 10" tablet landscape | `Tablet10/tablet10_01`–`04.png` | 2560×1440 |
+| 10" tablet portrait | `Tablet10/tablet10_portrait_01`–`02.png` | 1080×1920 |
+| App icon | `Docs/StoreAssets/play_store_icon_512.png` | 512×512 |
+| Feature graphic | `Docs/StoreAssets/play_feature_graphic_1024x500.png` | 1024×500 |
+| Promo (YouTube) | `Docs/StoreAssets/promo/vx-monster-promo-30s.mp4` | 1920×1080, 25–35s |
+
+**ASO phone upload order** (from `UPLOAD/` after bundle build):
+
+1. `phone_01_survive_endless_waves.png` (lobby)
+2. `phone_02_fight_massive_hordes.png` (gameplay)
+3. `phone_03_unlock_8_heroes.png` (characters)
+4. `phone_04_build_deadly_combos.png` (abilities)
+5. `phone_05_talents_shop_more.png` (meta)
+6. `phone_06_daily_endless_runs.png` (modes)
+7. `phone_07_conquer_6_worlds.png` (stage)
+8. `phone_08_power_up_talents.png` (upgrades)
+
+Single-shot recapture: **VX Monster → Store → Capture Named/** or **Recapture/** menus.
+
+**Promo video:** Unity Recorder 5.1.x does not compile on Unity 6000.5 yet. Use **VX Monster → Store → Promo → Record Promo From Lobby** after installing a Unity-6-compatible Recorder version, or record manually and place at `Docs/StoreAssets/promo/vx-monster-promo-30s.mp4`.
+
+**Known gameplay capture note:** If `phone_05_gameplay.png` shows the weapon-select panel instead of combat, run **Recapture → 05 Gameplay Only** again (the pipeline dismisses the panel and waits for ≥2 enemies before capture).
+
+QA report: `Docs/StoreAssets/QA/qa-report.md` + `qa-report.json`
 
 ### Day 4 — Release AAB
 

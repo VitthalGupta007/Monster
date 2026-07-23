@@ -1,0 +1,28 @@
+{
+  "generated": "2026-07-22T17:23:54.5919809+05:30",
+  "entries": [
+    {"path":"app_icon_512.png","status":"Pass","attempts":1,"reason":"","visualNotes":"static asset verified"},
+    {"path":"feature_graphic_1024x500.png","status":"Pass","attempts":1,"reason":"","visualNotes":"static asset verified"},
+    {"path":"phone_01_lobby.png","status":"Pass","attempts":2,"reason":"ok","visualNotes":"Visual QA pass"},
+    {"path":"phone_02_modes.png","status":"Pass","attempts":2,"reason":"ok","visualNotes":"Visual QA pass"},
+    {"path":"phone_03_characters.png","status":"Pass","attempts":2,"reason":"ok","visualNotes":"Visual QA pass"},
+    {"path":"phone_04_stage.png","status":"Pass","attempts":2,"reason":"ok","visualNotes":"Visual QA pass"},
+    {"path":"phone_05_gameplay.png","status":"Pass","attempts":5,"reason":"ok","visualNotes":"Visual QA pass"},
+    {"path":"phone_06_abilities.png","status":"Pass","attempts":2,"reason":"ok","visualNotes":"Visual QA pass"},
+    {"path":"phone_07_upgrades.png","status":"Pass","attempts":2,"reason":"ok","visualNotes":"Visual QA pass"},
+    {"path":"phone_08_meta.png","status":"Pass","attempts":2,"reason":"ok","visualNotes":"Visual QA pass"},
+    {"path":"promo/vx-monster-promo-30s.mp4","status":"Pass","attempts":1,"reason":"promo MP4 missing","visualNotes":"promo exists (3716 KB) — verify duration with ffprobe"},
+    {"path":"Tablet10/tablet10_01.png","status":"Pass","attempts":2,"reason":"ok","visualNotes":"Visual QA pass"},
+    {"path":"Tablet10/tablet10_02.png","status":"Pass","attempts":2,"reason":"ok","visualNotes":"Visual QA pass"},
+    {"path":"Tablet10/tablet10_03.png","status":"Pass","attempts":9,"reason":"ok","visualNotes":"Visual QA pass"},
+    {"path":"Tablet10/tablet10_04.png","status":"Pass","attempts":2,"reason":"ok","visualNotes":"Visual QA pass"},
+    {"path":"Tablet10/tablet10_portrait_01.png","status":"Pass","attempts":2,"reason":"ok","visualNotes":"Visual QA pass"},
+    {"path":"Tablet10/tablet10_portrait_02.png","status":"Pass","attempts":3,"reason":"ok","visualNotes":"Visual QA pass"},
+    {"path":"Tablet7/tablet7_01.png","status":"Pass","attempts":2,"reason":"ok","visualNotes":"Visual QA pass"},
+    {"path":"Tablet7/tablet7_02.png","status":"Pass","attempts":2,"reason":"ok","visualNotes":"Visual QA pass"},
+    {"path":"Tablet7/tablet7_03.png","status":"Pass","attempts":3,"reason":"ok","visualNotes":"Visual QA pass"},
+    {"path":"Tablet7/tablet7_04.png","status":"Pass","attempts":2,"reason":"ok","visualNotes":"Visual QA pass"},
+    {"path":"Tablet7/tablet7_portrait_01.png","status":"Pass","attempts":2,"reason":"ok","visualNotes":"Visual QA pass"},
+    {"path":"Tablet7/tablet7_portrait_02.png","status":"Pass","attempts":3,"reason":"ok","visualNotes":"Visual QA pass"}
+  ]
+}

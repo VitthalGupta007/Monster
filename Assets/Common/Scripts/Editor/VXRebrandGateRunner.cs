@@ -571,7 +571,7 @@ namespace VXMonster.EditorTools
         static T FindUiBehavior<T>() where T : Component
         {
 #if UNITY_2022_2_OR_NEWER
-            return UnityEngine.Object.FindFirstObjectByType<T>(FindObjectsInactive.Include);
+            return UnityEngine.Object.FindAnyObjectByType<T>(FindObjectsInactive.Include);
 #else
             return UnityEngine.Object.FindObjectOfType<T>(true);
 #endif

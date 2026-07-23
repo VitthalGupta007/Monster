@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEditor;
+using UnityEditor.U2D.Sprites;
 using UnityEngine;
 
 namespace VXMonster.EditorTools
@@ -175,22 +176,23 @@ namespace VXMonster.EditorTools
             importer.filterMode = FilterMode.Bilinear;
             importer.alphaIsTransparency = true;
             importer.isReadable = true;
-            importer.spritePixelsToUnits = 500;
+            importer.spritePixelsPerUnit = 500;
             importer.mipmapEnabled = false;
 
-            var metas = new List<SpriteMetaData>();
+            var spriteRects = new List<SpriteRect>();
             for (var i = 0; i < frameCount; i++)
             {
-                metas.Add(new SpriteMetaData
+                spriteRects.Add(new SpriteRect
                 {
                     name = $"{Path.GetFileNameWithoutExtension(assetPath)}_{i}",
+                    spriteID = GUID.Generate(),
                     rect = new Rect(i * frameWidth, 0, frameWidth, frameWidth),
-                    alignment = (int)SpriteAlignment.BottomCenter,
+                    alignment = SpriteAlignment.BottomCenter,
                     pivot = new Vector2(0.5f, 0f),
                 });
             }
 
-            importer.spritesheet = metas.ToArray();
+            ApplySpriteRects(importer, spriteRects.ToArray());
             importer.SaveAndReimport();
         }
 
@@ -203,9 +205,25 @@ namespace VXMonster.EditorTools
             importer.spriteImportMode = SpriteImportMode.Single;
             importer.filterMode = FilterMode.Bilinear;
             importer.alphaIsTransparency = true;
-            importer.spritePixelsToUnits = 100;
+            importer.spritePixelsPerUnit = 100;
             importer.mipmapEnabled = false;
             importer.SaveAndReimport();
+        }
+
+        static void ApplySpriteRects(TextureImporter importer, SpriteRect[] spriteRects)
+        {
+            var factory = new SpriteDataProviderFactories();
+            factory.Init();
+            var dataProvider = factory.GetSpriteEditorDataProviderFromObject(importer);
+            dataProvider.InitSpriteEditorDataProvider();
+            dataProvider.SetSpriteRects(spriteRects);
+
+            var spriteNameFileIdDataProvider = dataProvider.GetDataProvider<ISpriteNameFileIdDataProvider>();
+            var nameFileIdPairs = spriteRects
+                .Select(rect => new SpriteNameFileIdPair(rect.name, rect.spriteID))
+                .ToArray();
+            spriteNameFileIdDataProvider.SetNameFileIdPairs(nameFileIdPairs);
+            dataProvider.Apply();
         }
 
         public static void RemapClipSprites(string clipAssetPath, string textureAssetPath)
