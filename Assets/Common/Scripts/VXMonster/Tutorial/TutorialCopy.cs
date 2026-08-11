@@ -20,10 +20,13 @@ namespace VXMonster.Tutorial
             "Campaign, Daily Challenge, and Endless are in this lobby. Pick a difficulty, then Play.";
 
         public const string MoveTip =
-            "Drag the joystick to move. Avoid enemies and collect XP gems.";
+            "Drag the joystick to move.\nAvoid enemies and collect XP gems.";
 
         public const string LevelUpTip =
-            "Pick an ability. Combine elements for combo bursts.";
+            "Pick a card to take it.\nReroll swaps all three offers.\nBanish: tap it, then tap a card.";
+
+        public const string LevelUpActionsHint =
+            "Reroll: new cards    Banish: tap, then tap a card";
 
         public const string ChestTip =
             "Chests give gold and can grant relics.";
@@ -41,6 +44,7 @@ namespace VXMonster.Tutorial
         public const string HowToPlayBody =
             "• Move with the joystick. Attacks fire on their own.\n\n" +
             "• Collect XP gems to level up and pick abilities.\n\n" +
+            "• Reroll swaps the three level-up cards. Banish removes one ability from this run.\n\n" +
             "• Combine Burn, Chill, and Shock for combo bursts.\n\n" +
             "• Chests drop gold and relics. You can hold 3 relics.\n\n" +
             "• Campaign plays stages. Daily is a scored day seed. Endless loops and scales.\n\n" +

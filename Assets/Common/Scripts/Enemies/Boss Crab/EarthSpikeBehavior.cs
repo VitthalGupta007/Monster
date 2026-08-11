@@ -55,12 +55,27 @@ namespace VXMonster.Core.Enemy
 
         public void Clear()
         {
-            warningCircle.gameObject.SetActive(false);
+            if (warningCircle != null)
+            {
+                warningCircle.gameObject.SetActive(false);
+                warningCircle = null;
+            }
+
+            if (spikeCollider != null)
+            {
+                spikeCollider.enabled = false;
+            }
+
             gameObject.SetActive(false);
         }
 
         public void Hide()
         {
+            if (spikeCollider != null)
+            {
+                spikeCollider.enabled = false;
+            }
+
             animator.SetTrigger(HIDE_TRIGGER);
 
             isHiding = true;

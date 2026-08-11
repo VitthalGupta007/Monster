@@ -10,6 +10,7 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using VXMonster.Gameplay;
+using VXMonster.Tutorial;
 
 namespace VXMonster.Core.Abilities.UI
 {
@@ -54,6 +55,8 @@ namespace VXMonster.Core.Abilities.UI
 
             if (rerollButton != null) rerollButton.onClick.AddListener(OnRerollClicked);
             if (banishButton != null) banishButton.onClick.AddListener(OnBanishClicked);
+
+            ApplyActionButtonLayout();
         }
 
         public void SetData(List<AbilityData> abilities)
@@ -125,6 +128,7 @@ namespace VXMonster.Core.Abilities.UI
             });
 
             GameController.InputManager.onInputChanged += OnInputChanged;
+            ApplyActionButtonLayout();
             RefreshActionButtons();
         }
 
@@ -153,12 +157,99 @@ namespace VXMonster.Core.Abilities.UI
             GameController.InputManager.onInputChanged -= OnInputChanged;
         }
 
+        private void ApplyActionButtonLayout()
+        {
+            if (rerollButton == null || banishButton == null) return;
+
+            if (panelRect != null && panelRect.sizeDelta.y < 1380f)
+            {
+                panelRect.sizeDelta = new Vector2(panelRect.sizeDelta.x, 1380f);
+            }
+
+            var holder = abilitiesHolder;
+            if (holder != null)
+            {
+                holder.offsetMin = new Vector2(holder.offsetMin.x, 150f);
+            }
+
+            var row = rerollButton.transform.parent as RectTransform;
+            if (row == null) return;
+
+            var layout = row.GetComponent<HorizontalLayoutGroup>();
+            if (layout != null) layout.enabled = false;
+
+            row.anchorMin = new Vector2(0f, 0f);
+            row.anchorMax = new Vector2(1f, 0f);
+            row.pivot = new Vector2(0.5f, 0f);
+            row.anchoredPosition = new Vector2(0f, 24f);
+            row.sizeDelta = new Vector2(-48f, 88f);
+
+            var rerollRect = rerollButton.transform as RectTransform;
+            rerollRect.anchorMin = new Vector2(0f, 0.5f);
+            rerollRect.anchorMax = new Vector2(0f, 0.5f);
+            rerollRect.pivot = new Vector2(0f, 0.5f);
+            rerollRect.anchoredPosition = Vector2.zero;
+            rerollRect.sizeDelta = new Vector2(250f, 76f);
+
+            var banishRect = banishButton.transform as RectTransform;
+            banishRect.anchorMin = new Vector2(1f, 0.5f);
+            banishRect.anchorMax = new Vector2(1f, 0.5f);
+            banishRect.pivot = new Vector2(1f, 0.5f);
+            banishRect.anchoredPosition = Vector2.zero;
+            banishRect.sizeDelta = new Vector2(250f, 76f);
+
+            EnsureActionHint(row);
+        }
+
+        private static void EnsureActionHint(RectTransform row)
+        {
+            var existing = row.Find("Action Hint");
+            RectTransform rect;
+            TMP_Text hint;
+            if (existing == null)
+            {
+                var go = new GameObject("Action Hint", typeof(RectTransform), typeof(CanvasRenderer), typeof(TextMeshProUGUI));
+                rect = go.GetComponent<RectTransform>();
+                rect.SetParent(row, false);
+                hint = go.GetComponent<TextMeshProUGUI>();
+            }
+            else
+            {
+                rect = existing as RectTransform;
+                hint = existing.GetComponent<TMP_Text>();
+            }
+
+            if (rect != null)
+            {
+                rect.anchorMin = new Vector2(0.5f, 1f);
+                rect.anchorMax = new Vector2(0.5f, 1f);
+                rect.pivot = new Vector2(0.5f, 0f);
+                rect.anchoredPosition = new Vector2(0f, 10f);
+                rect.sizeDelta = new Vector2(880f, 72f);
+            }
+
+            if (hint == null) return;
+
+            var font = TutorialUiAssets.GameFont;
+            if (font != null) hint.font = font;
+            hint.fontSize = 36f;
+            hint.alignment = TextAlignmentOptions.Center;
+            hint.color = Color.white;
+            hint.raycastTarget = false;
+            hint.enableWordWrapping = true;
+            hint.overflowMode = TextOverflowModes.Overflow;
+            hint.text = TutorialCopy.LevelUpActionsHint;
+        }
+
         private void RefreshActionButtons()
         {
+            var hint = rerollButton != null ? rerollButton.transform.parent.Find("Action Hint") : null;
+
             if (!isLevelUpPanel)
             {
                 if (rerollButton != null) rerollButton.gameObject.SetActive(false);
                 if (banishButton != null) banishButton.gameObject.SetActive(false);
+                if (hint != null) hint.gameObject.SetActive(false);
                 return;
             }
 
@@ -187,6 +278,8 @@ namespace VXMonster.Core.Abilities.UI
             {
                 banishLabel.text = banishModeActive ? "Pick to banish" : (banishAvailable ? "Banish" : "Banished");
             }
+
+            if (hint != null) hint.gameObject.SetActive(true);
         }
 
         private void OnRerollClicked()

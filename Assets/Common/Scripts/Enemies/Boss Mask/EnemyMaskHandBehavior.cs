@@ -8,6 +8,7 @@ namespace VXMonster.Core.Enemy
         private static readonly int HIDE_TRIGGER = Animator.StringToHash("Hide");
 
         [SerializeField] Animator animator;
+        [SerializeField] Collider2D handCollider;
 
         private bool IsHiding { get; set; }
 
@@ -16,9 +17,22 @@ namespace VXMonster.Core.Enemy
 
         private bool IsAppearing { get; set; }
 
+        private void Awake()
+        {
+            if (handCollider == null)
+            {
+                handCollider = GetComponent<Collider2D>();
+            }
+        }
+
         public void Init(Vector3 destination, float speed)
         {
             Destination = destination;
+
+            if (handCollider != null)
+            {
+                handCollider.enabled = true;
+            }
 
             Init(transform.position, (destination - transform.position).normalized);
             Duration = Vector3.Distance(transform.position, destination) / speed;
@@ -37,6 +51,11 @@ namespace VXMonster.Core.Enemy
 
         public void Hide()
         {
+            if (handCollider != null)
+            {
+                handCollider.enabled = false;
+            }
+
             animator.SetTrigger(HIDE_TRIGGER);
 
             IsHiding = true;

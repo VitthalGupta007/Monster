@@ -14,6 +14,7 @@ namespace VXMonster.Core.Enemy
         [SerializeField] protected Animator animator;
         [SerializeField] protected SpriteRenderer spriteRenderer;
         [SerializeField] protected ParticleSystem chargeParticle;
+        [SerializeField] protected Collider2D holeCollider;
 
         [SerializeField] protected float projectileDamage = 10f;
 
@@ -25,8 +26,32 @@ namespace VXMonster.Core.Enemy
 
         protected List<SimpleEnemyProjectileBehavior> projectiles = new List<SimpleEnemyProjectileBehavior>();
 
+        protected virtual void Awake()
+        {
+            if (holeCollider == null)
+            {
+                holeCollider = GetComponent<Collider2D>();
+            }
+        }
+
+        protected virtual void OnEnable()
+        {
+            IsHiding = false;
+            if (holeCollider != null)
+            {
+                holeCollider.enabled = true;
+            }
+        }
+
         public virtual void Hide() 
         {
+            StopDamage();
+
+            if (holeCollider != null)
+            {
+                holeCollider.enabled = false;
+            }
+
             animator.SetTrigger(HIDE_TRIGGER);
 
             IsHiding = true;
@@ -98,12 +123,28 @@ namespace VXMonster.Core.Enemy
         {
             if (collision.GetComponent<PlayerEnemyCollisionHelper>() != null)
             {
+                StopDamage();
+            }
+        }
+
+        protected virtual void StopDamage()
+        {
+            if (damageCoroutine != null)
+            {
                 StopCoroutine(damageCoroutine);
+                damageCoroutine = null;
             }
         }
 
         public virtual void Clear()
         {
+            StopDamage();
+
+            if (holeCollider != null)
+            {
+                holeCollider.enabled = false;
+            }
+
             for(int i = 0; i < projectiles.Count; i++)
             {
                 projectiles[i].onFinished -= OnProjectileFinished;
