@@ -2,34 +2,72 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using VXMonster.Core;
-using VXMonster.Gameplay;
+using VXMonster.Core.Save;
+using VXMonster.Platform.Analytics;
 using VXMonster.Save;
+using VXMonster.Tutorial;
 
 namespace VXMonster.UI
 {
     public class TutorialOverlayBehavior : MonoBehaviour
     {
-        private const string SaveKey = "VX Tutorial";
-
         [SerializeField] CanvasGroup canvasGroup;
+        [SerializeField] TMP_Text titleText;
         [SerializeField] TMP_Text bodyText;
         [SerializeField] Button nextButton;
         [SerializeField] Button skipButton;
+        [SerializeField] TutorialSequenceDefinition lobbySequence;
 
         private TutorialSave tutorialSave;
         private int stepIndex;
-        private readonly string[] steps =
-        {
-            "Drag the joystick to move. Avoid enemies and collect XP gems.",
-            "Level up to choose new abilities. Combine elements for combo bursts!",
-            "Open chests for gold and relics. Relics change your whole run.",
-            "Try Daily Challenge and Endless from the lobby. Pick your difficulty before you play."
-        };
+        private TutorialStepData[] steps;
 
-        private void Awake()
+        private void OnEnable()
         {
-            if (nextButton != null) nextButton.onClick.AddListener(Advance);
-            if (skipButton != null) skipButton.onClick.AddListener(Complete);
+            BindButtons();
+        }
+
+        private void OnDisable()
+        {
+            if (nextButton != null) nextButton.onClick.RemoveListener(Advance);
+            if (skipButton != null) skipButton.onClick.RemoveListener(Skip);
+        }
+
+        public void OnNextClicked()
+        {
+            Advance();
+        }
+
+        public void OnSkipClicked()
+        {
+            Skip();
+        }
+
+        private void BindButtons()
+        {
+            if (nextButton == null)
+            {
+                var nextTransform = transform.Find("Card/Next Button") ?? transform.Find("Next Button");
+                if (nextTransform != null) nextButton = nextTransform.GetComponent<Button>();
+            }
+
+            if (skipButton == null)
+            {
+                var skipTransform = transform.Find("Card/Skip Button") ?? transform.Find("Skip Button");
+                if (skipTransform != null) skipButton = skipTransform.GetComponent<Button>();
+            }
+
+            if (nextButton != null)
+            {
+                nextButton.onClick.RemoveListener(Advance);
+                nextButton.onClick.AddListener(Advance);
+            }
+
+            if (skipButton != null)
+            {
+                skipButton.onClick.RemoveListener(Skip);
+                skipButton.onClick.AddListener(Skip);
+            }
         }
 
         private void Start()
@@ -39,22 +77,111 @@ namespace VXMonster.UI
 
         public void TryShowFirstRun()
         {
-            if (GameController.SaveManager == null) return;
+            tutorialSave = ResolveTutorialSave();
+            if (tutorialSave == null || tutorialSave.Completed)
+            {
+                Hide();
+                return;
+            }
 
-            tutorialSave = GameController.SaveManager.GetSave<TutorialSave>(SaveKey);
-            if (tutorialSave.Completed) return;
+            ShowFrom(tutorialSave.LastStepIndex);
+        }
 
-            stepIndex = tutorialSave.LastStepIndex;
+        public void ReplayLobby()
+        {
+            tutorialSave = ResolveTutorialSave();
+            if (tutorialSave == null) return;
+
+            tutorialSave.ResetLobby();
+            PersistSave();
+            ShowFrom(0);
+        }
+
+        private static TutorialSave ResolveTutorialSave()
+        {
+            var saveManager = ResolveSaveManager();
+            if (saveManager == null) return null;
+            return saveManager.GetSave<TutorialSave>(TutorialSave.SaveHash);
+        }
+
+        private static ISaveManager ResolveSaveManager()
+        {
+            if (GameController.SaveManager != null) return GameController.SaveManager;
+
+            var found = Object.FindAnyObjectByType<SaveManager>(FindObjectsInactive.Include);
+            if (found == null) return null;
+
+            GameController.RegisterSaveManager(found);
+            return found;
+        }
+
+        private void PersistSave()
+        {
+            var saveManager = ResolveSaveManager();
+            if (saveManager is SaveManager concrete)
+            {
+                concrete.SaveImmediate();
+                return;
+            }
+
+            saveManager?.Save(false);
+        }
+
+        private void ShowFrom(int startIndex)
+        {
+            steps = ResolveSteps();
+            stepIndex = Mathf.Clamp(startIndex, 0, Mathf.Max(0, steps.Length - 1));
+
             gameObject.SetActive(true);
-            if (canvasGroup != null) canvasGroup.alpha = 1f;
+            transform.SetAsLastSibling();
+            if (canvasGroup != null)
+            {
+                canvasGroup.alpha = 1f;
+                canvasGroup.blocksRaycasts = true;
+                canvasGroup.interactable = true;
+            }
+
             ShowStep();
+        }
+
+        private TutorialStepData[] ResolveSteps()
+        {
+            if (lobbySequence != null && lobbySequence.steps != null && lobbySequence.steps.Length > 0)
+            {
+                return lobbySequence.steps;
+            }
+
+            return new[]
+            {
+                new TutorialStepData
+                {
+                    stepId = TutorialCopy.LobbyStepWelcomeId,
+                    title = TutorialCopy.LobbyWelcomeTitle,
+                    body = TutorialCopy.LobbyWelcomeBody
+                },
+                new TutorialStepData
+                {
+                    stepId = TutorialCopy.LobbyStepModesId,
+                    title = TutorialCopy.LobbyModesTitle,
+                    body = TutorialCopy.LobbyModesBody
+                }
+            };
         }
 
         private void ShowStep()
         {
-            if (bodyText != null && stepIndex < steps.Length)
+            if (steps == null || stepIndex < 0 || stepIndex >= steps.Length) return;
+
+            var step = steps[stepIndex];
+            if (titleText != null)
             {
-                bodyText.text = steps[stepIndex];
+                titleText.text = step.title ?? string.Empty;
+                titleText.gameObject.SetActive(!string.IsNullOrEmpty(step.title));
+            }
+
+            if (bodyText != null)
+            {
+                bodyText.text = step.body ?? string.Empty;
             }
 
             if (nextButton != null)
@@ -65,32 +192,62 @@ namespace VXMonster.UI
                     nextLabel.text = stepIndex >= steps.Length - 1 ? "Done" : "Next";
                 }
             }
+
+            AnalyticsEvents.LogTutorialStep(step.stepId ?? $"lobby_{stepIndex}");
         }
 
         private void Advance()
         {
             stepIndex++;
-            if (stepIndex >= steps.Length)
+            if (steps == null || stepIndex >= steps.Length)
             {
-                Complete();
+                Complete(false);
                 return;
             }
 
+            if (tutorialSave == null) tutorialSave = ResolveTutorialSave();
             if (tutorialSave != null)
             {
                 tutorialSave.LastStepIndex = stepIndex;
-                GameController.SaveManager?.Save(false);
+                PersistSave();
             }
 
             ShowStep();
         }
 
-        private void Complete()
+        private void Skip()
         {
+            var stepId = steps != null && stepIndex >= 0 && stepIndex < steps.Length
+                ? steps[stepIndex].stepId
+                : "lobby";
+            AnalyticsEvents.LogTutorialSkip(stepId);
+            Complete(true);
+        }
+
+        private void Complete(bool skipped)
+        {
+            if (tutorialSave == null) tutorialSave = ResolveTutorialSave();
             if (tutorialSave != null)
             {
                 tutorialSave.Completed = true;
-                GameController.SaveManager?.Save(false);
+                PersistSave();
+            }
+
+            if (!skipped)
+            {
+                AnalyticsEvents.LogTutorialComplete(lobbySequence != null ? lobbySequence.sequenceId : "LobbyIntro");
+            }
+
+            Hide();
+        }
+
+        private void Hide()
+        {
+            if (canvasGroup != null)
+            {
+                canvasGroup.alpha = 0f;
+                canvasGroup.blocksRaycasts = false;
+                canvasGroup.interactable = false;
             }
 
             gameObject.SetActive(false);

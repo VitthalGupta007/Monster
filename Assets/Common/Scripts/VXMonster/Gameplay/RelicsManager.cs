@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using VXMonster.Core;
 
 namespace VXMonster.Gameplay
@@ -10,6 +11,7 @@ namespace VXMonster.Gameplay
         public const int MaxRelicSlots = 3;
 
         public static RelicsManager Instance { get; private set; }
+        public static event UnityAction RelicGranted;
 
         [SerializeField] RelicsDatabase database;
 
@@ -17,6 +19,7 @@ namespace VXMonster.Gameplay
         private static void ResetStatic()
         {
             Instance = null;
+            RelicGranted = null;
         }
 
         private void Awake()
@@ -67,6 +70,7 @@ namespace VXMonster.Gameplay
             }
 
             PlayerBehavior.Player?.RefreshRelicModifiers();
+            RelicGranted?.Invoke();
             return true;
         }
 

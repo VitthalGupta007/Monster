@@ -60,5 +60,20 @@ namespace VXMonster.Platform.Analytics
                 ("token_ok", tokenOk ? 1 : 0),
                 ("detail", detail ?? string.Empty));
         }
+
+        public static void LogTutorialStep(string stepId)
+        {
+            service?.LogEvent("tutorial_step", ("step_id", stepId ?? string.Empty));
+        }
+
+        public static void LogTutorialComplete(string sequenceId)
+        {
+            service?.LogEvent("tutorial_complete", ("sequence_id", sequenceId ?? string.Empty));
+        }
+
+        public static void LogTutorialSkip(string stepId)
+        {
+            service?.LogEvent("tutorial_skip", ("step_id", stepId ?? string.Empty));
+        }
     }
 }

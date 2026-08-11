@@ -57,7 +57,21 @@ namespace VXMonster.Platform.Bootstrap
                 adMobConfig = ScriptableObject.CreateInstance<AdMobConfig>();
             }
 
-#if (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR && GOOGLE_MOBILE_ADS_AVAILABLE
+#if UNITY_EDITOR
+            // Android define symbols stay on in the Editor and pull real UMP / IAP / Firebase.
+            // Those SDKs deadlock the editor UI on Play (window stops responding).
+            adService = new MockAdService();
+            AnalyticsEvents.Bind(new MockAnalyticsService());
+            AnalyticsEvents.Initialize();
+            if (GameController.SaveManager != null)
+            {
+                PlatformServices.BindEntitlements(
+                    GameController.SaveManager.GetSave<EntitlementsSave>("VX Entitlements"));
+            }
+
+            PlatformServices.Initialize(adMobConfig, adService, new MockPlayGamesService(), new MockIapService());
+#else
+#if (UNITY_ANDROID || UNITY_IOS) && GOOGLE_MOBILE_ADS_AVAILABLE
             adService = new AdMobService(adMobConfig);
 #else
             adService = new MockAdService();
@@ -83,7 +97,7 @@ namespace VXMonster.Platform.Bootstrap
 #else
                 var iapService = new MockIapService();
 #endif
-#if UNITY_ANDROID && !UNITY_EDITOR && GOOGLE_PLAY_GAMES_AVAILABLE
+#if UNITY_ANDROID && GOOGLE_PLAY_GAMES_AVAILABLE
                 var playGamesService = new GooglePlayGamesService();
 #else
                 var playGamesService = new MockPlayGamesService();
@@ -91,13 +105,14 @@ namespace VXMonster.Platform.Bootstrap
                 PlatformServices.Initialize(adMobConfig, adService, playGamesService, iapService);
                 PlayIntegrityBootstrap.RequestCheckOnce();
             });
+#endif
 
             TryShowLobbyTutorial();
         }
 
         private static void TryShowLobbyTutorial()
         {
-            var tutorial = FindAnyObjectByType<VXMonster.UI.TutorialOverlayBehavior>();
+            var tutorial = FindAnyObjectByType<VXMonster.UI.TutorialOverlayBehavior>(FindObjectsInactive.Include);
             tutorial?.TryShowFirstRun();
         }
 

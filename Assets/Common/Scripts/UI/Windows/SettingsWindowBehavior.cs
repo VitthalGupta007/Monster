@@ -10,6 +10,8 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using VXMonster.Tutorial;
+using VXMonster.UI;
 
 namespace VXMonster.Core.UI
 {
@@ -24,11 +26,18 @@ namespace VXMonster.Core.UI
         [SerializeField] Button exitButton;
         [SerializeField] Button privacyButton;
         [SerializeField] Button termsButton;
+        [SerializeField] Button howToPlayButton;
+        [SerializeField] Button replayTutorialButton;
         [SerializeField] LegalTextWindowBehavior legalTextWindow;
 
         private void Start()
         {
             EasingManager.DoNextFrame().SetOnFinish(InitToggles);
+        }
+
+        private void OnEnable()
+        {
+            WireGuideButtons();
         }
 
         private void InitToggles()
@@ -61,7 +70,7 @@ namespace VXMonster.Core.UI
 
             if (legalTextWindow != null)
             {
-                legalTextWindow.Init(CloseLegalWindow);
+                legalTextWindow.Init(null);
             }
 
             if (exitButton != null)
@@ -69,6 +78,41 @@ namespace VXMonster.Core.UI
                 exitButton.gameObject.SetActive(true);
                 exitButton.onClick.AddListener(OnExitButtonClicked);
             }
+
+            WireGuideButtons();
+        }
+
+        private void WireGuideButtons()
+        {
+            if (howToPlayButton != null)
+            {
+                howToPlayButton.onClick.RemoveListener(OnHowToPlayClicked);
+                howToPlayButton.onClick.AddListener(OnHowToPlayClicked);
+            }
+
+            if (replayTutorialButton != null)
+            {
+                replayTutorialButton.onClick.RemoveListener(OnReplayTutorialClicked);
+                replayTutorialButton.onClick.AddListener(OnReplayTutorialClicked);
+            }
+        }
+
+        private void OnHowToPlayClicked()
+        {
+            if (legalTextWindow != null)
+            {
+                legalTextWindow.Open(TutorialCopy.HowToPlayTitle, TutorialCopy.HowToPlayBody);
+                return;
+            }
+
+            TutorialUiFactory.ShowStandaloneGuide(transform, TutorialCopy.HowToPlayTitle, TutorialCopy.HowToPlayBody, null);
+        }
+
+        private void OnReplayTutorialClicked()
+        {
+            Close();
+            var overlay = FindAnyObjectByType<TutorialOverlayBehavior>(FindObjectsInactive.Include);
+            overlay?.ReplayLobby();
         }
 
         public void Open()
@@ -91,6 +135,12 @@ namespace VXMonster.Core.UI
 
         private void OnBackInputClicked(InputAction.CallbackContext context)
         {
+            if (legalTextWindow != null && legalTextWindow.IsOpen)
+            {
+                legalTextWindow.Close();
+                return;
+            }
+
             backButton.onClick?.Invoke();
         }
 

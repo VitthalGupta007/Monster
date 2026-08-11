@@ -482,7 +482,7 @@ namespace VXMonster.Core
             enemies.RemoveSwapBack(boss);
             boss.onEnemyDied -= OnBossDied;
 
-            TalentPointUtility.AwardBossKillPoints();
+            TalentPointUtility.AwardBossKillPoints(boss.transform.position);
 
             if (boss.ShouldSpawnChestOnDeath && StageController.AbilityManager.HasAvailableAbilities()) StageController.DropManager.Drop(DropType.Chest, boss.transform.position.XY() + Random.insideUnitCircle);
             StageController.DropManager.Drop(DropType.Magnet, boss.transform.position.XY() + Random.insideUnitCircle);

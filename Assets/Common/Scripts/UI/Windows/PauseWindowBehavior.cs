@@ -9,6 +9,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using VXMonster.Gameplay;
+using VXMonster.Tutorial;
 
 namespace VXMonster.Core.UI
 {
@@ -23,6 +24,7 @@ namespace VXMonster.Core.UI
         [SerializeField] ToggleBehavior soundToggle;
         [SerializeField] ToggleBehavior musicToggle;
         [SerializeField] ToggleBehavior vibrationToggle;
+        [SerializeField] Button howToPlayButton;
 
         public event UnityAction OnStartedClosing;
         public event UnityAction OnClosed;
@@ -31,8 +33,33 @@ namespace VXMonster.Core.UI
 
         private void Awake()
         {
-            continueButton.onClick.AddListener(ContinueButtonClick);
-            exitButton.onClick.AddListener(ExitButtonClick);
+            WireButtons();
+        }
+
+        private void OnEnable()
+        {
+            WireButtons();
+        }
+
+        private void WireButtons()
+        {
+            if (continueButton != null)
+            {
+                continueButton.onClick.RemoveListener(ContinueButtonClick);
+                continueButton.onClick.AddListener(ContinueButtonClick);
+            }
+
+            if (exitButton != null)
+            {
+                exitButton.onClick.RemoveListener(ExitButtonClick);
+                exitButton.onClick.AddListener(ExitButtonClick);
+            }
+
+            if (howToPlayButton != null)
+            {
+                howToPlayButton.onClick.RemoveListener(OnHowToPlayClicked);
+                howToPlayButton.onClick.AddListener(OnHowToPlayClicked);
+            }
         }
 
         private void Start()
@@ -97,6 +124,17 @@ namespace VXMonster.Core.UI
             }
         }
 
+        private void OnHowToPlayClicked()
+        {
+            if (GameController.AudioManager != null)
+            {
+                GameController.AudioManager.PlaySound(AudioManager.BUTTON_CLICK_HASH);
+            }
+
+            SetPauseChromeVisible(false);
+            TutorialUiFactory.ShowStandaloneGuide(transform, TutorialCopy.HowToPlayTitle, TutorialCopy.HowToPlayBody, RestorePauseChrome);
+        }
+
         private void ContinueButtonClick()
         {
             GameController.AudioManager.PlaySound(AudioManager.BUTTON_CLICK_HASH);
@@ -122,7 +160,25 @@ namespace VXMonster.Core.UI
 
         private void OnBackInputClicked(InputAction.CallbackContext context)
         {
+            if (TutorialUiFactory.HideStandaloneGuide(transform))
+            {
+                RestorePauseChrome();
+                return;
+            }
             continueButton.onClick?.Invoke();
+        }
+
+        private void RestorePauseChrome()
+        {
+            SetPauseChromeVisible(true);
+        }
+
+        private void SetPauseChromeVisible(bool visible)
+        {
+            if (canvasGroup == null) return;
+            canvasGroup.alpha = visible ? 1f : 0f;
+            canvasGroup.blocksRaycasts = visible;
+            canvasGroup.interactable = visible;
         }
 
         private void OnDestroy()

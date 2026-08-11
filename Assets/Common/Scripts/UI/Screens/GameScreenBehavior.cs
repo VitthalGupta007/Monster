@@ -10,6 +10,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using VXMonster.Tutorial;
+using VXMonster.UI;
 
 namespace VXMonster.Core
 {
@@ -28,6 +30,9 @@ namespace VXMonster.Core
 
         public AbilitiesWindowBehavior AbilitiesWindow => abilitiesWindow;
         public ChestWindowBehavior ChestWindow => chestWindow;
+        public JoystickBehavior Joystick => joystick;
+
+        private TutorialInRunController tutorialInRun;
 
         [Header("Top UI")]
         [SerializeField] CanvasGroup topUI;
@@ -58,8 +63,29 @@ namespace VXMonster.Core
         private void Start()
         {
             abilitiesWindow.Init();
+            TalentPointsHudBehavior.EnsureOn(transform);
+            BindInRunTutorial();
 
             GameController.InputManager.InputAsset.UI.Settings.performed += OnSettingsInputClicked;
+        }
+
+        private void BindInRunTutorial()
+        {
+            tutorialInRun = GetComponent<TutorialInRunController>();
+            if (tutorialInRun == null)
+            {
+                tutorialInRun = gameObject.AddComponent<TutorialInRunController>();
+            }
+
+            var relic = GetComponentInChildren<RelicHudBehavior>(true);
+            var combo = GetComponentInChildren<ComboHudBehavior>(true);
+            tutorialInRun.Bind(
+                joystick,
+                abilitiesWindow,
+                chestWindow,
+                relic != null ? relic.transform as RectTransform : null,
+                combo != null ? combo.transform as RectTransform : null);
+            tutorialInRun.Begin();
         }
 
         private void OnSettingsInputClicked(InputAction.CallbackContext context)
@@ -127,6 +153,7 @@ namespace VXMonster.Core
             blackgroundTint.Show();
 
             abilitiesWindow.Show(isLevelUp);
+            tutorialInRun?.NotifyAbilityPanelShown();
 
             GameController.InputManager.InputAsset.UI.Settings.performed -= OnSettingsInputClicked;
         }
@@ -151,6 +178,7 @@ namespace VXMonster.Core
         public void ShowChestWindow(int tierId, List<AbilityData> abilities, List<AbilityData> selectedAbilities)
         {
             chestWindow.OpenWindow(tierId, abilities, selectedAbilities);
+            tutorialInRun?.NotifyChestOpened();
 
             GameController.InputManager.InputAsset.UI.Settings.performed -= OnSettingsInputClicked;
         }

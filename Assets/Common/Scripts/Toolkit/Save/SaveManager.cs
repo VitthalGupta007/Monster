@@ -75,6 +75,19 @@ namespace VXMonster.Core.Save
             GameController.RegisterSaveManager(this);
         }
 
+        private void OnEnable()
+        {
+            if (instance != null && instance != this) return;
+
+            instance = this;
+            if (!IsSaveLoaded)
+            {
+                Load();
+            }
+
+            GameController.RegisterSaveManager(this);
+        }
+
         /// <summary>
         /// Re-reads the on-disk save file (e.g. after Play Games cloud restore).
         /// </summary>
@@ -262,6 +275,11 @@ namespace VXMonster.Core.Save
         /// Saves the current state of the game to the file system
         /// </summary>
         /// <param name="multithreading"> if true, saves the file in another thread. Do not use multitherading in OnDestroy</param>
+        public void SaveImmediate()
+        {
+            ForceSave();
+        }
+
         public void Save(bool multithreading = false)
         {
             if (SaveDatabase == null) return;

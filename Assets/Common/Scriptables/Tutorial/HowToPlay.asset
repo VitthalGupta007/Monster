@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd4fd2b2e146cdf4cb93cae220eefad4, type: 3}
+  m_Name: HowToPlay
+  m_EditorClassIdentifier: Assembly-CSharp::VXMonster.Tutorial.TutorialSequenceDefinition
+  sequenceId: HowToPlay
+  steps:
+  - stepId: howtoplay
+    title: How to Play
+    body: 'Move with the joystick. Attacks fire on their own.
+
+
+      Collect XP
+      gems to level up and pick abilities. Active and passive slots fill as you build.
+
+
+      Combine
+      Burn, Chill, and Shock for combo bursts.
+
+
+      Chests drop gold and relics
+      (3 slots). Relics change the whole run.
+
+
+      Campaign plays stages. Daily
+      Challenge is a scored day seed. Endless loops and scales.
+
+
+      Pick Easy
+      / Normal / Hard / Nightmare before Campaign or Endless.
+
+
+      Gold buys lobby
+      upgrades. Boss kills feed the talent tree. Codex tracks relics, evolutions,
+      and combos.'

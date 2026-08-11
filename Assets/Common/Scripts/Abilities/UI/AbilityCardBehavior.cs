@@ -63,7 +63,8 @@ namespace VXMonster.Core.Abilities.UI
             abilityIcon.sprite = abilityData.Icon;
 
             titleText.text = abilityData.Title;
-            descriptionText.text = abilityData.Description;
+            descriptionText.text = AbilityCardStatText.Build(abilityData, level);
+            FitDescription();
 
             if (abilityData.IsEvolution)
             {
@@ -109,6 +110,25 @@ namespace VXMonster.Core.Abilities.UI
 
             shineRect.anchoredPosition = shineStartPosition;
             shineRect.DoAnchorPosition(targetShinePosition, 0.5f, delay).SetUnscaledTime(true);
+        }
+
+        private void FitDescription()
+        {
+            if (descriptionText == null) return;
+
+            descriptionText.enableWordWrapping = true;
+            descriptionText.overflowMode = TextOverflowModes.Ellipsis;
+            descriptionText.enableAutoSizing = true;
+            descriptionText.fontSizeMin = 20f;
+            descriptionText.fontSizeMax = 31f;
+
+            var box = descriptionText.transform.parent as RectTransform;
+            if (box != null && box.GetComponent<RectMask2D>() == null)
+            {
+                box.gameObject.AddComponent<RectMask2D>();
+            }
+
+            descriptionText.ForceMeshUpdate();
         }
 
         private void OnAbilitySelected()

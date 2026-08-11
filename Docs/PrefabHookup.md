@@ -52,7 +52,11 @@ Add `LoadingScreenBehavior` with `progressBar`, `statusLabel`, `percentLabel`.
 
 ## Tutorial (`TutorialOverlayBehavior`)
 
-Full-screen overlay on Main Menu or Lobby; assign `bodyText`, `nextButton`, `skipButton`.
+Reuse the existing `VX Tutorial Overlay` on Main Menu. Do not recreate it (that would wipe MCP coordinates). Assign `bodyText`, `nextButton`, `skipButton`. Optional: `lobbySequence`.
+
+In-run tips are created at runtime on Game Screen (`TutorialInRunController`). How to Play / Replay buttons are created at runtime in Settings `(0, -260)` / `(0, -320)` and Pause `(0, -500)` — do not move existing Privacy/Terms/Back/Exit or Continue/Exit.
+
+Play Mode menu: **VX Monster → Tutorial → Reset Lobby Tutorial Save**.
 
 ## Local personal bests
 

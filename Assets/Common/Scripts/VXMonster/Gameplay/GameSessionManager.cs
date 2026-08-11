@@ -52,6 +52,11 @@ namespace VXMonster.Gameplay
             TalentTree = talentTree;
         }
 
+        public void BindTalentTree(TalentTreeSave talentTree)
+        {
+            if (talentTree != null) TalentTree = talentTree;
+        }
+
         public void ConfigureCampaign(DifficultyTier difficulty)
         {
             RunMode = RunMode.Campaign;

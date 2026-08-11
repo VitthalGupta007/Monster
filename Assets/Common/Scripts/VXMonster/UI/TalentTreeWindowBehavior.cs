@@ -4,8 +4,10 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using VXMonster.Core;
+using VXMonster.Core.Save;
 using VXMonster.Gameplay;
 using VXMonster.Save;
+using VXMonster.Tutorial;
 
 namespace VXMonster.UI
 {
@@ -26,6 +28,7 @@ namespace VXMonster.UI
         }
 
         private TalentTreeSave talentSave;
+        private TutorialHighlightOverlay pointsTip;
 
         private void Awake()
         {
@@ -51,12 +54,52 @@ namespace VXMonster.UI
         public void Open()
         {
             gameObject.SetActive(true);
+            transform.SetAsLastSibling();
             Refresh();
+            TryShowFirstPointsTip();
         }
 
         public void Close()
         {
+            pointsTip?.Hide();
             gameObject.SetActive(false);
+        }
+
+        private void TryShowFirstPointsTip()
+        {
+            if (talentSave == null || talentSave.TalentPoints <= 0) return;
+            if (GameController.SaveManager == null) return;
+
+            var tutorial = GameController.SaveManager.GetSave<TutorialSave>(TutorialSave.SaveHash);
+            if (tutorial == null || tutorial.HasSeenStep(TutorialCopy.TalentPointsId)) return;
+
+            if (pointsTip == null)
+            {
+                pointsTip = TutorialHighlightOverlay.Create(transform);
+            }
+
+            var focus = pointsLabel != null ? pointsLabel.rectTransform : transform as RectTransform;
+            pointsTip.Show(TutorialCopy.TalentPointsTip, focus);
+            if (pointsTip.SkipButton != null)
+            {
+                pointsTip.SkipButton.onClick.RemoveListener(DismissFirstPointsTip);
+                pointsTip.SkipButton.onClick.AddListener(DismissFirstPointsTip);
+            }
+
+            tutorial.MarkStepSeen(TutorialCopy.TalentPointsId);
+            if (GameController.SaveManager is SaveManager saveManager)
+            {
+                saveManager.SaveImmediate();
+            }
+            else
+            {
+                GameController.SaveManager.Save(false);
+            }
+        }
+
+        private void DismissFirstPointsTip()
+        {
+            pointsTip?.Hide();
         }
 
         private void Refresh()

@@ -4,9 +4,12 @@ using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using VXMonster.Core;
 using VXMonster.Core.UI;
 using VXMonster.Gameplay;
 using VXMonster.Platform.IAP;
+using VXMonster.Save;
+using VXMonster.Tutorial;
 using VXMonster.UI;
 
 namespace VXMonster.EditorTools
@@ -30,6 +33,66 @@ namespace VXMonster.EditorTools
         static readonly Color PrimaryPurple = new Color(0.42f, 0.25f, 0.63f, 1f);
         static readonly Color PrimaryGreen = new Color(0.3f, 0.69f, 0.31f, 1f);
         static readonly Color Danger = new Color(0.9f, 0.22f, 0.21f, 1f);
+
+        [MenuItem("VX Monster/Tutorial/Create Default Sequences")]
+        public static void CreateDefaultTutorialSequences()
+        {
+            const string folder = "Assets/Common/Scriptables/Tutorial";
+            if (!AssetDatabase.IsValidFolder(folder))
+            {
+                AssetDatabase.CreateFolder("Assets/Common/Scriptables", "Tutorial");
+            }
+
+            CreateSequenceAsset(folder + "/LobbyIntro.asset", "LobbyIntro", new[]
+            {
+                new TutorialStepData { stepId = TutorialCopy.LobbyStepWelcomeId, title = TutorialCopy.LobbyWelcomeTitle, body = TutorialCopy.LobbyWelcomeBody },
+                new TutorialStepData { stepId = TutorialCopy.LobbyStepModesId, title = TutorialCopy.LobbyModesTitle, body = TutorialCopy.LobbyModesBody }
+            });
+            CreateSequenceAsset(folder + "/HowToPlay.asset", "HowToPlay", new[]
+            {
+                new TutorialStepData { stepId = "howtoplay", title = TutorialCopy.HowToPlayTitle, body = TutorialCopy.HowToPlayBody }
+            });
+            AssetDatabase.SaveAssets();
+            Debug.Log("[VX] Created LobbyIntro and HowToPlay tutorial sequences.");
+        }
+
+        [MenuItem("VX Monster/Tutorial/Reset Lobby Tutorial Save")]
+        public static void ResetLobbyTutorialSave()
+        {
+            if (GameController.SaveManager == null)
+            {
+                Debug.LogWarning("[VX] SaveManager is not available. Enter Play Mode first.");
+                return;
+            }
+
+            var save = GameController.SaveManager.GetSave<TutorialSave>(TutorialSave.SaveHash);
+            save.ResetLobby();
+            GameController.SaveManager.Save(false);
+            Debug.Log("[VX] Lobby tutorial save reset.");
+        }
+
+        [MenuItem("VX Monster/Tutorial/Show Lobby Tutorial Now")]
+        public static void ShowLobbyTutorialNow()
+        {
+            var overlay = Object.FindAnyObjectByType<TutorialOverlayBehavior>(FindObjectsInactive.Include);
+            overlay?.ReplayLobby();
+        }
+
+        static void CreateSequenceAsset(string path, string sequenceId, TutorialStepData[] steps)
+        {
+            var existing = AssetDatabase.LoadAssetAtPath<TutorialSequenceDefinition>(path);
+            var asset = existing != null ? existing : ScriptableObject.CreateInstance<TutorialSequenceDefinition>();
+            asset.sequenceId = sequenceId;
+            asset.steps = steps;
+            if (existing == null)
+            {
+                AssetDatabase.CreateAsset(asset, path);
+            }
+            else
+            {
+                EditorUtility.SetDirty(asset);
+            }
+        }
 
         [MenuItem("VX Monster/Wire All Prefab Hookup (Phase 1)")]
         public static void WireAll()

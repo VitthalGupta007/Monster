@@ -1,11 +1,14 @@
 using VXMonster.Core;
 using UnityEngine;
+using UnityEngine.Events;
 using VXMonster.Platform;
 
 namespace VXMonster.Gameplay
 {
     public static class ComboResolver
     {
+        public static event UnityAction ComboTriggered;
+
         public static bool TryTriggerCombo(EnemyElementStatus status, EnemyBehavior sourceEnemy, float playerDamage)
         {
             if (status == null || sourceEnemy == null) return false;
@@ -34,6 +37,7 @@ namespace VXMonster.Gameplay
 
             if (triggered)
             {
+                ComboTriggered?.Invoke();
                 GameSessionManager.Instance?.RunSession?.IncrementComboBurstCount();
                 if (GameSessionManager.Instance?.Codex?.MarkFirstCombo() == true)
                 {
