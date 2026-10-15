@@ -22,6 +22,7 @@ namespace VXMonster.UI
         {
             public string nodeId;
             public string title;
+            [TextArea] public string description;
             public int cost;
             public Button unlockButton;
             public TMP_Text label;
@@ -118,9 +119,20 @@ namespace VXMonster.UI
                 var unlocked = talentSave.IsUnlocked(row.nodeId);
                 if (row.label != null)
                 {
+                    var effect = !string.IsNullOrWhiteSpace(row.description)
+                        ? row.description
+                        : PlayerFacingCopy.Talent(row.nodeId);
                     row.label.text = unlocked
-                        ? $"{row.title} (Unlocked)"
-                        : $"{row.title} ({row.cost} pts)";
+                        ? $"<b>{row.title}</b> (Unlocked)\n{effect}"
+                        : $"<b>{row.title}</b> ({row.cost} pts)\n{effect}";
+                    row.label.richText = true;
+                    row.label.textWrappingMode = TextWrappingModes.Normal;
+                    row.label.overflowMode = TextOverflowModes.Ellipsis;
+                    row.label.alignment = TextAlignmentOptions.Left;
+                    row.label.enableAutoSizing = true;
+                    row.label.fontSizeMin = 20f;
+                    row.label.fontSizeMax = 28f;
+                    ExpandTalentRowForDescription(row);
                 }
 
                 if (row.unlockButton != null)
@@ -138,6 +150,42 @@ namespace VXMonster.UI
             GameController.SaveManager?.Save(false);
             VXMonster.Platform.Analytics.AnalyticsEvents.LogTalentUnlock(row.nodeId);
             Refresh();
+        }
+
+        private static void ExpandTalentRowForDescription(TalentNodeRow row)
+        {
+            const float rowH = 128f;
+            var buttonRt = row.unlockButton != null ? row.unlockButton.transform as RectTransform : null;
+            if (buttonRt != null)
+            {
+                buttonRt.sizeDelta = new Vector2(
+                    buttonRt.sizeDelta.x > 0f ? buttonRt.sizeDelta.x : 900f,
+                    rowH);
+
+                var layout = buttonRt.GetComponent<LayoutElement>();
+                if (layout == null) layout = buttonRt.gameObject.AddComponent<LayoutElement>();
+                layout.minHeight = rowH;
+                layout.preferredHeight = rowH;
+                layout.flexibleHeight = 0f;
+            }
+
+            if (row.label != null)
+            {
+                var labelRt = row.label.rectTransform;
+                labelRt.anchorMin = Vector2.zero;
+                labelRt.anchorMax = Vector2.one;
+                labelRt.offsetMin = new Vector2(20f, 10f);
+                labelRt.offsetMax = new Vector2(-20f, -10f);
+            }
+
+            // Grow the nodes container so taller rows still fit.
+            var container = buttonRt != null ? buttonRt.parent as RectTransform : null;
+            if (container != null && container.name.Contains("Nodes"))
+            {
+                container.sizeDelta = new Vector2(
+                    container.sizeDelta.x > 0f ? container.sizeDelta.x : 920f,
+                    1100f);
+            }
         }
     }
 }

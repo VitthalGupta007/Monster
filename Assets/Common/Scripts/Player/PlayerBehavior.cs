@@ -94,6 +94,8 @@ namespace VXMonster.Core
         private float lastMaxHpAbilityMultiplier = 1f;
         private float lastGoldAbilityMultiplier = 1f;
         private float lastCooldownAbilityMultiplier = 1f;
+        private float lastMoveSpeedAbilityMultiplier = 1f;
+        private float lastDamageReductionAbilityPercent = 0f;
 
         public Vector2 LookDirection { get; protected set; }
         public bool IsMovingAlowed { get; set; }
@@ -208,8 +210,10 @@ namespace VXMonster.Core
 
         public virtual void RecalculateMoveSpeed(float moveSpeedMultiplier)
         {
+            lastMoveSpeedAbilityMultiplier = moveSpeedMultiplier;
             var talentMult = GameSessionManager.Instance?.GetTalentMoveSpeedMultiplier() ?? 1f;
-            Speed = speed * moveSpeedMultiplier * talentMult;
+            var relicMult = RelicsManager.Instance != null ? RelicsManager.Instance.GetMoveSpeedMultiplier() : 1f;
+            Speed = speed * moveSpeedMultiplier * talentMult * relicMult;
         }
 
         public virtual void RecalculateDamage(float damageMultiplier)
@@ -253,7 +257,9 @@ namespace VXMonster.Core
 
         public virtual void RecalculateDamageReduction(float damageReductionPercent)
         {
-            DamageReductionMultiplier = (100f - initialDamageReductionPercent - damageReductionPercent) / 100f;
+            lastDamageReductionAbilityPercent = damageReductionPercent;
+            var relicDr = RelicsManager.Instance != null ? RelicsManager.Instance.GetDamageReductionBonusPercent() : 0f;
+            DamageReductionMultiplier = (100f - initialDamageReductionPercent - damageReductionPercent - relicDr) / 100f;
 
             if (GameController.UpgradesManager.IsUpgradeAquired(UpgradeType.Armor))
             {
@@ -297,6 +303,8 @@ namespace VXMonster.Core
             RecalculateMaxHP(lastMaxHpAbilityMultiplier);
             RecalculateGoldMultiplier(lastGoldAbilityMultiplier);
             RecalculateCooldownMuliplier(lastCooldownAbilityMultiplier);
+            RecalculateMoveSpeed(lastMoveSpeedAbilityMultiplier);
+            RecalculateDamageReduction(lastDamageReductionAbilityPercent);
         }
 
         public virtual void RestoreHP(float hpPercent)
@@ -386,6 +394,14 @@ namespace VXMonster.Core
 
         protected float lastTimeVibrated = 0f;
 
+        public virtual void ApplyLifesteal(float damageDealt)
+        {
+            if (damageDealt <= 0f || RelicsManager.Instance == null) return;
+            var fraction = RelicsManager.Instance.GetLifestealFraction();
+            if (fraction <= 0f) return;
+            healthbar.AddHP(damageDealt * fraction);
+        }
+
         public virtual void TakeDamage(float damage)
         {
             if (invincible || IsPostHitInvulnerable() || healthbar.IsZero) return;
@@ -394,6 +410,11 @@ namespace VXMonster.Core
             BeginPostHitInvuln();
 
             Character.FlashHit();
+
+            if (!healthbar.IsZero)
+            {
+                TrySecondWind();
+            }
 
             if (healthbar.IsZero)
             {
@@ -456,6 +477,18 @@ namespace VXMonster.Core
             EasingManager.DoAfter(2f, () => invincible = false).SetUnscaledTime(true);
             GameController.AudioManager.PlaySound(REVIVE_HASH);
             return true;
+        }
+
+        protected virtual void TrySecondWind()
+        {
+            var session = GameSessionManager.Instance?.RunSession;
+            if (session == null || session.SecondWindUsed) return;
+            if (RelicsManager.Instance == null || !RelicsManager.Instance.HasSecondWind()) return;
+            if (healthbar.MaxHP <= 0f || healthbar.HP / healthbar.MaxHP > 0.25f) return;
+
+            session.SecondWindUsed = true;
+            healthbar.AddPercentage(RelicsManager.Instance.GetSecondWindHealFraction() * 100f);
+            VXMonster.UI.VxToastBehavior.Show("Second Wind!");
         }
     }
 }

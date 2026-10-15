@@ -16,6 +16,7 @@ MonoBehaviour:
     value: 20587bc1-9e63-43a2-b6aa-b264e55c6a3e
     canEdit: 0
   characterName: LUMEN
+  description: 'LUMEN: unique starting kit and stats.'
   price:
     currencyId: gold
     amount: 1800

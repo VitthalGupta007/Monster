@@ -16,6 +16,7 @@ MonoBehaviour:
     value: ebb77753-7342-49b2-9e8c-d228fc5f320d
     canEdit: 0
   characterName: QUILL
+  description: 'QUILL: unique starting kit and stats.'
   price:
     currencyId: gold
     amount: 1400

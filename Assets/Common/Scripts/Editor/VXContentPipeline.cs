@@ -444,13 +444,29 @@ namespace VXMonster.EditorTools
                 ("lucky_coin", "Lucky Coin", "More gold from runs.", RelicEffectType.GoldBoost, 0.25f, "Assets/Common/Sprites/UI/Generic/ui_coin_spin.png"),
                 ("phoenix_ash", "Phoenix Ash", "Revive once per run at low HP.", RelicEffectType.PhoenixRevive, 1f, "Assets/Common/Sprites/UI/Abilities/ui_ab_heal.png"),
                 ("reroll_token", "Reroll Token", "Extra ability reroll.", RelicEffectType.BonusReroll, 1f, "Assets/Common/Sprites/UI/Abilities/ui_ab_wand.png"),
+                ("vampiric_fang", "Vampiric Fang", "Heal a portion of damage you deal.", RelicEffectType.Lifesteal, 0.03f, "Assets/Common/Sprites/UI/Abilities/ui_ab_hp.png"),
+                ("iron_shell", "Iron Shell", "Take less damage from hits.", RelicEffectType.DamageReduction, 0.15f, "Assets/Common/Sprites/UI/Abilities/ui_ab_shield.png"),
+                ("haste_charm", "Haste Charm", "Move faster.", RelicEffectType.MoveSpeed, 0.12f, "Assets/Common/Sprites/UI/Abilities/ui_ab_wings.png"),
+                ("treasure_map", "Treasure Map", "Earn more gold from runs.", RelicEffectType.GoldBoost, 0.35f, "Assets/Common/Sprites/UI/Generic/ui_coin_spin.png"),
+                ("second_wind", "Second Wind", "Once per run, heal when critically low.", RelicEffectType.SecondWind, 0.4f, "Assets/Common/Sprites/UI/Abilities/ui_ab_heal.png"),
+                ("banishers_seal", "Banisher's Seal", "Extra ability banish.", RelicEffectType.BonusBanish, 1f, "Assets/Common/Sprites/UI/Abilities/ui_ab_wand.png"),
             };
 
             var relics = new List<RelicData>();
             foreach (var spec in relicSpecs)
             {
-                var assetPath = $"{RelicsFolder}/{spec.name.Replace(" ", "")}.asset";
-                var relic = AssetDatabase.LoadAssetAtPath<RelicData>(assetPath);
+                var safeName = spec.id.Replace(" ", "_");
+                var assetPath = $"{RelicsFolder}/{safeName}.asset";
+                var legacyPath = $"{RelicsFolder}/{spec.name.Replace(" ", "").Replace("'", "")}.asset";
+                var relic = AssetDatabase.LoadAssetAtPath<RelicData>(assetPath)
+                    ?? AssetDatabase.LoadAssetAtPath<RelicData>(legacyPath);
+                if (relic == null)
+                {
+                    // Prefer existing camel-case assets for the original nine relics.
+                    var titlePath = $"{RelicsFolder}/{spec.name.Replace(" ", "")}.asset";
+                    relic = AssetDatabase.LoadAssetAtPath<RelicData>(titlePath);
+                }
+
                 if (relic == null)
                 {
                     relic = ScriptableObject.CreateInstance<RelicData>();

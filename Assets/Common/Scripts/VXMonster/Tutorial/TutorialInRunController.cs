@@ -130,8 +130,13 @@ namespace VXMonster.Tutorial
             TryShow(TutorialCopy.InRunChestId, TutorialCopy.ChestTip, focus);
         }
 
-        private void OnRelicGranted()
+        private void OnRelicGranted(RelicData relic)
         {
+            if (relic != null)
+            {
+                VXMonster.UI.VxToastBehavior.Show($"{relic.DisplayName}\n{VXMonster.UI.PlayerFacingCopy.FormatRelic(relic)}");
+            }
+
             TryShow(TutorialCopy.InRunRelicId, TutorialCopy.RelicTip, relicHud);
         }
 

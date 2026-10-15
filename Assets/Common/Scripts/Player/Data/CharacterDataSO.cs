@@ -15,6 +15,9 @@ namespace VXMonster.Core
         [SerializeField] protected string characterName;
         public string Name => characterName;
 
+        [SerializeField, TextArea] protected string description;
+        public string Description => description;
+
         [SerializeField] protected Price price;
         public Price Price => price;
 
@@ -41,7 +44,7 @@ namespace VXMonster.Core
         // Keeping Character Data for backward compatability
         public CharacterData GetCharacterData()
         {
-            return new CharacterData(id, characterName, price, icon, prefab, hasStartingAbility, startingAbility, baseHP, baseDamage);
+            return new CharacterData(id, characterName, price, icon, prefab, hasStartingAbility, startingAbility, baseHP, baseDamage, description);
         }
 
 #if UNITY_EDITOR

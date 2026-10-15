@@ -14,11 +14,13 @@ namespace VXMonster.Core.Upgrades
         [SerializeField] UpgradeType upgradeType;
         [SerializeField] Sprite icon;
         [SerializeField] string title;
+        [SerializeField, TextArea] string description;
         [SerializeField] int devStartLevel = 0;
 
         public UpgradeType UpgradeType => upgradeType;
         public Sprite Icon => icon;
         public string Title => title;
+        public string Description => description;
 
         public int DevStartLevel => devStartLevel;
 

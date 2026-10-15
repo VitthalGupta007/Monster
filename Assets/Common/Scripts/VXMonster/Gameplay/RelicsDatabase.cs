@@ -39,6 +39,12 @@ namespace VXMonster.Gameplay
             relics.Add(CreateRelic("lucky_coin", "Lucky Coin", "More gold from runs.", RelicEffectType.GoldBoost, 0.25f));
             relics.Add(CreateRelic("phoenix_ash", "Phoenix Ash", "Revive once per run at low HP.", RelicEffectType.PhoenixRevive));
             relics.Add(CreateRelic("reroll_token", "Reroll Token", "Extra ability reroll.", RelicEffectType.BonusReroll));
+            relics.Add(CreateRelic("vampiric_fang", "Vampiric Fang", "Heal a portion of damage you deal.", RelicEffectType.Lifesteal, 0.03f));
+            relics.Add(CreateRelic("iron_shell", "Iron Shell", "Take less damage from hits.", RelicEffectType.DamageReduction, 0.15f));
+            relics.Add(CreateRelic("haste_charm", "Haste Charm", "Move faster.", RelicEffectType.MoveSpeed, 0.12f));
+            relics.Add(CreateRelic("treasure_map", "Treasure Map", "Earn more gold from runs.", RelicEffectType.GoldBoost, 0.35f));
+            relics.Add(CreateRelic("second_wind", "Second Wind", "Once per run, heal when critically low.", RelicEffectType.SecondWind, 0.4f));
+            relics.Add(CreateRelic("banishers_seal", "Banisher's Seal", "Extra ability banish.", RelicEffectType.BonusBanish, 1f));
         }
 
         private static RelicData CreateRelic(string relicId, string name, string description, RelicEffectType effect, float effectMagnitude = 1f)

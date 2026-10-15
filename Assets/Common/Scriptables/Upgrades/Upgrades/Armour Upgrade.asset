@@ -16,6 +16,7 @@ MonoBehaviour:
   upgradeType: 0
   icon: {fileID: 21300000, guid: defd5000544285c42b4e1ae97fedaa5d, type: 3}
   title: ARMOR
+  description: "Permanently reduces damage taken. Next: 0.9\xD7 incoming."
   devStartLevel: -1
   levels:
   - cost: 200

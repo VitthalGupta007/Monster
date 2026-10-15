@@ -21,7 +21,8 @@ namespace VXMonster.UI
 
             var summary = $"{mode} · {difficulty}\nKills: {kills}  Time: {time}\nCombos: {combos}";
 
-            if (session.RunMode == RunMode.DailyChallenge && session.IsDailyScoredRun)
+            if ((session.RunMode == RunMode.DailyChallenge || session.RunMode == RunMode.WeeklyChallenge)
+                && session.IsDailyScoredRun)
             {
                 var score = session.CalculateDailyScore(kills, stageSave.Time, combos);
                 summary += $"\nScore: {score}";

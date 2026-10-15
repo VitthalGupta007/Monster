@@ -11,9 +11,11 @@ namespace VXMonster.UI
         [SerializeField] TMP_Text dailyBestLabel;
         [SerializeField] TMP_Text endlessBestLabel;
         [SerializeField] TMP_Text streakLabel;
+        [SerializeField] TMP_Text weeklyBestLabel;
         [SerializeField] string dailyFormat = "Daily best: {0}";
         [SerializeField] string endlessFormat = "Endless best: {0} loops";
         [SerializeField] string streakFormat = "Daily streak: {0}";
+        [SerializeField] string weeklyFormat = "Weekly best: {0}";
 
         private void OnEnable()
         {
@@ -25,6 +27,7 @@ namespace VXMonster.UI
             if (GameController.SaveManager == null) return;
 
             var daily = GameController.SaveManager.GetSave<DailyChallengeSave>("VX Daily Challenge");
+            var weekly = GameController.SaveManager.GetSave<WeeklyChallengeSave>(WeeklyChallengeSave.SaveKey);
             var lifetime = GameController.SaveManager.GetSave<LifetimeStatsSave>("VX Lifetime Stats");
 
             if (dailyBestLabel != null)
@@ -43,6 +46,17 @@ namespace VXMonster.UI
                     ? string.Format(streakFormat, lifetime.DailyStreak)
                     : string.Empty;
             }
+
+            if (weeklyBestLabel != null)
+            {
+                weeklyBestLabel.text = string.Format(weeklyFormat, weekly.BestWeeklyScore);
+            }
+            else if (dailyBestLabel != null && weekly.BestWeeklyScore > 0)
+            {
+                dailyBestLabel.text = string.Format(dailyFormat, daily.BestDailyScore)
+                    + "\n" + string.Format(weeklyFormat, weekly.BestWeeklyScore);
+            }
         }
     }
 }
+

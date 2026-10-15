@@ -16,6 +16,7 @@ MonoBehaviour:
   upgradeType: 3
   icon: {fileID: 21300000, guid: b500287734c36194abb87d59e0cc108c, type: 3}
   title: DAMAGE
+  description: "Boosts ability damage. Next multiplier: 1.25\xD7."
   devStartLevel: -1
   levels:
   - cost: 200

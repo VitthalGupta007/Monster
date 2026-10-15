@@ -16,6 +16,7 @@ MonoBehaviour:
     value: bdfa7213-0f58-4aa2-8dc9-c5e007fc0a4e
     canEdit: 0
   characterName: FANG
+  description: 'FANG: unique starting kit and stats.'
   price:
     currencyId: gold
     amount: 1600

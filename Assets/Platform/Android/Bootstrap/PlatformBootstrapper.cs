@@ -170,12 +170,14 @@ namespace VXMonster.Platform.Bootstrap
             var runSession = GameController.SaveManager.GetSave<RunSessionSave>("VX Run Session");
             var lifetime = GameController.SaveManager.GetSave<LifetimeStatsSave>("VX Lifetime Stats");
             var daily = GameController.SaveManager.GetSave<DailyChallengeSave>("VX Daily Challenge");
+            var weekly = GameController.SaveManager.GetSave<WeeklyChallengeSave>(WeeklyChallengeSave.SaveKey);
             var codex = GameController.SaveManager.GetSave<CodexSave>("VX Codex");
             var talent = GameController.SaveManager.GetSave<TalentTreeSave>("VX Talent Tree");
+            GameController.SaveManager.GetSave<LoginClaimSave>(LoginClaimSave.SaveKey);
 
             if (GameSessionManager.Instance != null)
             {
-                GameSessionManager.Instance.BindSaves(runSession, lifetime, daily, codex, talent);
+                GameSessionManager.Instance.BindSaves(runSession, lifetime, daily, codex, talent, weekly);
             }
         }
 

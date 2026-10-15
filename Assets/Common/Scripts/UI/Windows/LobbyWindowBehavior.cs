@@ -334,6 +334,24 @@ namespace VXMonster.Core.UI
             GameController.LoadStage();
         }
 
+        public void StartWeeklyChallenge(bool scoredAttempt)
+        {
+            GameSessionManager.Instance?.ConfigureWeeklyChallenge(scoredAttempt);
+
+            save.IsPlaying = true;
+            save.ResetStageData = true;
+            save.Time = 0f;
+            save.XP = 0f;
+            save.XPLEVEL = 0;
+            save.EnemiesKilled = 0;
+
+            var stage = stagesDatabase.GetStage(save.SelectedStageId);
+            save.IncrementStageAttempts(stage);
+
+            GameController.AudioManager.PlaySound(AudioManager.BUTTON_CLICK_HASH);
+            GameController.LoadStage();
+        }
+
         protected virtual void IncremenSelectedStageId()
         {
             GameController.AudioManager.PlaySound(AudioManager.BUTTON_CLICK_HASH);

@@ -297,6 +297,7 @@ namespace VXMonster.Core
             }
 
             HP -= damage;
+            PlayerBehavior.Player?.ApplyLifesteal(damage);
 
             onHealthChanged?.Invoke(HP, MaxHP);
 

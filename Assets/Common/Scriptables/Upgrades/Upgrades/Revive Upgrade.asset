@@ -16,6 +16,7 @@ MonoBehaviour:
   upgradeType: 4
   icon: {fileID: 21300000, guid: 4a5f03c47f7094549aef6dbcbb22d190, type: 3}
   title: REVIVE
+  description: Unlock one free revive per failed run (before ads).
   devStartLevel: -1
   levels:
   - cost: 1000

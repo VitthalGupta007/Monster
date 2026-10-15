@@ -255,7 +255,8 @@ namespace VXMonster.Core.Abilities.UI
 
             var session = GameSessionManager.Instance?.RunSession;
             var rerolls = session?.RerollsRemaining ?? 0;
-            var banishAvailable = session != null && !session.BanishUsed;
+            var banishes = session?.BanishesRemaining ?? 0;
+            var banishAvailable = banishes > 0;
 
             if (rerollButton != null)
             {
@@ -276,7 +277,9 @@ namespace VXMonster.Core.Abilities.UI
 
             if (banishLabel != null)
             {
-                banishLabel.text = banishModeActive ? "Pick to banish" : (banishAvailable ? "Banish" : "Banished");
+                if (banishModeActive) banishLabel.text = "Pick to banish";
+                else if (banishAvailable) banishLabel.text = banishes > 1 ? $"Banish ({banishes})" : "Banish";
+                else banishLabel.text = "Banished";
             }
 
             if (hint != null) hint.gameObject.SetActive(true);
@@ -295,7 +298,7 @@ namespace VXMonster.Core.Abilities.UI
         private void OnBanishClicked()
         {
             var session = GameSessionManager.Instance?.RunSession;
-            if (session == null || session.BanishUsed) return;
+            if (session == null || session.BanishesRemaining <= 0) return;
             banishModeActive = !banishModeActive;
             RefreshActionButtons();
         }

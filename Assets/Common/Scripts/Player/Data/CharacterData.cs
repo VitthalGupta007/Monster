@@ -13,6 +13,9 @@ namespace VXMonster.Core
         [SerializeField] protected string name;
         public string Name => name;
 
+        [SerializeField] protected string description;
+        public string Description => description;
+
         [Obsolete("Migrating from cost to price")]
         [SerializeField] protected int cost;
         [Obsolete("Migrating from cost to price")]
@@ -40,10 +43,11 @@ namespace VXMonster.Core
 
         public Price Price { get; protected set; }
 
-        public CharacterData(string id, string name, Price price, Sprite icon, GameObject prefab, bool hasStartingAbility, AbilityType startingAbility, float baseHP, float baseDamage)
+        public CharacterData(string id, string name, Price price, Sprite icon, GameObject prefab, bool hasStartingAbility, AbilityType startingAbility, float baseHP, float baseDamage, string description = null)
         {
             this.id = id;
             this.name = name;
+            this.description = description ?? string.Empty;
             Price = price;
             this.icon = icon;
             this.prefab = prefab;

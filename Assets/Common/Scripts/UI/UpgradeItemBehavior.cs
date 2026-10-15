@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using VXMonster.UI;
 
 namespace VXMonster.Core.Upgrades.UI
 {
@@ -17,6 +18,7 @@ namespace VXMonster.Core.Upgrades.UI
         [SerializeField] Image iconImage;
         [SerializeField] TMP_Text titleLabel;
         [SerializeField] TMP_Text levelLabel;
+        [SerializeField] TMP_Text descriptionLabel;
 
         [Header("Button")]
         [SerializeField] Button upgradeButton;
@@ -63,6 +65,35 @@ namespace VXMonster.Core.Upgrades.UI
             
             titleLabel.text = Data.Title;
             iconImage.sprite = Data.Icon;
+
+            if (descriptionLabel != null)
+            {
+                var nextValue = UpgradeLevelId < Data.LevelsCount ? Data.GetLevel(UpgradeLevelId).Value : 0f;
+                var copy = !string.IsNullOrWhiteSpace(Data.Description)
+                    ? Data.Description
+                    : PlayerFacingCopy.Upgrade(Data.UpgradeType, nextValue);
+                descriptionLabel.text = copy;
+                descriptionLabel.textWrappingMode = TextWrappingModes.Normal;
+                descriptionLabel.fontSize = Mathf.Min(descriptionLabel.fontSize > 0 ? descriptionLabel.fontSize : 22f, 24f);
+                descriptionLabel.color = new Color(0.69f, 0.66f, 0.75f, 1f);
+            }
+            else if (titleLabel != null && string.IsNullOrWhiteSpace(Data.Description) == false)
+            {
+                // Prefab may lack a dedicated label; keep title clean.
+            }
+            else if (levelLabel != null)
+            {
+                var nextValue = UpgradeLevelId < Data.LevelsCount ? Data.GetLevel(UpgradeLevelId).Value : 0f;
+                var copy = PlayerFacingCopy.Upgrade(Data.UpgradeType, nextValue);
+                if (UpgradeLevelId >= Data.LevelsCount - 1)
+                {
+                    levelLabel.text = "Max Level\n" + copy;
+                }
+                else
+                {
+                    levelLabel.text = $"LEVEL {UpgradeLevelId + 1}\n{copy}";
+                }
+            }
 
             RedrawButton();
         }

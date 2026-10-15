@@ -11,7 +11,7 @@ namespace VXMonster.Gameplay
         public const int MaxRelicSlots = 3;
 
         public static RelicsManager Instance { get; private set; }
-        public static event UnityAction RelicGranted;
+        public static event UnityAction<RelicData> RelicGranted;
 
         [SerializeField] RelicsDatabase database;
 
@@ -69,8 +69,19 @@ namespace VXMonster.Gameplay
                 CodexRewardUtility.OnRelicDiscovered(relic.Id);
             }
 
+            if (relic.EffectType == RelicEffectType.BonusBanish && session != null)
+            {
+                session.BanishesRemaining += Mathf.Max(1, Mathf.RoundToInt(relic.Magnitude > 0f ? relic.Magnitude : 1f));
+                session.BanishUsed = false;
+            }
+
+            if (relic.EffectType == RelicEffectType.BonusReroll && session != null)
+            {
+                session.RerollsRemaining += Mathf.Max(1, Mathf.RoundToInt(relic.Magnitude > 0f ? relic.Magnitude : 1f));
+            }
+
             PlayerBehavior.Player?.RefreshRelicModifiers();
-            RelicGranted?.Invoke();
+            RelicGranted?.Invoke(relic);
             return true;
         }
 
@@ -101,6 +112,37 @@ namespace VXMonster.Gameplay
         public int GetBonusRerolls()
         {
             return CountEffect(RelicEffectType.BonusReroll);
+        }
+
+        public int GetBonusBanishes()
+        {
+            return CountEffect(RelicEffectType.BonusBanish);
+        }
+
+        public float GetDamageReductionBonusPercent()
+        {
+            return SumMagnitude(RelicEffectType.DamageReduction, 0.15f) * 100f;
+        }
+
+        public float GetMoveSpeedMultiplier()
+        {
+            return 1f + SumMagnitude(RelicEffectType.MoveSpeed, 0.12f);
+        }
+
+        public float GetLifestealFraction()
+        {
+            return SumMagnitude(RelicEffectType.Lifesteal, 0.03f);
+        }
+
+        public bool HasSecondWind()
+        {
+            return CountEffect(RelicEffectType.SecondWind) > 0;
+        }
+
+        public float GetSecondWindHealFraction()
+        {
+            var mag = SumMagnitude(RelicEffectType.SecondWind, 0.4f);
+            return mag > 0f ? mag : 0.4f;
         }
 
         public float GetDamageMultiplier()

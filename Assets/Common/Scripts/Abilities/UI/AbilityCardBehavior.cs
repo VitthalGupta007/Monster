@@ -64,6 +64,15 @@ namespace VXMonster.Core.Abilities.UI
 
             titleText.text = abilityData.Title;
             descriptionText.text = AbilityCardStatText.Build(abilityData, level);
+            if (abilityData.IsEvolution && abilityData.EvolutionRequirements != null && abilityData.EvolutionRequirements.Count > 0)
+            {
+                descriptionText.text += "\n" + BuildEvolutionRequirementText(abilityData);
+            }
+            else if (abilityData.MinStageId > 0)
+            {
+                descriptionText.text += $"\nUnlocks from Stage {abilityData.MinStageId + 1}+";
+            }
+
             FitDescription();
 
             if (abilityData.IsEvolution)
@@ -116,7 +125,7 @@ namespace VXMonster.Core.Abilities.UI
         {
             if (descriptionText == null) return;
 
-            descriptionText.enableWordWrapping = true;
+            descriptionText.textWrappingMode = TextWrappingModes.Normal;
             descriptionText.overflowMode = TextOverflowModes.Ellipsis;
             descriptionText.enableAutoSizing = true;
             descriptionText.fontSizeMin = 20f;
@@ -129,6 +138,27 @@ namespace VXMonster.Core.Abilities.UI
             }
 
             descriptionText.ForceMeshUpdate();
+        }
+
+        private static string BuildEvolutionRequirementText(AbilityData abilityData)
+        {
+            if (abilityData?.EvolutionRequirements == null || abilityData.EvolutionRequirements.Count == 0)
+            {
+                return string.Empty;
+            }
+
+            var parts = new System.Collections.Generic.List<string>();
+            for (var i = 0; i < abilityData.EvolutionRequirements.Count; i++)
+            {
+                var req = abilityData.EvolutionRequirements[i];
+                var reqData = StageController.AbilityManager != null
+                    ? StageController.AbilityManager.GetAbilityData(req.AbilityType)
+                    : null;
+                var title = reqData != null ? reqData.Title : req.AbilityType.ToString();
+                parts.Add($"{title} Lv {req.RequiredAbilityLevel + 1}");
+            }
+
+            return "Requires " + string.Join(" + ", parts);
         }
 
         private void OnAbilitySelected()

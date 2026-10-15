@@ -597,10 +597,11 @@ namespace VXMonster.EditorTools
             containerRt.SetParent(window.transform, false);
             containerRt.anchorMin = new Vector2(0.5f, 0.5f);
             containerRt.anchorMax = new Vector2(0.5f, 0.5f);
-            containerRt.sizeDelta = new Vector2(920f, 900f);
-            containerRt.anchoredPosition = new Vector2(0f, -40f);
+            // Tall enough for 6 description rows (~128px) + spacing.
+            containerRt.sizeDelta = new Vector2(920f, 1100f);
+            containerRt.anchoredPosition = new Vector2(0f, -20f);
             var layout = containerGo.GetComponent<VerticalLayoutGroup>();
-            layout.spacing = 12f;
+            layout.spacing = 14f;
             layout.childAlignment = TextAnchor.UpperCenter;
             layout.childControlWidth = true;
             layout.childControlHeight = false;
@@ -626,20 +627,30 @@ namespace VXMonster.EditorTools
 
         static void AddTalentNodeRow(SerializedProperty rows, Transform parent, string nodeId, string title, int cost, int index)
         {
+            const float rowH = 128f;
             var rowGo = CreateModalButton(parent, title, title, Vector2.zero, PrimaryPurple);
             var rowRt = rowGo.GetComponent<RectTransform>();
-            rowRt.sizeDelta = new Vector2(900f, 72f);
+            rowRt.sizeDelta = new Vector2(900f, rowH);
             var layout = rowGo.AddComponent<LayoutElement>();
-            layout.preferredHeight = 72f;
-            layout.minHeight = 72f;
+            layout.preferredHeight = rowH;
+            layout.minHeight = rowH;
+            layout.flexibleHeight = 0f;
 
             var label = rowGo.GetComponentInChildren<TMP_Text>();
             if (label != null)
             {
-                label.alignment = TextAlignmentOptions.MidlineLeft;
+                label.alignment = TextAlignmentOptions.Left;
+                label.textWrappingMode = TextWrappingModes.Normal;
+                label.fontSize = 26f;
+                label.enableAutoSizing = true;
+                label.fontSizeMin = 20f;
+                label.fontSizeMax = 28f;
+                label.overflowMode = TextOverflowModes.Ellipsis;
                 var labelRt = label.rectTransform;
-                labelRt.offsetMin = new Vector2(16f, 0f);
-                labelRt.offsetMax = new Vector2(-16f, 0f);
+                labelRt.anchorMin = Vector2.zero;
+                labelRt.anchorMax = Vector2.one;
+                labelRt.offsetMin = new Vector2(20f, 10f);
+                labelRt.offsetMax = new Vector2(-20f, -10f);
             }
 
             rows.InsertArrayElementAtIndex(index);
@@ -1054,7 +1065,7 @@ namespace VXMonster.EditorTools
                 attempts.sizeDelta = new Vector2(500f, 50f);
             }
 
-            SetAnchoredY(FindDeepChild(lobbyRoot.transform, "Play Button Background"), -550f);
+            SetAnchoredY(FindDeepChild(lobbyRoot.transform, "Play Button Background"), -620f);
             SetAnchoredY(FindDeepChild(lobbyRoot.transform, "Upgrade Button Background"), -780f);
             SetAnchoredY(FindDeepChild(lobbyRoot.transform, "Characters Button Background"), -780f);
             // Do NOT move Upgrade/Characters Button children — they are bottom-anchored
@@ -1082,21 +1093,29 @@ namespace VXMonster.EditorTools
             modeRt.anchoredPosition = Vector2.zero;
             modeRt.sizeDelta = Vector2.zero;
 
-            // Fits between Attempts (~-315) and Play top (~-448) without overlap.
+            // Same row as DAILY/PRACTICE/ENDLESS/WEEKLY — above Play, never overlapping it.
             const float rowH = 64f;
-            const float modeW = 180f;
+            const float modeW = 155f;
             const float diffW = 500f;
-            const float modeY = -410f;
+            const float modeY = -440f;
             const float diffY = -340f;
-            const float step = 195f;
+            const float step = 168f;
 
             var yellow = AssetDatabase.LoadAssetAtPath<Sprite>(YellowButtonSpritePath) ?? LoadButtonSprite();
             var green = AssetDatabase.LoadAssetAtPath<Sprite>(GreenButtonSpritePath) ?? yellow;
 
             var difficulty = CreateLobbyModeButton(modeRt, "Difficulty Button", "DIFF · NORMAL", new Vector2(0f, diffY), new Vector2(diffW, rowH), yellow, Color.white);
-            var daily = CreateLobbyModeButton(modeRt, "Daily Challenge", "DAILY", new Vector2(-step, modeY), new Vector2(modeW, rowH), green, Color.white);
-            var practice = CreateLobbyModeButton(modeRt, "Practice", "PRACTICE", new Vector2(0f, modeY), new Vector2(modeW, rowH), yellow, Color.white);
-            var endless = CreateLobbyModeButton(modeRt, "Endless", "ENDLESS", new Vector2(step, modeY), new Vector2(modeW, rowH), yellow, Color.white);
+            var daily = CreateLobbyModeButton(modeRt, "Daily Challenge", "DAILY", new Vector2(-1.5f * step, modeY), new Vector2(modeW, rowH), green, Color.white);
+            var practice = CreateLobbyModeButton(modeRt, "Practice", "PRACTICE", new Vector2(-0.5f * step, modeY), new Vector2(modeW, rowH), yellow, Color.white);
+            var endless = CreateLobbyModeButton(modeRt, "Endless", "ENDLESS", new Vector2(0.5f * step, modeY), new Vector2(modeW, rowH), yellow, Color.white);
+            var weekly = CreateLobbyModeButton(modeRt, "Weekly Challenge", "WEEKLY", new Vector2(1.5f * step, modeY), new Vector2(modeW, rowH), green, Color.white);
+
+            // Mode strip must stay behind Play in hierarchy.
+            var playBg = lobbyRoot.transform.Find("Play Button Background");
+            if (playBg != null)
+            {
+                modeRt.SetSiblingIndex(playBg.GetSiblingIndex());
+            }
 
             PrefabUtility.SaveAsPrefabAsset(modeRoot, ModeButtonsPrefabPath);
 
@@ -1108,6 +1127,7 @@ namespace VXMonster.EditorTools
             modeSo.FindProperty("dailyButton").objectReferenceValue = daily.GetComponent<Button>();
             modeSo.FindProperty("practiceButton").objectReferenceValue = practice.GetComponent<Button>();
             modeSo.FindProperty("endlessButton").objectReferenceValue = endless.GetComponent<Button>();
+            modeSo.FindProperty("weeklyButton").objectReferenceValue = weekly.GetComponent<Button>();
             modeSo.FindProperty("difficultyLabel").objectReferenceValue = difficulty.GetComponentInChildren<TMP_Text>();
             modeSo.ApplyModifiedPropertiesWithoutUndo();
         }

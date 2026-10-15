@@ -8,6 +8,7 @@ namespace VXMonster.Gameplay
     {
         public string Id;
         public string DisplayName;
+        public string Description;
         public float EnemyHpMultiplier;
         public float EnemyDamageMultiplier;
         public float RewardMultiplier;
@@ -21,6 +22,9 @@ namespace VXMonster.Gameplay
         {
             Id = "bless_xp",
             DisplayName = "Swift Growth",
+            Description = "+20% run rewards (XP/gold scaling).",
+            EnemyHpMultiplier = 1f,
+            EnemyDamageMultiplier = 1f,
             RewardMultiplier = 1.2f,
             IsCurse = false
         };
@@ -29,6 +33,9 @@ namespace VXMonster.Gameplay
         {
             Id = "bless_chests",
             DisplayName = "Treasure Tide",
+            Description = "+15% run rewards. Richer pickups feel.",
+            EnemyHpMultiplier = 1f,
+            EnemyDamageMultiplier = 1f,
             RewardMultiplier = 1.15f,
             IsCurse = false
         };
@@ -37,7 +44,10 @@ namespace VXMonster.Gameplay
         {
             Id = "curse_fragile",
             DisplayName = "Fragile Hero",
+            Description = "Enemies deal +20% damage.",
+            EnemyHpMultiplier = 1f,
             EnemyDamageMultiplier = 1.2f,
+            RewardMultiplier = 1f,
             IsCurse = true
         };
 
@@ -45,7 +55,10 @@ namespace VXMonster.Gameplay
         {
             Id = "curse_horde",
             DisplayName = "Restless Horde",
+            Description = "Enemies have +15% HP.",
             EnemyHpMultiplier = 1.15f,
+            EnemyDamageMultiplier = 1f,
+            RewardMultiplier = 1f,
             IsCurse = true
         };
 
@@ -53,6 +66,10 @@ namespace VXMonster.Gameplay
         {
             Id = "bless_slots",
             DisplayName = "Expanded Mind",
+            Description = "+1 passive ability slot for this run.",
+            EnemyHpMultiplier = 1f,
+            EnemyDamageMultiplier = 1f,
+            RewardMultiplier = 1f,
             PassiveSlotBonus = 1,
             IsCurse = false
         };
@@ -63,7 +80,23 @@ namespace VXMonster.Gameplay
             return dateKey * 31337;
         }
 
+        public static int GetUtcWeeklySeed()
+        {
+            var weekKey = int.Parse(GameSessionManager.GetUtcWeekKey());
+            return weekKey * 7919;
+        }
+
         public static IReadOnlyList<RunModifierDefinition> GetDailyModifiers(int seed)
+        {
+            return PickModifiers(seed);
+        }
+
+        public static IReadOnlyList<RunModifierDefinition> GetWeeklyModifiers(int seed)
+        {
+            return PickModifiers(seed ^ 0x5A5A5A5A);
+        }
+
+        private static IReadOnlyList<RunModifierDefinition> PickModifiers(int seed)
         {
             var rng = new Random(seed);
             var pool = new List<RunModifierDefinition>

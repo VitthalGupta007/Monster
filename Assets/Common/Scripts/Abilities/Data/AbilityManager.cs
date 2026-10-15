@@ -246,12 +246,11 @@ namespace VXMonster.Core.Abilities
         public bool TryBanishAbility(AbilityType abilityType)
         {
             var session = GameSessionManager.Instance?.RunSession;
-            if (session == null || session.BanishUsed) return false;
+            if (session == null || session.BanishesRemaining <= 0) return false;
             if (removedAbilities.Contains(abilityType)) return false;
 
             removedAbilities.Add(abilityType);
-            session.BanishUsed = true;
-            return true;
+            return session.TryConsumeBanish();
         }
 
         public List<AbilityData> SelectWeightedAbilities(int level, int maxCount)

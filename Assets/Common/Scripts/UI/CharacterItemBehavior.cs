@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using VXMonster.UI;
 
 namespace VXMonster.Core.UI
 {
@@ -16,8 +17,10 @@ namespace VXMonster.Core.UI
         [Header("Info")]
         [SerializeField] protected Image iconImage;
         [SerializeField] protected TMP_Text titleLabel;
+        [SerializeField] protected TMP_Text descriptionLabel;
         [SerializeField] protected GameObject startingAbilityObject;
         [SerializeField] protected Image startingAbilityImage;
+        [SerializeField] protected TMP_Text startingAbilityLabel;
 
         [Header("Button")]
         [SerializeField] protected Button upgradeButton;
@@ -85,17 +88,29 @@ namespace VXMonster.Core.UI
                 startingAbilityObject.SetActive(characterData.HasStartingAbility);
             }
 
-            if (characterData.HasStartingAbility && database != null && startingAbilityImage != null)
+            if (characterData.HasStartingAbility && database != null)
             {
                 var abilityData = database.GetAbility(characterData.StartingAbility);
-                if (abilityData != null && abilityData.Icon != null)
+                if (abilityData != null)
                 {
-                    startingAbilityImage.sprite = abilityData.Icon;
+                    if (startingAbilityImage != null && abilityData.Icon != null)
+                    {
+                        startingAbilityImage.sprite = abilityData.Icon;
+                    }
+
+                    if (startingAbilityLabel != null)
+                    {
+                        startingAbilityLabel.text = abilityData.Title;
+                    }
                 }
                 else
                 {
                     Debug.LogError($"[Characters] Missing starting ability '{characterData.StartingAbility}' for {characterData.Name}.");
                 }
+            }
+            else if (startingAbilityLabel != null)
+            {
+                startingAbilityLabel.text = string.Empty;
             }
 
             Data = characterData;
@@ -113,6 +128,17 @@ namespace VXMonster.Core.UI
             titleLabel.overflowMode = TextOverflowModes.Ellipsis;
             titleLabel.textWrappingMode = TextWrappingModes.NoWrap;
             iconImage.sprite = Data.Icon;
+
+            if (descriptionLabel != null)
+            {
+                var copy = !string.IsNullOrWhiteSpace(Data.Description)
+                    ? Data.Description
+                    : PlayerFacingCopy.Character(Data.Id, Data.Name);
+                descriptionLabel.text = copy;
+                descriptionLabel.textWrappingMode = TextWrappingModes.Normal;
+                descriptionLabel.fontSize = Mathf.Min(descriptionLabel.fontSize > 0 ? descriptionLabel.fontSize : 22f, 24f);
+                descriptionLabel.color = new Color(0.69f, 0.66f, 0.75f, 1f);
+            }
 
             hpText.text = Data.BaseHP.ToString();
             damageText.text = Data.BaseDamage.ToString();

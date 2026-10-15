@@ -41,6 +41,12 @@ namespace VXMonster.Gameplay
         CooldownReduction,
         GoldBoost,
         PhoenixRevive,
-        BonusReroll
+        BonusReroll,
+        DamageReduction,
+        MoveSpeed,
+        Lifesteal,
+        SecondWind,
+        BonusBanish
     }
 }
+

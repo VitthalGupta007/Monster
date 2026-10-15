@@ -4,6 +4,8 @@ namespace VXMonster.Gameplay
     {
         Campaign = 0,
         DailyChallenge = 1,
-        Endless = 2
+        Endless = 2,
+        WeeklyChallenge = 3
     }
 }
+

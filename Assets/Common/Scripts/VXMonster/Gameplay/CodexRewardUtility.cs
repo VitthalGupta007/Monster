@@ -1,6 +1,5 @@
 using VXMonster.Core;
-using VXMonster.Core.Currency;
-using VXMonster.Save;
+using VXMonster.UI;
 
 namespace VXMonster.Gameplay
 {
@@ -9,27 +8,35 @@ namespace VXMonster.Gameplay
         private const int RelicDiscoveryGold = 25;
         private const int EvolutionDiscoveryGold = 40;
         private const int FirstComboGold = 15;
+        private const int ScholarBonusGold = 15;
 
         public static void OnRelicDiscovered(string relicId)
         {
-            GrantGold(RelicDiscoveryGold, "codex_relic");
+            var total = RelicDiscoveryGold;
+            GrantGold(RelicDiscoveryGold);
             if (TalentTreeIds.ScholarsEyeUnlocked())
             {
-                GrantGold(15, "codex_scholar_bonus");
+                GrantGold(ScholarBonusGold);
+                total += ScholarBonusGold;
             }
+
+            var name = RelicsManager.Instance?.GetRelicById(relicId)?.DisplayName ?? "Relic";
+            VxToastBehavior.Show($"Discovered {name} — +{total} gold");
         }
 
         public static void OnEvolutionDiscovered(string evolutionId)
         {
-            GrantGold(EvolutionDiscoveryGold, "codex_evolution");
+            GrantGold(EvolutionDiscoveryGold);
+            VxToastBehavior.Show($"Evolution discovered — +{EvolutionDiscoveryGold} gold");
         }
 
         public static void OnFirstComboDiscovered()
         {
-            GrantGold(FirstComboGold, "codex_combo");
+            GrantGold(FirstComboGold);
+            VxToastBehavior.Show($"First combo! — +{FirstComboGold} gold");
         }
 
-        private static void GrantGold(int amount, string reason)
+        private static void GrantGold(int amount)
         {
             if (amount <= 0 || GameController.CurrenciesManager == null) return;
 
@@ -39,3 +46,4 @@ namespace VXMonster.Gameplay
         }
     }
 }
+

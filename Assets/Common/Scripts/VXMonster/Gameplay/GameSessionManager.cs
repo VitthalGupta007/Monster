@@ -18,6 +18,7 @@ namespace VXMonster.Gameplay
         public RunSessionSave RunSession { get; private set; }
         public LifetimeStatsSave LifetimeStats { get; private set; }
         public DailyChallengeSave DailyChallenge { get; private set; }
+        public WeeklyChallengeSave WeeklyChallenge { get; private set; }
         public CodexSave Codex { get; private set; }
         public TalentTreeSave TalentTree { get; private set; }
 
@@ -43,11 +44,12 @@ namespace VXMonster.Gameplay
             DontDestroyOnLoad(gameObject);
         }
 
-        public void BindSaves(RunSessionSave runSession, LifetimeStatsSave lifetimeStats, DailyChallengeSave dailyChallenge, CodexSave codex, TalentTreeSave talentTree)
+        public void BindSaves(RunSessionSave runSession, LifetimeStatsSave lifetimeStats, DailyChallengeSave dailyChallenge, CodexSave codex, TalentTreeSave talentTree, WeeklyChallengeSave weeklyChallenge = null)
         {
             RunSession = runSession;
             LifetimeStats = lifetimeStats;
             DailyChallenge = dailyChallenge;
+            WeeklyChallenge = weeklyChallenge;
             Codex = codex;
             TalentTree = talentTree;
         }
@@ -65,7 +67,7 @@ namespace VXMonster.Gameplay
             IsDailyScoredRun = false;
             DailySeed = 0;
             activeModifiers.Clear();
-            RunSession?.ResetForNewRun(GetBonusRerolls());
+            RunSession?.ResetForNewRun(GetBonusRerolls(), GetBonusBanishes());
             CaptureSessionToSave();
         }
 
@@ -78,7 +80,20 @@ namespace VXMonster.Gameplay
             DailySeed = RunModifierUtility.GetUtcDailySeed();
             activeModifiers.Clear();
             activeModifiers.AddRange(RunModifierUtility.GetDailyModifiers(DailySeed));
-            RunSession?.ResetForNewRun(GetBonusRerolls());
+            RunSession?.ResetForNewRun(GetBonusRerolls(), GetBonusBanishes());
+            CaptureSessionToSave();
+        }
+
+        public void ConfigureWeeklyChallenge(bool scoredAttempt)
+        {
+            RunMode = RunMode.WeeklyChallenge;
+            Difficulty = DifficultyTier.Normal;
+            EndlessLoopCount = 0;
+            IsDailyScoredRun = scoredAttempt;
+            DailySeed = RunModifierUtility.GetUtcWeeklySeed();
+            activeModifiers.Clear();
+            activeModifiers.AddRange(RunModifierUtility.GetWeeklyModifiers(DailySeed));
+            RunSession?.ResetForNewRun(GetBonusRerolls(), GetBonusBanishes());
             CaptureSessionToSave();
         }
 
@@ -90,7 +105,7 @@ namespace VXMonster.Gameplay
             IsDailyScoredRun = false;
             DailySeed = 0;
             activeModifiers.Clear();
-            RunSession?.ResetForNewRun(GetBonusRerolls());
+            RunSession?.ResetForNewRun(GetBonusRerolls(), GetBonusBanishes());
             CaptureSessionToSave();
         }
 
@@ -117,9 +132,16 @@ namespace VXMonster.Gameplay
             IsDailyScoredRun = RunSession.SavedIsDailyScoredRun;
 
             activeModifiers.Clear();
-            if (RunMode == RunMode.DailyChallenge && DailySeed != 0)
+            if (DailySeed != 0)
             {
-                activeModifiers.AddRange(RunModifierUtility.GetDailyModifiers(DailySeed));
+                if (RunMode == RunMode.DailyChallenge)
+                {
+                    activeModifiers.AddRange(RunModifierUtility.GetDailyModifiers(DailySeed));
+                }
+                else if (RunMode == RunMode.WeeklyChallenge)
+                {
+                    activeModifiers.AddRange(RunModifierUtility.GetWeeklyModifiers(DailySeed));
+                }
             }
 
             VXDifficultySelection.Set(Difficulty);
@@ -222,6 +244,17 @@ namespace VXMonster.Gameplay
             return rerolls;
         }
 
+        public int GetBonusBanishes()
+        {
+            var banishes = 1;
+            if (RelicsManager.Instance != null)
+            {
+                banishes += RelicsManager.Instance.GetBonusBanishes();
+            }
+
+            return banishes;
+        }
+
         public float GetTalentGoldMultiplier()
         {
             if (TalentTree != null && TalentTree.IsUnlocked(TalentTreeIds.GoldenInstinct))
@@ -262,5 +295,15 @@ namespace VXMonster.Gameplay
         {
             return DateTime.UtcNow.ToString("yyyyMMdd");
         }
+
+        public static string GetUtcWeekKey()
+        {
+            var utc = DateTime.UtcNow.Date;
+            var calendar = System.Globalization.CultureInfo.InvariantCulture.Calendar;
+            var week = calendar.GetWeekOfYear(utc, System.Globalization.CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+            return $"{utc.Year}{week:00}";
+        }
     }
 }
+
+

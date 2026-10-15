@@ -158,6 +158,13 @@ namespace VXMonster.Core
                 PlatformServices.UnlockDailyComplete();
             }
 
+            if (session != null && session.RunMode == RunMode.WeeklyChallenge && session.IsDailyScoredRun)
+            {
+                var weekKey = GameSessionManager.GetUtcWeekKey();
+                var score = session.CalculateDailyScore(stageSave.EnemiesKilled, stageSave.Time, session.RunSession?.ComboBurstCount ?? 0);
+                session.WeeklyChallenge?.RecordScore(weekKey, score);
+            }
+
             if (session?.LifetimeStats != null)
             {
                 PlatformServices.SubmitLifetimeKills(session.LifetimeStats.TotalEnemiesKilled);
@@ -194,6 +201,13 @@ namespace VXMonster.Core
                 var score = session.CalculateDailyScore(stageSave.EnemiesKilled, stageSave.Time, session.RunSession?.ComboBurstCount ?? 0);
                 session.DailyChallenge?.RecordScore(dateKey, score);
                 DailyStreakUtility.RecordScoredDailyRun(dateKey);
+            }
+
+            if (session != null && session.RunMode == RunMode.WeeklyChallenge && session.IsDailyScoredRun)
+            {
+                var weekKey = GameSessionManager.GetUtcWeekKey();
+                var score = session.CalculateDailyScore(stageSave.EnemiesKilled, stageSave.Time, session.RunSession?.ComboBurstCount ?? 0);
+                session.WeeklyChallenge?.RecordScore(weekKey, score);
             }
 
             gameScreen.Hide();

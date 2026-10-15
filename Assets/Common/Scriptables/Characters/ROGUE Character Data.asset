@@ -16,6 +16,7 @@ MonoBehaviour:
     value: b191c572-d260-43c1-86d9-2526e49bb347
     canEdit: 0
   characterName: SHADE
+  description: 'SHADE: unique starting kit and stats.'
   price:
     currencyId: gold
     amount: 800
