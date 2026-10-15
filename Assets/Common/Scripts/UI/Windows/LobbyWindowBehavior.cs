@@ -50,6 +50,9 @@ namespace VXMonster.Core.UI
         public bool IsContinuePopupActive =>
             contituePopupRect != null && contituePopupRect.gameObject.activeInHierarchy;
 
+        /// <summary>True when a continue-run prompt is waiting to show after tutorial/daily claim.</summary>
+        public bool HasPendingContinue => pendingContinue;
+
         [Space]
         [SerializeField] protected Button infoButton;
         [SerializeField] protected LobbyInfoPopup infoPopup;
@@ -62,6 +65,8 @@ namespace VXMonster.Core.UI
         protected UnityAction talentAction;
         protected UnityAction codexAction;
         protected UnityAction shopAction;
+
+        private bool pendingContinue;
 
         protected virtual void Awake()
         {
@@ -83,17 +88,18 @@ namespace VXMonster.Core.UI
 
             save.onSelectedStageChanged += InitStage;
 
+            // Defer continue-run UI until after tutorial + daily claim (shown via TryShowDeferredContinue).
             if (save.IsPlaying && GameController.FirstTimeLoaded)
             {
-                continueBackgroundImage.gameObject.SetActive(true);
+                pendingContinue = true;
+                if (continueBackgroundImage != null) continueBackgroundImage.gameObject.SetActive(false);
+                if (contituePopupRect != null) contituePopupRect.gameObject.SetActive(false);
 
-                contituePopupRect.gameObject.SetActive(true);
-
-                EventSystem.current.SetSelectedGameObject(confirmButton.gameObject);
-
+                EventSystem.current.SetSelectedGameObject(playButton.gameObject);
                 InitStage(save.SelectedStageId);
             } else
             {
+                pendingContinue = false;
                 EventSystem.current.SetSelectedGameObject(playButton.gameObject);
 
                 var lastUnlockedStageId = GetLastUnlockedStageId();
@@ -470,6 +476,41 @@ namespace VXMonster.Core.UI
             settingsButton.onClick?.Invoke();
         }
 
+        /// <summary>
+        /// Shows the continue-run confirmation after higher-priority lobby popups finish.
+        /// Order: Tutorial → Daily Claim → Continue.
+        /// </summary>
+        public virtual void TryShowDeferredContinue()
+        {
+            if (!pendingContinue) return;
+            if (save == null || !save.IsPlaying) 
+            {
+                pendingContinue = false;
+                return;
+            }
+
+            pendingContinue = false;
+
+            if (continueBackgroundImage != null)
+            {
+                continueBackgroundImage.gameObject.SetActive(true);
+                var c = continueBackgroundImage.color;
+                c.a = 1f;
+                continueBackgroundImage.color = c;
+            }
+
+            if (contituePopupRect != null)
+            {
+                contituePopupRect.gameObject.SetActive(true);
+                contituePopupRect.anchoredPosition = Vector2.zero;
+            }
+
+            if (confirmButton != null && EventSystem.current != null)
+            {
+                EventSystem.current.SetSelectedGameObject(confirmButton.gameObject);
+            }
+        }
+
         protected virtual void ConfirmButtonClicked()
         {
             save.ResetStageData = false;
@@ -482,6 +523,7 @@ namespace VXMonster.Core.UI
         protected virtual void CancelButtonClicked()
         {
             save.IsPlaying = false;
+            pendingContinue = false;
             GameSessionManager.Instance?.ClearSessionContext();
 
             continueBackgroundImage.DoAlpha(0, 0.3f).SetOnFinish(() => continueBackgroundImage.gameObject.SetActive(false));

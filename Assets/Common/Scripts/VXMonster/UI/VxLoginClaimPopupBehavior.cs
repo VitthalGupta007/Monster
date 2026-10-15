@@ -11,22 +11,31 @@ namespace VXMonster.UI
 {
     /// <summary>
     /// Daily Reward modal shown on lobby open when UTC daily claim is available.
-    /// Matches UIStyleGuide / info-popup look (PanelDark card, tutorial fonts/sprites).
+    /// Matches UIStyleGuide (gold title, PanelDark content, NeverMindRounded, green/purple CTAs).
     /// </summary>
     public class VxLoginClaimPopupBehavior : MonoBehaviour
     {
-        private static readonly Color PanelDark = new Color(0.12f, 0.08f, 0.2f, 0.98f);
-        private static readonly Color PrimaryGreen = new Color(0.3f, 0.69f, 0.31f, 1f);
-        private static readonly Color PrimaryPurple = new Color(0.42f, 0.25f, 0.63f, 1f);
+        // UIStyleGuide tokens
+        private static readonly Color PanelDark = new Color(0.102f, 0.071f, 0.157f, 0.96f); // #1A1228
+        private static readonly Color PrimaryGreen = new Color(0.298f, 0.686f, 0.314f, 1f); // #4CAF50
+        private static readonly Color PrimaryPurple = new Color(0.420f, 0.247f, 0.627f, 1f); // #6B3FA0
+        private static readonly Color Gold = new Color(1f, 0.757f, 0.027f, 1f); // #FFC107
+        private static readonly Color TextPrimary = Color.white;
+        private static readonly Color TextMuted = new Color(0.690f, 0.659f, 0.753f, 1f); // #B0A8C0
 
         [SerializeField] GameObject popupRoot;
         [SerializeField] TMP_Text titleLabel;
+        [SerializeField] TMP_Text rewardLabel;
         [SerializeField] TMP_Text bodyLabel;
+        [SerializeField] TMP_Text streakLabel;
         [SerializeField] Button claimButton;
         [SerializeField] Button laterButton;
 
         private bool shownThisSession;
         private UnityAction onClaimed;
+
+        /// <summary>True while the Daily Reward modal is visible.</summary>
+        public bool IsShowing => popupRoot != null && popupRoot.activeInHierarchy;
 
         public static VxLoginClaimPopupBehavior Ensure(Transform parent)
         {
@@ -62,13 +71,10 @@ namespace VXMonster.UI
             var gold = LoginClaimUtility.PreviewGold(save, dateKey);
             var streak = LoginClaimUtility.PreviewStreak(save, dateKey);
 
-            if (titleLabel != null) titleLabel.text = "Daily Reward";
-            if (bodyLabel != null)
-            {
-                bodyLabel.text =
-                    $"Welcome back!\n\nClaim <b>+{gold} gold</b> for logging in today.\nLogin streak: <b>{streak}</b>";
-                bodyLabel.ForceMeshUpdate();
-            }
+            if (titleLabel != null) titleLabel.text = "DAILY REWARD";
+            if (rewardLabel != null) rewardLabel.text = $"+{gold} GOLD";
+            if (bodyLabel != null) bodyLabel.text = "Welcome back! Claim your login bonus.";
+            if (streakLabel != null) streakLabel.text = $"Login streak · {streak}";
 
             if (popupRoot != null)
             {
@@ -105,8 +111,10 @@ namespace VXMonster.UI
             var popupRt = popupRoot.GetComponent<RectTransform>();
             popupRt.SetParent(hostRt, false);
             Stretch(popupRt);
+
             var dim = popupRoot.GetComponent<Image>();
-            dim.color = new Color(0f, 0f, 0f, 0.6f);
+            TutorialUiAssets.StyleDimmer(dim);
+            dim.color = new Color(0.07f, 0.05f, 0.12f, 0.82f);
             dim.raycastTarget = true;
 
             var overlayCanvas = popupRoot.GetComponent<Canvas>();
@@ -118,44 +126,68 @@ namespace VXMonster.UI
                 popupRoot.AddComponent<GraphicRaycaster>();
             }
 
-            var card = new GameObject("Card", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image), typeof(VerticalLayoutGroup));
+            // Outer frame (game window chrome)
+            var card = new GameObject("Card", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
             var cardRt = card.GetComponent<RectTransform>();
             cardRt.SetParent(popupRt, false);
             cardRt.anchorMin = new Vector2(0.5f, 0.5f);
             cardRt.anchorMax = new Vector2(0.5f, 0.5f);
             cardRt.pivot = new Vector2(0.5f, 0.5f);
-            cardRt.sizeDelta = new Vector2(560f, 420f);
+            cardRt.sizeDelta = new Vector2(600f, 520f);
             var cardImage = card.GetComponent<Image>();
             TutorialUiAssets.StyleWindow(cardImage);
-            if (cardImage.sprite == null) cardImage.color = PanelDark;
-            else cardImage.color = Color.white;
+            cardImage.color = Color.white;
+            cardImage.raycastTarget = true;
 
-            var vlg = card.GetComponent<VerticalLayoutGroup>();
-            vlg.padding = new RectOffset(28, 28, 28, 28);
-            vlg.spacing = 16f;
+            // Dark inset so title/body read cleanly on the orange frame
+            var inset = new GameObject("Inset", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image), typeof(VerticalLayoutGroup));
+            var insetRt = inset.GetComponent<RectTransform>();
+            insetRt.SetParent(cardRt, false);
+            insetRt.anchorMin = new Vector2(0.5f, 0.5f);
+            insetRt.anchorMax = new Vector2(0.5f, 0.5f);
+            insetRt.pivot = new Vector2(0.5f, 0.5f);
+            insetRt.sizeDelta = new Vector2(520f, 430f);
+            var insetImage = inset.GetComponent<Image>();
+            insetImage.color = PanelDark;
+            insetImage.raycastTarget = false;
+
+            var vlg = inset.GetComponent<VerticalLayoutGroup>();
+            vlg.padding = new RectOffset(28, 28, 32, 28);
+            vlg.spacing = 10f;
             vlg.childAlignment = TextAnchor.UpperCenter;
             vlg.childControlWidth = true;
             vlg.childControlHeight = true;
             vlg.childForceExpandWidth = true;
             vlg.childForceExpandHeight = false;
 
-            titleLabel = CreateLabel(cardRt, "Title", "Daily Reward", 40f, 56f, TextAlignmentOptions.Center, true);
-            bodyLabel = CreateLabel(cardRt, "Body", string.Empty, 28f, 160f, TextAlignmentOptions.Center, false);
-            bodyLabel.richText = true;
+            titleLabel = CreateLabel(insetRt, "Title", "DAILY REWARD", 50f, 58f, TextAlignmentOptions.Center, true, Gold);
+            ApplyLogoGradient(titleLabel);
+
+            rewardLabel = CreateLabel(insetRt, "Reward", "+50 GOLD", 58f, 68f, TextAlignmentOptions.Center, true, Gold);
+            ApplyLogoGradient(rewardLabel);
+
+            bodyLabel = CreateLabel(insetRt, "Body", string.Empty, 28f, 72f, TextAlignmentOptions.Center, false, TextPrimary);
+            streakLabel = CreateLabel(insetRt, "Streak", string.Empty, 24f, 36f, TextAlignmentOptions.Center, false, TextMuted);
+
+            var spacer = new GameObject("Spacer", typeof(RectTransform), typeof(LayoutElement));
+            spacer.transform.SetParent(insetRt, false);
+            spacer.GetComponent<LayoutElement>().flexibleHeight = 1f;
+            spacer.GetComponent<LayoutElement>().minHeight = 8f;
 
             var buttons = new GameObject("Buttons", typeof(RectTransform), typeof(HorizontalLayoutGroup), typeof(LayoutElement));
             var buttonsRt = buttons.GetComponent<RectTransform>();
-            buttonsRt.SetParent(cardRt, false);
+            buttonsRt.SetParent(insetRt, false);
             var buttonsLe = buttons.GetComponent<LayoutElement>();
-            buttonsLe.preferredHeight = 72f;
-            buttonsLe.minHeight = 72f;
+            buttonsLe.preferredHeight = 78f;
+            buttonsLe.minHeight = 78f;
             var hlg = buttons.GetComponent<HorizontalLayoutGroup>();
-            hlg.spacing = 16f;
+            hlg.spacing = 18f;
             hlg.childAlignment = TextAnchor.MiddleCenter;
             hlg.childControlWidth = true;
             hlg.childControlHeight = true;
             hlg.childForceExpandWidth = true;
             hlg.childForceExpandHeight = true;
+            hlg.padding = new RectOffset(0, 0, 4, 0);
 
             claimButton = CreateButton(buttonsRt, "Claim Button", "CLAIM", PrimaryGreen, true);
             laterButton = CreateButton(buttonsRt, "Later Button", "LATER", PrimaryPurple, false);
@@ -188,7 +220,8 @@ namespace VXMonster.UI
             float fontSize,
             float height,
             TextAlignmentOptions align,
-            bool bold)
+            bool bold,
+            Color color)
         {
             var go = new GameObject(name, typeof(RectTransform), typeof(TextMeshProUGUI), typeof(LayoutElement));
             go.transform.SetParent(parent, false);
@@ -196,13 +229,15 @@ namespace VXMonster.UI
             le.preferredHeight = height;
             le.minHeight = height;
             var tmp = go.GetComponent<TextMeshProUGUI>();
-            TutorialUiFactory.ApplyGameFont(tmp);
+            ForceGameFont(tmp);
             tmp.text = text;
             tmp.fontSize = fontSize;
             tmp.alignment = align;
-            tmp.color = Color.white;
+            tmp.color = color;
             tmp.textWrappingMode = TextWrappingModes.Normal;
             tmp.raycastTarget = false;
+            tmp.richText = true;
+            tmp.characterSpacing = -1.5f;
             if (bold) tmp.fontStyle = FontStyles.Bold;
             return tmp;
         }
@@ -211,7 +246,7 @@ namespace VXMonster.UI
         {
             var go = new GameObject(name, typeof(RectTransform), typeof(CanvasRenderer), typeof(Image), typeof(Button), typeof(LayoutElement));
             go.transform.SetParent(parent, false);
-            go.GetComponent<LayoutElement>().preferredHeight = 72f;
+            go.GetComponent<LayoutElement>().preferredHeight = 78f;
             var image = go.GetComponent<Image>();
             if (confirmStyle) TutorialUiAssets.StyleConfirmButton(image);
             else TutorialUiAssets.StyleSkipButton(image);
@@ -224,13 +259,35 @@ namespace VXMonster.UI
             labelRt.SetParent(go.transform, false);
             Stretch(labelRt);
             var tmp = labelGo.GetComponent<TextMeshProUGUI>();
-            TutorialUiFactory.ApplyGameFont(tmp);
+            ForceGameFont(tmp);
             tmp.text = label;
-            tmp.fontSize = 30f;
+            tmp.fontSize = 36f;
+            tmp.fontStyle = FontStyles.Bold;
             tmp.alignment = TextAlignmentOptions.Center;
-            tmp.color = Color.white;
+            tmp.color = TextPrimary;
+            tmp.characterSpacing = -1f;
             tmp.raycastTarget = false;
             return button;
+        }
+
+        private static void ForceGameFont(TMP_Text tmp)
+        {
+            if (tmp == null) return;
+            var font = TutorialUiAssets.GameFont != null ? TutorialUiAssets.GameFont : TutorialUiAssets.PlainFont;
+            if (font == null) return;
+            tmp.font = font;
+            // Use the font asset's outline/shadow material (NeverMindRounded Shadow Outline).
+            if (font.material != null) tmp.fontSharedMaterial = font.material;
+        }
+
+        private static void ApplyLogoGradient(TMP_Text tmp)
+        {
+            if (tmp == null) return;
+            var top = new Color(1f, 0.93f, 0.35f, 1f);   // bright yellow
+            var bottom = new Color(1f, 0.55f, 0.08f, 1f); // orange like VX MONSTER logo
+            tmp.enableVertexGradient = true;
+            tmp.colorGradient = new VertexGradient(top, top, bottom, bottom);
+            tmp.color = Color.white; // multiply with gradient
         }
 
         private static void Stretch(RectTransform rt)

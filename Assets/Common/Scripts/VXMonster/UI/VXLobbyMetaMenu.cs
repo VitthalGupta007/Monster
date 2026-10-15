@@ -124,20 +124,55 @@ namespace VXMonster.UI
 
         private IEnumerator ShowDailyClaimPopupWhenReady()
         {
-            // Wait one frame so continue-run popup can activate if a save exists.
+            // Lobby open order: Tutorial (new user) → Daily Claim → Continue run.
             yield return null;
             yield return new WaitForSecondsRealtime(0.15f);
 
-            const float timeoutSeconds = 8f;
-            var elapsed = 0f;
-            while (lobbyWindow != null && lobbyWindow.IsContinuePopupActive && elapsed < timeoutSeconds)
+            // 1) Wait for first-run tutorial to finish (or skip if already done).
+            var tutorial = FindAnyObjectByType<TutorialOverlayBehavior>(FindObjectsInactive.Include);
+            var waitedForTutorialStart = 0f;
+            const float tutorialStartWindow = 1.25f;
+            while (waitedForTutorialStart < tutorialStartWindow)
             {
-                elapsed += Time.unscaledDeltaTime;
+                if (tutorial == null)
+                {
+                    tutorial = FindAnyObjectByType<TutorialOverlayBehavior>(FindObjectsInactive.Include);
+                }
+
+                if (tutorial != null && tutorial.IsShowing) break;
+                if (IsLobbyTutorialCompleted()) break;
+
+                waitedForTutorialStart += Time.unscaledDeltaTime;
                 yield return null;
             }
 
+            while (tutorial != null && tutorial.IsShowing)
+            {
+                yield return null;
+                if (tutorial == null)
+                {
+                    tutorial = FindAnyObjectByType<TutorialOverlayBehavior>(FindObjectsInactive.Include);
+                }
+            }
+
+            // 2) Daily claim after tutorial.
             EnsureLoginClaimPopup();
             loginClaimPopup?.TryShowIfUnclaimed();
+
+            while (loginClaimPopup != null && loginClaimPopup.IsShowing)
+            {
+                yield return null;
+            }
+
+            // 3) Continue-run last (if an unfinished run was deferred on lobby open).
+            lobbyWindow?.TryShowDeferredContinue();
+        }
+
+        private static bool IsLobbyTutorialCompleted()
+        {
+            if (GameController.SaveManager == null) return true;
+            var save = GameController.SaveManager.GetSave<TutorialSave>(TutorialSave.SaveHash);
+            return save == null || save.Completed;
         }
 
         private void EnsureExtraRows()

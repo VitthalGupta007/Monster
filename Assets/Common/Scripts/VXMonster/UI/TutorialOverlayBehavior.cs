@@ -21,6 +21,10 @@ namespace VXMonster.UI
         private TutorialSave tutorialSave;
         private int stepIndex;
         private TutorialStepData[] steps;
+        private bool showing;
+
+        /// <summary>True while the lobby first-run tutorial is visible and blocking input.</summary>
+        public bool IsShowing => showing && gameObject.activeInHierarchy;
 
         private void OnEnable()
         {
@@ -72,6 +76,7 @@ namespace VXMonster.UI
 
         private void Start()
         {
+            // Lobby open order: Tutorial (new user) → Daily Claim → Continue run.
             TryShowFirstRun();
         }
 
@@ -132,6 +137,7 @@ namespace VXMonster.UI
             steps = ResolveSteps();
             stepIndex = Mathf.Clamp(startIndex, 0, Mathf.Max(0, steps.Length - 1));
 
+            showing = true;
             gameObject.SetActive(true);
             transform.SetAsLastSibling();
             if (canvasGroup != null)
@@ -243,6 +249,7 @@ namespace VXMonster.UI
 
         private void Hide()
         {
+            showing = false;
             if (canvasGroup != null)
             {
                 canvasGroup.alpha = 0f;
