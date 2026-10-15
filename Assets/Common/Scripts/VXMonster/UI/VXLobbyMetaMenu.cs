@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -31,6 +32,7 @@ namespace VXMonster.UI
         [SerializeField] Button closeRowButton;
         [SerializeField] VxMetaMenuInfoPopup infoPopup;
         [SerializeField] TMP_Text loginClaimLabel;
+        [SerializeField] VxLoginClaimPopupBehavior loginClaimPopup;
 
         private bool wired;
 
@@ -44,6 +46,7 @@ namespace VXMonster.UI
             if (lobbyWindow == null) return;
 
             Wire();
+            StartCoroutine(ShowDailyClaimPopupWhenReady());
         }
 
         private void Wire()
@@ -105,7 +108,36 @@ namespace VXMonster.UI
 #endif
 
             WireLoginClaimRow();
+            EnsureLoginClaimPopup();
             wired = true;
+        }
+
+        private void EnsureLoginClaimPopup()
+        {
+            if (loginClaimPopup != null) return;
+
+            var canvas = GetComponentInParent<Canvas>();
+            var parent = canvas != null ? canvas.transform : transform;
+            loginClaimPopup = VxLoginClaimPopupBehavior.Ensure(parent);
+            loginClaimPopup?.SetOnClaimed(RefreshLoginClaimLabel);
+        }
+
+        private IEnumerator ShowDailyClaimPopupWhenReady()
+        {
+            // Wait one frame so continue-run popup can activate if a save exists.
+            yield return null;
+            yield return new WaitForSecondsRealtime(0.15f);
+
+            const float timeoutSeconds = 8f;
+            var elapsed = 0f;
+            while (lobbyWindow != null && lobbyWindow.IsContinuePopupActive && elapsed < timeoutSeconds)
+            {
+                elapsed += Time.unscaledDeltaTime;
+                yield return null;
+            }
+
+            EnsureLoginClaimPopup();
+            loginClaimPopup?.TryShowIfUnclaimed();
         }
 
         private void EnsureExtraRows()
@@ -183,16 +215,16 @@ namespace VXMonster.UI
 
             var save = GameController.SaveManager.GetSave<LoginClaimSave>(LoginClaimSave.SaveKey);
             var dateKey = GameSessionManager.GetUtcDateKey();
-            if (save.HasClaimedToday(dateKey))
+            if (save != null && save.HasClaimedToday(dateKey))
             {
                 loginClaimLabel.text = $"CLAIMED (streak {save.LoginStreak})";
-                loginClaimRowButton.interactable = false;
+                if (loginClaimRowButton != null) loginClaimRowButton.interactable = false;
             }
             else
             {
                 var gold = LoginClaimUtility.PreviewGold(save, dateKey);
                 loginClaimLabel.text = $"DAILY CLAIM (+{gold}g)";
-                loginClaimRowButton.interactable = true;
+                if (loginClaimRowButton != null) loginClaimRowButton.interactable = true;
             }
         }
 

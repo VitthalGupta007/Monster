@@ -1,5 +1,6 @@
 using System;
 using System.Globalization;
+using UnityEngine;
 using VXMonster.Core;
 using VXMonster.Save;
 
@@ -11,12 +12,26 @@ namespace VXMonster.Gameplay
         public const int StreakBonusGold = 10;
         public const int MaxStreakBonusDays = 7;
 
+        public static bool CanClaimToday()
+        {
+            if (GameController.SaveManager == null) return false;
+            var save = GameController.SaveManager.GetSave<LoginClaimSave>(LoginClaimSave.SaveKey);
+            return save != null && !save.HasClaimedToday(GameSessionManager.GetUtcDateKey());
+        }
+
         public static int PreviewGold(LoginClaimSave save, string utcDateKey)
         {
             if (save == null || save.HasClaimedToday(utcDateKey)) return 0;
             var nextStreak = NextStreak(save, utcDateKey);
             var bonusDays = Clamp(nextStreak - 1, 0, MaxStreakBonusDays);
             return BaseGold + bonusDays * StreakBonusGold;
+        }
+
+        public static int PreviewStreak(LoginClaimSave save, string utcDateKey)
+        {
+            if (save == null) return 1;
+            if (save.HasClaimedToday(utcDateKey)) return Mathf.Max(1, save.LoginStreak);
+            return NextStreak(save, utcDateKey);
         }
 
         public static bool TryClaim(out int goldGranted, out int streak)

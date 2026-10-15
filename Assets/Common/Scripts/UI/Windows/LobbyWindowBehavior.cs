@@ -46,6 +46,10 @@ namespace VXMonster.Core.UI
         [SerializeField] protected Button confirmButton;
         [SerializeField] protected Button cancelButton;
 
+        /// <summary>True while the continue-run confirmation popup is visible.</summary>
+        public bool IsContinuePopupActive =>
+            contituePopupRect != null && contituePopupRect.gameObject.activeInHierarchy;
+
         [Space]
         [SerializeField] protected Button infoButton;
         [SerializeField] protected LobbyInfoPopup infoPopup;
